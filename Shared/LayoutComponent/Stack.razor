@@ -1,0 +1,18 @@
+﻿@using BlazorApp.Styles
+	
+<div
+	stack
+	style="
+	--stack-gutter: @Gutter;
+	"
+>
+	@ChildContent
+</div>
+	
+@code {
+	[Parameter]
+	public string Gutter { get; set; } = StyleDictionary.SpacingS;
+	
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+}

@@ -1,0 +1,47 @@
+﻿<div
+	split
+	class=@_prefixId
+>
+	@ChildContent
+</div>
+
+<style>
+	.@_prefixId {
+		display: flex;
+		flex-wrap: nowrap;
+		height: inherit;
+		min-height: inherit;
+	}
+	
+	.@_prefixId .stretch-all > *  { 
+		flex: 1 
+	}
+	
+	.@_prefixId > :nth-child(@_stretchedChild) {
+		flex: 1
+	} 
+</style>
+
+@code {
+	private string _prefixId = Wrapper.UseId();
+	
+	private int? _stretchedChild;
+
+	[Parameter]
+	public bool StretchAll { get; set; }
+
+	[Parameter]
+	public int? StretchIndex
+	{
+		set
+		{
+			if (value < 0) throw new ArgumentOutOfRangeException(nameof(value));
+			_stretchedChild = value + 1;
+		}
+	}
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+}
+
+

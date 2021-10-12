@@ -1,0 +1,12 @@
+﻿[stack] {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: inherit;
+    position: relative;
+}
+
+::deep > * + * {
+    margin-top: var(--stack-gutter);
+    overflow: auto !important;
+}

@@ -1,0 +1,26 @@
+﻿<div
+	cover
+	style="
+	--cover-min-height: @MinimumHeight;
+	--cover-padding: @Padding;
+	--cover-space: @Space;
+	"	
+>
+	@ChildContent
+</div>
+
+@code {
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+	[Parameter]
+	public string MinimumHeight { get; set; } = "100vh";
+
+	[Parameter]
+	public string Space { get; set; } = "1rem";
+
+	[Parameter]
+	public bool NoPadding { get; set; }
+
+	private string Padding => NoPadding ? "0" : Space;
+}

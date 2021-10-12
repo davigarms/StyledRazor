@@ -1,0 +1,32 @@
+﻿<div
+	container
+	centered=@Centered
+	style="
+	--container-max-width: @MaxWidth;
+	--container-width: @Width;
+    "
+>
+	@ChildContent
+</div>
+
+@code {
+	private string _width = "initial";
+	
+	private string MaxWidth => Fluid ? _width : "initial";
+	
+	[Parameter]
+	public bool Fluid { get; set; } = false;
+	
+	[Parameter]
+	public bool Centered { get; set; }
+
+	[Parameter]
+	public string Width
+	{
+		get => Fluid ? "100%" : _width;
+		set => _width = value;
+	}
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+}

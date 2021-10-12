@@ -1,0 +1,23 @@
+@inherits LayoutComponentBase
+
+<Split StretchIndex="1">
+	<Container Width="15rem">
+		<Cover>
+			Menu
+		</Cover>
+	</Container>
+	<Container>
+		<Cover>
+			<header>
+				Header
+			</header>
+			<Container Width="768px" Centered>
+				@Body
+			</Container>
+			<div>Something above footer</div>
+			<footer>
+				Footer
+			</footer>
+		</Cover>
+	</Container>
+</Split>
