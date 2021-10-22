@@ -1,29 +1,28 @@
 ﻿<div
-	split
-	class=@_prefixId
+	class=@_className
 >
 	@ChildContent
 </div>
 
 <style>
-	.@_prefixId {
+	.@_className {
 		display: flex;
 		flex-wrap: nowrap;
 		height: inherit;
 		min-height: inherit;
 	}
 	
-	.@_prefixId .stretch-all > *  { 
+	.@_className .stretch-all > *  { 
 		flex: 1 
 	}
 	
-	.@_prefixId > :nth-child(@_stretchedChild) {
+	.@_className > :nth-child(@_stretchedChild) {
 		flex: 1
 	} 
 </style>
 
 @code {
-	private string _prefixId = Wrapper.UseId();
+	private string _className = Wrapper.GenerateUniqueClassName("split");
 	
 	private int? _stretchedChild;
 

@@ -4,6 +4,6 @@ namespace BlazorApp.Shared
 {
     public class Wrapper
     {
-        public static string UseId() => $"wrapper_{Guid.NewGuid().ToString()[..8]}";
+        public static string GenerateUniqueClassName(string className = "wrapper") => $"{className}_{Guid.NewGuid().ToString()[..8]}";
     }
 }
