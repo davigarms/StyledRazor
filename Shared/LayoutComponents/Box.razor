@@ -1,0 +1,34 @@
+﻿<div
+	class=@_className
+	style="
+	--box-height: @Height;
+	--box-padding: @Padding;
+	--box-width: @Width;
+	"	
+>
+	@ChildContent
+	
+	<style>
+		.@_className {
+	        height: var(--box-height);
+	        padding: var(--box-padding);
+	        width: var(--box-width);
+	    }
+	</style>
+</div>
+
+@code {
+	private string _className = Utils.GenerateUniqueClassName("box");
+	
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+	[Parameter]
+	public string Height { get; set; }
+	
+	[Parameter]
+	public string Width { get; set; }
+
+	[Parameter]
+	public string Padding { get; set; } = "1rem";
+}
