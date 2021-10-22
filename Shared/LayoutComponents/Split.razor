@@ -1,30 +1,31 @@
 ﻿<div
 	class=@_className
+	stretch=@StretchAll
 >
 	@ChildContent
+	
+	<style>
+		.@_className {
+			display: flex;
+			flex-wrap: nowrap;
+			height: inherit;
+			min-height: inherit;
+		}
+		
+		[stretch].@_className > *  { 
+			flex: 1 
+		}
+		
+		.@_className > :nth-child(@_stretchedIndex) {
+			flex: 1
+		} 
+	</style>
 </div>
 
-<style>
-	.@_className {
-		display: flex;
-		flex-wrap: nowrap;
-		height: inherit;
-		min-height: inherit;
-	}
-	
-	.@_className .stretch-all > *  { 
-		flex: 1 
-	}
-	
-	.@_className > :nth-child(@_stretchedChild) {
-		flex: 1
-	} 
-</style>
-
 @code {
-	private string _className = Wrapper.GenerateUniqueClassName("split");
+	private string _className = Utils.GenerateUniqueClassName("split");
 	
-	private int? _stretchedChild;
+	private int? _stretchedIndex;
 
 	[Parameter]
 	public bool StretchAll { get; set; }
@@ -35,7 +36,7 @@
 		set
 		{
 			if (value < 0) throw new ArgumentOutOfRangeException(nameof(value));
-			_stretchedChild = value + 1;
+			_stretchedIndex = value + 1;
 		}
 	}
 

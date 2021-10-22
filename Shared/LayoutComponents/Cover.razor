@@ -1,5 +1,5 @@
 ﻿<div
-	cover
+	class=@_className
 	style="
 	--cover-min-height: @MinimumHeight;
 	--cover-padding: @Padding;
@@ -7,9 +7,39 @@
 	"	
 >
 	@ChildContent
+	
+	<style>
+		.@_className {
+	        display: flex;
+	        flex-direction: column;
+	        min-height: var(--cover-min-height);
+	        padding: var(--cover-padding);
+	    }
+	    
+	    .@_className > * {
+	        margin-top: var(--cover-space);
+	        margin-bottom: var(--cover-space);
+	    }
+	    
+	    .@_className > :first-child:not([centered]) {
+	        margin-top: 0;
+	    }
+	    
+	    .@_className > :last-child:not([centered]) {
+	        margin-bottom: 0;
+	    }
+	    
+	    .@_className > [centered] {
+	        margin-top: auto;
+	        margin-bottom: auto;
+	    }
+	</style>
 </div>
 
+
 @code {
+	private string _className = Utils.GenerateUniqueClassName("cover");
+	
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }
 
