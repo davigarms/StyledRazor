@@ -1,15 +1,15 @@
 ﻿@using BlazorApp.Styles
 	
 <div
-	class=@_className
+	class=@_styled.ClassName
 	style="
 	--stack-gutter: @Gutter;
 	"
 >
 	@ChildContent
 	
-	<style>
-		.@_className {
+	@_styled.Render(@"
+        .wrapper {
 	        display: flex;
 	        flex-direction: column;
 	        justify-content: flex-start;
@@ -17,18 +17,20 @@
 	        position: relative;
 	    }
 	    
-	    .@_className > * + * {
+	    .wrapper > * + * {
 	        margin-top: var(--stack-gutter);
 	        overflow: auto !important;
 	    }
-	</style>
+    ")
 </div>
 	
 @code {
+	private Styled _styled = new("stack");
+	
 	private string _className = Utils.GenerateUniqueClassName("stack");
 	
 	[Parameter]
-	public string Gutter { get; set; } = StyleDictionary.SpacingS;
+	public string Gutter { get; set; } = StyleDictionary.SpacingXL;
 	
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }

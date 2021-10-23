@@ -1,5 +1,6 @@
-﻿<div
-	class=@_className
+﻿@using BlazorApp.Styles
+<div
+	class=@_styled.ClassName
 	style="
 	--cover-min-height: @MinimumHeight;
 	--cover-padding: @Padding;
@@ -8,35 +9,37 @@
 >
 	@ChildContent
 	
-	<style>
-		.@_className {
+	@_styled.Render(@"
+        .wrapper {
 	        display: flex;
 	        flex-direction: column;
 	        min-height: var(--cover-min-height);
 	        padding: var(--cover-padding);
 	    }
 	    
-	    .@_className > * {
+	    .wrapper > * {
 	        margin-top: var(--cover-space);
 	        margin-bottom: var(--cover-space);
 	    }
 	    
-	    .@_className > :first-child:not([centered]) {
+	    .wrapper > :first-child:not([centered]) {
 	        margin-top: 0;
 	    }
 	    
-	    .@_className > :last-child:not([centered]) {
+	    .wrapper > :last-child:not([centered]) {
 	        margin-bottom: 0;
 	    }
 	    
-	    .@_className > [centered] {
+	    .wrapper > [centered] {
 	        margin-top: auto;
 	        margin-bottom: auto;
 	    }
-	</style>
+    ")
 </div>
 
 @code {
+	private Styled _styled = new("cover");
+	
 	private string _className = Utils.GenerateUniqueClassName("cover");
 	
 	[Parameter]
@@ -46,7 +49,7 @@
 	public string MinimumHeight { get; set; } = "100vh";
 
 	[Parameter]
-	public string Space { get; set; } = "1rem";
+	public string Space { get; set; } = StyleDictionary.SpacingM;
 
 	[Parameter]
 	public bool NoPadding { get; set; }

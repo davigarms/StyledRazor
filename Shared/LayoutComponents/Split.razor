@@ -1,28 +1,30 @@
 ﻿<div
-	class=@_className
+	class=@_styled.ClassName
 	stretch=@StretchAll
 >
 	@ChildContent
 	
-	<style>
-		.@_className {
+	@_styled.Render(@"
+        .wrapper {
 			display: flex;
 			flex-wrap: nowrap;
 			height: inherit;
 			min-height: inherit;
 		}
 		
-		[stretch].@_className > *  { 
+		[stretch].wrapper > *  { 
 			flex: 1 
 		}
 		
-		.@_className > :nth-child(@_stretchedIndex) {
+		.wrapper > :nth-child("+ _stretchedIndex + @") {
 			flex: 1
 		} 
-	</style>
+    ")
 </div>
 
 @code {
+	private Styled _styled = new("split");
+	
 	private string _className = Utils.GenerateUniqueClassName("split");
 	
 	private int? _stretchedIndex;

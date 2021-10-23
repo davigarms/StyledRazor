@@ -1,5 +1,5 @@
 ﻿<div
-	class=@_className
+	class=@_styled.ClassName
 	style="
 	--container-max-width: @MaxWidth;
 	--container-width: @Width;
@@ -8,19 +8,19 @@
 >
 	@ChildContent
 	
-	<style>
-		.@_className {
+	@_styled.Render(@"
+    	.wrapper {
 	        margin-left: auto;
 	        margin-right: auto;
 	        max-width: var(--container-max-width);
 	        width: var(--container-width);
 	        position: relative;
 	    }
-	</style>
+    ")
 </div>
 
 @code {
-	private string _className = Utils.GenerateUniqueClassName("container");
+	private Styled _styled = new("container");
 	
 	private string _width = "initial";
 	
