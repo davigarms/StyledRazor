@@ -1,36 +1,34 @@
 ﻿@using BlazorApp.Styles
-
-<div
-	class=@_styled.ClassName
-	style="
-	--box-height: @Height;
-	--box-padding: @Padding;
-	--box-width: @Width;
-	"	
->
-	@ChildContent
-	
-	@_styled.Render(@"
-		.wrapper {
-	        height: var(--box-height);
-	        padding: var(--box-padding);
-	        width: var(--box-width);
-	    }
+@using BlazorApp.Lib.Styled
+@(new Styled("h1")
+	.As("box")
+	.WithContent(ChildContent)
+	.WithStyle($@"
+		--box-height: {Height};
+		--box-padding: {Padding};
+		--box-width: {Width};
 	")
-</div>
+	.WithCss(@"
+		h1 {
+		    height: var(--box-height);
+		    padding: var(--box-padding);
+		    width: var(--box-width);
+		}
+	")
+	.Render())
 
 @code {
-	private Styled _styled = new("box");
-	
+
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }
 
 	[Parameter]
 	public string Height { get; set; } = "initial";
-	
+
 	[Parameter]
 	public string Width { get; set; } = "initial";
 
 	[Parameter]
 	public string Padding { get; set; } = StyleDictionary.SpacingM;
+
 }

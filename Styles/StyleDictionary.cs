@@ -1,13 +1,11 @@
-﻿using System;
-
-namespace BlazorApp.Styles
+﻿namespace BlazorApp.Styles
 {
     public static class StyleDictionary
     {
-        public static String SpacingXS => ".25rem";
-        public static String SpacingS => ".5rem";
-        public static String SpacingM => "1rem";
-        public static String SpacingL => "2rem";
-        public static String SpacingXL => "4rem";
+        public static string SpacingXS => ".25rem";
+        public static string SpacingS => ".5rem";
+        public static string SpacingM => "1rem";
+        public static string SpacingL => "2rem";
+        public static string SpacingXL => "4rem";
     }
 }

@@ -1,37 +1,31 @@
 ﻿@using BlazorApp.Styles
-	
-<div
-	class=@_styled.ClassName
-	style="
-	--stack-gutter: @Gutter;
-	"
->
-	@ChildContent
-	
-	@_styled.Render(@"
-        .wrapper {
-	        display: flex;
+@using BlazorApp.Lib.Styled
+@(new Styled()
+	.As("stack")
+	.WithContent(ChildContent)
+	.WithStyle($@"
+		--stack-gutter: {@Gutter};
+	")
+	.WithCss(@"
+		div {
+			display: flex;
 	        flex-direction: column;
 	        justify-content: flex-start;
 	        height: inherit;
 	        position: relative;
 	    }
 	    
-	    .wrapper > * + * {
-	        margin-top: var(--stack-gutter);
+	    div > * + * {
+			margin-top: var(--stack-gutter);
 	        overflow: auto !important;
-	    }
-    ")
-</div>
-	
+	    } 
+	")
+	.Render())
+
 @code {
-	private Styled _styled = new("stack");
-	
-	private string _className = Utils.GenerateUniqueClassName("stack");
-	
 	[Parameter]
 	public string Gutter { get; set; } = StyleDictionary.SpacingXL;
-	
+
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }
 }

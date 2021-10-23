@@ -1,32 +1,30 @@
-﻿<div
-	class=@_styled.ClassName
-	stretch=@StretchAll
->
-	@ChildContent
-	
-	@_styled.Render(@"
-        .wrapper {
+﻿@using BlazorApp.Lib.Styled
+@(new Styled()
+	.As("split")
+	.WithContent(ChildContent)
+	.WithParams(new Params()
+	{
+		{"stretch", StretchAll}
+	})
+	.WithCss($@"
+		div {{
 			display: flex;
 			flex-wrap: nowrap;
 			height: inherit;
 			min-height: inherit;
-		}
+		}}
 		
-		[stretch].wrapper > *  { 
+		div[stretch] > *  {{ 
 			flex: 1 
-		}
+		}}
 		
-		.wrapper > :nth-child("+ _stretchedIndex + @") {
+		div > :nth-child({StretchIndex}) {{
 			flex: 1
-		} 
-    ")
-</div>
+		}} 
+	")
+	.Render())
 
 @code {
-	private Styled _styled = new("split");
-	
-	private string _className = Utils.GenerateUniqueClassName("split");
-	
 	private int? _stretchedIndex;
 
 	[Parameter]
@@ -35,6 +33,7 @@
 	[Parameter]
 	public int? StretchIndex
 	{
+		get => _stretchedIndex;
 		set
 		{
 			if (value < 0) throw new ArgumentOutOfRangeException(nameof(value));
@@ -45,5 +44,3 @@
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }
 }
-
-

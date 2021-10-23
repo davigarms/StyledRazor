@@ -1,34 +1,34 @@
-﻿<div
-	class=@_styled.ClassName
-	style="
-	--container-max-width: @MaxWidth;
-	--container-width: @Width;
-    "
-	centered=@Centered
->
-	@ChildContent
-	
-	@_styled.Render(@"
-    	.wrapper {
-	        margin-left: auto;
+﻿@using BlazorApp.Lib.Styled
+@(new Styled()
+	.As("container")
+	.WithContent(ChildContent)
+	.WithParams(new Params()
+	{
+		{"centered", Centered}
+	})
+	.WithStyle($@"
+		--container-max-width: {MaxWidth};
+		--container-width: {Width};
+	")
+	.WithCss(@"
+		div {
+		    margin-left: auto;
 	        margin-right: auto;
 	        max-width: var(--container-max-width);
 	        width: var(--container-width);
 	        position: relative;
-	    }
-    ")
-</div>
+		}
+	")
+	.Render())
 
 @code {
-	private Styled _styled = new("container");
-	
 	private string _width = "initial";
-	
+
 	private string MaxWidth => Fluid ? _width : "initial";
-	
+
 	[Parameter]
 	public bool Fluid { get; set; } = false;
-	
+
 	[Parameter]
 	public bool Centered { get; set; }
 
@@ -41,4 +41,5 @@
 
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }
+
 }

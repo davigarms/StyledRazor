@@ -1,46 +1,43 @@
 ﻿@using BlazorApp.Styles
-<div
-	class=@_styled.ClassName
-	style="
-	--cover-min-height: @MinimumHeight;
-	--cover-padding: @Padding;
-	--cover-space: @Space;
-	"	
->
-	@ChildContent
-	
-	@_styled.Render(@"
-        .wrapper {
+@using BlazorApp.Lib.Styled
+@(new Styled()
+	.As("cover")
+	.WithContent(ChildContent)
+	.WithStyle($@"
+		--cover-min-height: {@MinimumHeight};
+		--cover-padding: {@Padding};
+		--cover-space: {@Space};
+	")
+	.WithCss(@"
+		div {
 	        display: flex;
 	        flex-direction: column;
 	        min-height: var(--cover-min-height);
 	        padding: var(--cover-padding);
 	    }
 	    
-	    .wrapper > * {
+	    div > * {
 	        margin-top: var(--cover-space);
 	        margin-bottom: var(--cover-space);
 	    }
 	    
-	    .wrapper > :first-child:not([centered]) {
+	    div > :first-child:not([centered]) {
 	        margin-top: 0;
 	    }
 	    
-	    .wrapper > :last-child:not([centered]) {
+	    div > :last-child:not([centered]) {
 	        margin-bottom: 0;
 	    }
 	    
-	    .wrapper > [centered] {
+	    div > [centered] {
 	        margin-top: auto;
 	        margin-bottom: auto;
 	    }
-    ")
-</div>
+	")
+	.Render())
 
 @code {
-	private Styled _styled = new("cover");
-	
-	private string _className = Utils.GenerateUniqueClassName("cover");
+	private string Padding => NoPadding ? "0" : Space;
 	
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }
@@ -53,6 +50,4 @@
 
 	[Parameter]
 	public bool NoPadding { get; set; }
-
-	private string Padding => NoPadding ? "0" : Space;
 }
