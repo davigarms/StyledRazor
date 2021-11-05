@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorApp.Lib.Styled
 {
@@ -53,18 +54,47 @@ namespace BlazorApp.Lib.Styled
         {
             return builder =>
             {
-                builder.OpenElement(5, _element);
-                builder.AddAttribute(1, "class", ClassName);
-                builder.AddAttribute(2, "style", _style);
-                if (_params != null)
-                    foreach (var (key, value) in _params)
-                        builder.AddAttribute(3, key, value);
-                builder.AddContent(4, _child);
-                builder.OpenElement(5, "style");
-                builder.AddContent(6, _css.Replace(_element, $".{ClassName}"));
-                builder.CloseElement();
+                builder.OpenElement(0, _element);
+                AddClass(builder);
+                AddStyle(builder);
+                AddParams(builder);
+                AddChild(builder);
+                AddCss(builder);
                 builder.CloseElement();
             };
+        }
+        
+        private void AddCss(RenderTreeBuilder builder)
+        {
+            builder.OpenElement(0, "style");
+            builder.AddContent(1, _css.Replace(_element, $".{ClassName}"));
+            builder.CloseElement();
+        }
+
+        private void AddClass(RenderTreeBuilder builder)
+        {
+            builder.AddAttribute(0, "class", ClassName);
+        }
+
+        private void AddStyle(RenderTreeBuilder builder)
+        {
+            if (_style != null) builder.AddAttribute(0, "style", _style);
+        }
+
+        private void AddParams(RenderTreeBuilder builder)
+        {
+            if (_params == null) return;
+            var i = 0;
+            foreach (var (key, value) in _params)
+            {
+                builder.AddAttribute(i, key, value);
+                i++;
+            }
+        }
+        
+        private void AddChild(RenderTreeBuilder builder)
+        {
+            if (_child != null) builder.AddContent(4, _child);
         }
 
         private string GenerateUniqueClassName(string prefix = "wrapper")

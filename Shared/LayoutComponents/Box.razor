@@ -1,5 +1,6 @@
-﻿@using BlazorApp.Styles
-@using BlazorApp.Lib.Styled
+﻿@using BlazorApp.Lib.Styled
+@using BlazorApp.Lib.Styles
+
 @(new Styled("h1")
 	.As("box")
 	.WithContent(ChildContent)
@@ -30,5 +31,4 @@
 
 	[Parameter]
 	public string Padding { get; set; } = StyleDictionary.SpacingM;
-
 }
