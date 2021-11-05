@@ -15,14 +15,14 @@ namespace BlazorApp.Lib.Styled
         public Styled(string element = "div")
         {
             _element = element;
-            GenerateUniqueClassName();
+            Wrapper = GenerateUniqueWrapper();
         }
 
-        private string ClassName { get; set; }
+        public string Wrapper { get; private set; }
 
         public Styled As(string prefix)
         {
-            GenerateUniqueClassName(prefix);
+            Wrapper = GenerateUniqueWrapper(prefix);
             return this;
         }
 
@@ -50,30 +50,33 @@ namespace BlazorApp.Lib.Styled
             return this;
         }
 
-        public RenderFragment Render()
+        public RenderFragment Render() =>  builder =>
         {
-            return builder =>
-            {
-                builder.OpenElement(0, _element);
-                AddClass(builder);
-                AddStyle(builder);
-                AddParams(builder);
-                AddChild(builder);
-                AddCss(builder);
-                builder.CloseElement();
-            };
+            builder.OpenElement(0, _element);
+            AddWrapper(builder);
+            AddStyle(builder);
+            AddParams(builder);
+            AddChild(builder);
+            AddCss(builder);
+            builder.CloseElement();
+        };
+        
+        public RenderFragment Css(string value = null)
+        {
+            if (value != null) _css = value;
+            return AddCss;
         }
         
         private void AddCss(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, "style");
-            builder.AddContent(1, _css.Replace(_element, $".{ClassName}"));
+            builder.AddContent(1, _css.Replace(_element, $"[as=\"{Wrapper}\"]"));
             builder.CloseElement();
         }
 
-        private void AddClass(RenderTreeBuilder builder)
+        private void AddWrapper(RenderTreeBuilder builder)
         {
-            builder.AddAttribute(0, "class", ClassName);
+            builder.AddAttribute(0, "as", Wrapper);
         }
 
         private void AddStyle(RenderTreeBuilder builder)
@@ -97,10 +100,9 @@ namespace BlazorApp.Lib.Styled
             if (_child != null) builder.AddContent(4, _child);
         }
 
-        private string GenerateUniqueClassName(string prefix = "wrapper")
+        private string GenerateUniqueWrapper(string prefix = "wrapper")
         {
-            ClassName = $"{prefix}_{Guid.NewGuid().ToString()[..8]}";
-            return ClassName;
+            return $"{prefix}_{Guid.NewGuid().ToString()[..8]}";
         }
     }
 }
