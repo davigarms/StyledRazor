@@ -1,12 +1,12 @@
 ﻿@using BlazorApp.Lib.Styled
 @(new Styled()
-	.As("split")
-	.WithContent(ChildContent)
-	.WithParams(new Params()
+	.Prefix("split")
+	.Content(ChildContent)
+	.Params(new Dictionary<string, object>()
 	{
 		{"stretch", StretchAll}
 	})
-	.WithCss($@"
+	.Css($@"
 		div {{
 			display: flex;
 			flex-wrap: nowrap;

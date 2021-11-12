@@ -1,51 +1,54 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
 namespace BlazorApp.Lib.Styled
 {
-    public class Styled : ComponentBase
+    public class Styled
     {
-        private readonly string _element;
         private RenderFragment _child;
         private string _css;
-        private Params _params;
+        private readonly string _element;
+        private IReadOnlyDictionary<string,object> _params;
         private string _style;
+        
+        public string WrapperName { get; private set; }
 
         public Styled(string element = "div")
         {
             _element = element;
-            Wrapper = GenerateUniqueWrapper();
+            WrapperName = GenerateUniqueWrapper();
         }
 
-        public string Wrapper { get; private set; }
-
-        public Styled As(string prefix)
+        public Styled Prefix(string prefix)
         {
-            Wrapper = GenerateUniqueWrapper(prefix);
+            WrapperName = GenerateUniqueWrapper(prefix);
             return this;
         }
 
-        public Styled WithContent(RenderFragment value)
+        public Styled Content(RenderFragment value)
         {
             _child = value;
             return this;
         }
 
-        public Styled WithParams(Params value)
+        public Styled Params(IReadOnlyDictionary<string,object> value)
         {
             _params = value;
             return this;
         }
 
-        public Styled WithStyle(string value)
+        public Styled Style(string value)
         {
+            if (value == "") return this;
             _style = value;
             return this;
         }
 
-        public Styled WithCss(string value)
+        public Styled Css(string value)
         {
+            if (value == "") return this;
             _css = value;
             return this;
         }
@@ -54,34 +57,32 @@ namespace BlazorApp.Lib.Styled
         {
             builder.OpenElement(0, _element);
             AddWrapper(builder);
-            AddStyle(builder);
             AddParams(builder);
-            AddChild(builder);
+            AddStyle(builder);
+            AddContent(builder);
             AddCss(builder);
             builder.CloseElement();
         };
         
-        public RenderFragment Css(string value = null)
+        public RenderFragment RenderCss(string value = null)
         {
             if (value != null) _css = value;
             return AddCss;
         }
         
-        private void AddCss(RenderTreeBuilder builder)
+        private string GenerateUniqueWrapper(string prefix = "wrapper")
         {
-            builder.OpenElement(0, "style");
-            builder.AddContent(1, _css.Replace(_element, $"[as=\"{Wrapper}\"]"));
-            builder.CloseElement();
+            return $"{prefix}_{Guid.NewGuid().ToString()[..8]}";
         }
-
+        
         private void AddWrapper(RenderTreeBuilder builder)
         {
-            builder.AddAttribute(0, "as", Wrapper);
+            builder.AddAttribute(0, "wrapper", WrapperName);
         }
-
-        private void AddStyle(RenderTreeBuilder builder)
+        
+        private void AddContent(RenderTreeBuilder builder)
         {
-            if (_style != null) builder.AddAttribute(0, "style", _style);
+            if (_child != null) builder.AddContent(4, _child);
         }
 
         private void AddParams(RenderTreeBuilder builder)
@@ -94,15 +95,17 @@ namespace BlazorApp.Lib.Styled
                 i++;
             }
         }
-        
-        private void AddChild(RenderTreeBuilder builder)
+
+        private void AddStyle(RenderTreeBuilder builder)
         {
-            if (_child != null) builder.AddContent(4, _child);
+            if (_style != null) builder.AddAttribute(0, "style", _style);
         }
 
-        private string GenerateUniqueWrapper(string prefix = "wrapper")
+        private void AddCss(RenderTreeBuilder builder)
         {
-            return $"{prefix}_{Guid.NewGuid().ToString()[..8]}";
+            builder.OpenElement(0, "style");
+            builder.AddContent(1, _css.Replace(_element, $"[wrapper=\"{WrapperName}\"]"));
+            builder.CloseElement();
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿@using BlazorApp.Lib.Styled
 @using BlazorApp.Lib.Styles
 @(new Styled()
-	.As("cover")
-	.WithContent(ChildContent)
-	.WithStyle($@"
+	.Prefix("cover")
+	.Content(ChildContent)
+	.Style($@"
 		--cover-min-height: {@MinimumHeight};
 		--cover-padding: {@Padding};
 		--cover-space: {@Space};
 	")
-	.WithCss(@"
+	.Css(@"
 		div {
 	        display: flex;
 	        flex-direction: column;

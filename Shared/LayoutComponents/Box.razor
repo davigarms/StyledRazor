@@ -1,7 +1,7 @@
 ﻿@using BlazorApp.Lib.Styled
 @using BlazorApp.Lib.Styles
 
-<h1 as=@_styled.Wrapper
+<h1 wrapper=@_styled.WrapperName
 	style="
 		--box-height: @Height;
 		--box-padding: @Padding;
@@ -9,7 +9,7 @@
 	"
 >
 	@ChildContent
-	@_styled.Css(@"
+	@_styled.RenderCss(@"
 		h1 {
 		    height: var(--box-height);
 		    padding: var(--box-padding);
@@ -19,7 +19,7 @@
 </h1>
 
 @code {
-	private Styled _styled = new Styled("h1").As("box");
+	private Styled _styled = new Styled("h1").Prefix("box");
 
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }

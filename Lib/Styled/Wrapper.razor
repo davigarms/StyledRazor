@@ -1,0 +1,15 @@
+﻿@(Css
+	.Content(ChildContent)
+	.Params(Params)
+	.Render())
+
+@code {
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+	[Parameter]
+	public Styled Css { get; set; } = new ();
+	
+	[Parameter(CaptureUnmatchedValues = true)]
+	public IReadOnlyDictionary<string, object> Params { get; set; }
+}

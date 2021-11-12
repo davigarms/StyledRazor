@@ -1,12 +1,12 @@
 ﻿@using BlazorApp.Lib.Styled
 @using BlazorApp.Lib.Styles
 @(new Styled()
-	.As("stack")
-	.WithContent(ChildContent)
-	.WithStyle($@"
+	.Prefix("stack")
+	.Content(ChildContent)
+	.Style($@"
 		--stack-gutter: {@Gutter};
 	")
-	.WithCss(@"
+	.Css(@"
 		div {
 			display: flex;
 	        flex-direction: column;
