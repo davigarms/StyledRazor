@@ -1,42 +1,48 @@
 ﻿@using BlazorApp.Lib.Styled
 @using BlazorApp.Lib.Styles
-@(new Styled()
-	.Prefix("cover")
-	.Content(ChildContent)
-	.Style($@"
-		--cover-min-height: {@MinimumHeight};
-		--cover-padding: {@Padding};
-		--cover-space: {@Space};
-	")
-	.Css(@"
-		div {
-	        display: flex;
-	        flex-direction: column;
-	        min-height: var(--cover-min-height);
-	        padding: var(--cover-padding);
-	    }
-	    
-	    div > * {
-	        margin-top: var(--cover-space);
-	        margin-bottom: var(--cover-space);
-	    }
-	    
-	    div > :first-child:not([centered]) {
-	        margin-top: 0;
-	    }
-	    
-	    div > :last-child:not([centered]) {
-	        margin-bottom: 0;
-	    }
-	    
-	    div > [centered] {
-	        margin-top: auto;
-	        margin-bottom: auto;
-	    }
-	")
-	.Render())
+
+<Wrapper 
+	Css=@Styled 
+	style=@($@"
+			--min-height: {@MinimumHeight};
+			--padding: {@Padding};
+			--space: {@Space};
+		")
+>
+	@ChildContent
+</Wrapper>
 
 @code {
+	private Styled Styled =>
+		new Styled()
+			.Prefix("cover")
+			.Css(@"
+        :root {
+          display: flex;
+          flex-direction: column;
+          min-height: var(--min-height);
+          padding: var(--padding);
+        }
+        
+        :root > * {
+          margin-top: var(--space);
+          margin-bottom: var(--space);
+        }
+        
+        :root > :first-child:not([centered]) {
+          margin-top: 0;
+        }
+        
+        :root > :last-child:not([centered]) {
+          margin-bottom: 0;
+        }
+        
+        :root > [centered] {
+          margin-top: auto;
+          margin-bottom: auto;
+        }
+      ");
+	
 	private string Padding => NoPadding ? "0" : Space;
 	
 	[Parameter]

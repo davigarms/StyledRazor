@@ -1,28 +1,34 @@
 ﻿@using BlazorApp.Lib.Styled
 @using BlazorApp.Lib.Styles
-@(new Styled()
-	.Prefix("stack")
-	.Content(ChildContent)
-	.Style($@"
-		--stack-gutter: {@Gutter};
-	")
-	.Css(@"
-		div {
-			display: flex;
-	        flex-direction: column;
-	        justify-content: flex-start;
-	        height: inherit;
-	        position: relative;
-	    }
-	    
-	    div > * + * {
-			margin-top: var(--stack-gutter);
-	        overflow: auto !important;
-	    } 
-	")
-	.Render())
+
+<Wrapper 
+	Css=@Styled 
+	style=@($@"
+			--gutter: {@Gutter};
+		")
+>
+	@ChildContent
+</Wrapper>
 
 @code {
+	private Styled Styled => 
+		new Styled()
+			.Prefix("stack")
+			.Css(@"
+				:root {
+					display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          height: inherit;
+          position: relative;
+        }
+			    
+        :root > * + * {
+          margin-top: var(--gutter);
+          overflow: auto !important;
+        } 
+			");
+	
 	[Parameter]
 	public string Gutter { get; set; } = StyleDictionary.SpacingXL;
 

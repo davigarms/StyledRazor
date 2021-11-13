@@ -11,9 +11,8 @@ namespace BlazorApp.Lib.Styled
         private string _css;
         private readonly string _element;
         private IReadOnlyDictionary<string,object> _params;
-        private string _style;
         
-        public string WrapperName { get; private set; }
+        private string WrapperName { get; set; }
 
         public Styled(string element = "div")
         {
@@ -27,22 +26,15 @@ namespace BlazorApp.Lib.Styled
             return this;
         }
 
-        public Styled Content(RenderFragment value)
-        {
-            _child = value;
-            return this;
-        }
-
         public Styled Params(IReadOnlyDictionary<string,object> value)
         {
             _params = value;
             return this;
         }
-
-        public Styled Style(string value)
+        
+        public Styled Content(RenderFragment value)
         {
-            if (value == "") return this;
-            _style = value;
+            _child = value;
             return this;
         }
 
@@ -56,55 +48,39 @@ namespace BlazorApp.Lib.Styled
         public RenderFragment Render() =>  builder =>
         {
             builder.OpenElement(0, _element);
-            AddWrapper(builder);
+            AddWrapperName(builder);
             AddParams(builder);
-            AddStyle(builder);
             AddContent(builder);
             AddCss(builder);
             builder.CloseElement();
         };
-        
-        public RenderFragment RenderCss(string value = null)
-        {
-            if (value != null) _css = value;
-            return AddCss;
-        }
         
         private string GenerateUniqueWrapper(string prefix = "wrapper")
         {
             return $"{prefix}_{Guid.NewGuid().ToString()[..8]}";
         }
         
-        private void AddWrapper(RenderTreeBuilder builder)
+        private void AddWrapperName(RenderTreeBuilder builder)
         {
-            builder.AddAttribute(0, "wrapper", WrapperName);
-        }
-        
-        private void AddContent(RenderTreeBuilder builder)
-        {
-            if (_child != null) builder.AddContent(4, _child);
+            builder.AddAttribute(0, WrapperName);
         }
 
         private void AddParams(RenderTreeBuilder builder)
         {
             if (_params == null) return;
-            var i = 0;
             foreach (var (key, value) in _params)
-            {
-                builder.AddAttribute(i, key, value);
-                i++;
-            }
+                builder.AddAttribute(0, key, value);
         }
 
-        private void AddStyle(RenderTreeBuilder builder)
+        private void AddContent(RenderTreeBuilder builder)
         {
-            if (_style != null) builder.AddAttribute(0, "style", _style);
+            if (_child != null) builder.AddContent(0, _child);
         }
 
         private void AddCss(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, "style");
-            builder.AddContent(1, _css.Replace(_element, $"[wrapper=\"{WrapperName}\"]"));
+            builder.AddContent(0, _css.Replace(":root", $"{_element}[{WrapperName}]"));
             builder.CloseElement();
         }
     }
