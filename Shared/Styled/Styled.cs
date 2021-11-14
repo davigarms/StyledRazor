@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace BlazorApp.Lib.StyledRazor
+namespace StyledRazor.Shared.Styled
 {
     public class Styled
     {

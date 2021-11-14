@@ -1,6 +1,6 @@
 using System;
 
-namespace BlazorApp.Lib.StyledRazor
+namespace StyledRazor.Shared.Styled
 {
     public class ComponentId
     {

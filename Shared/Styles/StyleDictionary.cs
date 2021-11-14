@@ -1,4 +1,4 @@
-﻿namespace BlazorApp.Lib.Styles
+﻿namespace StyledRazor.Shared.Styles
 {
     public static class StyleDictionary
     {

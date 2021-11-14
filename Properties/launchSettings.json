@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "BlazorApp": {
+    "StyledRazor": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
