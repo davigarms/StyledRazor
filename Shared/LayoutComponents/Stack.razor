@@ -1,32 +1,30 @@
-﻿@using BlazorApp.Lib.Styled
-@using BlazorApp.Lib.Styles
-
-<Wrapper 
-	Css=@Styled 
+﻿@using BlazorApp.Lib.StyledRazor
+<Render 
+	Component=@Wrapper 
 	style=@($@"
-			--gutter: {@Gutter};
-		")
+		--gutter: {@Gutter};
+	")
 >
 	@ChildContent
-</Wrapper>
+</Render>
 
 @code {
-	private Styled Styled => 
+	private Styled Wrapper => 
 		new Styled()
-			.Prefix("stack")
+			.Component(this)
 			.Css(@"
 				:root {
 					display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          height: inherit;
-          position: relative;
-        }
+					flex-direction: column;
+					justify-content: flex-start;
+					height: inherit;
+					position: relative;
+				}
 			    
-        :root > * + * {
-          margin-top: var(--gutter);
-          overflow: auto !important;
-        } 
+				:root > * + * {
+					margin-top: var(--gutter);
+					overflow: auto !important;
+				} 
 			");
 	
 	[Parameter]

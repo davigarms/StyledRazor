@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace BlazorApp.Lib.Styled
+namespace BlazorApp.Lib.StyledRazor
 {
     public class Styled
     {
-        private RenderFragment _child;
-        private string _css;
-        private readonly string _element;
+        private string _componentId;
         private IReadOnlyDictionary<string,object> _params;
-        
-        private string WrapperName { get; set; }
+        private RenderFragment _childContent;
+        private string _css;
+        private readonly string _baseElement;
 
-        public Styled(string element = "div")
+        public Styled(string baseElement = "div")
         {
-            _element = element;
-            WrapperName = GenerateUniqueWrapper();
+            _baseElement = baseElement;
+            _componentId = new ComponentId("wrapper").Value;
         }
 
-        public Styled Prefix(string prefix)
+        public Styled Component(Object type)
         {
-            WrapperName = GenerateUniqueWrapper(prefix);
+            _componentId = new ComponentId(type.GetType().Name).Value;
             return this;
         }
 
@@ -34,7 +33,7 @@ namespace BlazorApp.Lib.Styled
         
         public Styled Content(RenderFragment value)
         {
-            _child = value;
+            _childContent = value;
             return this;
         }
 
@@ -47,22 +46,17 @@ namespace BlazorApp.Lib.Styled
 
         public RenderFragment Render() =>  builder =>
         {
-            builder.OpenElement(0, _element);
-            AddWrapperName(builder);
+            builder.OpenElement(0, _baseElement);
+            AddComponentId(builder);
             AddParams(builder);
             AddContent(builder);
             AddCss(builder);
             builder.CloseElement();
         };
         
-        private string GenerateUniqueWrapper(string prefix = "wrapper")
+        private void AddComponentId(RenderTreeBuilder builder)
         {
-            return $"{prefix}_{Guid.NewGuid().ToString()[..8]}";
-        }
-        
-        private void AddWrapperName(RenderTreeBuilder builder)
-        {
-            builder.AddAttribute(0, WrapperName);
+            builder.AddAttribute(0, _componentId);
         }
 
         private void AddParams(RenderTreeBuilder builder)
@@ -74,13 +68,13 @@ namespace BlazorApp.Lib.Styled
 
         private void AddContent(RenderTreeBuilder builder)
         {
-            if (_child != null) builder.AddContent(0, _child);
+            if (_childContent != null) builder.AddContent(0, _childContent);
         }
 
         private void AddCss(RenderTreeBuilder builder)
         {
             builder.OpenElement(0, "style");
-            builder.AddContent(0, _css.Replace(":root", $"{_element}[{WrapperName}]"));
+            builder.AddContent(0, _css.Replace(":root", $"{_baseElement}[{_componentId}]"));
             builder.CloseElement();
         }
     }

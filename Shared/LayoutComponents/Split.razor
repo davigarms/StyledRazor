@@ -1,16 +1,15 @@
-﻿@using BlazorApp.Lib.Styled
-
-<Wrapper 
-	Css=@Styled 
+﻿@using BlazorApp.Lib.StyledRazor
+<Render 
+	Component=@Wrapper 
 	stretch-all=@StretchAll
 >
 	@ChildContent
-</Wrapper>
+</Render>
 
 @code {
-	private Styled Styled =>
+	private Styled Wrapper =>
 		new Styled()
-			.Prefix("split")
+			.Component(this)
 			.Css($@"
 				:root {{
 					display: flex;

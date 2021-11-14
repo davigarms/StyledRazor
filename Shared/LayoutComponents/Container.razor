@@ -1,29 +1,31 @@
-﻿@using BlazorApp.Lib.Styled
-
-<Wrapper 
-	Css=@Styled 
+﻿@using BlazorApp.Lib.StyledRazor
+<Render
+	Component=@Wrapper 
 	style=@($@"
-			--max-width: {MaxWidth};
-			--width: {Width};
-		")
+		--max-width: {MaxWidth};
+		--width: {Width};
+	")
 	centered=@Centered
 >
 	@ChildContent
-</Wrapper>
+</Render>
 
 @code {
-	private Styled Styled => 
+	private Styled Wrapper => 
 		new Styled()
-			.Prefix("container")
+			.Component(this)
 			.Css(@"
 				:root {
-          margin-left: auto;
-          margin-right: auto;
-          max-width: var(--max-width);
-          width: var(--width);
-          position: relative;
+					margin-left: auto;
+					margin-right: auto;
+					max-width: var(--max-width);
+					width: var(--width);
+					position: relative;
 				}
 			");
+
+	private RenderFragment Div =>
+		new Styled().Component(this).Css(":root{margin: 10px}").Render();
 	
 	private string _width = "initial";
 
