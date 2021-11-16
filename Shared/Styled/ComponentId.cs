@@ -6,7 +6,7 @@ namespace StyledRazor.Shared.Styled
     {
       public string Value {get;}
 
-      public ComponentId(string prefix)
+      public ComponentId(string prefix = "wrapper")
       {
           Value = $"{prefix.ToLower()}_{Guid.NewGuid().ToString()[..8]}";
       }

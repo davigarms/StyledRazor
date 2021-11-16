@@ -11,7 +11,7 @@
 
 @code {
 	private Styled Wrapper => 
-		new Styled()
+		new Styled("div")
 			.Component(this)
 			.Css(@"
 				:root {
@@ -22,9 +22,6 @@
 					position: relative;
 				}
 			");
-
-	private RenderFragment Div =>
-		new Styled().Component(this).Css(":root{margin: 10px}").Render();
 	
 	private string _width = "initial";
 

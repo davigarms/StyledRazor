@@ -9,7 +9,7 @@
 
 @code {
 	private Styled Wrapper => 
-		new Styled()
+		new Styled("div")
 			.Component(this)
 			.Css(@"
 				:root {
@@ -27,7 +27,7 @@
 			");
 	
 	[Parameter]
-	public string Gutter { get; set; } = StyleDictionary.SpacingXL;
+	public string Gutter { get; set; } = Style.SpacingXL;
 
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }

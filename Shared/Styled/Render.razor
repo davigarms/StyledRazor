@@ -8,7 +8,7 @@
 	public RenderFragment ChildContent { get; set; }
 
 	[Parameter]
-	public Styled Component { get; set; } = new ();
+	public Styled Component { get; set; } = new ("div");
 	
 	[Parameter(CaptureUnmatchedValues = true)]
 	public IReadOnlyDictionary<string, object> Params { get; set; }

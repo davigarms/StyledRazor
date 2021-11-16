@@ -13,15 +13,15 @@ namespace StyledRazor.Shared.Styled
         private string _css;
         private readonly string _baseElement;
 
-        public Styled(string baseElement = "div")
+        public Styled(string baseElement)
         {
             _baseElement = baseElement;
-            _componentId = new ComponentId("wrapper").Value;
+            _componentId = new ComponentId().Value;
         }
 
-        public Styled Component(Object type)
+        public Styled Component(object target)
         {
-            _componentId = new ComponentId(type.GetType().Name).Value;
+            _componentId = new ComponentId(target.GetType().Name).Value;
             return this;
         }
 
@@ -39,7 +39,6 @@ namespace StyledRazor.Shared.Styled
 
         public Styled Css(string value)
         {
-            if (value == "") return this;
             _css = value;
             return this;
         }
@@ -47,32 +46,35 @@ namespace StyledRazor.Shared.Styled
         public RenderFragment Render() =>  builder =>
         {
             builder.OpenElement(0, _baseElement);
-            AddComponentId(builder);
-            AddParams(builder);
-            AddContent(builder);
-            AddCss(builder);
+            BuildComponentId(builder);
+            BuildParams(builder);
+            BuildContent(builder);
+            BuildCss(builder);
             builder.CloseElement();
         };
         
-        private void AddComponentId(RenderTreeBuilder builder)
+        private void BuildComponentId(RenderTreeBuilder builder)
         {
+            if (_componentId == null) return;
             builder.AddAttribute(0, _componentId);
         }
 
-        private void AddParams(RenderTreeBuilder builder)
+        private void BuildParams(RenderTreeBuilder builder)
         {
             if (_params == null) return;
             foreach (var (key, value) in _params)
                 builder.AddAttribute(0, key, value);
         }
 
-        private void AddContent(RenderTreeBuilder builder)
+        private void BuildContent(RenderTreeBuilder builder)
         {
-            if (_childContent != null) builder.AddContent(0, _childContent);
+            if (_childContent == null) return; 
+            builder.AddContent(0, _childContent);
         }
 
-        private void AddCss(RenderTreeBuilder builder)
+        private void BuildCss(RenderTreeBuilder builder)
         {
+            if (_css == null) return;
             builder.OpenElement(0, "style");
             builder.AddContent(0, _css.Replace(":root", $"{_baseElement}[{_componentId}]"));
             builder.CloseElement();

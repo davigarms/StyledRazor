@@ -1,6 +1,6 @@
 ﻿namespace StyledRazor.Shared.Styles
 {
-    public static class StyleDictionary
+    public static class Style
     {
         public static string SpacingXS => ".25rem";
         public static string SpacingS => ".5rem";
