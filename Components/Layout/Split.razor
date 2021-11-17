@@ -8,20 +8,20 @@
 @code {
 	private Styled Wrapper =>
 		new Styled("div")
-			.Component(this)
+			.Type(GetType())
 			.Css($@"
-				:root {{
+				div {{
 					display: flex;
 					flex-wrap: nowrap;
 					height: inherit;
 					min-height: inherit;
 				}}
 				
-				:root[stretch-all] > *  {{
+				div[stretch-all] > *  {{
 					flex: 1 
 				}}
 				
-				:root > :nth-child({StretchIndex}) {{
+				div > :nth-child({StretchIndex}) {{
 					flex: 1
 				}}
 			");

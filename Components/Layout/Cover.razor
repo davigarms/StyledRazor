@@ -12,29 +12,29 @@
 @code {
 	private Styled Wrapper =>
 		new Styled("div")
-			.Component(this)
+			.Type(GetType())
 			.Css(@"
-                :root {
+                div {
                   display: flex;
                   flex-direction: column;
                   min-height: var(--min-height);
                   padding: var(--padding);
                 }
         
-                :root > * {
+                div > * {
                   margin-top: var(--space);
                   margin-bottom: var(--space);
                 }
         
-                :root > :first-child:not([centered]) {
+                div > :first-child:not([centered]) {
                   margin-top: 0;
                 }
         
-                :root > :last-child:not([centered]) {
+                div > :last-child:not([centered]) {
                   margin-bottom: 0;
                 }
         
-                :root > [centered] {
+                div > [centered] {
                   margin-top: auto;
                   margin-bottom: auto;
                 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace StyledRazor.Shared.Styled
+namespace StyledRazor.Styled
 {
     public class ComponentId
     {

@@ -12,9 +12,9 @@
 @code {
 	private Styled Wrapper =>
 		new Styled("h1")
-			.Component(this)
+			.Type(GetType())
 			.Css(@"
-				:root {
+				h1 {
 					height: var(--height);
 					padding: var(--padding);
 					width: var(--width);

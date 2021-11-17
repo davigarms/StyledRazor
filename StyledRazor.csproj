@@ -5,4 +5,10 @@
     <OutputType>Exe</OutputType>
     <StartupObject />
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Styled\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Styled\" />
+  </ItemGroup>
 </Project>

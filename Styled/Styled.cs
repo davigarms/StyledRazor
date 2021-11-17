@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace StyledRazor.Shared.Styled
+namespace StyledRazor.Styled
 {
     public class Styled
     {
@@ -16,12 +16,11 @@ namespace StyledRazor.Shared.Styled
         public Styled(string baseElement)
         {
             _baseElement = baseElement;
-            _componentId = new ComponentId().Value;
         }
 
-        public Styled Component(object target)
+        public Styled Type(Type type)
         {
-            _componentId = new ComponentId(target.GetType().Name).Value;
+            _componentId = new ComponentId(type.Name).Value;
             return this;
         }
 
@@ -55,7 +54,7 @@ namespace StyledRazor.Shared.Styled
         
         private void BuildComponentId(RenderTreeBuilder builder)
         {
-            if (_componentId == null) return;
+            if (_componentId == null) _componentId = new ComponentId().Value;
             builder.AddAttribute(0, _componentId);
         }
 
@@ -76,7 +75,7 @@ namespace StyledRazor.Shared.Styled
         {
             if (_css == null) return;
             builder.OpenElement(0, "style");
-            builder.AddContent(0, _css.Replace(":root", $"{_baseElement}[{_componentId}]"));
+            builder.AddContent(0, _css.Replace(_baseElement, $"{_baseElement}[{_componentId}]"));
             builder.CloseElement();
         }
     }

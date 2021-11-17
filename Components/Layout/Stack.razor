@@ -10,9 +10,9 @@
 @code {
 	private Styled Wrapper => 
 		new Styled("div")
-			.Component(this)
+			.Type(GetType())
 			.Css(@"
-				:root {
+				div {
 					display: flex;
 					flex-direction: column;
 					justify-content: flex-start;
@@ -20,7 +20,7 @@
 					position: relative;
 				}
 			    
-				:root > * + * {
+				div > * + * {
 					margin-top: var(--gutter);
 					overflow: auto !important;
 				} 
