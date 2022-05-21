@@ -8,10 +8,9 @@
 </Render>
 
 @code {
-	private Styled Wrapper => 
-		new Styled("div")
-			.Type(GetType())
-			.Css(@"
+    Styled Wrapper =>
+        new Styled(this)
+            .Css(@"
 				div {
 					display: flex;
 					flex-direction: column;
@@ -25,10 +24,10 @@
 					overflow: auto !important;
 				} 
 			");
-	
-	[Parameter]
-	public string Gutter { get; set; } = Style.SpacingXL;
 
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public string Gutter { get; set; } = Style.SpacingXL;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 }

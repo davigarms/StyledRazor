@@ -6,9 +6,8 @@
 </Render>
 
 @code {
-	private Styled Wrapper =>
-		new Styled("div")
-			.Type(GetType())
+	Styled Wrapper =>
+		new Styled(this)
 			.Css($@"
 				div {{
 					display: flex;

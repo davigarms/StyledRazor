@@ -10,10 +10,9 @@
 </Render>
 
 @code {
-	private Styled Wrapper =>
-		new Styled("h1")
-			.Type(GetType())
-			.Css(@"
+    Styled Wrapper =>
+        new Styled(typeof(Box))
+            .Css(@"
 				h1 {
 					height: var(--height);
 					padding: var(--padding);
@@ -21,15 +20,15 @@
 				}
 			");
 
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
-	[Parameter]
-	public string Height { get; set; } = "initial";
+    [Parameter]
+    public string Height { get; set; } = "initial";
 
-	[Parameter]
-	public string Width { get; set; } = "initial";
+    [Parameter]
+    public string Width { get; set; } = "initial";
 
-	[Parameter]
-	public string Padding { get; set; } = Style.SpacingM;
+    [Parameter]
+    public string Padding { get; set; } = Style.SpacingM;
 }
