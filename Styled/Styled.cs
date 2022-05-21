@@ -14,59 +14,62 @@ namespace StyledRazor.Styled
         private string _baseElement = "div";
 
         public Styled() =>
-            _componentId = new ComponentId().Value;
+            _componentId = GenerateId();
 
         public Styled(Type type) =>
-            _componentId = new ComponentId(type.Name).Value;
+            _componentId = GenerateId(type.Name);
 
         public Styled(ComponentBase componentBase = null) =>
-            _componentId = new ComponentId(componentBase.GetType().Name).Value;
+            _componentId = GenerateId(componentBase.GetType().Name);
 
-        public Styled Params(IReadOnlyDictionary<string,object> value)
+        public Styled Params(IReadOnlyDictionary<string,object> @params)
         {
-            _params = value;
+            _params = @params;
             return this;
         }
         
-        public Styled Content(RenderFragment value)
+        public Styled Content(RenderFragment childContent)
         {
-            _childContent = value;
+            _childContent = childContent;
             return this;
         }
 
-        public Styled Css(string value)
+        public Styled Css(string css)
         {
-            _css = value;
-            _baseElement = value.Substring(0, value.IndexOf("{")).Trim();
+            _css = css;
+            _baseElement = css.Substring(0, css.IndexOf("{")).Trim();
             return this;
         }
 
-        public RenderFragment Render() =>  builder =>
+        public RenderFragment Render() => Component =>
         {
-            builder.OpenElement(0, _baseElement);
-            BuildComponentId(builder);
-            BuildParams(builder);
-            BuildContent(builder);
-            BuildCss(builder);
-            builder.CloseElement();
+            Component.OpenElement(0, _baseElement);
+            ComponentId(Component);
+            ComponentParams(Component);
+            ComponentContent(Component);
+            ComponentCss(Component);
+            Component.CloseElement();
         };
 
-        private void BuildComponentId(RenderTreeBuilder builder) => builder.AddAttribute(0, _componentId);
+        private string GenerateId(string prefix = "wrapper") =>
+            $"{prefix.ToLower()}_{Guid.NewGuid().ToString()[..8]}";
 
-        private void BuildParams(RenderTreeBuilder builder)
+        private void ComponentId(RenderTreeBuilder builder) => builder.AddAttribute(0, _componentId);
+
+        private void ComponentParams(RenderTreeBuilder builder)
         {
             if (_params == null) return;
             foreach (var (key, value) in _params)
                 builder.AddAttribute(0, key, value);
         }
 
-        private void BuildContent(RenderTreeBuilder builder)
+        private void ComponentContent(RenderTreeBuilder builder)
         {
             if (_childContent == null) return; 
             builder.AddContent(0, _childContent);
         }
 
-        private void BuildCss(RenderTreeBuilder builder)
+        private void ComponentCss(RenderTreeBuilder builder)
         {
             if (_css == null) return;
             builder.OpenElement(0, "style");
