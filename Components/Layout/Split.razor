@@ -1,12 +1,14 @@
-﻿<Render 
-	Component=@Wrapper 
+﻿@using Styled = Lib.Styled
+
+<Styled 
+	Base=@Div 
 	stretch-all=@StretchAll
 >
 	@ChildContent
-</Render>
+</Styled>
 
 @code {
-	Styled Wrapper =>
+	Styled Div =>
 		new Styled(this)
 			.Css($@"
 				div {{

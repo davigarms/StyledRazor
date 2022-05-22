@@ -1,14 +1,16 @@
-﻿<Render 
-	Component=@Wrapper 
+﻿@using Styled = Lib.Styled
+
+<Styled 
+	Base=@Div 
 	style=@($@"
 		--gutter: {@Gutter};
 	")
 >
 	@ChildContent
-</Render>
+</Styled>
 
 @code {
-    Styled Wrapper =>
+    Styled Div =>
         new Styled(this)
             .Css(@"
 				div {

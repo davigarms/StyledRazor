@@ -1,5 +1,7 @@
-﻿<Render
-	Component=@Wrapper
+﻿@using Styled = Lib.Styled
+
+<Styled
+	Base=@H1
 	style=@($@"
 		--height: {@Height};
 		--padding: {@Padding};
@@ -7,10 +9,10 @@
 	")
 >
 	@ChildContent
-</Render>
+</Styled>
 
 @code {
-    Styled Wrapper =>
+    Styled H1 =>
         new Styled(typeof(Box))
             .Css(@"
 				h1 {

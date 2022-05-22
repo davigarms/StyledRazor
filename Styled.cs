@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace StyledRazor.Styled
+namespace Lib
 {
-    public class Styled
+    public class Styled 
     {
         private readonly string _componentId;
         private IReadOnlyDictionary<string,object> _params;
