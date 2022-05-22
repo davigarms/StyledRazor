@@ -12,9 +12,9 @@
 </Styled>
 
 @code {
+
 	Styled Div =>
-		new Styled(this)
-			.Css(@"
+		new (@"
                 div {
                   display: flex;
                   flex-direction: column;
@@ -39,7 +39,7 @@
                   margin-top: auto;
                   margin-bottom: auto;
                 }
-            ");
+            ", typeof(Cover));
 	
 	private string Padding => NoPadding ? "0" : Space;
 	

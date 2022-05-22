@@ -11,8 +11,7 @@
 
 @code {
     Styled Div =>
-        new Styled(this)
-            .Css(@"
+        new (@"
 				div {
 					display: flex;
 					flex-direction: column;
@@ -25,7 +24,7 @@
 					margin-top: var(--gutter);
 					overflow: auto !important;
 				} 
-			");
+			", typeof(Stack));
 
     [Parameter]
     public string Gutter { get; set; } = Style.SpacingXL;

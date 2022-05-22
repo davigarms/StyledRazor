@@ -9,8 +9,7 @@
 
 @code {
 	Styled Div =>
-		new Styled(this)
-			.Css($@"
+		new ($@"
 				div {{
 					display: flex;
 					flex-wrap: nowrap;
@@ -25,7 +24,7 @@
 				div > :nth-child({StretchIndex}) {{
 					flex: 1
 				}}
-			");
+			", typeof(Split));
 	
 	private int? _stretchedIndex;
 

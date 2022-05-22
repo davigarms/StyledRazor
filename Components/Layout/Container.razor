@@ -12,9 +12,9 @@
 </Styled>
 
 @code {
-	Styled Div => 
-		new Styled(this)
-			.Css(@"
+
+	Styled Div =>
+		new (@"
 				div {
 					margin-left: auto;
 					margin-right: auto;
@@ -22,7 +22,7 @@
 					width: var(--width);
 					position: relative;
 				}
-			");
+			", this);
 	
 	private string _width = "initial";
 

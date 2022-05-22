@@ -13,14 +13,28 @@ namespace Lib
         private string _css;
         private string _baseElement = "div";
 
-        public Styled() =>
-            _componentId = GenerateId();
+        public Styled() => _componentId = GenerateId();
+        
+        public Styled(string css) : this () => SetCss(css);
 
-        public Styled(Type type) =>
-            _componentId = GenerateId(type.Name);
+        public Styled(Type type) => _componentId = GenerateId(type.Name);
+        
+        public Styled(string css, Type type) : this (type) => SetCss(css);
 
-        public Styled(ComponentBase componentBase = null) =>
-            _componentId = GenerateId(componentBase.GetType().Name);
+        public Styled(ComponentBase componentBase) => _componentId = GenerateId(componentBase.GetType().Name);
+        
+        public Styled(string css, ComponentBase componentBase) : this (componentBase) => SetCss(css);
+
+        private string GenerateId(string prefix = null) =>
+            $"{(prefix == null ? "w" : prefix.ToLower() + "-w")}{Guid.NewGuid().ToString()[..8]}";
+        
+        private static string BaseElement(string css) => css.Substring(0, css.IndexOf("{")).Trim();
+        
+        private void SetCss(string css)
+        {
+            _css = css;
+            _baseElement = BaseElement(css);
+        }
 
         public Styled Params(IReadOnlyDictionary<string,object> @params)
         {
@@ -36,23 +50,19 @@ namespace Lib
 
         public Styled Css(string css)
         {
-            _css = css;
-            _baseElement = css.Substring(0, css.IndexOf("{")).Trim();
+            SetCss(css);
             return this;
         }
-
-        public RenderFragment Render() => Component =>
+       
+        public RenderFragment Render() => component =>
         {
-            Component.OpenElement(0, _baseElement);
-            ComponentId(Component);
-            ComponentParams(Component);
-            ComponentContent(Component);
-            ComponentCss(Component);
-            Component.CloseElement();
+            component.OpenElement(0, _baseElement);
+            ComponentId(component);
+            ComponentParams(component);
+            ComponentContent(component);
+            ComponentCss(component);
+            component.CloseElement();
         };
-
-        private string GenerateId(string prefix = "wrapper") =>
-            $"{prefix.ToLower()}_{Guid.NewGuid().ToString()[..8]}";
 
         private void ComponentId(RenderTreeBuilder builder) => builder.AddAttribute(0, _componentId);
 
