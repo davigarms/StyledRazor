@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace StyledRazor.Lib
+namespace StyledRazor.Web
 {
     public class Program
     {

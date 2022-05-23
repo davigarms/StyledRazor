@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Exe</OutputType>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'StyledRazor' " />
+  <ItemGroup>
+    <ProjectReference Include="..\StyledRazor.Lib\StyledRazor.Lib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Shared" />
+  </ItemGroup>
+</Project>

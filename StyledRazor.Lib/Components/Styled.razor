@@ -8,7 +8,7 @@
 	public RenderFragment ChildContent { get; set; }
 
 	[Parameter]
-	public StyledRazor.Lib.Styled Base { get; set; } = new ();
+	public Lib.Styled Base { get; set; } = new ();
 
 	[Parameter(CaptureUnmatchedValues = true)]
 	public IReadOnlyDictionary<string, object> Params { get; set; }
