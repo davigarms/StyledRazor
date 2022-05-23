@@ -1,4 +1,4 @@
-﻿namespace Lib.Shared.Styles
+﻿namespace StyledRazor.Lib.Shared.Styles
 {
     public static class Style
     {
