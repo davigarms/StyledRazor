@@ -1,0 +1,18 @@
+@inherits StyledRazor.Lib.Components.UI.StyledUI
+
+<Styled Type=@A>
+    @ChildContent
+</Styled>
+
+@code {
+
+    Styled A =>
+        new($@"a{{
+					    {ButtonDefinition}                          
+				    }}
+			", typeof(Button));
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

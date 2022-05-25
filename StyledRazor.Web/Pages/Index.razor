@@ -1,7 +1,26 @@
 @page "/"
+@inherits StyledRazor.Lib.Components.UI.StyledUI
 
 <Stack Gutter="@Style.SpacingXL">
-	<div>First</div>
-	<div>Second</div>
-	<div>Third</div>
+    <div>First</div>
+    <div>
+        <Button>Second</Button>
+        <Styled Type=@Button @onclick=@Click>
+            Dynamic
+        </Styled>
+    </div>
+    <div>Third</div>
 </Stack>
+
+@code
+{
+    Styled Button { get; set; } = GreyButton;
+
+    private void Click()
+    {
+        Button =
+            Button.Type == "GreyButton"
+                ? AlertButton
+                : GreyButton;
+    }
+}
