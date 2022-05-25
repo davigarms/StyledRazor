@@ -1,20 +1,17 @@
-﻿@using Styled = Lib.Styled
-
-<Styled 
-	Base=@Div 
-	style=@($@"
+﻿<Styled
+    Type=@Div
+    style=@($@"
 		--min-height: {@MinimumHeight};
 		--padding: {@Padding};
 		--space: {@Space};
-	")
->
-	@ChildContent
+	")>
+    @ChildContent
 </Styled>
 
 @code {
 
-	Styled Div =>
-		new (@"
+    Styled Div =>
+        new(@"
                 div {
                   display: flex;
                   flex-direction: column;
@@ -40,18 +37,19 @@
                   margin-bottom: auto;
                 }
             ", typeof(Cover));
-	
-	private string Padding => NoPadding ? "0" : Space;
-	
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
 
-	[Parameter]
-	public string MinimumHeight { get; set; } = "100vh";
+    private string Padding => NoPadding ? "0" : Space;
 
-	[Parameter]
-	public string Space { get; set; } = Style.SpacingM;
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
-	[Parameter]
-	public bool NoPadding { get; set; }
+    [Parameter]
+    public string MinimumHeight { get; set; } = "100vh";
+
+    [Parameter]
+    public string Space { get; set; } = Style.SpacingM;
+
+    [Parameter]
+    public bool NoPadding { get; set; }
+
 }

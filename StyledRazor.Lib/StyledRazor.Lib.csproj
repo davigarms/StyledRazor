@@ -1,31 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>10</LangVersion>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
 
-  
-  <ItemGroup>
-    <SupportedPlatform Include="browser" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.17" />
-  </ItemGroup>
+    <ItemGroup>
+        <SupportedPlatform Include="browser" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <AdditionalFiles Include="Components\Layout\Box.razor" />
-    <AdditionalFiles Include="Components\Layout\Container.razor" />
-    <AdditionalFiles Include="Components\Layout\Cover.razor" />
-    <AdditionalFiles Include="Components\Layout\Split.razor" />
-    <AdditionalFiles Include="Components\Layout\Stack.razor" />
-    <AdditionalFiles Include="Components\Styled.razor" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.17" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\background.png" />
-    <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
-  </ItemGroup>
+    <ItemGroup>
+        <AdditionalFiles Include="Components\Layout\Box.razor" />
+        <AdditionalFiles Include="Components\Layout\Container.razor" />
+        <AdditionalFiles Include="Components\Layout\Cover.razor" />
+        <AdditionalFiles Include="Components\Layout\Split.razor" />
+        <AdditionalFiles Include="Components\Layout\Stack.razor" />
+        <AdditionalFiles Include="Components\Core\Styled.razor" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="wwwroot\background.png" />
+        <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
+    </ItemGroup>
 
 </Project>

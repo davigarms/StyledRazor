@@ -1,15 +1,13 @@
-﻿@using Styled = Lib.Styled
-
-<Styled 
-	Base=@Div 
-	stretch-all=@StretchAll
->
-	@ChildContent
+﻿<Styled
+    Type=@Div
+    stretch-all=@StretchAll>
+    @ChildContent
 </Styled>
 
 @code {
-	Styled Div =>
-		new ($@"
+
+    Styled Div =>
+        new($@"
 				div {{
 					display: flex;
 					flex-wrap: nowrap;
@@ -25,23 +23,24 @@
 					flex: 1
 				}}
 			", typeof(Split));
-	
-	private int? _stretchedIndex;
 
-	[Parameter]
-	public bool StretchAll { get; set; }
+    private int? _stretchedIndex;
 
-	[Parameter]
-	public int? StretchIndex
-	{
-		get => _stretchedIndex;
-		set
-		{
-			if (value < 0) throw new ArgumentOutOfRangeException(nameof(value));
-			_stretchedIndex = value + 1;
-		}
-	}
+    [Parameter]
+    public bool StretchAll { get; set; }
 
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public int? StretchIndex
+    {
+        get => _stretchedIndex;
+        set
+        {
+            if (value < 0) throw new ArgumentOutOfRangeException(nameof(value));
+            _stretchedIndex = value + 1;
+        }
+    }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
 }

@@ -1,20 +1,17 @@
-﻿@using Styled = Lib.Styled
-
-<Styled
-	Base=@Div 
-	style=@($@"
+﻿<Styled
+    Type=@Div
+    style=@($@"
 		--max-width: {MaxWidth};
 		--width: {Width};
 	")
-	centered=@Centered
->
-	@ChildContent
+    centered=@Centered>
+    @ChildContent
 </Styled>
 
 @code {
 
-	Styled Div =>
-		new (@"
+    Styled Div =>
+        new(@"
 				div {
 					margin-left: auto;
 					margin-right: auto;
@@ -23,24 +20,25 @@
 					position: relative;
 				}
 			", this);
-	
-	private string _width = "initial";
 
-	private string MaxWidth => Fluid ? _width : "initial";
+    private string _width = "initial";
 
-	[Parameter]
-	public bool Fluid { get; set; } 
+    private string MaxWidth => Fluid ? _width : "initial";
 
-	[Parameter]
-	public bool Centered { get; set; }
+    [Parameter]
+    public bool Fluid { get; set; }
 
-	[Parameter]
-	public string Width
-	{
-		get => Fluid ? "100%" : _width;
-		set => _width = value;
-	}
+    [Parameter]
+    public bool Centered { get; set; }
 
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public string Width
+    {
+        get => Fluid ? "100%" : _width;
+        set => _width = value;
+    }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
 }

@@ -1,25 +1,23 @@
-﻿@using Styled = Lib.Styled
-
-<Styled 
-	Base=@Div 
-	style=@($@"
+﻿<Styled
+    Type=@Div
+    style=@($@"
 		--gutter: {@Gutter};
-	")
->
-	@ChildContent
+	")>
+    @ChildContent
 </Styled>
 
 @code {
+
     Styled Div =>
-        new (@"
+        new(@"
 				div {
 					display: flex;
 					flex-direction: column;
 					justify-content: flex-start;
 					height: inherit;
 					position: relative;
-				}
-			    
+				}    
+				
 				div > * + * {
 					margin-top: var(--gutter);
 					overflow: auto !important;
@@ -31,4 +29,5 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
 }
