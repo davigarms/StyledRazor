@@ -15,29 +15,36 @@ namespace StyledRazor.Lib
         public string Type { get; }
 
 
-        public Styled(string css = null, string type = null)
+        public Styled(string css = null, string component = null)
         {
-            Type = type;
-            _componentId = GenerateId(type);
+            Type = component;
+            _componentId = GenerateId(component);
             SetCss(css);
         }
 
-        public Styled(string css, Type type)
-            : this(css, type.Name) => SetCss(css);
+        public Styled(string css, Type component)
+            : this(css, component.Name) => SetCss(css);
 
-        public Styled(string css, ComponentBase component) :
-            this(css, component.GetType().Name) => SetCss(css);
+        public Styled(string css, ComponentBase component)
+            : this(css, component.GetType().Name) => SetCss(css);
 
         private static string GenerateId(string prefix = null) =>
             $"{(prefix == null ? "w" : prefix.ToLower() + "-w")}{Guid.NewGuid().ToString()[..8]}";
 
-        private static string BaseElement(string css) => css.Substring(0, css.IndexOf("{")).Trim();
+        private static string BaseElement(string css) =>
+            css[..css.IndexOf("{", StringComparison.Ordinal)]
+                .Trim();
 
         private void SetCss(string css)
         {
             if (css == null) return;
             _baseElement = BaseElement(css);
-            _css = css
+            _css = IsolateCss(css);
+        }
+
+        private string IsolateCss(string css)
+        {
+            return css
                 .Insert(0, "\n")
                 .Replace("}", "}\n")
                 .Replace("  ", "")
