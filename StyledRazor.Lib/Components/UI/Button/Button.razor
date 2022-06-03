@@ -1,0 +1,23 @@
+@inherits Global
+
+<Styled
+    Type=@DefaultButton
+    style=@($@"
+        --margin: {Margin ?? ButtonMargin};
+        --padding: {Padding ?? ButtonPadding};
+    ")>
+    @ChildContent
+</Styled>
+
+@code {
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public string Margin { get; set; }
+
+    [Parameter]
+    public string Padding { get; set; }
+
+}

@@ -1,11 +1,16 @@
 @page "/"
-@inherits StyledRazor.Lib.Components.UI.StyledUI
+@inherits StyledRazor.Lib.Components.UI.Button.Global
 
-<Stack Gutter="@Style.SpacingXl">
+<Stack Gutter="@T.SpacingXl">
     <div>First</div>
     <div>
-        <Button>Second</Button>
-        <Styled Type=@Button @onclick=@Click>
+        <Button Padding=@($"{T.SpacingS} {T.SpacingXxl}")>Second</Button>
+        <Styled
+            Type=@Button 
+            @onclick=@Click
+            style=@($@"
+                    --margin: 0 {T.SpacingL};
+                ")>
             Dynamic
         </Styled>
     </div>

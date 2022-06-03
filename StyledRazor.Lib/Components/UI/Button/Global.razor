@@ -1,0 +1,46 @@
+@code {
+
+    protected static string ButtonMargin => $"{T.SpacingS} {T.SpacingM}";
+
+    protected static string ButtonPadding => $"{T.SpacingS} 0";
+
+    private static string ButtonDefinition =>
+        $@"display: inline-block;
+		min-width: 11rem;
+		border-radius: {T.SpacingXs};
+		background: transparent;
+		color: black;
+		border: 1px solid grey;
+		text-align: center;
+		cursor: pointer;
+		margin: var(--margin);
+        padding: var(--padding);    
+		--margin: {ButtonMargin};
+		--padding: {ButtonPadding};
+		";
+
+    protected static Styled DefaultButton =>
+        new($@"a{{
+					    {ButtonDefinition}                       
+				    }}
+			", typeof(Button));
+
+    protected static Styled GreyButton =>
+        new($@"
+				a {{
+					{ButtonDefinition}
+					background: grey;
+					color: white;
+				}}
+			", "GreyButton");
+
+    protected static Styled AlertButton =>
+        new($@"
+				a {{
+					{ButtonDefinition}
+					background: red;
+					color: white;
+				}}
+			", "AlertButton");
+
+}

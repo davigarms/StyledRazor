@@ -21,6 +21,7 @@
         <AdditionalFiles Include="Components\Layout\Split.razor" />
         <AdditionalFiles Include="Components\Layout\Stack.razor" />
         <AdditionalFiles Include="Components\Core\Styled.razor" />
+        <AdditionalFiles Include="Components\UI\Button\Button.razor" />
     </ItemGroup>
 
     <ItemGroup>
