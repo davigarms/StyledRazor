@@ -1,4 +1,6 @@
-﻿<Styled
+﻿@inherits Styles
+
+<Styled
     Type=@Div
     style=@($@"
 		--min-height: {@MinimumHeight};
@@ -38,16 +40,16 @@
                 }
             ", typeof(Cover));
 
-    private string Padding => NoPadding ? "0" : Space;
+    private string Padding => NoPadding ? SizeZero : Space;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public string MinimumHeight { get; set; } = "100vh";
+    public string MinimumHeight { get; set; } = SizeFullHeight;
 
     [Parameter]
-    public string Space { get; set; } = T.SpacingM;
+    public string Space { get; set; } = SpacingM;
 
     [Parameter]
     public bool NoPadding { get; set; }

@@ -1,4 +1,6 @@
-﻿<Styled
+﻿@inherits Styles
+
+<Styled
     Type=@Div
     stretch-all=@StretchAll>
     @ChildContent
@@ -24,21 +26,11 @@
 				}}
 			", typeof(Split));
 
-    private int? _stretchedIndex;
-
     [Parameter]
     public bool StretchAll { get; set; }
 
     [Parameter]
-    public int? StretchIndex
-    {
-        get => _stretchedIndex;
-        set
-        {
-            if (value < 0) throw new ArgumentOutOfRangeException(nameof(value));
-            _stretchedIndex = value + 1;
-        }
-    }
+    public int StretchIndex { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

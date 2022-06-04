@@ -1,10 +1,12 @@
-﻿<Styled
+﻿@inherits Styles
+
+<Styled
     Type=@Div
+    centered=@Centered
     style=@($@"
-		--max-width: {MaxWidth};
-		--width: {Width};
-	")
-    centered=@Centered>
+		--max-width: {(Fluid ? Width : Initial)};
+		--width: {(Fluid ? SizeFullScale : Width)};
+	")>
     @ChildContent
 </Styled>
 
@@ -19,11 +21,9 @@
 					width: var(--width);
 					position: relative;
 				}
-			", this);
+			");
 
-    private string _width = "initial";
-
-    private string MaxWidth => Fluid ? _width : "initial";
+    private string MaxWidth { get; set; }
 
     [Parameter]
     public bool Fluid { get; set; }
@@ -32,11 +32,7 @@
     public bool Centered { get; set; }
 
     [Parameter]
-    public string Width
-    {
-        get => Fluid ? "100%" : _width;
-        set => _width = value;
-    }
+    public string Width { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

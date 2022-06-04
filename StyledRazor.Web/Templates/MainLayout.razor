@@ -1,8 +1,8 @@
-@inherits LayoutComponentBase
+@inherits Styles
 
-<Split StretchIndex="1">
+<Split StretchIndex="2">
     <Container Width="15rem">
-        <Box Padding="@T.SpacingXs">
+        <Box Padding="@SpacingXs">
             Title
         </Box>
     </Container>
@@ -21,3 +21,10 @@
         </Cover>
     </Container>
 </Split>
+
+@code {
+
+    [Parameter]
+    public RenderFragment Body { get; set; }
+
+}

@@ -1,4 +1,6 @@
-﻿<Styled
+﻿@inherits Styles
+
+<Styled
     Type=@Div
     style=@($@"
 		--gutter: {@Gutter};
@@ -25,7 +27,7 @@
 			", typeof(Stack));
 
     [Parameter]
-    public string Gutter { get; set; } = T.SpacingXl;
+    public string Gutter { get; set; } = SpacingXl;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }

@@ -1,13 +1,13 @@
-@code {
+using Styled = StyledRazor.Lib.Core.Styled;
 
-    protected static string ButtonMargin => $"{T.SpacingS} {T.SpacingM}";
+namespace StyledRazor.Lib.Styles.UI;
 
-    protected static string ButtonPadding => $"{T.SpacingS} 0";
-
+public partial class Elements : Tokens
+{
     private static string ButtonDefinition =>
         $@"display: inline-block;
 		min-width: 11rem;
-		border-radius: {T.SpacingXs};
+		border-radius: {SpacingXs};
 		background: transparent;
 		color: black;
 		border: 1px solid grey;
@@ -19,11 +19,15 @@
 		--padding: {ButtonPadding};
 		";
 
+    protected static string ButtonMargin => $"{SpacingS} {SpacingM}";
+
+    protected static string ButtonPadding => $"{SpacingS} 0";
+
     protected static Styled DefaultButton =>
         new($@"a{{
 					    {ButtonDefinition}                       
 				    }}
-			", typeof(Button));
+			", "Button");
 
     protected static Styled GreyButton =>
         new($@"
@@ -42,5 +46,4 @@
 					color: white;
 				}}
 			", "AlertButton");
-
 }

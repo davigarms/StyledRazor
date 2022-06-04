@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
-namespace StyledRazor.Lib
+namespace StyledRazor.Lib.Core
 {
     public class Styled
     {
@@ -13,7 +13,6 @@ namespace StyledRazor.Lib
         private string _css;
         private string _baseElement = "div";
         public string Type { get; }
-
 
         public Styled(string css = null, string component = null)
         {

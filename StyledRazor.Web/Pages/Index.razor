@@ -1,31 +1,30 @@
 @page "/"
-@inherits StyledRazor.Lib.Components.UI.Button.Global
+@inherits Styles
 
-<Stack Gutter="@T.SpacingXl">
+<Stack Gutter="@SpacingXl">
     <div>First</div>
     <div>
-        <Button Padding=@($"{T.SpacingS} {T.SpacingXxl}")>Second</Button>
+        <Button Padding=@($"{SpacingS} {SpacingXxl}")>Second</Button>
         <Styled
             Type=@Button 
             @onclick=@Click
             style=@($@"
-                    --margin: 0 {T.SpacingL};
+                    --margin: 0 {SpacingXl};
                 ")>
             Dynamic
         </Styled>
     </div>
-    <div>Third</div>
+    <div>
+        Third
+    </div>
 </Stack>
 
 @code
 {
     Styled Button { get; set; } = GreyButton;
 
-    private void Click()
-    {
-        Button =
-            Button.Type == "GreyButton"
-                ? AlertButton
-                : GreyButton;
-    }
+    private void Click() => Button =
+        Button.Type == "GreyButton"
+            ? AlertButton
+            : GreyButton;
 }

@@ -1,4 +1,6 @@
-﻿<Styled
+﻿@inherits Styles
+
+<Styled
     Type=@H1
     style=@($@"
 		--height: {@Height};
@@ -24,12 +26,12 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public string Height { get; set; } = "initial";
+    public string Height { get; set; } = Initial;
 
     [Parameter]
-    public string Width { get; set; } = "initial";
+    public string Width { get; set; } = Initial;
 
     [Parameter]
-    public string Padding { get; set; } = T.SpacingM;
+    public string Padding { get; set; } = SpacingM;
 
 }
