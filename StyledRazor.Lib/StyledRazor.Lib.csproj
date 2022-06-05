@@ -20,13 +20,16 @@
         <AdditionalFiles Include="Components\Layout\Cover.razor" />
         <AdditionalFiles Include="Components\Layout\Split.razor" />
         <AdditionalFiles Include="Components\Layout\Stack.razor" />
-        <AdditionalFiles Include="Components\Core\Styled.razor" />
         <AdditionalFiles Include="Components\UI\Button\Button.razor" />
     </ItemGroup>
 
     <ItemGroup>
         <_ContentIncludedByDefault Remove="wwwroot\background.png" />
         <_ContentIncludedByDefault Remove="wwwroot\exampleJsInterop.js" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\StyledRazor.Core\StyledRazor.Core.csproj" />
     </ItemGroup>
 
 </Project>

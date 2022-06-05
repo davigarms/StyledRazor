@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyledRazor.Web", "StyledRa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyledRazor.Lib", "StyledRazor.Lib\StyledRazor.Lib.csproj", "{0D1A35C4-23BE-4322-9765-0338C2EC5A2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyledRazor.Core", "StyledRazor.Core\StyledRazor.Core.csproj", "{607D81AB-C4D4-4AAB-80CB-1160723D03ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{B102BD56-EFB4-405B-BBE7-6D17D60984CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B102BD56-EFB4-405B-BBE7-6D17D60984CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B102BD56-EFB4-405B-BBE7-6D17D60984CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{607D81AB-C4D4-4AAB-80CB-1160723D03ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{607D81AB-C4D4-4AAB-80CB-1160723D03ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{607D81AB-C4D4-4AAB-80CB-1160723D03ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{607D81AB-C4D4-4AAB-80CB-1160723D03ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

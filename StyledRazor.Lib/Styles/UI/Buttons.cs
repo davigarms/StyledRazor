@@ -1,4 +1,5 @@
-using Styled = StyledRazor.Lib.Core.Styled;
+using StyledRazor.Lib.Styles.Base;
+using Styled = StyledRazor.Core.Styled;
 
 namespace StyledRazor.Lib.Styles.UI;
 

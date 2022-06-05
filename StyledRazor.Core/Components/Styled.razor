@@ -9,7 +9,7 @@
     public RenderFragment ChildContent { get; set; }
 
     [Parameter]
-    public Lib.Core.Styled Type { get; set; } = new();
+    public StyledRazor.Core.Styled Type { get; set; } = new();
 
     [Parameter(CaptureUnmatchedValues = true)]
     public IReadOnlyDictionary<string, object> Params { get; set; }

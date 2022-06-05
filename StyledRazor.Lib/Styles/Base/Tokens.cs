@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace StyledRazor.Lib.Styles;
+namespace StyledRazor.Lib.Styles.Base;
 
 public class Tokens : ComponentBase
 {
