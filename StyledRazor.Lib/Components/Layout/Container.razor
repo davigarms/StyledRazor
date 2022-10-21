@@ -1,40 +1,35 @@
-﻿@inherits Styles
-
-<Styled
-    Type=@Div
-    centered=@Centered
-    style=@($@"
-		--max-width: {(Fluid ? Width : Initial)};
-		--width: {(Fluid ? SizeFullScale : Width)};
-	")>
-    @ChildContent
-</Styled>
+﻿<Layout _="Wrapper"
+        style=@($@"
+					--max-width: {(Fluid ? Width : Tokens.Initial)};
+					--width: {(Fluid ? Tokens.SizeFullScale : Width)};")
+        centered="@Centered">
+  @ChildContent
+</Layout>
 
 @code {
 
-    Styled Div =>
-        new(@"
-				div {
-					margin-left: auto;
-					margin-right: auto;
-					max-width: var(--max-width);
-					width: var(--width);
-					position: relative;
-				}
-			");
+	Styled Wrapper => new("div",
+	  @"
+			{
+				margin-left: auto;
+				margin-right: auto;
+				max-width: var(--max-width);
+				width: var(--width);
+				position: relative;
+			}
+		", typeof(Container));
 
-    private string MaxWidth { get; set; }
+  private string MaxWidth { get; set; }
 
-    [Parameter]
-    public bool Fluid { get; set; }
+  [Parameter]
+  public bool Fluid { get; set; }
 
-    [Parameter]
-    public bool Centered { get; set; }
+  [Parameter]
+  public bool Centered { get; set; }
 
-    [Parameter]
-    public string Width { get; set; }
+  [Parameter]
+  public string Width { get; set; }
 
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
+  [Parameter]
+  public RenderFragment ChildContent { get; set; }
 }

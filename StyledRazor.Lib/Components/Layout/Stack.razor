@@ -1,35 +1,29 @@
-﻿@inherits Styles
-
-<Styled
-    Type=@Div
-    style=@($@"
-		--gutter: {@Gutter};
-	")>
-    @ChildContent
-</Styled>
+﻿<Layout _="Wrapper"
+         style=@($@"
+					--gutter: {@Gutter};")>
+  @ChildContent
+</Layout>
 
 @code {
+	static Styled Wrapper => new("div",
+	  @"
+			 {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				height: inherit;
+				position: relative;
+			}
+			
+			 > * + * {
+				margin-top: var(--gutter);
+				overflow: auto !important;
+			} 
+		", typeof(Stack));
 
-    Styled Div =>
-        new(@"
-				div {
-					display: flex;
-					flex-direction: column;
-					justify-content: flex-start;
-					height: inherit;
-					position: relative;
-				}    
-				
-				div > * + * {
-					margin-top: var(--gutter);
-					overflow: auto !important;
-				} 
-			", typeof(Stack));
+  [Parameter]
+  public string Gutter { get; set; } = Tokens.SpacingXl;
 
-    [Parameter]
-    public string Gutter { get; set; } = SpacingXl;
-
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
-
+  [Parameter]
+  public RenderFragment ChildContent { get; set; }
 }

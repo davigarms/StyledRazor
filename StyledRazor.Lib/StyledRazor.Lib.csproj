@@ -15,7 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="Components\Layout\Box.razor" />
         <AdditionalFiles Include="Components\Layout\Container.razor" />
         <AdditionalFiles Include="Components\Layout\Cover.razor" />
         <AdditionalFiles Include="Components\Layout\Split.razor" />

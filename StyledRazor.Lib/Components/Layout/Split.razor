@@ -1,38 +1,31 @@
-﻿@inherits Styles
+﻿@inherits ParametersBase
 
-<Styled
-    Type=@Div
-    stretch-all=@StretchAll>
-    @ChildContent
-</Styled>
+<Layout _="Wrapper" 
+        stretch-all="@StretchAll">
+	@ChildContent
+</Layout>
 
 @code {
 
-    Styled Div =>
-        new($@"
-				div {{
-					display: flex;
-					flex-wrap: nowrap;
-					height: inherit;
-					min-height: inherit;
-				}}
-				
-				div[stretch-all] > *  {{
-					flex: 1 
-				}}
-				
-				div > :nth-child({StretchIndex}) {{
-					flex: 1
-				}}
-			", typeof(Split));
+  Styled Wrapper => new("div", 
+    $@"
+     {{
+      display: flex;
+      flex-wrap: nowrap;
+      height: inherit;
+      min-height: inherit;
+    }}
 
-    [Parameter]
-    public bool StretchAll { get; set; }
+    [stretch-all] > *  {{
+      flex: 1 
+    }}
 
-    [Parameter]
-    public int StretchIndex { get; set; }
+     > :nth-child({StretchIndex}) {{
+      flex: 1
+    }}
+  ", typeof(Split));
 
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+  [Parameter] public bool StretchAll { get; set; }
 
+	[Parameter] public int StretchIndex { get; set; }
 }

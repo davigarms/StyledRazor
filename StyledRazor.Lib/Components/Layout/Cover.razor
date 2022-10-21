@@ -1,57 +1,52 @@
-﻿@inherits Styles
-
-<Styled
-    Type=@Div
-    style=@($@"
-		--min-height: {@MinimumHeight};
-		--padding: {@Padding};
-		--space: {@Space};
-	")>
-    @ChildContent
-</Styled>
+﻿<Layout _="Wrapper"
+        style=@($@"
+		      --min-height: {@MinimumHeight};
+		      --padding: {@Padding};
+		      --space: {@Space};")>
+  @ChildContent
+</Layout>
 
 @code {
 
-    Styled Div =>
-        new(@"
-                div {
-                  display: flex;
-                  flex-direction: column;
-                  min-height: var(--min-height);
-                  padding: var(--padding);
-                }
-        
-                div > * {
-                  margin-top: var(--space);
-                  margin-bottom: var(--space);
-                }
-        
-                div > :first-child:not([centered]) {
-                  margin-top: 0;
-                }
-        
-                div > :last-child:not([centered]) {
-                  margin-bottom: 0;
-                }
-        
-                div > [centered] {
-                  margin-top: auto;
-                  margin-bottom: auto;
-                }
-            ", typeof(Cover));
+  static Styled Wrapper => new("div",
+    @"
+      {
+        display: flex;
+        flex-direction: column;
+        min-height: var(--min-height);
+        padding: var(--padding);
+      }
 
-    private string Padding => NoPadding ? SizeZero : Space;
+      > * {
+        margin-top: var(--space);
+        margin-bottom: var(--space);
+      }
 
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+      > :first-child:not([centered]) {
+        margin-top: 0;
+      }
 
-    [Parameter]
-    public string MinimumHeight { get; set; } = SizeFullHeight;
+      > :last-child:not([centered]) {
+        margin-bottom: 0;
+      }
 
-    [Parameter]
-    public string Space { get; set; } = SpacingM;
+      > [centered] {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+  ", typeof(Cover));
 
-    [Parameter]
-    public bool NoPadding { get; set; }
+  private string Padding => NoPadding ? Tokens.SizeZero : Space;
 
+  [Parameter]
+  public RenderFragment ChildContent { get; set; }
+
+  [Parameter]
+  public string MinimumHeight { get; set; } = Tokens.SizeFullHeight;
+
+  [Parameter]
+  public string Space { get; set; } = Tokens.SpacingM;
+
+  [Parameter]
+  public bool NoPadding { get; set; }
 }

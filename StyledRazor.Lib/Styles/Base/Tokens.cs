@@ -1,18 +1,16 @@
-using Microsoft.AspNetCore.Components;
-
 namespace StyledRazor.Lib.Styles.Base;
 
-public class Tokens : ComponentBase
+public static class Tokens
 {
-    protected static string SpacingXs => ".25rem";
-    protected static string SpacingS => ".5rem";
-    protected static string SpacingM => "1rem";
-    protected static string SpacingL => "2rem";
-    protected static string SpacingXl => "4rem";
-    protected static string SpacingXxl => "8rem";
-    protected static string Initial => "initial";
-    protected static string SizeFullScale => "100%";
-    protected static string SizeFullWidth => "100vw";
-    protected static string SizeFullHeight => "100vh";
-    protected static string SizeZero => "0";
+    public static string SpacingXs => ".25rem";
+    public static string SpacingS => ".5rem";
+    public static string SpacingM => "1rem";
+    public static string SpacingL => "2rem";
+    public static string SpacingXl => "4rem";
+    public static string SpacingXxl => "8rem";
+    public static string Initial => "initial";
+    public static string SizeFullScale => "100%";
+    public static string SizeFullWidth => "100vw";
+    public static string SizeFullHeight => "100vh";
+    public static string SizeZero => "0";
 }

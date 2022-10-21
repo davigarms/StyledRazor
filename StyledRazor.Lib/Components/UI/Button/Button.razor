@@ -1,23 +1,19 @@
-@inherits Styles
+@inherits UIComponents
 
-<Styled
-    Type=@DefaultButton
-    style=@($@"
-        --margin: {Margin ?? ButtonMargin};
-        --padding: {Padding ?? ButtonPadding};
-    ")>
-    @ChildContent
-</Styled>
+<Layout _="DefaultButton"
+        style=@($@"
+          --margin: {Margin ?? ButtonMargin};
+          --padding: {Padding ?? ButtonPadding};")>
+  @ChildContent
+</Layout>
 
 @code {
+  [Parameter]
+  public RenderFragment ChildContent { get; set; }
 
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+  [Parameter]
+  public string Margin { get; set; }
 
-    [Parameter]
-    public string Margin { get; set; }
-
-    [Parameter]
-    public string Padding { get; set; }
-
+  [Parameter]
+  public string Padding { get; set; }
 }

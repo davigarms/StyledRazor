@@ -1,0 +1,9 @@
+@inherits StyledBox
+
+<StyledBox 
+	style=@($@"
+		--height: {@Height};
+		--padding: {@Padding};
+		--width: {@Width};")>
+  @ChildContent
+</StyledBox>
