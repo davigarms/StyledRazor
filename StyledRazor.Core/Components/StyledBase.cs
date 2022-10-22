@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 
 namespace StyledRazor.Core.Components;
@@ -11,15 +12,15 @@ public class StyledBase : ParametersBase
 
   public string Name { get; set; }
 
-  protected virtual Styled Styled { get; set; }
+  protected virtual Styled Element { get; set; }
 
-  protected virtual string Styles { get; set;  }
+  protected virtual string Inline { get; set;  }
 
-  protected StyledBase()
+  public StyledBase()
   {
     Name = GetType().Name;
-    if (Styled != null)
-      SetCss(Styled.BaseElement, Styled.BaseCss, Name);
+    if (Element != null)
+      SetCss(Element.Name, Element.Css, Name);
   }
 
   private static string ComponentId(string prefix = null) =>
@@ -43,6 +44,7 @@ public class StyledBase : ParametersBase
   protected void SetCss(string baseElement, string baseCss, string name)
   {
     Name = name;
+    SetCss(baseElement, baseCss, true);
   }
 
   private string CompressedCss(string css)
@@ -68,7 +70,7 @@ public class StyledBase : ParametersBase
 
   private void BuildComponentId(RenderTreeBuilder builder) => builder.AddAttribute(0, _componentId);
 
-  private void BuildComponentStyle(RenderTreeBuilder builder) => builder.AddAttribute(0, "style", Styles);
+  private void BuildComponentStyle(RenderTreeBuilder builder) => builder.AddAttribute(0, "style", Inline);
 
   private void BuildComponentParams(RenderTreeBuilder builder)
   {
@@ -103,5 +105,13 @@ public class StyledBase : ParametersBase
     BuildComponentContent(builder);
     BuildComponentCss(builder);
     builder.CloseElement();
+  }
+
+  [Parameter] public Styled Styled { get; set; }
+
+  protected override void OnParametersSet()
+  {
+    if (Styled != null)
+      SetCss(Styled.Name, Styled.Css, Styled.Prefix);
   }
 }

@@ -1,4 +1,6 @@
-﻿<Layout _="Wrapper"
+﻿@inherits ElementBase
+
+<Layout Styled="@Div"
         style=@($@"
 		      --min-height: {@MinimumHeight};
 		      --padding: {@Padding};
@@ -8,7 +10,7 @@
 
 @code {
 
-  static Styled Wrapper => new("div",
+  new Styled Div => Div(
     @"
       {
         display: flex;
@@ -34,12 +36,9 @@
         margin-top: auto;
         margin-bottom: auto;
       }
-  ", typeof(Cover));
+  ");
 
   private string Padding => NoPadding ? Tokens.SizeZero : Space;
-
-  [Parameter]
-  public RenderFragment ChildContent { get; set; }
 
   [Parameter]
   public string MinimumHeight { get; set; } = Tokens.SizeFullHeight;

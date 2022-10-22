@@ -1,11 +1,13 @@
-﻿<Layout _="Wrapper"
+﻿@inherits ElementBase
+
+<Layout Styled="@Div"
          style=@($@"
 					--gutter: {@Gutter};")>
   @ChildContent
 </Layout>
 
 @code {
-	static Styled Wrapper => new("div",
+	new Styled Div => Div(
 	  @"
 			 {
 				display: flex;
@@ -19,11 +21,8 @@
 				margin-top: var(--gutter);
 				overflow: auto !important;
 			} 
-		", typeof(Stack));
+		");
 
   [Parameter]
   public string Gutter { get; set; } = Tokens.SpacingXl;
-
-  [Parameter]
-  public RenderFragment ChildContent { get; set; }
 }

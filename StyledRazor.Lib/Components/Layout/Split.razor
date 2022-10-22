@@ -1,29 +1,28 @@
-﻿@inherits ParametersBase
+﻿@inherits ElementBase
 
-<Layout _="Wrapper" 
+<Layout Styled="@Div" 
         stretch-all="@StretchAll">
 	@ChildContent
 </Layout>
 
 @code {
-
-  Styled Wrapper => new("div", 
+  new Styled Div => Div(
     $@"
-     {{
-      display: flex;
-      flex-wrap: nowrap;
-      height: inherit;
-      min-height: inherit;
-    }}
+      {{
+        display: flex;
+        flex-wrap: nowrap;
+        height: inherit;
+        min-height: inherit;
+      }}
 
-    [stretch-all] > *  {{
-      flex: 1 
-    }}
+      [stretch-all] > *  {{
+        flex: 1 
+      }}
 
-     > :nth-child({StretchIndex}) {{
-      flex: 1
-    }}
-  ", typeof(Split));
+       > :nth-child({StretchIndex}) {{
+        flex: 1
+      }}
+    ");
 
   [Parameter] public bool StretchAll { get; set; }
 

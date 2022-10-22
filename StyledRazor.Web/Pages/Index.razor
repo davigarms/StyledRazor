@@ -6,7 +6,7 @@
   <div>First</div>
   <div>
     <Button Padding=@($"{Tokens.SpacingS} {Tokens.SpacingXxl}")>Second</Button>
-    <Layout _="@DynamicButton"
+    <Layout Styled="@DynamicButton"
             @onclick="@Click"
             style=@($@"
               --margin: 0 {Tokens.SpacingXl};")>
@@ -23,7 +23,7 @@
   Styled DynamicButton { get; set; } = GreyButton;
 
   private void Click() => DynamicButton =
-    DynamicButton.Name == "GreyButton"
+    DynamicButton.Prefix == "GreyButton"
       ? AlertButton
       : GreyButton;
 }

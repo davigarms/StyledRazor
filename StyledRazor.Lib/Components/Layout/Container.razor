@@ -1,24 +1,14 @@
-﻿<Layout _="Wrapper"
+﻿@inherits ContainerBase
+
+<ContainerBase
         style=@($@"
 					--max-width: {(Fluid ? Width : Tokens.Initial)};
 					--width: {(Fluid ? Tokens.SizeFullScale : Width)};")
         centered="@Centered">
   @ChildContent
-</Layout>
+</ContainerBase>
 
 @code {
-
-	Styled Wrapper => new("div",
-	  @"
-			{
-				margin-left: auto;
-				margin-right: auto;
-				max-width: var(--max-width);
-				width: var(--width);
-				position: relative;
-			}
-		", typeof(Container));
-
   private string MaxWidth { get; set; }
 
   [Parameter]
@@ -29,7 +19,4 @@
 
   [Parameter]
   public string Width { get; set; }
-
-  [Parameter]
-  public RenderFragment ChildContent { get; set; }
 }

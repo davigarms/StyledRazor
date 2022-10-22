@@ -1,23 +1,22 @@
 using System;
 using System.Reflection;
+using Microsoft.AspNetCore.Components;
 
 namespace StyledRazor.Core;
 
 public class Styled
 {
-  public string BaseElement { get; }
-  public string BaseCss { get; }
   public string Name { get; }
+  public string Css { get; }
+  public string Prefix { get; }
   
-  public Styled(string baseElement, string baseCss, string name = null)
+  public Styled(string name, string css, string prefix = null)
   {
-    BaseElement = baseElement;
-    BaseCss = baseCss;
     Name = name;
+    Css = css;
+    Prefix = prefix;
   }
   
-  public Styled(string baseElement, string baseCss, MemberInfo type) : this (baseElement, baseCss, type.Name) {}
-
-  public static Styled Div(string baseCss) => new(MethodBase.GetCurrentMethod()?.Name, baseCss);
-  public static Styled H1(string baseCss) => new(MethodBase.GetCurrentMethod()?.Name, baseCss);
+  public Styled(string name, string css, MemberInfo member) : this (name, css, member.Name) {}
+  public Styled(string name, string css, ComponentBase componentBase) : this (name, css, componentBase.GetType().Name) {}
 }
