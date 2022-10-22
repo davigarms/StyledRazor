@@ -1,12 +1,12 @@
-﻿@inherits ElementBase
+﻿@inherits StyledRazor.Core.Components.StyledBase
 
-<Layout Styled="@Div" 
+<Layout Styled="@SplitBase" 
         stretch-all="@StretchAll">
 	@ChildContent
 </Layout>
 
 @code {
-  new Styled Div => Div(
+  Styled SplitBase => Div(
     $@"
       {{
         display: flex;

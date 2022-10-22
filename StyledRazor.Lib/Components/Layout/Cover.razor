@@ -1,6 +1,6 @@
-﻿@inherits ElementBase
+﻿@inherits StyledRazor.Core.Components.StyledBase
 
-<Layout Styled="@Div"
+<Layout Styled="@BoxBase"
         style=@($@"
 		      --min-height: {@MinimumHeight};
 		      --padding: {@Padding};
@@ -10,8 +10,7 @@
 
 @code {
 
-  new Styled Div => Div(
-    @"
+  Styled BoxBase => Div(@"
       {
         display: flex;
         flex-direction: column;

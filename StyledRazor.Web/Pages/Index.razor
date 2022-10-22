@@ -23,7 +23,7 @@
   Styled DynamicButton { get; set; } = GreyButton;
 
   private void Click() => DynamicButton =
-    DynamicButton.Prefix == "GreyButton"
+    DynamicButton.Name == "GreyButton"
       ? AlertButton
       : GreyButton;
 }

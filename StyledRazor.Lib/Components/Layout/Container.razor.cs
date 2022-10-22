@@ -3,10 +3,10 @@ using StyledRazor.Core.Components;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class ContainerBase : ElementBase
+public class ContainerBase : StyledBase
 {
-  protected override Styled Element => Div(
-    @"
+	protected override Styled Base => Div(
+		@"
 			{
 				margin-left: auto;
 				margin-right: auto;
@@ -15,5 +15,5 @@ public class ContainerBase : ElementBase
 				position: relative;
 			}
 		"
-  );
+	);
 }
