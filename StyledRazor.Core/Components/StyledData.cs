@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Components;
+namespace StyledRazor.Core.Components;
 
-namespace StyledRazor.Core;
-
-public class StyledData : ComponentBase
+public class StyledData : ElementBase
 {
   protected virtual Styled Base => Element();
   protected virtual string Style { get; set; }
@@ -34,9 +32,4 @@ public class StyledData : ComponentBase
     ComponentId = styled.ComponentId;
     Style = _styled.Style;
   }
-
-  private Styled Element(string baseElement = "div", string baseCss = "") => new(baseElement, baseCss, this);
-  protected Styled Div(string css) => Element("div", css);
-  protected Styled H1(string css) => Element("h1", css);
-  protected Styled A(string css) => Element("a", css);
 }
