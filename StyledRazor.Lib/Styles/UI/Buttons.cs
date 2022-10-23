@@ -6,10 +6,10 @@ namespace StyledRazor.Lib.Styles.UI;
 
 public partial class UiComponents : ComponentBase
 {
-	protected static string ButtonMargin => $"{Tokens.SpacingS} {Tokens.SpacingM}";
-	protected static string ButtonPadding => $"{Tokens.SpacingS} 0";
-  private static string ButtonDefinition => 
-    $@"
+	protected const string ButtonMargin = $"{Tokens.SpacingS} {Tokens.SpacingM}";
+	protected const string ButtonPadding = $"{Tokens.SpacingS} 0";
+
+	private const string ButtonDefinition = $@"
 			display: inline-block;
 			min-width: 11rem;
 			border-radius: {Tokens.SpacingXs};
@@ -24,14 +24,14 @@ public partial class UiComponents : ComponentBase
 			--padding: {ButtonPadding};
 		";
 
-  protected static Styled DefaultButton => new("a", 
+	protected static readonly Styled DefaultButton = new("a", 
 		$@"
 			{{
 		    {ButtonDefinition}                       
 	    }}
 		", "Button");
 
-  protected static Styled GreyButton => new("a",
+  protected static readonly Styled GreyButton = new("a",
     $@"
 			{{
 				{ButtonDefinition}
@@ -40,7 +40,7 @@ public partial class UiComponents : ComponentBase
 			}}
 		", "GreyButton");
 
-  protected static Styled AlertButton => new("a", 
+  protected static readonly Styled AlertButton = new("a", 
     $@"
 			{{
 				{ButtonDefinition}

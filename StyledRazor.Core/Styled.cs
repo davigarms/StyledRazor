@@ -6,29 +6,34 @@ namespace StyledRazor.Core;
 
 public class Styled
 {
-  private readonly string _id = Guid.NewGuid().ToString().Replace("-", "")[..10];
   public string Name { get; }
   public string BaseElement { get; }
-  public string ComponentId { get; }
-  private string BaseElementId => $"{BaseElement}[{ComponentId}]";
+  public readonly string ComponentId;
   public string BaseCss { get; }
-  
+  public string Style { get; set; }
+
   public Styled(string baseElement, string baseCss, string name = "")
   {
+    var id = Guid.NewGuid().ToString().Replace("-", "")[..10];
     Name = name;
+    ComponentId = ComponentIdFrom(id, Name);
     BaseElement = baseElement;
-    ComponentId = ComponentIdFrom(Name);
-    BaseCss = Compressed(BaseElementId, baseCss);
+    
+    var baseElementId = BaseElementIdFrom(BaseElement, ComponentId);
+    BaseCss = Compressed(baseCss, baseElementId);
   }
-  
-  public Styled(string baseElement, string baseCss, MemberInfo member) : this (baseElement, baseCss, member.Name) {}
-  
-  public Styled(string baseElement, string baseCss, ComponentBase component) : this (baseElement, baseCss, component.GetType().Name) {}
 
-  private string ComponentIdFrom(string name = null) =>
-    $"{(name == null ? "w" : name.ToLower() + "_")}{_id}";
+  private static string BaseElementIdFrom(string baseElement, string componentId) => $"{baseElement}[{componentId}]";
 
-  private static string Compressed(string baseElementId, string css)
+  private static string ComponentIdFrom(string id, string name) => $"{(name == null ? "w" : name.ToLower() + "_")}{id}";
+
+  public Styled(string baseElement, string baseCss, MemberInfo member) : 
+    this (baseElement, baseCss, member.Name) {}
+  
+  public Styled(string baseElement, string baseCss, ComponentBase component) : 
+    this (baseElement, baseCss, component.GetType().Name) {}
+
+  private string Compressed(string css, string baseElementId)
   {
     css = css
       .Insert(0, $"{baseElementId}")

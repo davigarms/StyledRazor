@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components.Rendering;
 
 namespace StyledRazor.Core.Components;
 
-public class StyledBase : StyledContainer
+public class StyledBase : StyledData
 {
   [Parameter] public Styled Styled { get; set; }
 
