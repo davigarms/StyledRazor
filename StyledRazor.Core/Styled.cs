@@ -7,31 +7,33 @@ namespace StyledRazor.Core;
 public class Styled
 {
   public string Name { get; }
-  public string BaseElement { get; }
-  public readonly string ComponentId;
-  public string BaseCss { get; }
-  public string Style { get; set; }
+  public string Element { get; }
+  public readonly string Id;
+  public string Css { get; }
+  public string Style { get; private set; }
 
-  public Styled(string baseElement, string baseCss, string name = "")
+  public Styled(string element = "div", string baseCss = "", string name = "")
   {
     var id = Guid.NewGuid().ToString().Replace("-", "")[..10];
     Name = name;
-    ComponentId = ComponentIdFrom(id, Name);
-    BaseElement = baseElement;
+    Id = IdFrom(Name, id);
+    Element = element;
     
-    var baseElementId = BaseElementIdFrom(BaseElement, ComponentId);
-    BaseCss = Compressed(baseCss, baseElementId);
+    var baseElementId = ElementIdFrom(Element, Id);
+    Css = Compressed(baseCss, baseElementId);
   }
 
-  private static string BaseElementIdFrom(string baseElement, string componentId) => $"{baseElement}[{componentId}]";
+  public void SetStyle(string style) => Style = style;
 
-  private static string ComponentIdFrom(string id, string name) => $"{(name == null ? "w" : name.ToLower() + "_")}{id}";
+  private static string ElementIdFrom(string baseElement, string componentId) => $"{baseElement}[{componentId}]";
 
-  public Styled(string baseElement, string baseCss, MemberInfo member) : 
-    this (baseElement, baseCss, member.Name) {}
+  private static string IdFrom(string name, string id) => $"{(name == null ? "w" : name.ToLower() + "_")}{id}";
+
+  public Styled(string element, string baseCss, MemberInfo member) : 
+    this (element, baseCss, member.Name) {}
   
-  public Styled(string baseElement, string baseCss, ComponentBase component) : 
-    this (baseElement, baseCss, component.GetType().Name) {}
+  public Styled(string element, string baseCss, ComponentBase component) : 
+    this (element, baseCss, component.GetType().Name) {}
 
   private string Compressed(string css, string baseElementId)
   {

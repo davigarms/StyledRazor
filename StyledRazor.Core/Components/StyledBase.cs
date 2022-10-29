@@ -14,7 +14,7 @@ public class StyledBase : StyledData
   
   protected override void BuildRenderTree(RenderTreeBuilder builder)
   {
-    builder.OpenElement(0, BaseElement);
+    builder.OpenElement(0, ComponentElement);
     BuildComponentId(builder);
     BuildComponentStyle(builder);
     BuildComponentParams(builder);
@@ -27,12 +27,12 @@ public class StyledBase : StyledData
   {
     if (Styled == null) return;
 
-    SetStyle(Styled);
+    ComponentStyleFrom(Styled);
   }
 
   private void BuildComponentId(RenderTreeBuilder builder) => builder.AddAttribute(0, ComponentId);
 
-  private void BuildComponentStyle(RenderTreeBuilder builder) => builder.AddAttribute(0, "style", Style);
+  private void BuildComponentStyle(RenderTreeBuilder builder) => builder.AddAttribute(0, "style", ComponentStyle);
 
   private void BuildComponentParams(RenderTreeBuilder builder)
   {
@@ -51,10 +51,10 @@ public class StyledBase : StyledData
 
   private void BuildComponentCss(RenderTreeBuilder builder)
   {
-    if (BaseCss == null) return;
+    if (ComponentCss == null) return;
 
     builder.OpenElement(0, "style");
-    builder.AddContent(0, BaseCss);
+    builder.AddContent(0, ComponentCss);
     builder.CloseElement();
   }
 }

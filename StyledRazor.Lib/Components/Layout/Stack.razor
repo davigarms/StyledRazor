@@ -1,13 +1,13 @@
-﻿@inherits StyledRazor.Core.Components.StyledBase
+﻿@inherits StyledBase
 
-<Layout Styled="@StackBase"
+<Layout Styled="@Base"
          style=@($@"
 					--gutter: {@Gutter};")>
   @ChildContent
 </Layout>
 
 @code {
-	Styled StackBase => Div(
+	protected override Styled Base => Div(
 	  @"
 			 {
 				display: flex;

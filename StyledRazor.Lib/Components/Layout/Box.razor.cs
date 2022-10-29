@@ -1,4 +1,3 @@
-using System.Reflection;
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core;
 using StyledRazor.Core.Components;
@@ -22,7 +21,7 @@ public class Box : StyledBase
 		"
   );
 
-  protected override string Style => $@"
+  protected override string ComponentStyle => $@"
 			--height: {@Height};
 			--padding: {@Padding};
 			--width: {@Width};

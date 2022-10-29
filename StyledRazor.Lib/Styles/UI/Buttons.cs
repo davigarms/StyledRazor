@@ -4,7 +4,7 @@ using StyledRazor.Lib.Styles.Base;
 
 namespace StyledRazor.Lib.Styles.UI;
 
-public partial class UiComponents : ComponentBase
+public partial class UIComponents : ComponentBase
 {
 	protected const string ButtonMargin = $"{Tokens.SpacingS} {Tokens.SpacingM}";
 	protected const string ButtonPadding = $"{Tokens.SpacingS} 0";

@@ -2,11 +2,11 @@ namespace StyledRazor.Core.Components;
 
 public class StyledData : ElementBase
 {
-  protected virtual Styled Base => Element();
-  protected virtual string Style { get; set; }
   protected string ComponentId;
-  protected string BaseElement;
-  protected string BaseCss;
+  protected string ComponentElement;
+  protected string ComponentCss;
+  protected virtual string ComponentStyle { get; set; }
+  protected virtual Styled Base => new ();
   
   private Styled _styled;
 
@@ -14,22 +14,22 @@ public class StyledData : ElementBase
 
   private void Init()
   {
+    Base.SetStyle(ComponentStyle);
     _styled = Base;
-    _styled.Style = Style;
   }
 
   protected override void OnInitialized()
   {
     if (_styled == null) return;
 
-    SetStyle(_styled);
+    ComponentStyleFrom(_styled);
   }
 
-  protected void SetStyle(Styled styled)
+  protected void ComponentStyleFrom(Styled styled)
   {
-    BaseElement = styled.BaseElement;
-    BaseCss = styled.BaseCss;
-    ComponentId = styled.ComponentId;
-    Style = _styled.Style;
+    ComponentElement = styled.Element;
+    ComponentCss = styled.Css;
+    ComponentId = styled.Id;
+    ComponentStyle = styled.Style;
   }
 }

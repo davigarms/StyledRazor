@@ -6,12 +6,12 @@
   <div>First</div>
   <div>
     <Button Padding=@($"{Tokens.SpacingS} {Tokens.SpacingXxl}")>Second</Button>
-    <Layout Styled="@DynamicButton"
+    <UI Styled="@DynamicButton"
             @onclick="@Click"
             style=@($@"
               --margin: 0 {Tokens.SpacingXl};")>
       Dynamic
-    </Layout>
+    </UI>
   </div>
   <Box>
     Third

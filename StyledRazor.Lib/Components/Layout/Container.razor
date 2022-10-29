@@ -1,4 +1,4 @@
-﻿@inherits ContainerBase
+﻿@inherits StyledBase
 
 <ContainerBase
         style=@($@"
@@ -9,8 +9,6 @@
 </ContainerBase>
 
 @code {
-  private string MaxWidth { get; set; }
-
   [Parameter]
   public bool Fluid { get; set; }
 
