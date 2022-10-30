@@ -1,0 +1,12 @@
+@inherits GridListBase
+
+<div @ref="ElementRef">
+  <GridListBase style=@($@"
+                --height: {CalculatedHeight};
+                --width: {100 / Cols}%;
+                --gutter: {Gutter}
+                ")>
+    @ChildContent
+  </GridListBase>
+</div>
+
