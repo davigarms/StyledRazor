@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StyledRazor.Core;
+using StyledRazor.Core.Services;
 
 namespace StyledRazor.Web
 {
@@ -21,6 +23,7 @@ namespace StyledRazor.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddScoped<BrowserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
