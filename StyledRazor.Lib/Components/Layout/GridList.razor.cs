@@ -8,7 +8,7 @@ using StyledRazor.Lib.Styles.Base;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class GridListBase : StyledBase
+public class GridListBase : StyledBase, IDisposable
 {
   [Inject]
   protected BrowserService Service { get; set; }
@@ -70,4 +70,6 @@ public class GridListBase : StyledBase
     CalculatedHeight = !string.IsNullOrEmpty(Height) ? Height :
       GridRatio != 0 ? $"{((double)elementDimension.Width / Cols - Utils.RemToInt(Gutter)) / GridRatio}px" : "initial";
   }
+
+  public void Dispose() => BrowserService.OnResize -= WindowSizeHasChanged;
 }
