@@ -18,10 +18,12 @@
     {
       var content = "Item " + i;
       <GridItem>
-        <Box Padding="@($"{Tokens.SpacingM} {Tokens.SpacingS}")"
-             Width="100%">
-          <div>@content</div>
-        </Box>
+        <Background Color="lightgrey">
+          <Box Padding="@($"{Tokens.SpacingM} {Tokens.SpacingS}")"
+               Width="100%">
+              @content
+          </Box>
+        </Background>
       </GridItem>
     }
   </GridList>

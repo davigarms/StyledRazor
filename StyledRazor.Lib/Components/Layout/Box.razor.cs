@@ -12,12 +12,12 @@ public class Box : StyledBase
 	[Parameter] public string Width { get; set; } = "initial";
   [Parameter] public string Padding { get; set; } = "0";
 
-  protected override Styled Base => Div($@"
-		{{
+  protected override Styled Base => Div(@"
+		{
 			height: var(--height);
 			width: var(--width);
 			padding: var(--padding);
-		}}
+		}
 	");
   
   protected override string Style => $@"
