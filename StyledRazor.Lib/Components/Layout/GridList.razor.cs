@@ -32,7 +32,7 @@ public class GridListBase : StyledBase, IDisposable
 			{
 				display: inline-flex;
         flex-wrap: wrap;
-        margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
+        margin: calc(-1 * var(--gutter)) 0 0 calc(-2 * var(--gutter));
         width: calc(100% + var(--gutter));
         position: relative;
 			}

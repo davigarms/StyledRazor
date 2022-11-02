@@ -2,27 +2,29 @@
 
 @inherits UIComponents
 
-<Stack Gutter="@Tokens.SpacingXl">
-  <div>First</div>
+<Stack Gutter="@Tokens.SpacingXL">
+  <Container>First</Container>
   
-  <div>
-    <Button Padding=@($"{Tokens.SpacingS} {Tokens.SpacingXxl}")>Second</Button>
-    <UI Styled="@DynamicButton"
-        @onclick="@Click"
-        style=@($@"
-              --margin: 0 {Tokens.SpacingXl};")>
-      Dynamic
-    </UI>
-  </div>
-  
-  <Box>
-    <GridList Cols="4" GridRatio="@((double)3/2)">
-      @for (var i = 0; i < 8; i++ )
-      {
-        <div>@i</div>
-      }
-    </GridList>
-  </Box>
+  <GridList Cols="2">
+    <Button Padding=@($"{Tokens.SpacingS} {Tokens.SpacingXXL}")>Second</Button>
+    <Container Align="@Tokens.AlignCenter">
+      <UI Styled="@DynamicButton" @onclick="@Click">
+        Dynamic
+      </UI>
+    </Container>
+  </GridList>
+  <GridList Cols="4" Gutter="@Tokens.SpacingL" Height="@Tokens.SpacingXXL">
+    @for (var i = 1; i < 9; i++ )
+    {
+      var content = "Item " + i;
+      <li>
+        <Box Padding="@($"{Tokens.SpacingM} {Tokens.SpacingS}")"
+             Width="100%">
+          <div>@content</div>
+        </Box>
+      </li>
+    }
+  </GridList>
 </Stack>
 
 @code

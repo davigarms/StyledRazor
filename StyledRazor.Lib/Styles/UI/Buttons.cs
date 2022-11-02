@@ -12,16 +12,14 @@ public partial class UIComponents : ComponentBase
 	private const string ButtonDefinition = $@"
 			display: inline-block;
 			min-width: 11rem;
-			border-radius: {Tokens.SpacingXs};
+			border-radius: {Tokens.SpacingXS};
 			background: transparent;
 			color: black;
 			border: 1px solid grey;
 			text-align: center;
 			cursor: pointer;
-			margin: var(--margin);
-	    padding: var(--padding);    
-			--margin: {ButtonMargin};
-			--padding: {ButtonPadding};
+			margin: 0;
+	    padding: {ButtonPadding};    
 		";
 
 	protected static readonly Styled DefaultButton = new("a", 

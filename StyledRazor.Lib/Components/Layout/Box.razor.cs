@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core;
 using StyledRazor.Core.Components;
@@ -7,23 +8,21 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Box : StyledBase
 {
-	[Parameter] public string Height { get; set; } = Tokens.Initial;
-  [Parameter] public string Width { get; set; } = Tokens.Initial;
-  [Parameter] public string Padding { get; set; } = Tokens.SpacingM;
+	[Parameter] public string Height { get; set; } = "unset";
+	[Parameter] public string Width { get; set; } = "initial";
+  [Parameter] public string Padding { get; set; } = "0";
 
-  protected override Styled Base => H1(
-	  @"
-			{	
-				height: var(--height);
-				padding: var(--padding);
-				width: var(--width);
-			}
-		"
-  );
-
-  protected override string ComponentStyle => $@"
-			--height: {@Height};
-			--padding: {@Padding};
-			--width: {@Width};
-		";
+  protected override Styled Base => Div($@"
+		{{
+			height: var(--height);
+			width: var(--width);
+			padding: var(--padding);
+		}}
+	");
+  
+  protected override string Style => $@"
+		--height: {Height};
+		--width: {Width};
+		--padding: {Padding};
+	";
 }

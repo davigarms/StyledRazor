@@ -9,4 +9,5 @@ public class ElementBase : ComponentBase
   protected Styled H1(string css) => Element("h1", css);
   protected Styled A(string css) => Element("a", css);
   protected Styled UL(string css) => Element("ul", css);
+  protected Styled LI(string css) => Element("li", css);
 }
