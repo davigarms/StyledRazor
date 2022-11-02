@@ -17,12 +17,12 @@
     @for (var i = 1; i < 9; i++ )
     {
       var content = "Item " + i;
-      <li>
+      <GridItem>
         <Box Padding="@($"{Tokens.SpacingM} {Tokens.SpacingS}")"
              Width="100%">
           <div>@content</div>
         </Box>
-      </li>
+      </GridItem>
     }
   </GridList>
 </Stack>
