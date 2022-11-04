@@ -3,15 +3,18 @@
 
 <Stack Gutter="@Tokens.SpacingXL">
   <Box>First</Box>
-  
+
   <GridList Cols="2">
     <BasicButton>Second</BasicButton>
     <Box>
-      <GenericButton Styled="@DynamicButton" @onclick="@Click">
-        Dynamic
-      </GenericButton>
+      <Cluster>
+        <GenericButton Styled="@DynamicButton" @onclick="@Click">
+          Dynamic
+        </GenericButton>
+      </Cluster>
     </Box>
   </GridList>
+  
   <GridList Cols="4" Gutter="@Tokens.SpacingL" Height="@Tokens.SpacingXXL">
     @for (var i = 1; i < 9; i++ )
     {
@@ -22,6 +25,9 @@
               <Container Centered>
                 @content
               </Container>
+              <Cluster>
+                Cluster
+              </Cluster>
             </Cover>
         </Background>
       </GridItem>
