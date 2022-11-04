@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core;
+using StyledRazor.Core.Components;
 using StyledRazor.Lib.Styles.Base;
 
 namespace StyledRazor.Lib.Styles.UI;
 
-public partial class UIComponents : ComponentBase
+public partial class UIComponents : StyledBase
 {
 	protected const string ButtonMargin = $"{Tokens.SpacingS} {Tokens.SpacingM}";
 	protected const string ButtonPadding = $"{Tokens.SpacingS} 0";
@@ -18,8 +19,8 @@ public partial class UIComponents : ComponentBase
 			border: 1px solid grey;
 			text-align: center;
 			cursor: pointer;
-			margin: 0;
-	    padding: {ButtonPadding};    
+			margin: var(--margin);
+	    padding: var(--padding);    
 		";
 
 	protected static readonly Styled DefaultButton = new("a", 
@@ -44,6 +45,6 @@ public partial class UIComponents : ComponentBase
 				{ButtonDefinition}
 				background: red;
 				color: white;
-			}}
+			}}°
 		", "AlertButton");
 }
