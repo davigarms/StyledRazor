@@ -8,8 +8,8 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Box : StyledBase
 {
-	[Parameter] public string Height { get; set; } = "inherit";
-	[Parameter] public string Width { get; set; } = "inherit";
+	[Parameter] public string Height { get; set; } = "unset";
+	[Parameter] public string Width { get; set; } = "unset";
   [Parameter] public string Padding { get; set; } = Tokens.Zero;
   [Parameter] public string Left { get; set; }
   [Parameter] public string Top { get; set; }
