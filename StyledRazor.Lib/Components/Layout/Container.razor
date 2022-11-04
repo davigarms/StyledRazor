@@ -1,9 +1,9 @@
 ﻿@inherits StyledBase
 
 <ContainerBase
-        style=@($@"
+  style=@($@"
 					--max-width: {(Fluid ? Width : Tokens.Initial)};
-					--width: {(Fluid ? Tokens.SizeFullScale : Width)};")
+					--width: {(Fluid ? Tokens.SizeTotal : Width)};")
         centered="@Centered">
   @ChildContent
 </ContainerBase>
@@ -16,5 +16,5 @@
   public bool Centered { get; set; }
 
   [Parameter]
-  public string Width { get; set; } = "unset";
+  public string Width { get; set; } = "initial";
 }

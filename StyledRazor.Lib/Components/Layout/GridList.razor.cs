@@ -10,29 +10,19 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class GridListBase : StyledBase, IDisposable
 {
-  [Inject]
-  protected BrowserService Service { get; set; }
-
-  [Parameter]
-  public string Gutter { get; set; } = Tokens.SpacingS;
-
-  [Parameter]
-  public string Height { get; set; }
-
-  [Parameter]
-  public int Cols { get; set; } = 1;
-
-  [Parameter]
-  public double GridRatio { get; set; }
-
+  [Inject] protected BrowserService Service { get; set; }
+  [Parameter] public string Gutter { get; set; } = Tokens.SpacingS;
+  [Parameter] public string Height { get; set; }
+  [Parameter] public int Cols { get; set; } = 1;
+  [Parameter] public double GridRatio { get; set; }
   protected string CalculatedHeight { get; private set; }
 
   protected override Styled Base => UL(
     @"
 			{
-				display: inline-flex;
+				display: flex;
         flex-wrap: wrap;
-        margin: calc(-1 * var(--gutter)) 0 0 calc(-2 * var(--gutter));
+        margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
         width: calc(100% + var(--gutter));
         position: relative;
 			}

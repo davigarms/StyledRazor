@@ -23,13 +23,13 @@
         margin-bottom: var(--space);
       }
 
-      > :first-child:not([centered]) {
+      > : first-child:not([centered]) {
         margin-top: 0;
       }
 
-      > :last-child:not([centered]) {
+      > :nth-last-child(2):not([centered]) {
         margin-bottom: 0;
-      }
+      } 
 
       > [centered] {
         margin-top: auto;
@@ -37,10 +37,10 @@
       }
   ");
 
-  private string Padding => NoPadding ? Tokens.SizeZero : Space;
+  private string Padding => NoPadding ? Tokens.Zero : Space;
 
   [Parameter]
-  public string MinimumHeight { get; set; } = Tokens.SizeFullHeight;
+  public string MinimumHeight { get; set; } = Tokens.SizeTotal;
 
   [Parameter]
   public string Space { get; set; } = Tokens.SpacingM;

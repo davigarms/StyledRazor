@@ -11,6 +11,7 @@ public class Background : StyledBase
   protected override Styled Base => Div(@"
     {
       background: var(--background-color);
+      height: inherit; 
     }
   ");
 

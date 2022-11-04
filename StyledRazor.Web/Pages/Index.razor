@@ -1,28 +1,28 @@
 @page "/"
-
 @inherits UIComponents
 
 <Stack Gutter="@Tokens.SpacingXL">
-  <Container>First</Container>
+  <Box>First</Box>
   
   <GridList Cols="2">
-    <Button Padding=@($"{Tokens.SpacingS} {Tokens.SpacingXXL}")>Second</Button>
-    <Container Align="@Tokens.AlignCenter">
-      <UI Styled="@DynamicButton" @onclick="@Click">
+    <BasicButton>Second</BasicButton>
+    <Box>
+      <GenericButton Styled="@DynamicButton" @onclick="@Click">
         Dynamic
-      </UI>
-    </Container>
+      </GenericButton>
+    </Box>
   </GridList>
   <GridList Cols="4" Gutter="@Tokens.SpacingL" Height="@Tokens.SpacingXXL">
     @for (var i = 1; i < 9; i++ )
     {
       var content = "Item " + i;
-      <GridItem>
-        <Background Color="lightgrey">
-          <Box Padding="@($"{Tokens.SpacingM} {Tokens.SpacingS}")"
-               Width="100%">
-              @content
-          </Box>
+        <GridItem>
+          <Background Color="lightgrey">
+            <Cover>
+              <Container Centered>
+                @content
+              </Container>
+            </Cover>
         </Background>
       </GridItem>
     }
