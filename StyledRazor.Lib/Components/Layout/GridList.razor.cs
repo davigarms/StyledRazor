@@ -20,8 +20,10 @@ public class GridListBase : StyledBase, IDisposable
   protected override Styled Base => UL(
     @"
 			{
+        list-style: none;
 				display: flex;
         flex-wrap: wrap;
+        padding: 0;
         margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
         width: calc(100% + var(--gutter));
         position: relative;
@@ -29,7 +31,7 @@ public class GridListBase : StyledBase, IDisposable
 
       > * {
         width: calc(var(--width) - var(--gutter)) !important;
-        margin: var(--gutter) 0 0 var(--gutter);
+        margin: var(--gutter) 0 0 var(--gutter) !important;
         height: var(--height) !important;
         max-height: var(--height);
         overflow: hidden;
