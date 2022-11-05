@@ -14,12 +14,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <AdditionalFiles Include="Components\Layout\Container.razor" />
         <AdditionalFiles Include="Components\Layout\Cover.razor" />
         <AdditionalFiles Include="Components\Layout\Split.razor" />
         <AdditionalFiles Include="Components\Layout\Stack.razor" />
         <AdditionalFiles Include="Components\UI\Button\BasicButton.razor" />
-        <AdditionalFiles Include="Components\Layout\GridList.razor" />
     </ItemGroup>
 
     <ItemGroup>
@@ -29,10 +27,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\StyledRazor.Core\StyledRazor.Core.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Components\Layout\Align" />
     </ItemGroup>
 
 </Project>

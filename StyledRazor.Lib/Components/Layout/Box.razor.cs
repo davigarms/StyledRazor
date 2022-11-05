@@ -10,15 +10,23 @@ public class Box : StyledBase
 {
 	[Parameter] public string Height { get; set; } = "initial";
 	[Parameter] public string Width { get; set; } = "initial";
-  [Parameter] public string Padding { get; set; } = Tokens.Zero;
-  [Parameter] public string Left { get; set; }
-  [Parameter] public string Top { get; set; }
-  [Parameter] public string Right { get; set; }
-  [Parameter] public string Bottom { get; set; }
-  [Parameter] public string Horizontal { get; set; }
-  [Parameter] public string Vertical { get; set; }
-  
-  protected override Styled Base => Div($@"
+	[Parameter] public string Padding { get; set; } = Tokens.Zero;
+	[Parameter] public string Left { get; set; }
+	[Parameter] public string Top { get; set; }
+	[Parameter] public string Right { get; set; }
+	[Parameter] public string Bottom { get; set; }
+	[Parameter] public string Horizontal { get; set; }
+	[Parameter] public string Vertical { get; set; }
+	
+	private bool HasIndividualPadding => !string.IsNullOrEmpty(Left) || !string.IsNullOrEmpty(Top) ||
+	                                     !string.IsNullOrEmpty(Right) || !string.IsNullOrEmpty(Bottom);
+
+	private bool HasMirroredPadding => !string.IsNullOrEmpty(Horizontal) || !string.IsNullOrEmpty(Vertical);
+
+	private string ShorthandPadding => HasIndividualPadding ? string.Empty :
+		HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero}" : $"--padding: {Padding};";
+	
+	protected override Styled Base => Div($@"
 		{{
 			height: var(--height);
 			width: var(--width);
@@ -39,13 +47,4 @@ public class Box : StyledBase
 		--right: {Right};
 		--bottom: {Bottom};
 	";
-
-  private bool HasIndividualPadding => !string.IsNullOrEmpty(Left) || !string.IsNullOrEmpty(Top) ||
-                                       !string.IsNullOrEmpty(Right) || !string.IsNullOrEmpty(Bottom);
-
-  private bool HasMirroredPadding => !string.IsNullOrEmpty(Horizontal) || !string.IsNullOrEmpty(Vertical);
-
-  private string ShorthandPadding =>
-	  HasIndividualPadding ? string.Empty :
-	  HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero}" : $"--padding: {Padding};";
 }

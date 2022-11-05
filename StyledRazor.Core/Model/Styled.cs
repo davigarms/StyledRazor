@@ -23,17 +23,21 @@ public class Styled
     Css = Compressed(baseCss, baseElementId);
   }
 
+  public Styled(string element, string baseCss, MemberInfo member) :
+    this(element, baseCss, member.Name)
+  {
+  }
+
+  public Styled(string element, string baseCss, ComponentBase component) :
+    this(element, baseCss, component.GetType().Name)
+  {
+  }
+
   public void SetStyle(string style) => Style = style;
 
   private static string ElementIdFrom(string baseElement, string componentId) => $"{baseElement}[{componentId}]";
 
   private static string IdFrom(string name, string id) => $"{(name == null ? "w" : name.ToLower() + "_")}{id}";
-
-  public Styled(string element, string baseCss, MemberInfo member) : 
-    this (element, baseCss, member.Name) {}
-  
-  public Styled(string element, string baseCss, ComponentBase component) : 
-    this (element, baseCss, component.GetType().Name) {}
 
   private static string Compressed(string css, string baseElementId)
   {

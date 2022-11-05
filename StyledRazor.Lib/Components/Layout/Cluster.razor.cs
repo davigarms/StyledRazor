@@ -7,6 +7,10 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Cluster : StyledBase
 {
+	[Parameter] public string Space { get; set; } = Tokens.Zero;
+	[Parameter] public string Justify { get; set; } = Tokens.AlignFlexEnd;
+	[Parameter] public string Align { get; set; } = Tokens.AlignCenter;
+	[Parameter] public bool NoPadding { get; set; }
 
 	private string Padding => NoPadding ? Tokens.Zero : Space;
 	
@@ -27,16 +31,4 @@ public class Cluster : StyledBase
 	  --align: {Align};
 	  --padding: {Padding};
   ";
-
-  [Parameter] 
-  public string Space { get; set; } = Tokens.Zero;
-  
-  [Parameter] 
-  public string Justify { get; set; } = Tokens.AlignFlexEnd;
-  
-  [Parameter] 
-  public string Align { get; set; } = Tokens.AlignCenter;
-  
-  [Parameter] 
-  public bool NoPadding { get; set; }
 }

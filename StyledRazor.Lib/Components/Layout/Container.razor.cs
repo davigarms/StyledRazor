@@ -1,11 +1,17 @@
+using Microsoft.AspNetCore.Components;
 using StyledRazor.Core.Components;
 using StyledRazor.Core.Model;
+using StyledRazor.Lib.Styles.Base;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class ContainerBase : StyledBase
+public class Container : StyledBase
 {
-	protected override Styled Base => Div(@"
+	[Parameter] public bool Fluid { get; set; }
+	[Parameter] public string Width { get; set; } = "initial";
+
+	protected override Styled Base => Div(
+		@"
 		{
 			margin-left: auto;
 			margin-right: auto;
@@ -13,5 +19,11 @@ public class ContainerBase : StyledBase
 			width: var(--width);
 			position: relative;
 		}
-	");
+	"
+	);
+
+	protected override string Style => $@"
+		--max-width: {(Fluid ? Width : Tokens.Initial)};
+		--width: {(Fluid ? Tokens.SizeTotal : Width)};
+	";
 }

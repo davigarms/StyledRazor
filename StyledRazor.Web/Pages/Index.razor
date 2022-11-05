@@ -20,14 +20,13 @@
         <Box>
           Box1
         </Box>
-        
         <Box>
           Box2
         </Box>
       </Cluster>
   </Box>
   
-  <GridList Cols="4" Gutter="@Tokens.SpacingL" Height="@Tokens.SpacingXXL">
+  <GridList Cols="4" Gutter="@Tokens.SpacingL" GridRatio="1">
     @for (var i = 1; i < 9; i++ )
     {
       var content = "Item " + i;
@@ -35,7 +34,7 @@
           <Background Color="lightgrey">
             <Cover>
               <Container Centered>
-                @content
+                @content  
               </Container>
               <Cluster>
                 Cluster
