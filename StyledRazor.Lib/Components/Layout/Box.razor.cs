@@ -8,8 +8,8 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Box : StyledBase
 {
-	[Parameter] public string Height { get; set; } = "unset";
-	[Parameter] public string Width { get; set; } = "unset";
+	[Parameter] public string Height { get; set; } = "initial";
+	[Parameter] public string Width { get; set; } = "initial";
   [Parameter] public string Padding { get; set; } = Tokens.Zero;
   [Parameter] public string Left { get; set; }
   [Parameter] public string Top { get; set; }
@@ -26,23 +26,19 @@ public class Box : StyledBase
 			padding-top: var(--top);
 			padding-right: var(--right);	
 			padding-bottom: var(--bottom);
-			{ShorthandPadding};
+			padding: var(--padding);
 		}}
 	");
 
   protected override string Style => $@"
 		--height: {Height};
 		--width: {Width};
-		--padding: {Padding};
+		{ShorthandPadding}
 		--left: {Left};
 		--top: {Top};
 		--right: {Right};
 		--bottom: {Bottom};
-		--horizontal: {(string.IsNullOrEmpty(Horizontal) ? Tokens.Zero : Horizontal)};
-		--vertical: {(string.IsNullOrEmpty(Vertical) ? Tokens.Zero : Vertical)};
 	";
-
-
 
   private bool HasIndividualPadding => !string.IsNullOrEmpty(Left) || !string.IsNullOrEmpty(Top) ||
                                        !string.IsNullOrEmpty(Right) || !string.IsNullOrEmpty(Bottom);
@@ -51,7 +47,5 @@ public class Box : StyledBase
 
   private string ShorthandPadding =>
 	  HasIndividualPadding ? string.Empty :
-	  HasMirroredPadding ? "padding: var(--vertical) var(--horizontal)" : "padding: var(--padding)";
-
-  protected override void OnParametersSet() => ComponentStyleFrom(Base);
+	  HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero}" : $"--padding: {Padding};";
 }

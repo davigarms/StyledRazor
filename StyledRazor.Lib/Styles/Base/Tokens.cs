@@ -18,9 +18,13 @@ public static class Tokens
     public const string AlignCenter = "center";
     public const string AlignRight = "right";
     public const string AlignJustify = "justify";
+    public const string AlignSpaceBetween = "space-between";
     public const string AlignTop = "top";
     public const string AlignEnd = "end";
+    public const string AlignFlexStart = "flex-start";
+    public const string AlignFlexEnd = "flex-end";
     public const string DisplayInlineFlex = "inline-flex";
+    public const string DisplayFlex = "flex";
     public const string DisplayBlock = "block";
     public const string DirectionColumn = "column";
 }
