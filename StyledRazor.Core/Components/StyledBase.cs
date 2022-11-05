@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using StyledRazor.Core.Model;
 
 namespace StyledRazor.Core.Components;
 

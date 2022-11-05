@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core;
 using StyledRazor.Core.Components;
+using StyledRazor.Core.Model;
 using StyledRazor.Core.Services;
 using StyledRazor.Lib.Styles.Base;
 

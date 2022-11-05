@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using Microsoft.AspNetCore.Components;
 
-namespace StyledRazor.Core;
+namespace StyledRazor.Core.Model;
 
 public class Styled
 {
@@ -35,7 +35,7 @@ public class Styled
   public Styled(string element, string baseCss, ComponentBase component) : 
     this (element, baseCss, component.GetType().Name) {}
 
-  private string Compressed(string css, string baseElementId)
+  private static string Compressed(string css, string baseElementId)
   {
     css = css
       .Insert(0, $"{baseElementId}")

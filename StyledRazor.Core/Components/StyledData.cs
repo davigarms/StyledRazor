@@ -1,3 +1,6 @@
+using System;
+using StyledRazor.Core.Model;
+
 namespace StyledRazor.Core.Components;
 
 public class StyledData : ElementBase
@@ -6,7 +9,7 @@ public class StyledData : ElementBase
   protected string Element;
   protected string Css;
   protected virtual string Style { get; set; }
-  protected virtual Styled Base { get; set; } = new ();
+  protected virtual Styled Base { get; } = new ();
   
   private Styled _styled;
 

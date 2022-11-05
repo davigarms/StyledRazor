@@ -1,7 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core;
 using StyledRazor.Core.Components;
+using StyledRazor.Core.Model;
 using StyledRazor.Lib.Styles.Base;
 
 namespace StyledRazor.Lib.Components.Layout;
