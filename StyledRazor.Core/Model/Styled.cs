@@ -6,9 +6,9 @@ namespace StyledRazor.Core.Model;
 
 public class Styled
 {
+  public readonly string Id;
   public string Name { get; }
   public string Element { get; }
-  public readonly string Id;
   public string Css { get; }
   public string Style { get; private set; }
 

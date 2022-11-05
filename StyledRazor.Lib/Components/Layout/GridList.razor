@@ -19,7 +19,7 @@
 
   private ElementReference _elementRef;
 
-  protected override Styled Base => new("ul", @"
+  protected override Styled Base => UL(@"
 		{
       list-style: none;
 			display: flex;
@@ -37,7 +37,7 @@
       max-height: var(--height);
       overflow: hidden;
     }
-	", "GridList");
+	");
   
   protected override Task OnInitializedAsync() => InitComponent();
 
