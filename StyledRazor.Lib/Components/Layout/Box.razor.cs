@@ -24,7 +24,7 @@ public class Box : StyledBase
 	private bool HasMirroredPadding => !string.IsNullOrEmpty(Horizontal) || !string.IsNullOrEmpty(Vertical);
 
 	private string ShorthandPadding => HasIndividualPadding ? string.Empty :
-		HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero}" : $"--padding: {Padding};";
+		HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero};" : $"--padding: {Padding};";
 	
 	protected override Styled Base => Div($@"
 		{{
@@ -39,9 +39,9 @@ public class Box : StyledBase
 	");
 
   protected override string Style => $@"
+		{ShorthandPadding}
 		--height: {Height};
 		--width: {Width};
-		{ShorthandPadding}
 		--left: {Left};
 		--top: {Top};
 		--right: {Right};

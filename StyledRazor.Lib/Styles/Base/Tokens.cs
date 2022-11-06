@@ -27,4 +27,8 @@ public static class Tokens
     public const string DisplayFlex = "flex";
     public const string DisplayBlock = "block";
     public const string DirectionColumn = "column";
+    public const string DirectionRow = "row";
+    public const string FlexWrap = "wrap";
+    public const string FlexWrapReverse = "wrap-reverse";
+    public const string FlexNoWrap = "nowrap";
 }

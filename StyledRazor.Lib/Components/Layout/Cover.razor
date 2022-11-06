@@ -24,17 +24,27 @@
         margin-bottom: var(--space);
       }
 
-      > : first-child:not([centered]) {
+      > : first-child {
         margin-top: 0;
       }
 
-      > :nth-last-child(2):not([centered]) {
+      > :nth-last-child(2) {
         margin-bottom: 0;
       } 
 
-      > [centered] {
-        margin-top: auto;
-        margin-bottom: auto;
+>     [centered] {
+        margin-top: auto !important;
+        margin-bottom: auto !important;
+      }
+
+      > [top] {
+        margin-top: 0 !important;
+        margin-bottom: auto !important;
+      }
+      
+      > [bottom] {
+        margin-top: auto !important;
+        margin-bottom: 0 !important;
       }
   ");
 
