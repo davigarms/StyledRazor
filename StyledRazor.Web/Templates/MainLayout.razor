@@ -7,20 +7,18 @@
       Title
     </Box>
   </Container>
-  <Container>
-    <Cover>
-      <header>
-        Header
-      </header>
-      <Container Width="768px" Fluid Centered>
-        @Body
-      </Container>
-      <div>Something above the footer</div>
-      <footer>
-        Footer
-      </footer>
-    </Cover>
-  </Container>
+  <Cover>
+    <header>  
+      Header
+    </header>
+    <Container Width="@Tokens.ScreenMd" Fluid Centered>
+      @Body
+    </Container>
+    <div>Something above the footer</div>
+    <footer>
+      Footer
+    </footer>
+  </Cover>
 </Split>
 
 @code {

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core.Components;
 using StyledRazor.Core.Model;
@@ -24,18 +25,42 @@ public class Cluster : StyledBase
       {{
         display: flex;
         gap: var(--gap);
-        flex-wrap: var(--wrap);
-        align-items: var(--align);
+        flex-wrap: var(--flex-wrap);
+        align-items: var(--align-items);
         align-content: var(--align-content);
         justify-content: var(--justify);
         padding: var(--padding);
       }}
+
+			[stretch] {{
+				height: inherit;
+			}}
+
+			> [start] {{
+				align-self: flex-start;
+			}}
+
+			> [end] {{
+				align-self: flex-end;
+			}}
+
+			> [center] {{
+				align-self: center;
+			}}
+
+			> [baseline] {{
+				align-self: baseline;
+			}}
+
+			> [stretch] {{
+				align-self: stretch;
+			}}
   ");
 
   protected override string Style => $@"
 	  --gap: {Space};
-	  --wrap: {FlexWrap};
-	  --align: {Align};
+	  --flex-wrap: {FlexWrap};
+	  --align-items: {Align};
 	  --align-content: {AlignContent};
 	  --justify: {Justify};
 	  --padding: {Padding};

@@ -15,15 +15,12 @@
     </GridItem>
   </GridList>
   
-  <Box Horizontal="@Tokens.SpacingM">
-     <Cluster Space="1rem" NoPadding>
-        <Box>
-          Box1
-        </Box>
-        <Box>
-          Box2
-        </Box>
-      </Cluster>
+  <Box Horizontal="@Tokens.SpacingM" Height="@Tokens.SpacingXXL">
+    <Cluster Space="@Tokens.SpacingL" Justify="@Tokens.AlignSpaceBetween" NoPadding Stretch>
+      <Box Start>First</Box>
+      <Box>Second</Box>
+      <Box End>Third</Box>
+    </Cluster>
   </Box>
   
   <GridList Cols="4" Gutter="@Tokens.SpacingL" GridRatio="1">

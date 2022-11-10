@@ -31,4 +31,5 @@ public static class Tokens
     public const string FlexWrap = "wrap";
     public const string FlexWrapReverse = "wrap-reverse";
     public const string FlexNoWrap = "nowrap";
+    public const string ScreenMd = "768px";
 }

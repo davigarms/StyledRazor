@@ -10,7 +10,7 @@
 </Layout>
 
 @code {
-  protected override Styled Base => Div(
+  new Styled Base => Div(
     @"
       {
         display: flex;
@@ -32,7 +32,7 @@
         margin-bottom: 0;
       } 
 
->     [centered] {
+      > [centered] {
         margin-top: auto !important;
         margin-bottom: auto !important;
       }
@@ -46,7 +46,7 @@
         margin-top: auto !important;
         margin-bottom: 0 !important;
       }
-  ");
+    ");
 
   private string Padding => NoPadding ? Tokens.Zero : Space;
 
