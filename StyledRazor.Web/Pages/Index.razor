@@ -1,18 +1,14 @@
 @page "/"
-@inherits UIComponents
+@inherits ButtonBase
 
 <Stack>
   <Box>First</Box>
 
-  <GridList Cols="2">
+  <GridList MinWidth="@Tokens.SpacingXXL">
       <BasicButton>Second</BasicButton>
-      <GridItem>
-      <Cluster>
-        <GenericButton Styled="@DynamicButton" @onclick="@Click">
-          Dynamic
-        </GenericButton>
-      </Cluster>
-    </GridItem>
+      <Button Styled="@DynamicButton" @onclick="@Click">
+        Dynamic
+      </Button>
   </GridList>
   
   <Box Horizontal="@Tokens.SpacingM" Height="@Tokens.SpacingXXL">
@@ -23,11 +19,11 @@
     </Cluster>
   </Box>
   
-  <GridList Cols="4" Gutter="@Tokens.SpacingL" GridRatio="1">
-    @for (var i = 1; i < 9; i++ )
+  <GridList Gutter="@Tokens.SpacingS" Cols="4" Ratio="1">
+    @for (var i = 1; i < 5; i++ )
     {
       var content = "Item " + i;
-        <GridItem>
+      <GridItem>
           <Background Color="lightgrey">
             <Cover>
               <Container Centered>
@@ -37,6 +33,25 @@
                 Cluster
               </Cluster>
             </Cover>
+        </Background>
+      </GridItem>
+    }
+  </GridList>
+  
+  <GridList Gutter="@Tokens.SpacingS" MinWidth="@Tokens.SpacingXXL">
+    @for (var i = 5; i < 9; i++ )
+    {
+      var content = "Item " + i;
+      <GridItem>
+        <Background Color="lightgrey">
+          <Cover>
+            <Container Centered>
+              @content  
+            </Container>
+            <Cluster>
+              Cluster
+            </Cluster>
+          </Cover>
         </Background>
       </GridItem>
     }

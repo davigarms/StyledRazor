@@ -3,16 +3,23 @@ using StyledRazor.Core.Components;
 using StyledRazor.Core.Model;
 using StyledRazor.Lib.Styles.Base;
 
-namespace StyledRazor.Lib.Styles.UI;
+namespace StyledRazor.Lib.Components.UI.Button;
 
-public partial class UIComponents : StyledBase
+public class ButtonBase : StyledBase
 {
-	protected const string ButtonMargin = $"{Tokens.SpacingS} {Tokens.SpacingM}";
-	protected const string ButtonPadding = $"{Tokens.SpacingS} 0";
+
+	[Parameter] public string Margin { get; set; } = "0";
+	[Parameter] public string Padding { get; set; }
+
+	private const string ButtonMargin = $"{Tokens.SpacingS} {Tokens.SpacingM}";
+	private const string ButtonPadding = $"{Tokens.SpacingS}";
+
+	protected override string Style => $@"
+          --margin: {(string.IsNullOrEmpty(Margin) ? ButtonMargin : Margin)};
+          --padding: {(string.IsNullOrEmpty(Padding) ? ButtonPadding : Padding)}";
 
 	private const string ButtonDefinition = $@"
 			display: inline-block;
-			min-width: 11rem;
 			border-radius: {Tokens.SpacingXS};
 			background: transparent;
 			color: black;

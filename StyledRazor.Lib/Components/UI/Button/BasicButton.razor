@@ -1,17 +1,6 @@
 @using StyledRazor.Lib.Components.Layout
-@inherits UIComponents
+@inherits ButtonBase
 
-<Layout Styled="DefaultButton"
-        style=@($@"
-          --margin: {(string.IsNullOrEmpty(Margin) ? ButtonMargin : Margin)};
-          --padding: {(string.IsNullOrEmpty(Padding) ? ButtonPadding : Padding)}")>
+<Button Styled="DefaultButton" style="@Style">
   @ChildContent
-</Layout>
-
-@code {
-  [Parameter]
-  public string Margin { get; set; } = "0";
-
-  [Parameter]
-  public string Padding { get; set; }
-}
+</Button>
