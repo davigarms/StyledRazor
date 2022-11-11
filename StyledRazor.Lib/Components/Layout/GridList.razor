@@ -1,5 +1,6 @@
 @using StyledRazor.Core.Services
 @using StyledRazor.Core
+@using StyledRazor.Core.Model.Browser
 @inherits StyledBase
 @implements IDisposable
 
@@ -7,7 +8,7 @@
   <Layout Styled="@Base"
           style=@($@"
               --height: {CalculatedHeight};
-              --width: {100 / Cols}%;
+              --width: {CalculatedWidth};
               --gutter: {Gutter}
               ")>
     @ChildContent
@@ -17,7 +18,16 @@
 @code {
   private string CalculatedHeight { get; set; }
 
+  private string CalculatedWidth => string.IsNullOrEmpty(MinWidth) ? $"{100 / Cols}%" : $"{MinWidth}";
+
   private ElementReference _elementRef;
+  
+  private bool HasHeight => !string.IsNullOrEmpty(Height);
+
+  private bool HasRatio => Ratio != 0;
+  
+  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - Utils.RemToInt(Gutter)) / Ratio}px";
+
 
   protected override Styled Base => UL(@"
 		{
@@ -31,11 +41,12 @@
 		}
 
     > * {
-      width: calc(var(--width) - var(--gutter)) !important;
+      width: calc(var(--width) - 1 * var(--gutter)) !important;
       margin: var(--gutter) 0 0 var(--gutter) !important;
       height: var(--height) !important;
       max-height: var(--height);
       overflow: hidden;
+      flex-grow: 1;
     }
 	");
   
@@ -57,11 +68,13 @@
   private async Task SetCalculatedHeight()
   {
     var elementDimension = await Service.DimensionFrom(_elementRef);
-    CalculatedHeight = !string.IsNullOrEmpty(Height) ? Height :
-      GridRatio != 0 ? $"{((double)elementDimension.Width / Cols - Utils.RemToInt(Gutter)) / GridRatio}px" 
-        : "initial";
+    
+    CalculatedHeight = HasHeight ? Height :
+      HasRatio ? HeightFrom(elementDimension.Width) :
+        "initial";
   }
 
+  
   public void Dispose() => BrowserService.OnResize -= WindowSizeHasChanged;
 
   [Inject]
@@ -74,8 +87,11 @@
   public string Height { get; set; }
 
   [Parameter]
+  public string MinWidth { get; set; }
+
+  [Parameter]
   public int Cols { get; set; } = 1;
 
   [Parameter]
-  public double GridRatio { get; set; }
+  public double Ratio { get; set; }
 }
