@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using StyledRazor.Core.Model;
@@ -17,9 +16,9 @@ public class MediaQuery
   public static string ScreenXs => $"{BreakPointXs}px";
   public static string ScreenS => $"{BreakPointS}px";
   public static string ScreenM => $"{BreakPointM}px";
-  public static string ScreenL => $"{BreakPointL}px";
-  public static string ScreenXl => $"{BreakPointXl}px";
-  public static string ScreenXxl => $"{BreakPointXxl}px";
+  public static string ScreenLg => $"{BreakPointL}px";
+  public static string ScreenXlg => $"{BreakPointXl}px";
+  public static string Screen2Xlg => $"{BreakPointXxl}px";
 
   private static readonly BreakPoints BreakPoints = new()
   {
@@ -37,13 +36,15 @@ public class MediaQuery
   {
     if (responsiveColumns == null) return;
 
+    var orderedBreakpoints = BreakPoints.OrderBy(bp => bp.Value);
+
     _mediaQuery = new Dictionary<int, int>();
 
-    foreach (var breakpoint in BreakPoints)
+    foreach (var bp in orderedBreakpoints)
     {
-      foreach (var col in responsiveColumns.Where(col => col.Key == breakpoint.Key))
+      foreach (var col in responsiveColumns.Where(col => col.Key == bp.Key))
       {
-        _mediaQuery.Add(breakpoint.Value, col.Value);
+        _mediaQuery.Add(bp.Value, col.Value);
       }
     }
   }

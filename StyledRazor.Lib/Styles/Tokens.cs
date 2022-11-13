@@ -9,7 +9,7 @@ public static class Tokens
     public const string SpacingM = "1rem";
     public const string SpacingL = "2rem";
     public const string SpacingXl = "4rem";
-    public const string Spacing2Xl = "8rem";
+    public const string SpacingXxl = "8rem";
     public const string Initial = "initial";
     public const string SizeViewPortWidth = "100vw";
     public const string SizeViewportHeight = "100vh";

@@ -6,10 +6,10 @@
   <Box>First</Box>
 
   <Grid MinWidth="220px">
-      <BasicButton>Second</BasicButton>
-      <Button Styled="@DynamicButton" @onclick="@Click">
-        Dynamic
-      </Button>
+    <BasicButton>Second</BasicButton>
+    <Button Styled="@DynamicButton" @onclick="@Click">
+      Dynamic
+    </Button>
   </Grid>
   
   <Box Horizontal="@Tokens.SpacingM" Height="@Tokens.SpacingXl">
@@ -40,7 +40,7 @@
       }
     </Grid>
       
-    <Grid Gutter="@Tokens.SpacingS" MinWidth="@Tokens.Spacing2Xl">
+    <Grid Gutter="@Tokens.SpacingS" MinWidth="@Tokens.SpacingXxl">
       @for (var i = 5; i < 8; i++ )
       {
         var content = "Item " + i;
