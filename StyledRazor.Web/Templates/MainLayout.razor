@@ -1,6 +1,8 @@
+@using StyledRazor.Core.Services
+@using StyledRazor.Lib.Styles
 <Split StretchIndex="2">
   <Container Width="15rem">
-    <Box Padding="@Tokens.SpacingXS">
+    <Box Padding="@Tokens.SpacingXs">
       Title
     </Box>
     <Box Padding="@Tokens.SpacingL">
@@ -11,7 +13,7 @@
     <header>  
       Header
     </header>
-    <Container Width="@Tokens.ScreenMd" Fluid Centered>
+    <Container Width="@MediaQuery.ScreenM" Fluid Centered>
       @Body
     </Container>
     <div>Something above the footer</div>

@@ -1,34 +1,23 @@
 @using StyledRazor.Core.Services
 @using StyledRazor.Core
-@using StyledRazor.Core.Model.Browser
+@using StyledRazor.Core.Utils
+@using StyledRazor.Lib.Styles
 @inherits StyledBase
 @implements IDisposable
 
-<div @ref="_elementRef">
+<div @ref="ElementRef">
   <Layout Styled="@Base"
           style=@($@"
               --height: {CalculatedHeight};
               --width: {CalculatedWidth};
-              --gutter: {Gutter}
+              --flex-grow: {FlexGrow};
+              --gutter: {Gutter};
               ")>
     @ChildContent
   </Layout>
 </div>
 
 @code {
-  private string CalculatedHeight { get; set; }
-
-  private string CalculatedWidth => string.IsNullOrEmpty(MinWidth) ? $"{100 / Cols}%" : $"{MinWidth}";
-
-  private ElementReference _elementRef;
-  
-  private bool HasHeight => !string.IsNullOrEmpty(Height);
-
-  private bool HasRatio => Ratio != 0;
-  
-  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - Utils.RemToInt(Gutter)) / Ratio}px";
-
-
   protected override Styled Base => UL(@"
 		{
       list-style: none;
@@ -46,35 +35,58 @@
       height: var(--height) !important;
       max-height: var(--height);
       overflow: hidden;
-      flex-grow: 1;
+      flex-grow: var(--flex-grow);
     }
 	");
+
+  private ElementReference ElementRef { get; set; }
+  
+  private MediaQuery MediaQuery { get; set; }
+
+  private string CalculatedHeight { get; set; }
+  
+  private string CalculatedWidth => string.IsNullOrEmpty(MinWidth) ? $"{100 / Columns}%" : $"{MinWidth}";
+
+  private string FlexGrow => string.IsNullOrEmpty(MinWidth) ? "0" : "1"; 
+  
+  private bool HasHeight => !string.IsNullOrEmpty(Height);
+  
+  private bool HasRatio => Ratio != 0;
   
   protected override Task OnInitializedAsync() => InitComponent();
 
   private async Task InitComponent()
   {
+    MediaQuery = new MediaQuery(ResponsiveColumns);
     BrowserService.OnResize += WindowSizeHasChanged;
-    await Task.Delay(1);
+    await Task.Delay(10);
     await WindowSizeHasChanged();
   }
 
   private async Task WindowSizeHasChanged()
   {
+    await SetNumberOfColumns();
     await SetCalculatedHeight();
     StateHasChanged();
+  }
+  
+  private async Task SetNumberOfColumns()
+  {
+    var windowDimension = await Service.WindowDimension();
+    Columns = MediaQuery.NumberOfColumnsFor(windowDimension.Width) ?? Columns;
   }
 
   private async Task SetCalculatedHeight()
   {
-    var elementDimension = await Service.DimensionFrom(_elementRef);
+    var elementDimension = await Service.DimensionFrom(ElementRef);
     
     CalculatedHeight = HasHeight ? Height :
       HasRatio ? HeightFrom(elementDimension.Width) :
         "initial";
   }
 
-  
+  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Columns - Utils.RemToInt(Gutter)) / Ratio}px";
+
   public void Dispose() => BrowserService.OnResize -= WindowSizeHasChanged;
 
   [Inject]
@@ -90,7 +102,10 @@
   public string MinWidth { get; set; }
 
   [Parameter]
-  public int Cols { get; set; } = 1;
+  public BreakPoints ResponsiveColumns { get; set; }
+
+  [Parameter]
+  public int Columns { get; set; } = 1;
 
   [Parameter]
   public double Ratio { get; set; }

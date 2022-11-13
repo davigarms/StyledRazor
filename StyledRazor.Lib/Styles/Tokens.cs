@@ -1,15 +1,15 @@
-namespace StyledRazor.Lib.Styles.Base;
+namespace StyledRazor.Lib.Styles;
 
 public static class Tokens
 {
     public const string Zero = "0";
     public const string Auto = "auto";
-    public const string SpacingXS = ".25rem";
+    public const string SpacingXs = ".25rem";
     public const string SpacingS = ".5rem";
     public const string SpacingM = "1rem";
     public const string SpacingL = "2rem";
-    public const string SpacingXL = "4rem";
-    public const string SpacingXXL = "8rem";
+    public const string SpacingXl = "4rem";
+    public const string Spacing2Xl = "8rem";
     public const string Initial = "initial";
     public const string SizeViewPortWidth = "100vw";
     public const string SizeViewportHeight = "100vh";
@@ -31,5 +31,4 @@ public static class Tokens
     public const string FlexWrap = "wrap";
     public const string FlexWrapReverse = "wrap-reverse";
     public const string FlexNoWrap = "nowrap";
-    public const string ScreenMd = "768px";
 }

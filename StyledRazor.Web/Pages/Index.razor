@@ -1,29 +1,31 @@
 @page "/"
+@using StyledRazor.Lib.Styles
 @inherits ButtonBase
 
 <Stack>
   <Box>First</Box>
 
-  <GridList MinWidth="@Tokens.SpacingXXL">
+  <Grid MinWidth="220px">
       <BasicButton>Second</BasicButton>
       <Button Styled="@DynamicButton" @onclick="@Click">
         Dynamic
       </Button>
-  </GridList>
+  </Grid>
   
-  <Box Horizontal="@Tokens.SpacingM" Height="@Tokens.SpacingXXL">
+  <Box Horizontal="@Tokens.SpacingM" Height="@Tokens.SpacingXl">
     <Cluster Space="@Tokens.SpacingL" Justify="@Tokens.AlignSpaceBetween" NoPadding Stretch>
       <Box Start>First</Box>
       <Box>Second</Box>
       <Box End>Third</Box>
     </Cluster>
-  </Box>
+  </Box>  
   
-  <GridList Gutter="@Tokens.SpacingS" Cols="4" Ratio="1">
-    @for (var i = 1; i < 5; i++ )
-    {
-      var content = "Item " + i;
-      <GridItem>
+  <Stack Gutter="@Tokens.SpacingS">
+    <Grid Gutter="@Tokens.SpacingS" ResponsiveColumns="@(new BreakPoints{{ "L", 4 },{ "M", 2 },{ "S", 1 }})" Ratio="1">
+      @for (var i = 1; i < 5; i++ )
+      {
+        var content = "Item " + i;
+        <GridItem>
           <Background Color="lightgrey">
             <Cover>
               <Container Centered>
@@ -33,29 +35,31 @@
                 Cluster
               </Cluster>
             </Cover>
-        </Background>
-      </GridItem>
-    }
-  </GridList>
-  
-  <GridList Gutter="@Tokens.SpacingS" MinWidth="@Tokens.SpacingXXL">
-    @for (var i = 5; i < 9; i++ )
-    {
-      var content = "Item " + i;
-      <GridItem>
-        <Background Color="lightgrey">
-          <Cover>
-            <Container Centered>
-              @content  
-            </Container>
-            <Cluster>
-              Cluster
-            </Cluster>
-          </Cover>
-        </Background>
-      </GridItem>
-    }
-  </GridList>
+          </Background>
+        </GridItem>
+      }
+    </Grid>
+      
+    <Grid Gutter="@Tokens.SpacingS" MinWidth="@Tokens.Spacing2Xl">
+      @for (var i = 5; i < 8; i++ )
+      {
+        var content = "Item " + i;
+        var item = i;
+        <GridItem>
+          <Background Color="lightgrey">
+            <Cover>
+              <Container Centered>
+                @content  
+              </Container>
+              <Cluster>
+                Cluster
+              </Cluster>
+            </Cover>
+          </Background>
+        </GridItem>
+      }
+    </Grid>
+  </Stack>
 </Stack>
 
 @code

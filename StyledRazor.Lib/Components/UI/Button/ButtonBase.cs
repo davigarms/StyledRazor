@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core.Components;
 using StyledRazor.Core.Model;
-using StyledRazor.Lib.Styles.Base;
+using StyledRazor.Lib.Styles;
 
 namespace StyledRazor.Lib.Components.UI.Button;
 
@@ -20,7 +20,7 @@ public class ButtonBase : StyledBase
 
 	private const string ButtonDefinition = $@"
 			display: inline-block;
-			border-radius: {Tokens.SpacingXS};
+			border-radius: {Tokens.SpacingXs};
 			background: transparent;
 			color: black;
 			border: 1px solid grey;
