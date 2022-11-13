@@ -37,6 +37,26 @@
       overflow: hidden;
       flex-grow: var(--flex-grow);
     }
+      
+    > [double] {
+      flex-basis: calc(2 * (var(--width)) - 1 * var(--gutter)) !important
+    }
+
+    > [triple] {
+      flex-basis: calc(3 * (var(--width)) - 1 * var(--gutter)) !important
+    }
+
+    > [half] {
+      flex-basis: calc(50% - 1 * var(--gutter)) !important
+    }
+
+    > [third] {
+      flex-basis: calc(33% - 1 * var(--gutter)) !important
+    }
+
+    > [full] {
+      flex-basis: 100% !important
+    }
 	");
 
   private ElementReference ElementRef { get; set; }
@@ -47,8 +67,12 @@
   
   private string CalculatedWidth => string.IsNullOrEmpty(MinWidth) ? $"{100 / Columns}%" : $"{MinWidth}";
 
-  private string FlexGrow => string.IsNullOrEmpty(MinWidth) ? "0" : "1"; 
-  
+  private string FlexGrow => Grow ? "1" : 
+                              HasMinWidth ? "1" 
+                                : "0";
+
+  private bool HasMinWidth => !string.IsNullOrEmpty(MinWidth);
+
   private bool HasHeight => !string.IsNullOrEmpty(Height);
   
   private bool HasRatio => Ratio != 0;
@@ -81,8 +105,8 @@
     var elementDimension = await Service.DimensionFrom(ElementRef);
     
     CalculatedHeight = HasHeight ? Height :
-      HasRatio ? HeightFrom(elementDimension.Width) :
-        "initial";
+                        HasRatio ? HeightFrom(elementDimension.Width) :
+                          "initial";
   }
 
   private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Columns - Utils.RemToInt(Gutter)) / Ratio}px";
@@ -109,4 +133,7 @@
 
   [Parameter]
   public double Ratio { get; set; }
+  
+  [Parameter]
+  public bool Grow { get; set; }
 }
