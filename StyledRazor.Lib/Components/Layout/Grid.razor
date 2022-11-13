@@ -17,46 +17,48 @@
 </div>
 
 @code {
-  protected override Styled Base => UL(@"
-		{
-      list-style: none;
-			display: flex;
-      flex-wrap: wrap;
-      padding: 0;
-      margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
-      width: calc(100% + var(--gutter));
-      position: relative;
-		}
+  protected const string Css = @"
+  {
+    list-style: none;
+	  display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
+    width: calc(100% + var(--gutter));
+    position: relative;
+  }
 
-    > * {
-      width: calc(var(--width) - 1 * var(--gutter)) !important;
-      margin: var(--gutter) 0 0 var(--gutter) !important;
-      height: var(--height) !important;
-      max-height: var(--height);
-      overflow: hidden;
-      flex-grow: var(--flex-grow);
-    }
-      
-    > [double] {
-      flex-basis: calc(2 * (var(--width)) - 1 * var(--gutter)) !important
-    }
+  > * {
+    width: calc(var(--width) - 1 * var(--gutter)) !important;
+    margin: var(--gutter) 0 0 var(--gutter) !important;
+    height: var(--height) !important;
+    max-height: var(--height);
+    overflow: hidden;
+    flex-grow: var(--flex-grow);
+  }
+    
+  > [double] {
+    flex-basis: calc(2 * (var(--width)) - 1 * var(--gutter)) !important
+  }
 
-    > [triple] {
-      flex-basis: calc(3 * (var(--width)) - 1 * var(--gutter)) !important
-    }
+  > [triple] {
+    flex-basis: calc(3 * (var(--width)) - 1 * var(--gutter)) !important
+  }
 
-    > [half] {
-      flex-basis: calc(50% - 1 * var(--gutter)) !important
-    }
+  > [half] {
+    flex-basis: calc(50% - 1 * var(--gutter)) !important
+  }
 
-    > [third] {
-      flex-basis: calc(33% - 1 * var(--gutter)) !important
-    }
+  > [third] {
+    flex-basis: calc(33% - 1 * var(--gutter)) !important
+  }
 
-    > [full] {
-      flex-basis: 100% !important
-    }
-	");
+  > [full] {
+    flex-basis: 100% !important
+  }
+  ";
+
+  protected override Styled Base => Div(Css);
 
   private ElementReference ElementRef { get; set; }
   
