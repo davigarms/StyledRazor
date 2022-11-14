@@ -8,7 +8,7 @@ public class MediaQuery
 {
   private readonly List<KeyValuePair<BreakPoint, int>> _orderedColumns;
 
-  public MediaQuery(BreakPoints responsiveColumns)
+  public MediaQuery(ResponsiveCols responsiveColumns)
   {
     if (responsiveColumns == null) return;
     _orderedColumns = responsiveColumns.OrderBy(col => (int) col.Key).ToList();

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace StyledRazor.Core.Collections;
 
-public class BreakPoints : Dictionary<BreakPoint, int> { }
+public class ResponsiveCols : Dictionary<BreakPoint, int> { }
 
 public enum BreakPoint
 {

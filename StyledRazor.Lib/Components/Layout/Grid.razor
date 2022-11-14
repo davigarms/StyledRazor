@@ -62,30 +62,30 @@
   protected override Styled Base => Div(Css);
 
   private ElementReference ElementRef { get; set; }
-  
+
   private MediaQuery MediaQuery { get; set; }
 
   private string CalculatedHeight { get; set; }
-  
-  private string CalculatedWidth => string.IsNullOrEmpty(MinWidth) ? $"{100 / Columns}%" : $"{MinWidth}";
 
-  private string FlexGrow => Grow ? "1" : 
-                              HasMinWidth ? "1" 
+  private string CalculatedWidth => string.IsNullOrEmpty(BaseWidth) ? $"{100 / Cols}%" : $"{BaseWidth}";
+
+  private string FlexGrow => HasBaseWidth ? 
+                              Grow ? "1" : "0"
                                 : "0";
 
-  private bool HasMinWidth => !string.IsNullOrEmpty(MinWidth);
+  private bool HasBaseWidth => !string.IsNullOrEmpty(BaseWidth);
 
   private bool HasHeight => !string.IsNullOrEmpty(Height);
-  
+
   private bool HasRatio => Ratio != 0;
-  
+
   protected override Task OnInitializedAsync() => InitComponent();
 
   private async Task InitComponent()
   {
-    MediaQuery = new MediaQuery(ResponsiveColumns);
+    MediaQuery = new MediaQuery(GetResponsiveColumns());
     BrowserService.OnResize += WindowSizeHasChanged;
-    await Task.Delay(10);
+    await Task.Delay(1);
     await WindowSizeHasChanged();
   }
 
@@ -95,47 +95,56 @@
     await SetCalculatedHeight();
     StateHasChanged();
   }
-  
+
   private async Task SetNumberOfColumns()
   {
     var windowDimension = await Service.WindowDimension();
-    Columns = MediaQuery.NumberOfColumnsFor(windowDimension.Width) ?? Columns;
+    Cols = MediaQuery.NumberOfColumnsFor(windowDimension.Width) ?? Cols;
   }
 
   private async Task SetCalculatedHeight()
   {
     var elementDimension = await Service.DimensionFrom(ElementRef);
-    
+
     CalculatedHeight = HasHeight ? Height :
                         HasRatio ? HeightFrom(elementDimension.Width) :
                           "initial";
   }
 
-  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Columns - Utils.RemToInt(Gutter)) / Ratio}px";
+  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - Utils.RemToInt(Gutter)) / Ratio}px";
+
+  private ResponsiveCols GetResponsiveColumns()
+  {
+    if (ResponsiveCols != null) return ResponsiveCols;
+
+    var bp = new ResponsiveCols();
+
+    if (ColsXs > 0) bp.Add(BreakPoint.Xs, ColsXs);
+    if (ColsSm > 0) bp.Add(BreakPoint.Sm, ColsSm);
+    if (ColsMd > 0) bp.Add(BreakPoint.Md, ColsMd);
+    if (ColsLg > 0) bp.Add(BreakPoint.Lg, ColsLg);
+    if (ColsXl > 0) bp.Add(BreakPoint.Xl, ColsXl);
+    if (ColsXxl > 0) bp.Add(BreakPoint.Xxl, ColsXxl);
+
+    return bp.Count > 0 ? bp : null;
+  }
 
   public void Dispose() => BrowserService.OnResize -= WindowSizeHasChanged;
 
   [Inject]
   protected BrowserService Service { get; set; }
-
-  [Parameter]
-  public string Gutter { get; set; } = Tokens.SpacingS;
-
-  [Parameter]
-  public string Height { get; set; }
-
-  [Parameter]
-  public string MinWidth { get; set; }
-
-  [Parameter]
-  public BreakPoints ResponsiveColumns { get; set; }
-
-  [Parameter]
-  public int Columns { get; set; } = 1;
-
-  [Parameter]
-  public double Ratio { get; set; }
   
-  [Parameter]
-  public bool Grow { get; set; }
+  [Parameter] public string Gutter { get; set; } = Tokens.SpacingS;
+  [Parameter] public string Height { get; set; }
+  [Parameter] public string BaseWidth { get; set; }
+  [Parameter] public double Ratio { get; set; }
+  [Parameter]public bool Grow { get; set; } = true;
+  [Parameter] public int ColsXs { get; set; }
+  [Parameter] public int ColsSm { get; set; }
+  [Parameter] public int ColsMd { get; set; }
+  [Parameter] public int ColsLg { get; set; }
+  [Parameter] public int ColsXl { get; set; }
+  [Parameter] public int ColsXxl { get; set; }
+  [Parameter] public int Cols { get; set; } = 1;
+  [Parameter] public ResponsiveCols ResponsiveCols { get; set; }
 }

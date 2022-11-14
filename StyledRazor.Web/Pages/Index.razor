@@ -7,7 +7,7 @@
   <Box>First</Box>
   
   <Stack Gutter="@Tokens.SpacingM">
-    <Grid MinWidth="200px">
+    <Grid BaseWidth="200px">
       <BasicButton>Grid</BasicButton>
       <Button Styled="@GreyButton">
         Button
@@ -33,7 +33,7 @@
   </Box>  
   
   <Stack Gutter="@Tokens.SpacingS">
-    <GridList Gutter="@Tokens.SpacingS" ResponsiveColumns="@(new BreakPoints{{ BreakPoint.Lg, 4 },{ BreakPoint.Md, 2 },{ BreakPoint.Sm, 1 }})" Ratio="1">
+    <GridList Gutter="@Tokens.SpacingS" ColsLg="4" ColsMd="2" ColsSm="1" Ratio="1">
       @for (var i = 1; i < 5; i++ )
       {
         var content = "Item " + i;
@@ -52,7 +52,7 @@
       }
     </GridList>
       
-    <GridList Gutter="@Tokens.SpacingS" MinWidth="@Tokens.SpacingXxl">
+    <GridList Gutter="@Tokens.SpacingS" BaseWidth="@Tokens.SpacingXxl">
       @for (var i = 5; i < 8; i++ )
       {
         var content = "Item " + i;
