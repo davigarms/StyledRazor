@@ -1,3 +1,5 @@
+using StyledRazor.Core.Collections;
+
 namespace StyledRazor.Lib.Styles;
 
 public static class Tokens
@@ -31,4 +33,10 @@ public static class Tokens
     public const string FlexWrap = "wrap";
     public const string FlexWrapReverse = "wrap-reverse";
     public const string FlexNoWrap = "nowrap";
+    public static string ScreenXs => $"{(int)BreakPoint.Xs}px";
+    public static string ScreenS => $"{(int)BreakPoint.Sm}px";
+    public static string ScreenM => $"{(int)BreakPoint.Md}px";
+    public static string ScreenLg => $"{(int)BreakPoint.Lg}px";
+    public static string ScreenXlg => $"{(int)BreakPoint.Xl}px";
+    public static string ScreenXxg => $"{(int)BreakPoint.Xxl}px";
 }

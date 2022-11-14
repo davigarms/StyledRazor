@@ -1,5 +1,6 @@
 @page "/"
 @using StyledRazor.Lib.Styles
+@using StyledRazor.Core.Collections
 @inherits ButtonBase
 
 <Stack>
@@ -9,7 +10,7 @@
     <Grid MinWidth="200px">
       <BasicButton>Grid</BasicButton>
       <Button Styled="@GreyButton">
-        Red
+        Button
       </Button>
     </Grid>
     
@@ -32,7 +33,7 @@
   </Box>  
   
   <Stack Gutter="@Tokens.SpacingS">
-    <GridList Gutter="@Tokens.SpacingS" ResponsiveColumns="@(new BreakPoints{{ "L", 4 },{ "M", 2 },{ "S", 1 }})" Ratio="1">
+    <GridList Gutter="@Tokens.SpacingS" ResponsiveColumns="@(new BreakPoints{{ BreakPoint.Lg, 4 },{ BreakPoint.Md, 2 },{ BreakPoint.Sm, 1 }})" Ratio="1">
       @for (var i = 1; i < 5; i++ )
       {
         var content = "Item " + i;
