@@ -7,11 +7,10 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Container : StyledBase
 {
-	[Parameter] public bool Fluid { get; set; }
-	[Parameter] public string Width { get; set; } = "initial";
+  [Parameter] public bool Fluid { get; set; }
+  [Parameter] public string Width { get; set; } = "initial";
 
-	protected override Styled Base => Div(
-		@"
+  protected override Styled Base => Div(@"
 		{
 			margin-left: auto;
 			margin-right: auto;
@@ -19,10 +18,9 @@ public class Container : StyledBase
 			width: var(--width);
 			position: relative;
 		}
-	"
-	);
+	");
 
-	protected override string Style => $@"
+  protected override string Style => $@"
 		--max-width: {(Fluid ? Width : Tokens.Initial)};
 		--width: {(Fluid ? Tokens.SizeTotal : Width)};
 	";

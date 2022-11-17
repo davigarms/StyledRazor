@@ -6,63 +6,63 @@ using StyledRazor.Lib.Styles;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class Cluster : StyledBase
+public class Cluster : StyledBase 
 {
-	[Parameter] public string Space { get; set; } = Tokens.Zero;
-	[Parameter] public bool Wrap { get; set; }
-	[Parameter] public bool WrapReverse { get; set; }
-	[Parameter] public bool Grow { get; set; }
-	[Parameter] public string Align { get; set; } = Tokens.AlignCenter;
-	[Parameter] public string AlignContent { get; set; }
-	[Parameter] public string Justify { get; set; } = Tokens.AlignFlexEnd;
-	[Parameter] public bool NoPadding { get; set; }
+  [Parameter] public string Space { get; set; } = Tokens.Zero;
+  [Parameter] public bool Wrap { get; set; }
+  [Parameter] public bool WrapReverse { get; set; }
+  [Parameter] public bool Grow { get; set; }
+  [Parameter] public string Align { get; set; } = Tokens.AlignCenter;
+  [Parameter] public string AlignContent { get; set; }
+  [Parameter] public string Justify { get; set; } = Tokens.AlignFlexEnd;
+  [Parameter] public bool NoPadding { get; set; }
 
-	public string FlexGrow => Grow ? "1" : "0";
-	public string FlexBasis => Grow ? "100%" : "auto";
-	private string Padding => NoPadding ? Tokens.Zero : Space;
-	private string FlexWrap => Wrap ? Tokens.FlexWrap :
-															WrapReverse ? Tokens.FlexWrapReverse :
-																Tokens.FlexNoWrap;
-	
-  protected override Styled Base => Div($@"
-      {{
-        display: flex;
-        gap: var(--gap);
-        flex-wrap: var(--flex-wrap);
-        align-items: var(--align-items);
-        align-content: var(--align-content);
-        justify-content: var(--justify);
-        padding: var(--padding);
-      }}
+  private string FlexGrow => Grow ? "1" : "0";
+  private string FlexBasis => Grow ? "100%" : "auto";
+  private string Padding => NoPadding ? Tokens.Zero : Space;
+  private string FlexWrap => Wrap ? Tokens.FlexWrap :
+													    WrapReverse ? Tokens.FlexWrapReverse :
+													    Tokens.FlexNoWrap;
 
-			[stretch] {{
-				height: inherit;
-			}}
+  protected override Styled Base => Div(@"
+	  {
+	    display: flex;
+	    gap: var(--gap);
+	    flex-wrap: var(--flex-wrap);
+	    align-items: var(--align-items);
+	    align-content: var(--align-content);
+	    justify-content: var(--justify);
+	    padding: var(--padding);
+	  }
 
-			> * {{
-				flex-grow: var(--flex-grow);
-				flex-basis: var(--flex-basis);
-			}}
+		[stretch] {
+			height: inherit;
+		}
 
-			> [start] {{
-				align-self: flex-start;
-			}}
+		> * {
+			flex-grow: var(--flex-grow);
+			flex-basis: var(--flex-basis);
+		}
 
-			> [end] {{
-				align-self: flex-end;
-			}}
+		> [start] {
+			align-self: flex-start;
+		}
 
-			> [center] {{
-				align-self: center;
-			}}
+		> [end] {
+			align-self: flex-end;
+		}
 
-			> [baseline] {{
-				align-self: baseline;
-			}}
+		> [center] {
+			align-self: center;
+		}
 
-			> [stretch] {{
-				align-self: stretch;
-			}}
+		> [baseline] {
+			align-self: baseline;
+		}
+
+		> [stretch] {
+			align-self: stretch;
+		}
   ");
 
   protected override string Style => $@"

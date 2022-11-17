@@ -6,27 +6,24 @@
 </Layout>
 
 @code {
-  protected override Styled Base => Div(
-    $@"
-      {{
-        display: flex;
-        flex-wrap: nowrap;
-        height: inherit;
-        min-height: inherit;
-      }}
+  [Parameter] public bool StretchAll { get; set; }
 
-      [stretch-all] > *  {{
-        flex: 1 
-      }}
+  [Parameter] public int StretchIndex { get; set; }
+  
+  protected override Styled Base => Div($@"
+    {{
+      display: flex;
+      flex-wrap: nowrap;
+      height: inherit;
+      min-height: inherit;
+    }}
 
-       > :nth-child({StretchIndex}) {{
-        flex: 1
-      }}
-    ");
+    [stretch-all] > *  {{
+      flex: 1 
+    }}
 
-  [Parameter]
-  public bool StretchAll { get; set; }
-
-	[Parameter]
-	public int StretchIndex { get; set; }
+    > :nth-child({StretchIndex}) {{
+      flex: 1
+    }}
+  ");
 }

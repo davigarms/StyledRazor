@@ -18,45 +18,73 @@
 </div>
 
 @code {
+  [Parameter] public string Gutter { get; set; } = Tokens.SpacingS;
+  
+  [Parameter] public bool Grow { get; set; } = true;
+  
+  [Parameter] public string Height { get; set; }
+  
+  [Parameter] public string BaseWidth { get; set; }
+  
+  [Parameter] public double Ratio { get; set; }
+  
+  [Parameter] public int ColsXs { get; set; }
+  
+  [Parameter] public int ColsSm { get; set; }
+  
+  [Parameter] public int ColsMd { get; set; }
+  
+  [Parameter] public int ColsLg { get; set; }
+  
+  [Parameter] public int ColsXl { get; set; }
+  
+  [Parameter] public int ColsXxl { get; set; }
+  
+  [Parameter] public int Cols { get; set; } = 1;
+  
+  [Parameter] public ResponsiveCols ResponsiveCols { get; set; }
+
+  [Inject] private BrowserService Service { get; set; }
+  
   protected const string Css = @"
-  {
-    list-style: none;
-	  display: flex;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
-    width: calc(100% + var(--gutter));
-    position: relative;
-  }
+    {
+      list-style: none;
+	    display: flex;
+      flex-wrap: wrap;
+      padding: 0;
+      margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
+      width: calc(100% + var(--gutter));
+      position: relative;
+    }
 
-  > * {
-    width: calc(var(--width) - 1 * var(--gutter)) !important;
-    margin: var(--gutter) 0 0 var(--gutter) !important;
-    height: var(--height) !important;
-    max-height: var(--height);
-    overflow: hidden;
-    flex-grow: var(--flex-grow);
-  }
-    
-  > [double] {
-    flex-basis: calc(2 * (var(--width)) - 1 * var(--gutter)) !important
-  }
+    > * {
+      width: calc(var(--width) - 1 * var(--gutter)) !important;
+      margin: var(--gutter) 0 0 var(--gutter) !important;
+      height: var(--height) !important;
+      max-height: var(--height);
+      overflow: hidden;
+      flex-grow: var(--flex-grow);
+    }
+      
+    > [double] {
+      flex-basis: calc(2 * (var(--width)) - 1 * var(--gutter)) !important
+    }
 
-  > [triple] {
-    flex-basis: calc(3 * (var(--width)) - 1 * var(--gutter)) !important
-  }
+    > [triple] {
+      flex-basis: calc(3 * (var(--width)) - 1 * var(--gutter)) !important
+    }
 
-  > [half] {
-    flex-basis: calc(50% - 1 * var(--gutter)) !important
-  }
+    > [half] {
+      flex-basis: calc(50% - 1 * var(--gutter)) !important
+    }
 
-  > [third] {
-    flex-basis: calc(33% - 1 * var(--gutter)) !important
-  }
+    > [third] {
+      flex-basis: calc(33% - 1 * var(--gutter)) !important
+    }
 
-  > [full] {
-    flex-basis: 100% !important
-  }
+    > [full] {
+      flex-basis: 100% !important
+    }
   ";
 
   protected override Styled Base => Div(Css);
@@ -80,6 +108,8 @@
   private bool HasRatio => Ratio != 0;
 
   protected override Task OnInitializedAsync() => InitComponent();
+  
+  public void Dispose() => BrowserService.OnResize -= WindowSizeHasChanged;
 
   private async Task InitComponent()
   {
@@ -117,34 +147,15 @@
   {
     if (ResponsiveCols != null) return ResponsiveCols;
 
-    var bp = new ResponsiveCols();
+    var columns = new ResponsiveCols();
 
-    if (ColsXs > 0) bp.Add(BreakPoint.Xs, ColsXs);
-    if (ColsSm > 0) bp.Add(BreakPoint.Sm, ColsSm);
-    if (ColsMd > 0) bp.Add(BreakPoint.Md, ColsMd);
-    if (ColsLg > 0) bp.Add(BreakPoint.Lg, ColsLg);
-    if (ColsXl > 0) bp.Add(BreakPoint.Xl, ColsXl);
-    if (ColsXxl > 0) bp.Add(BreakPoint.Xxl, ColsXxl);
+    if (ColsXs > 0) columns.Add(BreakPoint.Xs, ColsXs);
+    if (ColsSm > 0) columns.Add(BreakPoint.Sm, ColsSm);
+    if (ColsMd > 0) columns.Add(BreakPoint.Md, ColsMd);
+    if (ColsLg > 0) columns.Add(BreakPoint.Lg, ColsLg);
+    if (ColsXl > 0) columns.Add(BreakPoint.Xl, ColsXl);
+    if (ColsXxl > 0) columns.Add(BreakPoint.Xxl, ColsXxl);
 
-    return bp.Count > 0 ? bp : null;
+    return columns.Count > 0 ? columns : null;
   }
-
-  public void Dispose() => BrowserService.OnResize -= WindowSizeHasChanged;
-
-  [Inject]
-  protected BrowserService Service { get; set; }
-  
-  [Parameter] public string Gutter { get; set; } = Tokens.SpacingS;
-  [Parameter] public string Height { get; set; }
-  [Parameter] public string BaseWidth { get; set; }
-  [Parameter] public double Ratio { get; set; }
-  [Parameter]public bool Grow { get; set; } = true;
-  [Parameter] public int ColsXs { get; set; }
-  [Parameter] public int ColsSm { get; set; }
-  [Parameter] public int ColsMd { get; set; }
-  [Parameter] public int ColsLg { get; set; }
-  [Parameter] public int ColsXl { get; set; }
-  [Parameter] public int ColsXxl { get; set; }
-  [Parameter] public int Cols { get; set; } = 1;
-  [Parameter] public ResponsiveCols ResponsiveCols { get; set; }
 }

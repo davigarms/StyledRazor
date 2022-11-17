@@ -17,6 +17,7 @@ public class MediaQuery
   public int? NumberOfColumnsFor(int windowWidth)
   {
     if (_orderedColumns == null) return null;
+    
     for (var i = 0; i < _orderedColumns.Count - 1; i++)
     {
       var minQuery = _orderedColumns.ElementAt(i);
@@ -29,7 +30,7 @@ public class MediaQuery
       }
     }
 
-    var last = _orderedColumns.Last();
-    return windowWidth > (int) last.Key ? last.Value : null;
+    var lastQuery = _orderedColumns.Last();
+    return windowWidth > (int) lastQuery.Key ? lastQuery.Value : null;
   }
 }

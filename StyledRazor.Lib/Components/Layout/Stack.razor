@@ -2,28 +2,26 @@
 @inherits StyledBase
 
 <Layout Styled="@Base"
-         style=@($@"
+        style=@($@"
 					--gutter: {@Gutter};")>
   @ChildContent
 </Layout>
 
 @code {
-	protected override Styled Base => Div(
-	  @"
-			 {
-				display: flex;
-				flex-direction: column;
-				justify-content: flex-start;
-				height: inherit;
-				position: relative;
-			}
-			
-			 > * + * {
-				margin-top: var(--gutter);
-				overflow: auto !important;
-			} 
-		");
+  [Parameter] public string Gutter { get; set; } = Tokens.SpacingL;
 
-  [Parameter]
-  public string Gutter { get; set; } = Tokens.SpacingL;
+  protected override Styled Base => Div(@"
+		{
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			height: inherit;
+			position: relative;
+		}
+
+		> * + * {
+			margin-top: var(--gutter);
+			overflow: auto !important;
+		} 
+	");
 }

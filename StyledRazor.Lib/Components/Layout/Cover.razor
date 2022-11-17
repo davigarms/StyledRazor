@@ -11,52 +11,48 @@
 </Layout>
 
 @code {
-  new Styled Base => Div(
-    @"
-      {
-        display: flex;
-        flex-direction: column;
-        min-height: var(--min-height);
-        padding: var(--padding);
-      }
+  [Parameter] public string MinimumHeight { get; set; } = Tokens.SizeTotal;
 
-      > * {
-        margin-top: var(--space);
-        margin-bottom: var(--space);
-      }
+  [Parameter] public string Space { get; set; } = Tokens.SpacingM;
 
-      > : first-child {
-        margin-top: 0;
-      }
-
-      > :nth-last-child(2) {
-        margin-bottom: 0;
-      } 
-
-      > [centered] {
-        margin-top: auto !important;
-        margin-bottom: auto !important;
-      }
-
-      > [top] {
-        margin-top: 0 !important;
-        margin-bottom: auto !important;
-      }
-      
-      > [bottom] {
-        margin-top: auto !important;
-        margin-bottom: 0 !important;
-      }
-    ");
+  [Parameter] public bool NoPadding { get; set; }
 
   private string Padding => NoPadding ? Tokens.Zero : Space;
 
-  [Parameter]
-  public string MinimumHeight { get; set; } = Tokens.SizeTotal;
+  protected override Styled Base => Div(@"
+    {
+      display: flex;
+      flex-direction: column;
+      min-height: var(--min-height);
+      padding: var(--padding);
+    }
 
-  [Parameter]
-  public string Space { get; set; } = Tokens.SpacingM;
+    > * {
+      margin-top: var(--space);
+      margin-bottom: var(--space);
+    }
 
-  [Parameter]
-  public bool NoPadding { get; set; }
+    > : first-child {
+      margin-top: 0;
+    }
+
+    > :nth-last-child(2) {
+      margin-bottom: 0;
+    } 
+
+    > [centered] {
+      margin-top: auto !important;
+      margin-bottom: auto !important;
+    }
+
+    > [top] {
+      margin-top: 0 !important;
+      margin-bottom: auto !important;
+    }
+
+    > [bottom] {
+      margin-top: auto !important;
+      margin-bottom: 0 !important;
+    }
+  ");
 }

@@ -7,7 +7,6 @@ namespace StyledRazor.Lib.Components.UI.Button;
 
 public class ButtonBase : StyledBase
 {
-
 	[Parameter] public string Margin { get; set; } = "0";
 	[Parameter] public string Padding { get; set; }
 
@@ -15,43 +14,44 @@ public class ButtonBase : StyledBase
 	private const string ButtonPadding = $"{Tokens.SpacingS}";
 
 	protected override string Style => $@"
-          --margin: {(string.IsNullOrEmpty(Margin) ? ButtonMargin : Margin)};
-          --padding: {(string.IsNullOrEmpty(Padding) ? ButtonPadding : Padding)}";
+	  --margin: {(string.IsNullOrEmpty(Margin) ? ButtonMargin : Margin)};
+	  --padding: {(string.IsNullOrEmpty(Padding) ? ButtonPadding : Padding)}
+	";
 
 	private const string ButtonDefinition = $@"
-			display: inline-block;
-			border-radius: {Tokens.SpacingXs};
-			background: transparent;
-			color: black;
-			border: 1px solid grey;
-			text-align: center;
-			cursor: pointer;
-			margin: var(--margin);
-	    padding: var(--padding);    
-		";
+		display: inline-block;
+		border-radius: {Tokens.SpacingXs};
+		background: transparent;
+		color: black;
+		border: 1px solid grey;
+		text-align: center;
+		cursor: pointer;
+		margin: var(--margin);
+    padding: var(--padding);    
+	";
 
-	protected static readonly Styled DefaultButton = new("a", 
-		$@"
-			{{
-		    {ButtonDefinition}                       
-	    }}
-		", "Button");
+	protected static readonly Styled DefaultButton = new("A", 
+	$@"
+		{{
+	    {ButtonDefinition}                       
+    }}
+	", "Button");
 
-  protected static readonly Styled GreyButton = new("a",
-    $@"
-			{{
-				{ButtonDefinition}
-				background: grey;
-				color: white;
-			}}
-		", "GreyButton");
+  protected static readonly Styled GreyButton = new("A",
+  $@"
+		{{
+			{ButtonDefinition}
+			background: grey;
+			color: white;
+		}}
+	", "GreyButton");
 
-  protected static readonly Styled AlertButton = new("a", 
-    $@"
-			{{
-				{ButtonDefinition}
-				background: red;
-				color: white;
-			}}°
-		", "AlertButton");
+  protected static readonly Styled AlertButton = new("A", 
+  $@"
+		{{
+			{ButtonDefinition}
+			background: red;
+			color: white;
+		}}°
+	", "AlertButton");
 }
