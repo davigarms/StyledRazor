@@ -25,5 +25,5 @@ public class BrowserService
   public static event Func<Task> OnResize;
 
   [JSInvokable]
-  public static async Task OnBrowserResize() => await OnResize?.Invoke();
+  public static async Task OnBrowserResize() => await OnResize.Invoke();
 }

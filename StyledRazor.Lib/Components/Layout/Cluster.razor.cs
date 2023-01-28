@@ -6,25 +6,23 @@ using StyledRazor.Lib.Styles;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class Cluster : StyledBase 
+public class Cluster : StyledBase
 {
-  [Parameter] public string Space { get; set; } = Tokens.Zero;
-  [Parameter] public bool Wrap { get; set; }
-  [Parameter] public bool WrapReverse { get; set; }
-  [Parameter] public bool Grow { get; set; }
-  [Parameter] public string Align { get; set; } = Tokens.AlignCenter;
-  [Parameter] public string AlignContent { get; set; }
-  [Parameter] public string Justify { get; set; } = Tokens.AlignFlexEnd;
-  [Parameter] public bool NoPadding { get; set; }
+	[Parameter] public string Space { get; set; } = Tokens.Zero;
+	[Parameter] public bool Wrap { get; set; }
+	[Parameter] public bool WrapReverse { get; set; }
+	[Parameter] public string Align { get; set; } = Tokens.AlignCenter;
+	[Parameter] public string AlignContent { get; set; }
+	[Parameter] public string Justify { get; set; } = Tokens.AlignFlexEnd;
+	[Parameter] public bool NoPadding { get; set; }
 
-  private string FlexGrow => Grow ? "1" : "0";
-  private string FlexBasis => Grow ? "100%" : "auto";
-  private string Padding => NoPadding ? Tokens.Zero : Space;
-  private string FlexWrap => Wrap ? Tokens.FlexWrap :
-													    WrapReverse ? Tokens.FlexWrapReverse :
-													    Tokens.FlexNoWrap;
+	private string Padding => NoPadding ? Tokens.Zero : Space;
 
-  protected override Styled Base => Div(@"
+	private string FlexWrap => Wrap ? Tokens.FlexWrap :
+		WrapReverse ? Tokens.FlexWrapReverse :
+		Tokens.FlexNoWrap;
+
+	protected override Styled Base => Div(@"
 	  {
 	    display: flex;
 	    gap: var(--gap);
@@ -65,14 +63,12 @@ public class Cluster : StyledBase
 		}
   ");
 
-  protected override string Style => $@"
+	protected override string Style => $@"
 	  --gap: {Space};
 	  --flex-wrap: {FlexWrap};
 	  --align-items: {Align};
 	  --align-content: {AlignContent};
 	  --justify: {Justify};
 	  --padding: {Padding};
-	  --flex-grow: {FlexGrow};
-	  --flex-basis: {FlexBasis};
   ";
 }

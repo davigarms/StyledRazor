@@ -1,27 +1,16 @@
 @page "/"
 @using StyledRazor.Lib.Styles
-@using StyledRazor.Core.Collections
-@inherits ButtonBase
 
 <Stack>
   <Box>First</Box>
   
   <Stack Gutter="@Tokens.SpacingM">
     <Grid BaseWidth="200px">
-      <BasicButton>Grid</BasicButton>
-      <Button Styled="@GreyButton">
-        Button
-      </Button>
-    </Grid>
-    
-    <Cluster Space="@Tokens.SpacingS" Grow NoPadding>
-      <BasicButton>
-        Cluster
-      </BasicButton>
+      <Button>Default</Button>
       <Button Styled="@DynamicButton" @onclick="@Click">
         Click me
       </Button>
-    </Cluster>
+    </Grid>
   </Stack>
   
   <Box Horizontal="@Tokens.SpacingM" Height="@Tokens.SpacingXl">
@@ -33,7 +22,7 @@
   </Box>  
   
   <Stack Gutter="@Tokens.SpacingS">
-    <GridList Gutter="@Tokens.SpacingS" ColsLg="4" ColsMd="2" ColsSm="1" Ratio="1">
+    <Grid Gutter="@Tokens.SpacingS" ColsLg="4" ColsMd="2" ColsSm="1" Ratio="1">
       @for (var i = 1; i < 5; i++ )
       {
         var content = "Item " + i;
@@ -50,9 +39,9 @@
           </Background>
         </GridItem>
       }
-    </GridList>
+    </Grid>
       
-    <GridList Gutter="@Tokens.SpacingS" BaseWidth="@Tokens.SpacingXxl">
+    <Grid Gutter="@Tokens.SpacingS" BaseWidth="@Tokens.SpacingXxl">
       @for (var i = 5; i < 8; i++ )
       {
         var content = "Item " + i;
@@ -70,16 +59,16 @@
           </Background>
         </GridItem>
       }
-    </GridList>
+    </Grid>
   </Stack>
 </Stack>
 
 @code
 {
-  Styled DynamicButton { get; set; } = GreyButton;
+  Styled DynamicButton { get; set; } = Button.GreyButton;
 
   private void Click() => DynamicButton =
     DynamicButton.Name == "GreyButton"
-      ? AlertButton
-      : GreyButton;
+      ? Button.AlertButton
+      : Button.GreyButton;
 }

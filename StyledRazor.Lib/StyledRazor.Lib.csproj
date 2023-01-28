@@ -17,7 +17,6 @@
         <AdditionalFiles Include="Components\Layout\Cover.razor" />
         <AdditionalFiles Include="Components\Layout\Split.razor" />
         <AdditionalFiles Include="Components\Layout\Stack.razor" />
-        <AdditionalFiles Include="Components\UI\Button\BasicButton.razor" />
     </ItemGroup>
 
     <ItemGroup>
