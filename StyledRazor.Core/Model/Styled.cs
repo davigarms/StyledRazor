@@ -14,9 +14,8 @@ public class Styled
 
   public Styled(string element = "div", string baseCss = "", string name = "")
   {
-    var id = Guid.NewGuid().ToString().Replace("-", "")[..10];
     Name = name;
-    Id = IdFrom(Name, id);
+    Id = IdFrom(Name);
     Element = element;
     
     var baseElementId = ElementIdFrom(Element, Id);
@@ -37,7 +36,8 @@ public class Styled
 
   private static string ElementIdFrom(string baseElement, string componentId) => $"{baseElement}[{componentId}]";
 
-  private static string IdFrom(string name, string id) => $"{(name == null ? "w" : name.ToLower() + "_")}{id}";
+  private static string IdFrom(string name) => 
+    $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
 
   private static string Compressed(string css, string baseElementId)
   {

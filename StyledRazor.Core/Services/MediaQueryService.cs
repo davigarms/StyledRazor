@@ -4,11 +4,11 @@ using StyledRazor.Core.Collections;
 
 namespace StyledRazor.Core.Services;
 
-public class MediaQuery
+public class MediaQueryService
 {
   private readonly List<KeyValuePair<BreakPoint, int>> _orderedColumns;
 
-  public MediaQuery(ResponsiveCols responsiveColumns)
+  public MediaQueryService(ResponsiveCols responsiveColumns)
   {
     if (responsiveColumns == null) return;
     _orderedColumns = responsiveColumns.OrderBy(col => (int) col.Key).ToList();

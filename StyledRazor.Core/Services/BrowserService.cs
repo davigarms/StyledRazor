@@ -20,7 +20,6 @@ public class BrowserService
 
   public async Task<Dimension> DimensionFrom(ElementReference element) =>
     await _js.InvokeAsync<Dimension>("dimensionFrom", element);
-
   
   public static event Func<Task> OnResize;
 

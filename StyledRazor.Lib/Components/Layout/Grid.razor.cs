@@ -102,7 +102,7 @@ public class Grid : StyledBase, IDisposable
     }
   ");
 
-  private MediaQuery MediaQuery { get; set; }
+  private MediaQueryService MediaQuery { get; set; }
 
   private string CalculatedHeight { get; set; }
 
@@ -128,7 +128,7 @@ public class Grid : StyledBase, IDisposable
 
   private async Task InitComponent()
   {
-    MediaQuery = new MediaQuery(GetResponsiveColumns());
+    MediaQuery = new MediaQueryService(GetResponsiveColumns());
     BrowserService.OnResize += WindowSizeHasChanged;
     await Task.Delay(1);
     await WindowSizeHasChanged();

@@ -1,5 +1,4 @@
 using StyledRazor.Core.Model;
-using System;
 
 namespace StyledRazor.Core.Components;
 
@@ -10,5 +9,5 @@ public partial class StyledBase
   protected Styled H1(string css = "") => Create("h1", css);
   protected Styled A(string css = "") => Create("a", css);
   protected Styled UL(string css = "") => Create("ul", css);
-  protected Styled LI(string css = "") => Create("li", css);
+  protected Styled Li(string css = "") => Create("li", css);
 }
