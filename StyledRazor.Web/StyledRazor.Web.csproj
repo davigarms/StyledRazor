@@ -4,7 +4,9 @@
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
   </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'StyledRazor' " />
   <ItemGroup>
     <ProjectReference Include="..\StyledRazor.Lib\StyledRazor.Lib.csproj" />

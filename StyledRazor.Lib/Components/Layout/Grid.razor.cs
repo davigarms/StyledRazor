@@ -1,24 +1,17 @@
-@using StyledRazor.Core.Services
-@using StyledRazor.Core.Utils
-@using StyledRazor.Lib.Styles
-@using StyledRazor.Core.Collections
-@inherits StyledBase
-@implements IDisposable
+using Microsoft.AspNetCore.Components;
+using StyledRazor.Core.Collections;
+using StyledRazor.Core.Components;
+using StyledRazor.Core.Model;
+using StyledRazor.Core.Services;
+using StyledRazor.Core.Utils;
+using StyledRazor.Lib.Styles;
+using System.Threading.Tasks;
+using System;
 
-<div @ref="ElementRef">
-  <Layout Styled="@Base"
-    style=@($@"
-      --height: {CalculatedHeight};
-      --width: {CalculatedWidth};
-      --flex-grow: {FlexGrow};
-      --gutter: {Gutter};
-      ")>
-    @ChildContent
-  </Layout>
-</div>
+namespace StyledRazor.Lib.Components.Layout;
 
-@code {
-
+public class Grid : StyledBase, IDisposable
+{
   [Parameter]
   public string Gutter { get; set; } = Tokens.SpacingS;
 
@@ -59,7 +52,14 @@
   public ResponsiveCols ResponsiveCols { get; set; }
 
   [Inject]
-  private BrowserService Service { get; set; }
+  private BrowserService Browser { get; set; }
+
+  protected override string Style => $@"
+    --height: {CalculatedHeight};
+    --width: {CalculatedWidth};
+    --flex-grow: {FlexGrow};
+    --gutter: {Gutter};
+  ";
 
   protected override Styled Base => Div(@"
     {
@@ -102,8 +102,6 @@
     }
   ");
 
-  private ElementReference ElementRef { get; set; }
-
   private MediaQuery MediaQuery { get; set; }
 
   private string CalculatedHeight { get; set; }
@@ -111,8 +109,8 @@
   private string CalculatedWidth => string.IsNullOrEmpty(BaseWidth) ? $"{100 / Cols}%" : $"{BaseWidth}";
 
   private string FlexGrow => HasBaseWidth ?
-    Grow ? "1" : "0"
-    : "0";
+                              Grow ? "1" : "0"
+                              : "0";
 
   private bool HasBaseWidth => !string.IsNullOrEmpty(BaseWidth);
 
@@ -122,7 +120,11 @@
 
   protected override Task OnInitializedAsync() => InitComponent();
 
-  public void Dispose() => BrowserService.OnResize -= WindowSizeHasChanged;
+  public void Dispose()
+  {
+    BrowserService.OnResize -= WindowSizeHasChanged;
+    GC.SuppressFinalize(this);
+  }
 
   private async Task InitComponent()
   {
@@ -141,13 +143,13 @@
 
   private async Task SetNumberOfColumns()
   {
-    var windowDimension = await Service.WindowDimension();
+    var windowDimension = await Browser.WindowDimension();
     Cols = MediaQuery.NumberOfColumnsFor(windowDimension.Width) ?? Cols;
   }
 
   private async Task SetCalculatedHeight()
   {
-    var elementDimension = await Service.DimensionFrom(ElementRef);
+    var elementDimension = await Browser.DimensionFrom(ElementRef);
 
     CalculatedHeight = HasHeight ? Height :
       HasRatio ? HeightFrom(elementDimension.Width) :
