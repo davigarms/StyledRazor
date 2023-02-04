@@ -18,6 +18,7 @@ public partial class StyledBase : ComponentBase
   private string _element;
   private string _css;
 
+  protected ElementReference ElementRef { get; set; }
   protected virtual string Style { get; set; }
   protected virtual Styled Base { get; } = new();
 
@@ -55,6 +56,7 @@ public partial class StyledBase : ComponentBase
     BuildComponentId(builder);
     BuildComponentStyle(builder);
     BuildComponentParams(builder);
+    BuildElementReference(builder);
     BuildComponentContent(builder);
     BuildComponentCss(builder);
     builder.CloseElement();
@@ -72,6 +74,8 @@ public partial class StyledBase : ComponentBase
       builder.AddAttribute(0, key, value);
   }
 
+  private void BuildElementReference(RenderTreeBuilder builder) => builder.AddElementReferenceCapture(7, value => ElementRef = value);
+  
   private void BuildComponentContent(RenderTreeBuilder builder)
   {
     if (ChildContent == null) return;
