@@ -52,7 +52,7 @@ public class Grid : StyledBase, IDisposable
   public ResponsiveCols ResponsiveCols { get; set; }
 
   [Inject]
-  private BrowserService Browser { get; set; }
+  private BrowserService BrowserService { get; set; }
 
   protected override string Style => $@"
     --height: {CalculatedHeight};
@@ -118,20 +118,23 @@ public class Grid : StyledBase, IDisposable
 
   private bool HasRatio => Ratio != 0;
 
-  protected override Task OnInitializedAsync() => InitComponent();
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      MediaQuery = new MediaQueryService(GetResponsiveColumns());
+      BrowserService.OnResize += WindowSizeHasChanged;
+      await Task.Delay(1);
+      await WindowSizeHasChanged();
+      
+      StateHasChanged();
+    }
+  }
 
   public void Dispose()
   {
     BrowserService.OnResize -= WindowSizeHasChanged;
     GC.SuppressFinalize(this);
-  }
-
-  private async Task InitComponent()
-  {
-    MediaQuery = new MediaQueryService(GetResponsiveColumns());
-    BrowserService.OnResize += WindowSizeHasChanged;
-    await Task.Delay(1);
-    await WindowSizeHasChanged();
   }
 
   private async Task WindowSizeHasChanged()
@@ -143,13 +146,13 @@ public class Grid : StyledBase, IDisposable
 
   private async Task SetNumberOfColumns()
   {
-    var windowDimension = await Browser.WindowDimension();
+    var windowDimension = await BrowserService.WindowDimension();
     Cols = MediaQuery.NumberOfColumnsFor(windowDimension.Width) ?? Cols;
   }
 
   private async Task SetCalculatedHeight()
   {
-    var elementDimension = await Browser.DimensionFrom(ElementRef);
+    var elementDimension = await BrowserService.DimensionFrom(ElementRef);
 
     CalculatedHeight = HasHeight ? Height :
       HasRatio ? HeightFrom(elementDimension.Width) :
