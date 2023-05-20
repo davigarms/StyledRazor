@@ -153,10 +153,10 @@ public class Grid : StyledBase, IDisposable
   private async Task SetCalculatedHeight()
   {
     var elementDimension = await BrowserService.DimensionFrom(ElementRef);
-
-    CalculatedHeight = HasHeight ? Height :
-      HasRatio ? HeightFrom(elementDimension.Width) :
-        "initial";
+    CalculatedHeight = Cols == 1 && string.IsNullOrEmpty(BaseWidth) ? "initial" : 
+      HasHeight ? Height :
+        HasRatio ? HeightFrom(elementDimension.Width) :
+          "initial";
   }
 
   private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - Utils.RemToInt(Gutter)) / Ratio}px";
