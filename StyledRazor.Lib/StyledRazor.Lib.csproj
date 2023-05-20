@@ -2,8 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <LangVersion>10</LangVersion>
-        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -12,12 +12,6 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.17" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <AdditionalFiles Include="Components\Layout\Cover.razor" />
-        <AdditionalFiles Include="Components\Layout\Split.razor" />
-        <AdditionalFiles Include="Components\Layout\Stack.razor" />
     </ItemGroup>
 
     <ItemGroup>
