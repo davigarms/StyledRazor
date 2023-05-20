@@ -13,7 +13,6 @@ public partial class StyledBase : ComponentBase
 
   [Parameter] public RenderFragment ChildContent { get; set; }
 
-  private Styled _styled;
   private string _componentId;
   private string _element;
   private string _css;
@@ -21,18 +20,7 @@ public partial class StyledBase : ComponentBase
   protected ElementReference ElementRef { get; set; }
   protected virtual string Style { get; set; }
   protected virtual Styled Base { get; } = new();
-
-  protected StyledBase()
-  {
-    Init();
-  }
-
-  private void Init()
-  {
-    Base.SetStyle(Style);
-    _styled = Base;
-  }
-
+  
   private void ComponentStyleFrom(Styled styled)
   {
     _element = styled.Element;
@@ -41,7 +29,11 @@ public partial class StyledBase : ComponentBase
     Style = styled.Style;
   }
 
-  protected override void OnInitialized() => ComponentStyleFrom(_styled);
+  protected override void OnInitialized()
+  {
+    Base.SetStyle(Style);
+    ComponentStyleFrom(Base);
+  }
 
   protected override void OnParametersSet()
   {
