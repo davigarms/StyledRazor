@@ -23,7 +23,7 @@
 
   private string Padding => NoPadding ? Tokens.Zero : Space;
 
-  protected override Styled Base => Div(@"
+  protected override Styled Base => Create.Div(@"
     {
       display: flex;
       flex-direction: column;

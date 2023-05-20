@@ -10,7 +10,7 @@ public class Container : StyledBase
   [Parameter] public bool Fluid { get; set; }
   [Parameter] public string Width { get; set; } = "initial";
 
-  protected override Styled Base => Div(@"
+  protected override Styled Base => Create.Div(@"
 		{
 			margin-left: auto;
 			margin-right: auto;

@@ -10,7 +10,7 @@
 @code {
   [Parameter] public string Gutter { get; set; } = Tokens.SpacingL;
 
-  protected override Styled Base => Div(@"
+  protected override Styled Base => Create.Div(@"
 		{
 			display: flex;
 			flex-direction: column;

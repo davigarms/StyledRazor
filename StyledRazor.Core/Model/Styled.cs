@@ -27,7 +27,7 @@ public class Styled
   {
   }
 
-  public Styled(string element, string baseCss, ComponentBase component) :
+  public Styled(string element, string baseCss, IComponent component) :
     this(element, baseCss, component.GetType().Name)
   {
   }

@@ -1,11 +1,11 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using StyledRazor.Core.Model;
+using System.Collections.Generic;
 
 namespace StyledRazor.Core.Components;
 
-public partial class StyledBase : ComponentBase
+public class StyledBase : ComponentBase
 {
   [Parameter] public Styled Styled { get; set; }
 
@@ -20,7 +20,13 @@ public partial class StyledBase : ComponentBase
   protected ElementReference ElementRef { get; set; }
   protected virtual string Style { get; set; }
   protected virtual Styled Base { get; } = new();
-  
+  protected readonly StyledFactory Create;
+
+  public StyledBase()
+  {
+    Create = new StyledFactory(this);
+  }
+
   private void ComponentStyleFrom(Styled styled)
   {
     _element = styled.Element;

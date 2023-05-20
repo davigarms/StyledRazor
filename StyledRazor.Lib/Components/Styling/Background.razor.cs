@@ -8,7 +8,7 @@ public class Background : StyledBase
 {
   [Parameter] public string Color { get; set; }
   
-  protected override Styled Base => Div(@"
+  protected override Styled Base => Create.Div(@"
     {
       background: var(--background-color);
       height: inherit; 

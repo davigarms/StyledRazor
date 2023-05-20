@@ -61,7 +61,7 @@ public class Grid : StyledBase, IDisposable
     --gutter: {Gutter};
   ";
 
-  protected override Styled Base => Div(@"
+  protected override Styled Base => Create.Div(@"
     {
       list-style: none;
 	    display: flex;
