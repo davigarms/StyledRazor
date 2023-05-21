@@ -10,30 +10,17 @@ public class Styled
   public string Name { get; }
   public string Element { get; }
   public string Css { get; }
-  public string Style { get; private set; }
 
-  public Styled(string element = "div", string baseCss = "", string name = "")
+  public Styled(string element, string baseCss, IComponent component)
   {
-    Name = name;
+    Name = component.GetType().Name;
     Id = IdFrom(Name);
     Element = element;
     
     var baseElementId = ElementIdFrom(Element, Id);
     Css = Compressed(baseCss, baseElementId);
   }
-
-  public Styled(string element, string baseCss, MemberInfo member) :
-    this(element, baseCss, member.Name)
-  {
-  }
-
-  public Styled(string element, string baseCss, IComponent component) :
-    this(element, baseCss, component.GetType().Name)
-  {
-  }
-
-  public void SetStyle(string style) => Style = style;
-
+  
   private static string ElementIdFrom(string baseElement, string componentId) => $"{baseElement}[{componentId}]";
 
   private static string IdFrom(string name) => 

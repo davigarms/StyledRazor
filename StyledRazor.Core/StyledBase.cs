@@ -16,10 +16,10 @@ public class StyledBase : ComponentBase
   private string _element;
   private string _css;
 
-  protected ElementReference ElementRef { get; private set; }
-  protected virtual string Style { get; set; }
   protected readonly StyledFactory Create;
-  public virtual Styled Base { get; } = new ();
+  protected ElementReference ElementRef { get; private set; }
+  protected virtual string Style { get; }
+  public virtual Styled Base { get; }
 
   public StyledBase()
   {
@@ -31,12 +31,12 @@ public class StyledBase : ComponentBase
     _element = styled.Element;
     _css = styled.Css;
     _componentId = styled.Id;
-    Style = styled.Style;
   }
 
   protected override void OnInitialized()
   {
-    Base.SetStyle(Style);
+    if (Base == null) return;
+    
     ComponentStyleFrom(Base);
   }
 
@@ -46,7 +46,7 @@ public class StyledBase : ComponentBase
 
     ComponentStyleFrom(Styled);
   }
-  
+
   protected override void BuildRenderTree(RenderTreeBuilder builder)
   {
     builder.OpenElement(0, _element);
@@ -72,7 +72,7 @@ public class StyledBase : ComponentBase
   }
 
   private void BuildElementReference(RenderTreeBuilder builder) => builder.AddElementReferenceCapture(7, value => ElementRef = value);
-  
+
   private void BuildComponentContent(RenderTreeBuilder builder)
   {
     if (ChildContent == null) return;
