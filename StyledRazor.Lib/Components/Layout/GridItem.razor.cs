@@ -5,5 +5,5 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class GridItem : StyledBase
 {
-  protected override Styled Base => Create.Li();
+  public override Styled Base => Create.Li();
 }

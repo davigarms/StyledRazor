@@ -6,7 +6,7 @@ namespace StyledRazor.Core;
 
 public class StyledBase : ComponentBase
 {
-  [Parameter] public virtual Styled Styled { get; set; }
+  [Parameter] public Styled Styled { get; set; }
 
   [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> Params { get; set; }
 
@@ -18,8 +18,8 @@ public class StyledBase : ComponentBase
 
   protected ElementReference ElementRef { get; private set; }
   protected virtual string Style { get; set; }
-  protected virtual Styled Base { get; } = new ();
   protected readonly StyledFactory Create;
+  public virtual Styled Base { get; } = new ();
 
   public StyledBase()
   {

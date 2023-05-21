@@ -1,5 +1,6 @@
 @page "/"
 @using StyledRazor.Lib.Styles
+@using StyledRazor.Core
 
 <Stack>
   <Box>First</Box>
@@ -7,7 +8,7 @@
   <Stack Gutter="@Tokens.SpacingM">
     <Grid BaseWidth="200px">
       <Button>Default</Button>
-      <Button Styled="@DynamicButton" @onclick="@Click">
+      <Button Styled="@DynamicButton.Base" @onclick="@Click">
         Click me
       </Button>
     </Grid>
@@ -28,7 +29,7 @@
         var content = "Item " + i;
         <GridItem>
           <Background Color="lightgrey">
-            <Cover>
+            <Cover Space="@Tokens.SpacingS">
               <Container Centered>
                 @content  
               </Container>
@@ -41,8 +42,8 @@
       }
     </Grid>
       
-    <Grid Gutter="@Tokens.SpacingS" BaseWidth="@Tokens.SpacingXxl">
-      @for (var i = 5; i < 8; i++ )
+    <Grid Gutter="@Tokens.SpacingS" BaseWidth="@Tokens.SpacingXxl" Height="10rem">
+      @for (var i = 5; i < 8; i++)
       {
         var content = "Item " + i;
         var item = i;
@@ -50,7 +51,7 @@
           <Background Color="lightgrey">
             <Cover>
               <Container Centered>
-                @content  
+                @content
               </Container>
               <Cluster>
                 Cluster
@@ -65,10 +66,10 @@
 
 @code
 {
-  Styled DynamicButton { get; set; } = Button.GreyButton;
+  Button DynamicButton { get; set; } = new GreyButton();
 
   private void Click() => DynamicButton =
-    DynamicButton.Name == "GreyButton"
-      ? Button.AlertButton
-      : Button.GreyButton;
+    DynamicButton is GreyButton
+      ? new AlertButton()
+      : new GreyButton();
 }

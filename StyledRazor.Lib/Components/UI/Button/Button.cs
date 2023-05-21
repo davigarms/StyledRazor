@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Components;
-using StyledRazor.Core.Model;
+using StyledRazor.Core;
 using StyledRazor.Lib.Styles;
 
 namespace StyledRazor.Lib.Components.UI.Button;
@@ -10,7 +9,10 @@ public class Button : StyledBase
 	[Parameter] public string Margin { get; set; } = "0";
 	[Parameter] public string Padding { get; set; }
 
-	protected override Styled Base => DefaultButton;
+	public override Styled Base => Create.A($@"
+	{{
+    {ButtonDefinition}                       
+  }}");
 	
 	protected override string Style => $@"
 	  --margin: {(string.IsNullOrEmpty(Margin) ? ButtonMargin : Margin)};
@@ -21,7 +23,7 @@ public class Button : StyledBase
 	
 	private const string ButtonPadding = $"{Tokens.SpacingS}";
 
-	private const string ButtonDefinition = $@"
+	protected const string ButtonDefinition = $@"
 		display: inline-block;
 		border-radius: {Tokens.SpacingXs};
 		background: transparent;
@@ -32,29 +34,24 @@ public class Button : StyledBase
 		margin: var(--margin);
     padding: var(--padding);    
 	";
+}
 
-	public static readonly Styled DefaultButton = new("A", 
-	$@"
-		{{
-	    {ButtonDefinition}                       
-    }}
-	", "Button");
+public class GreyButton : Button
+{
+	public override Styled Base => Create.A($@"
+	{{
+		{ButtonDefinition}
+		background: grey;
+		color: white;
+	}}");
+}
 
-  public static readonly Styled GreyButton = new("A",
-  $@"
-		{{
-			{ButtonDefinition}
-			background: grey;
-			color: white;
-		}}
-	", "GreyButton");
-
-  public static readonly Styled AlertButton = new("A", 
-  $@"
-		{{
-			{ButtonDefinition}
-			background: red;
-			color: white;
-		}}°
-	", "AlertButton");
+public class AlertButton : Button
+{
+	public override Styled Base => Create.A($@"
+	{{
+		{ButtonDefinition}
+		background: red;
+		color: white;
+	}}");
 }

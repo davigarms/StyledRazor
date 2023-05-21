@@ -10,8 +10,8 @@
   [Parameter] public bool StretchAll { get; set; }
 
   [Parameter] public int StretchIndex { get; set; }
-  
-  protected override Styled Base => Create.Div($@"
+
+  public override Styled Base => Create.Div($@"
   {{
     display: flex;
     flex-wrap: nowrap;

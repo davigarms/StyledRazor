@@ -21,7 +21,7 @@ public class Cluster : StyledBase
 		WrapReverse ? Tokens.FlexWrapReverse :
 		Tokens.FlexNoWrap;
 
-	protected override Styled Base => Create.Div(@"
+	public override Styled Base => Create.Div(@"
 	{
     display: flex;
     gap: var(--gap);
