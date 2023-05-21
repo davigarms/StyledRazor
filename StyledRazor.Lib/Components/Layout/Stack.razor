@@ -1,5 +1,6 @@
 ﻿@using StyledRazor.Lib.Styles
-@inherits StyledBase
+@using StyledRazor.Core
+@inherits StyledRazor.Core.StyledBase
 
 <Layout Styled="@Base"
         style=@($@"
@@ -11,17 +12,16 @@
   [Parameter] public string Gutter { get; set; } = Tokens.SpacingL;
 
   protected override Styled Base => Create.Div(@"
-		{
-			display: flex;
-			flex-direction: column;
-			justify-content: flex-start;
-			height: inherit;
-			position: relative;
-		}
+	{
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		height: inherit;
+		position: relative;
+	}
 
-		> * + * {
-			margin-top: var(--gutter);
-			overflow: auto !important;
-		} 
-	");
+	> * + * {
+		margin-top: var(--gutter);
+		overflow: auto !important;
+	}");
 }

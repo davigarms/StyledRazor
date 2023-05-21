@@ -1,7 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Components;
-using StyledRazor.Core.Model;
+using StyledRazor.Core;
 using StyledRazor.Lib.Styles;
 
 namespace StyledRazor.Lib.Components.Layout;
@@ -27,16 +26,15 @@ public class Box : StyledBase
 		HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero};" : $"--padding: {Padding};";
 	
 	protected override Styled Base => Create.Div(@"
-		{
-			height: var(--height);
-			width: var(--width);
-			padding-left: var(--left);
-			padding-top: var(--top);
-			padding-right: var(--right);	
-			padding-bottom: var(--bottom);
-			padding: var(--padding);
-		}
-	");
+	{
+		height: var(--height);
+		width: var(--width);
+		padding-left: var(--left);
+		padding-top: var(--top);
+		padding-right: var(--right);	
+		padding-bottom: var(--bottom);
+		padding: var(--padding);
+	}");
 
   protected override string Style => $@"
 		{ShorthandPadding}

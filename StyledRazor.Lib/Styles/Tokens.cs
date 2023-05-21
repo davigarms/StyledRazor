@@ -1,4 +1,4 @@
-using StyledRazor.Core.Collections;
+using StyledRazor.Core.MediaQuery;
 
 namespace StyledRazor.Lib.Styles;
 

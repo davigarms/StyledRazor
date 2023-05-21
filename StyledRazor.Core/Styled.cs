@@ -1,12 +1,12 @@
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Reflection;
-using Microsoft.AspNetCore.Components;
 
-namespace StyledRazor.Core.Model;
+namespace StyledRazor.Core;
 
 public class Styled
 {
-  public readonly string Id;
+  public string Id { get; }
   public string Name { get; }
   public string Element { get; }
   public string Css { get; }

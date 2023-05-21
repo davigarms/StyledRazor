@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StyledRazor.Core.Services;
+using StyledRazor.Core.Browser;
 
 namespace StyledRazor.Web
 {

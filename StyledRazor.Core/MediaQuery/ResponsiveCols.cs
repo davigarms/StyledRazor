@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace StyledRazor.Core.Collections;
+namespace StyledRazor.Core.MediaQuery;
 
 public class ResponsiveCols : Dictionary<BreakPoint, int> { }
 

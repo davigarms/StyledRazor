@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using StyledRazor.Core.Collections;
 
-namespace StyledRazor.Core.Services;
+namespace StyledRazor.Core.MediaQuery;
 
 public class MediaQueryService
 {

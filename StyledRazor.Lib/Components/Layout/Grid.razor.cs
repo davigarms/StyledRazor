@@ -1,9 +1,7 @@
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Collections;
-using StyledRazor.Core.Components;
-using StyledRazor.Core.Model;
-using StyledRazor.Core.Services;
-using StyledRazor.Core.Utils;
+using StyledRazor.Core;
+using StyledRazor.Core.Browser;
+using StyledRazor.Core.MediaQuery;
 using StyledRazor.Lib.Styles;
 using System.Threading.Tasks;
 using System;
@@ -62,45 +60,44 @@ public class Grid : StyledBase, IDisposable
   ";
 
   protected override Styled Base => Create.Div(@"
-    {
-      list-style: none;
-	    display: flex;
-      flex-wrap: wrap;
-      padding: 0;
-      margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
-      width: calc(100% + var(--gutter));
-      position: relative;
-    }
+  {
+    list-style: none;
+	  display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
+    width: calc(100% + var(--gutter));
+    position: relative;
+  }
 
-    > * {
-      width: calc(var(--width) - 1 * var(--gutter)) !important;
-      margin: var(--gutter) 0 0 var(--gutter) !important;
-      height: var(--height) !important;
-      max-height: var(--height);
-      overflow: hidden;
-      flex-grow: var(--flex-grow);
-    }
-      
-    > [double] {
-      flex-basis: calc(2 * (var(--width)) - 1 * var(--gutter)) !important
-    }
+  > * {
+    width: calc(var(--width) - 1 * var(--gutter)) !important;
+    margin: var(--gutter) 0 0 var(--gutter) !important;
+    height: var(--height) !important;
+    max-height: var(--height);
+    overflow: hidden;
+    flex-grow: var(--flex-grow);
+  }
+    
+  > [double] {
+    flex-basis: calc(2 * (var(--width)) - 1 * var(--gutter)) !important
+  }
 
-    > [triple] {
-      flex-basis: calc(3 * (var(--width)) - 1 * var(--gutter)) !important
-    }
+  > [triple] {
+    flex-basis: calc(3 * (var(--width)) - 1 * var(--gutter)) !important
+  }
 
-    > [half] {
-      flex-basis: calc(50% - 1 * var(--gutter)) !important
-    }
+  > [half] {
+    flex-basis: calc(50% - 1 * var(--gutter)) !important
+  }
 
-    > [third] {
-      flex-basis: calc(33% - 1 * var(--gutter)) !important
-    }
+  > [third] {
+    flex-basis: calc(33% - 1 * var(--gutter)) !important
+  }
 
-    > [full] {
-      flex-basis: 100% !important
-    }
-  ");
+  > [full] {
+    flex-basis: 100% !important
+  }");
 
   private MediaQueryService MediaQuery { get; set; }
 

@@ -1,6 +1,6 @@
-﻿@using StyledRazor.Core.Model
-@using StyledRazor.Lib.Styles
-@inherits StyledBase
+﻿@using StyledRazor.Lib.Styles
+@using StyledRazor.Core
+@inherits StyledRazor.Core.StyledBase
 
 <Layout Styled="@Base"
         style=@($@"
@@ -24,40 +24,39 @@
   private string Padding => NoPadding ? Tokens.Zero : Space;
 
   protected override Styled Base => Create.Div(@"
-    {
-      display: flex;
-      flex-direction: column;
-      min-height: var(--min-height);
-      padding: var(--padding);
-    }
+  {
+    display: flex;
+    flex-direction: column;
+    min-height: var(--min-height);
+    padding: var(--padding);
+  }
 
-    > * {
-      margin-top: var(--space);
-      margin-bottom: var(--space);
-    }
+  > * {
+    margin-top: var(--space);
+    margin-bottom: var(--space);
+  }
 
-    > : first-child {
-      margin-top: 0;
-    }
+  > : first-child {
+    margin-top: 0;
+  }
 
-    > :nth-last-child(2) {
-      margin-bottom: 0;
-    } 
+  > :nth-last-child(2) {
+    margin-bottom: 0;
+  } 
 
-    > [centered] {
-      margin-top: auto !important;
-      margin-bottom: auto !important;
-    }
+  > [centered] {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
 
-    > [top] {
-      margin-top: 0 !important;
-      margin-bottom: auto !important;
-    }
+  > [top] {
+    margin-top: 0 !important;
+    margin-bottom: auto !important;
+  }
 
-    > [bottom] {
-      margin-top: auto !important;
-      margin-bottom: 0 !important;
-    }
-  ");
+  > [bottom] {
+    margin-top: auto !important;
+    margin-bottom: 0 !important;
+  }");
 
 }

@@ -1,13 +1,12 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using StyledRazor.Core.Model;
 using System.Collections.Generic;
 
-namespace StyledRazor.Core.Components;
+namespace StyledRazor.Core;
 
 public class StyledBase : ComponentBase
 {
-  [Parameter] public Styled Styled { get; set; }
+  [Parameter] public virtual Styled Styled { get; set; }
 
   [Parameter(CaptureUnmatchedValues = true)] public IDictionary<string, object> Params { get; set; }
 
@@ -17,9 +16,9 @@ public class StyledBase : ComponentBase
   private string _element;
   private string _css;
 
-  protected ElementReference ElementRef { get; set; }
+  protected ElementReference ElementRef { get; private set; }
   protected virtual string Style { get; set; }
-  protected virtual Styled Base { get; } = new();
+  protected virtual Styled Base { get; } = new ();
   protected readonly StyledFactory Create;
 
   public StyledBase()

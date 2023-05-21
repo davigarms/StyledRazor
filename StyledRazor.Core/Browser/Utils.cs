@@ -1,4 +1,4 @@
-namespace StyledRazor.Core.Utils;
+namespace StyledRazor.Core.Browser;
 
 public static class Utils
 {

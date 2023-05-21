@@ -1,10 +1,9 @@
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using StyledRazor.Core.Model.Browser;
+using System;
+using System.Threading.Tasks;
 
-namespace StyledRazor.Core.Services;
+namespace StyledRazor.Core.Browser;
 
 public class BrowserService
 {

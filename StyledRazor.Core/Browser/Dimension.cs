@@ -1,4 +1,4 @@
-namespace StyledRazor.Core.Model.Browser;
+namespace StyledRazor.Core.Browser;
 
 public class Dimension
 {
