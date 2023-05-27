@@ -31,26 +31,5 @@
 </div>
 
 <script src="_framework/blazor.server.js"></script>
-<script type="text/javascript">
-  window.windowDimension = function() {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight
-    };
-  }
-  
-  window.dimensionFrom = function(component) {
-    return {
-      width: component.offsetWidth,
-      height: component.offsetHeight
-    };
-  }
-  
-  window.browserResize = function () {
-    DotNet.invokeMethodAsync("StyledRazor.Core", 'OnBrowserResize').then(data => data);
-  }
-
-  window.addEventListener("resize",  browserResize);
-</script>
 </body>
 </html>
