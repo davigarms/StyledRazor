@@ -1,18 +1,14 @@
 @page "/"
-@using StyledRazor.Lib.Styles
-@using StyledRazor.Core
 
 <Stack>
   <Box>First</Box>
   
-  <Stack Gutter="@Tokens.SpacingM">
-    <Grid BaseWidth="200px">
-      <Button>Default</Button>
-      <Button Styled="@DynamicButton.Base" @onclick="@Click">
-        Click me
-      </Button>
-    </Grid>
-  </Stack>
+  <Grid BaseWidth="200px">
+    <Button>Default</Button>
+    <Button Styled="@DynamicButton.Base" @onclick="@Click">
+      Click me
+    </Button>
+  </Grid>
   
   <Box Horizontal="@Tokens.SpacingM" Height="@Tokens.SpacingXl">
     <Cluster Space="@Tokens.SpacingXl" NoPadding Stretch>
@@ -66,7 +62,7 @@
 
 @code
 {
-  Button DynamicButton { get; set; } = new GreyButton();
+  private Button DynamicButton { get; set; } = new GreyButton();
 
   private void Click() => DynamicButton =
     DynamicButton is GreyButton

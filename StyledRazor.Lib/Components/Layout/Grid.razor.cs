@@ -114,12 +114,15 @@ public class Grid : StyledBase, IDisposable
   private bool HasHeight => !string.IsNullOrEmpty(Height);
 
   private bool HasRatio => Ratio != 0;
+  
+  [Inject]
+  private MediaQueryService MediaQueryService { get; set; }
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
     if (firstRender)
     {
-      MediaQuery = new MediaQueryService(GetResponsiveColumns());
+      MediaQueryService.SetColumns(GetResponsiveColumns());
       BrowserService.OnResize += WindowSizeHasChanged;
       await Task.Delay(1);
       await WindowSizeHasChanged();
@@ -144,7 +147,7 @@ public class Grid : StyledBase, IDisposable
   private async Task SetNumberOfColumns()
   {
     var windowDimension = await BrowserService.WindowDimension();
-    Cols = MediaQuery.NumberOfColumnsFor(windowDimension.Width) ?? Cols;
+    Cols = MediaQueryService.NumberOfColumnsFor(windowDimension.Width) ?? Cols;
   }
 
   private async Task SetCalculatedHeight()

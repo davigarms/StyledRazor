@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StyledRazor.Core.Browser;
+using StyledRazor.Core.MediaQuery;
 
 namespace StyledRazor.Web
 {
@@ -24,6 +24,7 @@ namespace StyledRazor.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<BrowserService>();
+            services.AddScoped<MediaQueryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

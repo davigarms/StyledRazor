@@ -5,9 +5,9 @@ namespace StyledRazor.Core.MediaQuery;
 
 public class MediaQueryService
 {
-  private readonly List<KeyValuePair<BreakPoint, int>> _orderedColumns;
+  private List<KeyValuePair<BreakPoint, int>> _orderedColumns;
 
-  public MediaQueryService(ResponsiveCols responsiveColumns)
+  public void SetColumns (ResponsiveCols responsiveColumns)
   {
     if (responsiveColumns == null) return;
     _orderedColumns = responsiveColumns.OrderBy(col => (int) col.Key).ToList();
