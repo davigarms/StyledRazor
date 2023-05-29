@@ -1,63 +1,74 @@
 @page "/"
 
-<Stack>
+<Stack Gutter="@Tokens.SpacingXs">
   <Box>First</Box>
-  
-  <Grid BaseWidth="200px">
-    <Button>Default</Button>
-    <Button Styled="@DynamicButton.Base" @onclick="@Click">
-      Click me
-    </Button>
-  </Grid>
-  
+
+  <Container Fluid>
+    <Grid BaseWidth="200px">
+        <Button>Default</Button>
+        <Button Styled="@DynamicButton.Base" @onclick="@Click">
+          Click me
+        </Button>
+    </Grid>
+  </Container>
+
   <Box Horizontal="@Tokens.SpacingM" Height="@Tokens.SpacingXl">
     <Cluster Space="@Tokens.SpacingXl" NoPadding Stretch>
       <Box>Cluster</Box>
       <Box Start>Start</Box>
       <Box End>End</Box>
     </Cluster>
-  </Box>  
-  
-  <Stack Gutter="@Tokens.SpacingS">
-    <Grid Gutter="@Tokens.SpacingS" ColsLg="4" ColsMd="2" ColsSm="1" Ratio="1">
-      @for (var i = 1; i < 5; i++ )
-      {
-        var content = "Item " + i;
-        <GridItem>
-          <Background Color="lightgrey">
-            <Cover Space="@Tokens.SpacingS">
-              <Container Centered>
-                @content  
-              </Container>
-              <Cluster>
-                Cluster
-              </Cluster>
-            </Cover>
-          </Background>
-        </GridItem>
-      }
-    </Grid>
+  </Box>
+
+  <Container Fluid>
+    <Stack Gutter="@Tokens.Zero">
       
-    <Grid Gutter="@Tokens.SpacingS" BaseWidth="@Tokens.SpacingXxl" Height="10rem">
-      @for (var i = 5; i < 8; i++)
-      {
-        var content = "Item " + i;
-        var item = i;
-        <GridItem Double="@(item == 6)" Full="@(item == 7)">
-          <Background Color="lightgrey">
-            <Cover>
-              <Container Centered>
-                @content
-              </Container>
-              <Cluster>
-                Cluster
-              </Cluster>
-            </Cover>
-          </Background>
-        </GridItem>
-      }
-    </Grid>
-  </Stack>
+      <Container Fluid>
+        <Grid Gutter="@Tokens.SpacingS" ColsLg="4" ColsMd="2" ColsSm="1" Ratio="1">
+          @for (var i = 1; i < 5; i++)
+          {
+            var content = "Item " + i;
+            <GridItem>
+              <Background Color="lightgrey">
+                <Cover Space="@Tokens.SpacingS">
+                  <Container Centered>
+                    @content
+                  </Container>
+                  <Cluster>
+                    Cluster
+                  </Cluster>
+                </Cover>
+              </Background>
+            </GridItem>
+          }
+        </Grid>
+      </Container>
+
+      <Container Fluid>
+        <Grid Gutter="@Tokens.SpacingS" BaseWidth="@Tokens.SpacingXxl" Height="10rem">
+          @for (var i = 5; i < 8; i++)
+          {
+            var content = "Item " + i;
+            var item = i;
+            <GridItem Double="@(item == 6)" Full="@(item == 7)">
+              <Background Color="lightgrey">
+                <Cover>
+                  <Container Centered>
+                    @content
+                  </Container>
+                  <Cluster>
+                    Cluster
+                  </Cluster>
+                </Cover>
+              </Background>
+            </GridItem>
+          }
+        </Grid>
+      </Container>
+
+    </Stack>
+  </Container>
+  
 </Stack>
 
 @code
