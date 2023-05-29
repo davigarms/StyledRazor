@@ -65,7 +65,7 @@ public class Grid : StyledBase, IDisposable
 	  display: flex;
     flex-wrap: wrap;
     padding: 0;
-    margin: calc(-1 * var(--gutter)) 0 0 calc(-1 * var(--gutter));
+    margin-left: calc(-1 * var(--gutter));
     width: calc(100% + var(--gutter));
     position: relative;
   }
