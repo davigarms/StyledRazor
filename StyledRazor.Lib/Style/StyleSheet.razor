@@ -1,0 +1,23 @@
+@implements IDisposable
+
+@StyleElement
+
+@code {
+  private RenderFragment StyleElement { get; set; }
+
+  private static StyleSheetService StyleSheetService => StyleSheetService.GetInstance();
+  
+  protected override void OnInitialized() => StyleSheetService.OnUpdate += UpdateStyleSheet;
+
+  private async Task UpdateStyleSheet()
+  {
+    StyleElement = StyleSheetService.CreateStyleSheet();
+    await InvokeAsync(StateHasChanged);
+  }
+
+  public void Dispose()
+  {
+    StyleSheetService.Reset();
+    StyleSheetService.OnUpdate -= UpdateStyleSheet;
+  }
+}

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using StyledRazor.Core.StyleSheet;
 using System;
 using System.Collections.Generic;
 
@@ -15,6 +16,8 @@ public abstract class StyledBase : ComponentBase
   
   [Parameter] 
   public RenderFragment ChildContent { get; set; }
+
+  private static StyleSheetService StyleSheetService => StyleSheetService.GetInstance();
 
   protected readonly StyledFactory Create;
   
@@ -37,13 +40,21 @@ public abstract class StyledBase : ComponentBase
     if (Base == null) 
       throw new NullReferenceException
         ($"Base field must be overriden on <{GetType().Name}> to set the component CSS");
+
+    StyleSheetService.Add(Base);
   }
 
   protected override void OnParametersSet()
   {
     if (Styled == null) return;
 
-    Base.UpdateStyle(Styled);
+    UpdateStyle(Styled);
+  }
+  
+  private void UpdateStyle(Styled styled)
+  {
+    StyleSheetService.Update(Base.Id, styled);
+    Base.UpdateStyle(styled);
   }
 
   protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -54,7 +65,6 @@ public abstract class StyledBase : ComponentBase
     BuildComponentParams(builder);
     BuildElementReference(builder);
     BuildComponentContent(builder);
-    BuildComponentCss(builder);
     builder.CloseElement();
   }
 
@@ -90,14 +100,5 @@ public abstract class StyledBase : ComponentBase
     if (ChildContent == null) return;
 
     builder.AddContent(0, ChildContent);
-  }
-
-  private void BuildComponentCss(RenderTreeBuilder builder)
-  {
-    if (Base.Css == null) return;
-
-    builder.OpenElement(0, "style");
-    builder.AddContent(0, Base.Css);
-    builder.CloseElement();
   }
 }
