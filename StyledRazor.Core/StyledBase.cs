@@ -22,12 +22,19 @@ public abstract class StyledBase : ComponentBase
   
   protected virtual string Style => "";
 
-  public virtual Styled Base => Create.Div();
+  public virtual Styled Base => null;
   
 
   protected StyledBase()
   {
     Create = new StyledFactory(this);
+  }
+  
+  protected override void OnInitialized()
+  {
+    if (Base == null) 
+      throw new NullReferenceException
+        ($"Base field must be overriden on <{GetType().Name}> to set the component CSS");
   }
 
   protected override void OnParametersSet()
