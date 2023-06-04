@@ -5,24 +5,32 @@ namespace StyledRazor.Core;
 
 public class Styled
 {
-  public string Id { get; }
-  public string Name { get; }
-  public string Element { get; }
-  public string Css { get; }
+  public string Id { get; private set; }
 
-  public Styled(string element, string baseCss, IComponent component)
+  public string Element { get; private set; }
+
+  public string Css { get; private set; }
+
+
+  internal Styled(IComponent component, string element, string baseCss)
   {
-    Name = component.GetType().Name;
-    Id = IdFrom(Name);
+    Id = IdFrom(component.GetType().Name);
     Element = element;
-    
+
     var baseElementId = ElementIdFrom(Element, Id);
     Css = Compressed(baseCss, baseElementId);
   }
-  
+
+  public void UpdateStyle(Styled styled)
+  {
+    Id = styled.Id;
+    Css = styled.Css;
+    Element = styled.Element;
+  }
+
   private static string ElementIdFrom(string baseElement, string componentId) => $"{baseElement}[{componentId}]";
 
-  private static string IdFrom(string name) => 
+  private static string IdFrom(string name) =>
     $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
 
   private static string Compressed(string css, string baseElementId)
