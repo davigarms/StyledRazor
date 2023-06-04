@@ -20,6 +20,8 @@ public abstract class StyledBase : ComponentBase
   
   protected ElementReference ElementRef { get; private set; }
   
+  protected virtual bool UseElementRef => false;
+  
   protected virtual string Style => "";
 
   public virtual Styled Base => null;
@@ -78,6 +80,8 @@ public abstract class StyledBase : ComponentBase
 
   private void BuildElementReference(RenderTreeBuilder builder)
   {
+    if (!UseElementRef) return;
+    
     builder.AddElementReferenceCapture(0, value => ElementRef = value);
   }
 

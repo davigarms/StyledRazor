@@ -52,6 +52,8 @@ public class Grid : StyledBase, IDisposable
   [Inject]
   private BrowserService BrowserService { get; set; }
 
+  protected override bool UseElementRef => true;
+
   protected override string Style => $@"
     --height: {CalculatedHeight};
     --width: {CalculatedWidth};
