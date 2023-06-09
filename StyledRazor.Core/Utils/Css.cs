@@ -22,4 +22,19 @@ public static class Css
       .Insert(css.Length, "\n")
       .Replace($"{baseElementId}\n", "");
   }
+
+  public static string Minify(string css)
+  {
+    return css
+      .Insert(0, "\n")
+      .Replace("  ", "")
+      .Replace("\r", "\n")
+      .Replace(" \n", "\n")
+      .Replace("\t", "")
+      .Replace(": ", ":")
+      .Replace(" {", "{")
+      .Replace(" }", "}")
+      .Replace(" > ", ">")
+      .Replace("\n", "");
+  }
 }

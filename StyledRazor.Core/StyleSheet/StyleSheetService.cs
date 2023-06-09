@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core.StyleSheet;
 
@@ -42,9 +43,12 @@ public sealed class StyleSheetService
     OnUpdate?.Invoke();
   }
 
-  public RenderFragment CreateStyleSheet() => builder =>
+  public RenderFragment CreateStyleSheet() => CreateStyleSheet("");
+
+  public RenderFragment CreateStyleSheet(string baseCss) => builder =>
   {
     builder.OpenElement(0, "style");
+    builder.AddContent(1, Minify(baseCss));
     builder.AddContent(1, Css);
     builder.CloseElement();
   };
