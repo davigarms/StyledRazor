@@ -49,7 +49,7 @@ public sealed class StyleSheetService
     builder.CloseElement();
   };
 
-  public void Reset() => _styledList.Clear();
+  public void Clear() => _styledList.Clear();
 
   public static StyleSheetService GetInstance()
   {
