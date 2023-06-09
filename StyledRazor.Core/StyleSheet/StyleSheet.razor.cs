@@ -1,11 +1,16 @@
-@implements IDisposable
+using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Rendering;
+using System.Threading.Tasks;
+using System;
 
-@StyleElement
+namespace StyledRazor.Core.StyleSheet;
 
-@code {
+public class StyleSheet : ComponentBase, IDisposable
+{
   private RenderFragment StyleElement { get; set; }
 
   private static StyleSheetService StyleSheetService => StyleSheetService.GetInstance();
+
   
   protected override void OnInitialized() => StyleSheetService.OnUpdate += UpdateStyleSheet;
 
@@ -15,9 +20,15 @@
     await InvokeAsync(StateHasChanged);
   }
 
+  protected override void BuildRenderTree(RenderTreeBuilder builder)
+  {
+    builder.AddContent(0, StyleElement);
+  }
+
   public void Dispose()
   {
-    StyleSheetService.Reset();
+    StyleSheetService.Clear();
     StyleSheetService.OnUpdate -= UpdateStyleSheet;
+    GC.SuppressFinalize(this);
   }
 }
