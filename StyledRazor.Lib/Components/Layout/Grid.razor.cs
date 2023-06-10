@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Components;
 using StyledRazor.Core;
 using StyledRazor.Core.Browser;
 using StyledRazor.Core.MediaQuery;
+using StyledRazor.Core.Utils;
+using static StyledRazor.Core.Utils.Browser;
 using StyledRazor.Lib.Styles;
 using System.Threading.Tasks;
 using System;
@@ -161,7 +163,7 @@ public class Grid : StyledBase, IDisposable
           "initial";
   }
 
-  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - Utils.RemToInt(Gutter)) / Ratio}px";
+  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - RemToInt(Gutter)) / Ratio}px";
 
   private ResponsiveCols GetResponsiveColumns()
   {
