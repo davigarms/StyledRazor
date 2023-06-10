@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using System;
+using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core;
 
@@ -18,7 +19,7 @@ public class Styled
     Element = element;
 
     var baseElementId = ElementIdFrom(Element, Id);
-    Css = Compressed(baseCss, baseElementId);
+    Css = Minify(baseCss, baseElementId);
   }
 
   public void UpdateStyle(Styled styled)
@@ -32,25 +33,4 @@ public class Styled
 
   private static string IdFrom(string name) =>
     $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
-
-  private static string Compressed(string css, string baseElementId)
-  {
-    css = css
-      .Insert(0, $"{baseElementId}")
-      .Insert(0, "\n")
-      .Replace("  ", "")
-      .Replace("\r", "\n")
-      .Replace(" \n", "\n")
-      .Replace("\t", "")
-      .Replace(": ", ":")
-      .Replace(" {", "{")
-      .Replace(" }", "}")
-      .Replace(" > ", ">")
-      .Replace("}", $"}}{baseElementId}")
-      .Replace("\n", "");
-
-    return css
-      .Insert(css.Length, "\n")
-      .Replace($"{baseElementId}\n", "");
-  }
 }
