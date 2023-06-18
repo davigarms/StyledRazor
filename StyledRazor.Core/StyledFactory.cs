@@ -17,8 +17,9 @@ public class StyledFactory
   private Styled Create(string baseElement, string baseCss)
   {
     if (_styled != null) return _styled;
-
+    
     _styled = new Styled(_component, baseElement, baseCss);
+
     return _styled;
   }
 

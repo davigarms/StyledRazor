@@ -1,14 +1,17 @@
 @page "/"
+@using System.Text.Json
+@using System.Text.Json.Serialization
+@using StyledRazor.Core
 
 <Stack Gutter="@Tokens.SpacingXs">
   <Box>First</Box>
 
   <Container Fluid>
     <Grid BaseWidth="200px">
-        <Button>Default</Button>
-        <Button Styled="@DynamicButton.Base" @onclick="@Click">
-          Click me
-        </Button>
+      <Button>Default</Button>
+      <Button Styled="@DynamicButton.Base" @onclick="@Click">
+        Click me
+      </Button>
     </Grid>
   </Container>
 
@@ -22,7 +25,7 @@
 
   <Container Fluid>
     <Stack Gutter="@Tokens.Zero">
-      
+
       <Container Fluid>
         <Grid Gutter="@Tokens.SpacingS" ColsLg="4" ColsMd="2" ColsSm="1" Ratio="1">
           @for (var i = 1; i < 5; i++)
@@ -68,11 +71,45 @@
 
     </Stack>
   </Container>
-  
+
 </Stack>
 
 @code
 {
+  public Index()
+  {
+    StyleDictionary style = new();
+    
+    style["div"] = new StyleProperties
+    {
+      ["margin-top"] = "10px",
+      ["margin-bottom"] = "10px",
+    };
+
+    style["> *"] = new StyleProperties();
+    style["> *"]["padding"] = "0";
+
+    var styleDictionary = new StyleDictionary
+    {
+      {
+        "div", new()
+        {
+          { "margin-top", "10px" },
+          { "margin-bottom", "10px" },
+        }
+      },
+      {
+        "> *", new()
+        {
+          { "padding", "10px" },
+        }
+      },
+    };
+    
+    Console.WriteLine(style.ToString());
+    Console.WriteLine(style.Serialize());
+  }
+
   private Button DynamicButton { get; set; } = new GreyButton();
 
   private void Click() => DynamicButton =
