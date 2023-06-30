@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
+using StyledRazor.Core.Style;
 using System;
-using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core;
 
@@ -17,9 +17,9 @@ public class Styled
 
   internal Styled(IComponent component, string element, string baseCss)
   {
-    Id = IdFrom(component.GetType().Name);
+    Id = SetId(component.GetType().Name);
     Element = element;
-    Style = new StyleDictionary().Deserialize(Minify(baseCss, ElementIdFrom(Element, Id)));
+    Style = StyleFactory.Create(baseCss, SetScope(Id, Element)); 
 
     if (Style == null) return;
     
@@ -37,8 +37,8 @@ public class Styled
 
   private void UpdateCss() => Css = Style.ToString();
 
-  private static string ElementIdFrom(string baseElement, string componentId) => $"{baseElement}[{componentId}]";
+  private static string SetScope(string componentId, string baseElement = "") => $"{baseElement}[{componentId}]";
 
-  private static string IdFrom(string name) =>
+  private static string SetId(string name) =>
     $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
 }

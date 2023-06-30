@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace StyledRazor.Core;
+namespace StyledRazor.Core.Style;
 
 public class StyleProperties : Dictionary<string, string>
 {

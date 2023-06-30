@@ -2,11 +2,25 @@ namespace StyledRazor.Core.Utils;
 
 public static class Css
 {
-  public static string Minify(string css, string baseElementId = "")
+
+  public static string AddScope(this string css, string scope = "")
+  {
+    css = css.Trim()
+      .Insert(0, $"{scope}")
+      .Replace("}", $"}}\n{scope}")
+      .Replace("\r", "")
+      .Replace("\n\n", "")
+      .Replace($"{scope}", scope);
+
+    return css
+      .Insert(css.Length, "\n")
+      .Replace($"{scope}\n", "");
+  }
+  
+  
+  public static string Minify(this string css)
   {
     css = css
-      .Insert(0, $"{baseElementId}")
-      .Insert(0, "\n")
       .Replace("  ", "")
       .Replace("\r", "\n")
       .Replace(" \n", "\n")
@@ -15,20 +29,17 @@ public static class Css
       .Replace(" {", "{")
       .Replace(" }", "}")
       .Replace(" > ", ">")
-      .Replace("}", $"}}{baseElementId}")
       .Replace("\n", "");
 
-    return css
-      .Insert(css.Length, "\n")
-      .Replace($"{baseElementId}\n", "");
+    return css;
   }
   
-  public static string CssToJson(string css)
+  public static string ToJson(this string css)
   {
     var json = css.Insert(css.Length - 1, "}");
     return json.Replace(":", "\":\"").Replace("{", "\":{\"").Replace("}", "\"},\"").Replace(";", "\",\"").Replace(",\"\"", "").Replace(" \":\"", ":").Replace("}},\"", "}}").Insert(0, "{\"");
   }
 
-  public static string JsonToCss(string json, string baseElement) => 
+  public static string ToCss(this string json, string baseElement) => 
     json.Replace("},", $";}}{baseElement}").Replace("\"", "").Replace(",", ";").Replace(":{", "{").Replace("}}", ";}")[1..];
 }

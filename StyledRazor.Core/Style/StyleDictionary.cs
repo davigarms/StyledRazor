@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using static StyledRazor.Core.Utils.Css;
 
-namespace StyledRazor.Core;
+namespace StyledRazor.Core.Style;
 
 public class StyleDictionary : Dictionary<string, StyleProperties>
 {
@@ -30,14 +30,14 @@ public class StyleDictionary : Dictionary<string, StyleProperties>
   {
     var baseElement = restrictScope ? Keys.ToArray()[0] + " " : "";
     var json = JsonSerializer.Serialize(this, JsonOptions);
-    return JsonToCss(json, baseElement);
+    return json.ToCss(baseElement);
   }
 
   public StyleDictionary Deserialize(string css)
   {
     if (string.IsNullOrEmpty(css)) return null;
 
-    var json = CssToJson(css);
+    var json = css.Minify().ToJson();
     var styleDictionary = JsonSerializer.Deserialize<StyleDictionary>(json);
 
     if (styleDictionary == null) return null;
