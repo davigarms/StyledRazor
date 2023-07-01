@@ -1,7 +1,25 @@
+using System;
+
 namespace StyledRazor.Core.Utils;
 
 public static class Css
 {
+  /// <summary>
+  /// Convert CSS units to float (support for more units to be added).  
+  /// </summary>
+  /// <param name="value"></param>
+  /// <returns>float</returns>
+  /// <exception cref="InvalidOperationException"></exception>
+  public static float ToInt(this string value)
+  {
+    if (value.Contains("rem"))
+      return float.Parse(value.Replace("rem", "").Trim()) * 16;
+
+    if (value.Contains("px"))
+      return float.Parse(value.Replace("px", "").Trim());
+
+    throw new InvalidOperationException("value must be in 'px' or 'rem'.");
+  }
 
   public static string AddScope(this string css, string scope = "")
   {
