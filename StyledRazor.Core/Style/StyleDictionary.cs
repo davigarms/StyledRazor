@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
@@ -8,19 +9,18 @@ namespace StyledRazor.Core.Style;
 
 public class StyleDictionary : Dictionary<string, StyleProperties>
 {
-  public event UpdateHandler OnUpdate;
-
-  public delegate void UpdateHandler();
-  
-  private void InvokeUpdate() => OnUpdate?.Invoke();
-
   private static readonly JsonSerializerOptions JsonOptions = new()
   {
     DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
   };
-  
-  public StyleProperties Get(string selector) => this.First(x => x.Key.Contains(selector)).Value;
+
+  public StyleProperties Get(string selector)
+  {
+    var property = this.FirstOrDefault(x => x.Key.Contains(selector));
+    if (property.Value != null) return property.Value;
+    throw new NullReferenceException($"'{selector}' selector not found");
+  }
 
   public new string ToString() => Serialize(false);
 
@@ -33,18 +33,11 @@ public class StyleDictionary : Dictionary<string, StyleProperties>
     return json.ToCss(baseElement);
   }
 
-  public StyleDictionary Deserialize(string css)
+  public static StyleDictionary Deserialize(string css)
   {
     if (string.IsNullOrEmpty(css)) return null;
 
     var json = css.Minify().ToJson();
-    var styleDictionary = JsonSerializer.Deserialize<StyleDictionary>(json);
-
-    if (styleDictionary == null) return null;
-    
-    foreach (var style in styleDictionary.Values)
-      style.OnUpdate += InvokeUpdate;
-    
-    return styleDictionary;
+    return JsonSerializer.Deserialize<StyleDictionary>(json);
   }
 }

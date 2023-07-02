@@ -19,12 +19,8 @@ public class Styled
   {
     Id = SetId(component.GetType().Name);
     Element = element;
-    Style = StyleFactory.Create(baseCss, SetScope(Id, Element)); 
-
-    if (Style == null) return;
-    
-    Css = Style.ToString();
-    Style.OnUpdate += UpdateCss;
+    Style = StyleFactory.Create(baseCss, SetScope(Id, Element));
+    UpdateCss();
   }
 
   public void Update(Styled styled)
@@ -32,10 +28,16 @@ public class Styled
     Id = styled.Id;
     Element = styled.Element;
     Style = styled.Style;
-    Css = styled.Css;
+    UpdateCss();
   }
 
-  private void UpdateCss() => Css = Style.ToString();
+  public void UpdateStyle(string selector, string property, string value)
+  {
+    Style.Get(selector).SetProperty(property, value);
+    UpdateCss();
+  }
+
+  private void UpdateCss() => Css = Style?.ToString();
 
   private static string SetScope(string componentId, string baseElement = "") => $"{baseElement}[{componentId}]";
 

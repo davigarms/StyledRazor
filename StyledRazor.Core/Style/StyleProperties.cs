@@ -4,15 +4,10 @@ namespace StyledRazor.Core.Style;
 
 public class StyleProperties : Dictionary<string, string>
 {
-  public event UpdateHandler OnUpdate;
-
-  public delegate void UpdateHandler();
-
   public void SetProperty(string property, string value)
   {
-    if (value == this[property]) return;
+    if (ContainsKey(property) && this[property] == value) return;
     
     this[property] = value;
-    OnUpdate?.Invoke();
   }
 }
