@@ -7,7 +7,7 @@ using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core.Style;
 
-public class StyleDictionary : Dictionary<string, StyleProperties>
+public class CssRules : Dictionary<string, CssDeclaration>
 {
   private static readonly JsonSerializerOptions JsonOptions = new()
   {
@@ -15,7 +15,7 @@ public class StyleDictionary : Dictionary<string, StyleProperties>
     Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
   };
 
-  public StyleProperties Get(string selector)
+  public CssDeclaration Get(string selector)
   {
     var property = this.FirstOrDefault(x => x.Key.Contains(selector));
     if (property.Value != null) return property.Value;
@@ -33,11 +33,11 @@ public class StyleDictionary : Dictionary<string, StyleProperties>
     return json.ToCss(baseElement);
   }
 
-  public static StyleDictionary Deserialize(string css)
+  public static CssRules Deserialize(string css)
   {
     if (string.IsNullOrEmpty(css)) return null;
 
     var json = css.Minify().ToJson();
-    return JsonSerializer.Deserialize<StyleDictionary>(json);
+    return JsonSerializer.Deserialize<CssRules>(json);
   }
 }

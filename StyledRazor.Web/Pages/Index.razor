@@ -76,21 +76,12 @@
 {
   public Index()
   {
-    StyleDictionary style = new();
+    CssRules cssRules = new ();
     
-    style["div"] = new StyleProperties
-    {
-      ["margin-top"] = "10px",
-      ["margin-bottom"] = "10px",
-    };
-
-    style["> *"] = new StyleProperties();
-    style["> *"]["padding"] = "0";
-
-    var styleDictionary = new StyleDictionary
+    cssRules = new CssRules()
     {
       {
-        "div", new()
+        "div", new CssDeclaration
         {
           { "margin-top", "10px" },
           { "margin-bottom", "10px" },
@@ -104,8 +95,17 @@
       },
     };
     
-    Console.WriteLine(style.ToString());
-    Console.WriteLine(style.Serialize());
+    cssRules["div"] = new CssDeclaration
+    {
+      ["margin-top"] = "10px",
+      ["margin-bottom"] = "10px",
+    };
+
+    cssRules["> *"]["margin"] = "0";
+    cssRules["> *"]["padding"] = "0";
+
+    Console.WriteLine(cssRules.ToString());
+    Console.WriteLine(cssRules.Serialize());
   }
 
   private Button DynamicButton { get; set; } = new GreyButton();

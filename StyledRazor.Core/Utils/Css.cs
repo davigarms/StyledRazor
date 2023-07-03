@@ -35,7 +35,6 @@ public static class Css
       .Replace($"{scope}\n", "");
   }
   
-  
   public static string Minify(this string css)
   {
     css = css

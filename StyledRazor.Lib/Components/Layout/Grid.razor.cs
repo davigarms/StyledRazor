@@ -135,12 +135,6 @@ public class Grid : StyledBase, IDisposable
     }
   }
 
-  public void Dispose()
-  {
-    BrowserService.OnResize -= WindowSizeHasChanged;
-    GC.SuppressFinalize(this);
-  }
-
   private async Task WindowSizeHasChanged()
   {
     await SetNumberOfColumns();
@@ -180,5 +174,11 @@ public class Grid : StyledBase, IDisposable
     if (ColsXxl > 0) columns.Add(BreakPoint.Xxl, ColsXxl);
 
     return columns.Count > 0 ? columns : null;
+  }
+
+  public void Dispose()
+  {
+    BrowserService.OnResize -= WindowSizeHasChanged;
+    GC.SuppressFinalize(this);
   }
 }
