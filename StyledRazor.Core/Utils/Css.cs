@@ -12,32 +12,35 @@ public static class Css
   /// <exception cref="InvalidOperationException"></exception>
   public static float ToInt(this string value)
   {
-    if (value.Contains("rem"))
-      return float.Parse(value.Replace("rem", "").Trim()) * 16;
-
     if (value.Contains("px"))
       return float.Parse(value.Replace("px", "").Trim());
 
-    throw new InvalidOperationException("value must be in 'px' or 'rem'.");
+    if (value.Contains("rem"))
+      return float.Parse(value.Replace("rem", "").Trim()) * 16;
+
+    if (value.Contains("em"))
+      return float.Parse(value.Replace("em", "").Trim()) * 16;
+
+    throw new InvalidOperationException("value must be in 'px', 'rem' or 'em'."); 
   }
 
-  public static string AddScope(this string css, string scope = "")
+  public static string AddScope(this string cssString, string scope = "")
   {
-    css = css.Trim()
+    cssString = cssString.Trim()
       .Insert(0, $"{scope}")
       .Replace("}", $"}}\n{scope}")
       .Replace("\r", "")
       .Replace("\n\n", "")
       .Replace($"{scope}", scope);
 
-    return css
-      .Insert(css.Length, "\n")
+    return cssString
+      .Insert(cssString.Length, "\n")
       .Replace($"{scope}\n", "");
   }
   
-  public static string Minify(this string css)
+  public static string Minify(this string cssString)
   {
-    css = css
+    cssString = cssString
       .Replace("  ", "")
       .Replace("\r", "\n")
       .Replace(" \n", "\n")
@@ -48,12 +51,12 @@ public static class Css
       .Replace(" > ", ">")
       .Replace("\n", "");
 
-    return css;
+    return cssString;
   }
   
-  public static string ToJson(this string css)
+  public static string ToJson(this string cssString)
   {
-    var json = css.Insert(css.Length - 1, "}");
+    var json = cssString.Insert(cssString.Length - 1, "}");
     return json.Replace(":", "\":\"").Replace("{", "\":{\"").Replace("}", "\"},\"").Replace(";", "\",\"").Replace(",\"\"", "").Replace(" \":\"", ":").Replace("}},\"", "}}").Insert(0, "{\"");
   }
 

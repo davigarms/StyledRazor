@@ -6,20 +6,20 @@ namespace StyledRazor.Core;
 
 public class Styled
 {
-  private CssRules CssRules { get; set; }
+  private Css Css { get; set; }
 
   public string Id { get; private set; }
 
   public string Element { get; private set; }
 
-  public string Css { get; private set; }
+  public string CssString { get; private set; }
 
 
   internal Styled(IComponent component, string element, string baseCss)
   {
     Id = SetId(component.GetType().Name);
     Element = element;
-    CssRules = CssRulesFactory.Create(baseCss, SetScope(Id, Element));
+    Css = CssFactory.Create(baseCss, SetScope(Id, Element));
     UpdateCss();
   }
 
@@ -27,20 +27,23 @@ public class Styled
   {
     Id = styled.Id;
     Element = styled.Element;
-    CssRules = styled.CssRules;
+    Css = styled.Css;
     UpdateCss();
   }
 
-  public void UpdateStyle(string selector, string property, string value)
+  public CssDefinition Get(string selector)
   {
-    CssRules.Get(selector).SetProperty(property, value);
-    UpdateCss();
+    var definition = Css.Get(selector);
+    definition.OnChange += DefinitionHasChanged;
+    return definition;
   }
 
-  private void UpdateCss() => Css = CssRules?.ToString();
+  private void DefinitionHasChanged() => UpdateCss();
+  
+  private void UpdateCss() => CssString = Css?.ToString();
 
   private static string SetScope(string componentId, string baseElement = "") => $"{baseElement}[{componentId}]";
 
   private static string SetId(string name) =>
     $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
-}   
+}

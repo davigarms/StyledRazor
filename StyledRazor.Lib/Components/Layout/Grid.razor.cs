@@ -85,7 +85,7 @@ public class Grid : StyledBase, IDisposable
     overflow: hidden;
     flex-grow: var(--flex-grow);
   }
-    
+
   > [double] {
     flex-basis: calc(2 * (var(--width)) - 1 * var(--gutter)) !important
   }
@@ -139,7 +139,7 @@ public class Grid : StyledBase, IDisposable
   {
     await SetNumberOfColumns();
     await SetCalculatedHeight();
-    Base.UpdateStyle("> *", "width", $"calc({CalculatedWidth} - 1 * {Gutter}) !important");
+    Base.Get("> *").SetProperty("width", $"calc({CalculatedWidth} - 1 * {Gutter}) !important");
     StateHasChanged();
   }
 

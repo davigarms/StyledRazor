@@ -25,23 +25,15 @@ public abstract class StyledBase : ComponentBase
   protected virtual string Style => "";
 
   public virtual Styled Base => null;
-
-
+  
   protected StyledBase()
   {
     Create = new StyledFactory(this);
   }
 
-  protected override void OnInitialized()
-  {
-    if (Base == null)
-      throw new NullReferenceException
-        ($"Base field must be overriden on <{GetType().Name}> to set the component CSS");
-  }
-
   protected override void OnParametersSet()
   {
-    if (Styled == null) return;
+    if (Styled == null || Base == null) return;
 
     Base.Update(Styled);
   }
@@ -94,10 +86,10 @@ public abstract class StyledBase : ComponentBase
 
   private void BuildComponentCss(RenderTreeBuilder builder)
   {
-    if (Base.Css == null) return;
+    if (Base.CssString == null) return;
 
     builder.OpenElement(0, "style");
-    builder.AddContent(0, Base.Css);
+    builder.AddContent(0, Base.CssString);
     builder.CloseElement();
   }
 }
