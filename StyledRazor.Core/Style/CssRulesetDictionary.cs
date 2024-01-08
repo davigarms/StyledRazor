@@ -6,7 +6,7 @@ using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core.Style;
 
-public class Css : Dictionary<string, CssDefinition>
+public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
 {
   private static readonly JsonSerializerOptions JsonOptions = new()
   {
@@ -14,44 +14,45 @@ public class Css : Dictionary<string, CssDefinition>
     Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
   };
 
-  public CssDefinition Get(string selector)
+  public CssDeclarationDictionary Get(string selector)
   {
-    var property = TryGetValue(selector, out var definition);
-    
+    var property = TryGetValue(selector, out var declaration);
+
     if (!property)
     {
-      definition = new CssDefinition();
-      Add(selector, definition);
+      declaration = new CssDeclarationDictionary();
+      Add(selector, declaration);
     }
-    
-    return definition;
+
+    return declaration;
   }
-  
-  public void Set(string selector, CssDefinition definition)
+
+  public void Set(string selector, CssDeclarationDictionary declaration)
   {
     if (ContainsKey(selector))
     {
-      this[selector] = definition;
+      this[selector] = declaration;
     }
     else
     {
-      Add(selector, definition);
+      Add(selector, declaration);
     }
   }
+
   public void Set(string selector, string cssString)
   {
-    var deserializeDefinition = DeserializeDefinition($"{selector}{cssString}");
+    var declaration = DeserializeDeclaration($"{selector}{cssString}");
 
     if (ContainsKey(selector))
     {
-      this[selector] = deserializeDefinition;
+      this[selector] = declaration;
     }
     else
     {
-      Add(selector, deserializeDefinition);
+      Add(selector, declaration);
     }
   }
-  
+
   public new string ToString() => Serialize(false);
 
   public string Serialize() => Serialize(true);
@@ -63,20 +64,20 @@ public class Css : Dictionary<string, CssDefinition>
     return json.ToCss(baseElement);
   }
 
-  public static Css Deserialize(string cssString)
+  public static CssRulesetDictionary Deserialize(string cssString)
   {
     if (string.IsNullOrEmpty(cssString)) return null;
 
     var json = cssString.Minify().ToJson();
-    return JsonSerializer.Deserialize<Css>(json);
+    return JsonSerializer.Deserialize<CssRulesetDictionary>(json);
   }
-  
-  public static CssDefinition DeserializeDefinition(string cssString)
+
+  public static CssDeclarationDictionary DeserializeDeclaration(string cssString)
   {
     if (string.IsNullOrEmpty(cssString)) return null;
 
     var json = cssString.Minify().ToJson();
-    var css = JsonSerializer.Deserialize<Css>(json);
-    return css?.Values.FirstOrDefault() ?? new CssDefinition();
+    var css = JsonSerializer.Deserialize<CssRulesetDictionary>(json);
+    return css?.Values.FirstOrDefault() ?? new CssDeclarationDictionary();
   }
 }

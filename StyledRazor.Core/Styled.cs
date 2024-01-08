@@ -6,7 +6,7 @@ namespace StyledRazor.Core;
 
 public class Styled
 {
-  private Css Css { get; set; }
+  private CssRulesetDictionary Css { get; set; }
 
   public string Id { get; private set; }
 
@@ -31,11 +31,11 @@ public class Styled
     UpdateCss();
   }
 
-  public CssDefinition Get(string selector)
+  public CssDeclarationDictionary Get(string selector)
   {
-    var definition = Css.Get(selector);
-    definition.OnChange += UpdateCss;
-    return definition;
+    var declaration = Css.Get(selector);
+    declaration.OnChange += UpdateCss;
+    return declaration;
   }
   
   private void UpdateCss() => CssString = Css?.ToString();

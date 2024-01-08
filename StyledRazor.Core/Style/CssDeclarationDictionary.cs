@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace StyledRazor.Core.Style;
 
-public class CssDefinition : Dictionary<string, string>
+public class CssDeclarationDictionary : Dictionary<string, string>
 {
   public event Action OnChange;
-  
+
   public void Set(string property, string value)
   {
     if (ContainsKey(property))
     {
       if (this[property] == value) return;
-      this[property] = value;  
+      this[property] = value;
     }
     else
     {
