@@ -24,7 +24,7 @@ public static class Css
     throw new InvalidOperationException("value must be in 'px', 'rem' or 'em'."); 
   }
 
-  public static string AddScope(this string cssString, string scope = "")
+  public static string AddScope(this string cssString, string scope)
   {
     cssString = cssString.Trim()
       .Insert(0, $"{scope}")
@@ -57,9 +57,28 @@ public static class Css
   public static string ToJson(this string cssString)
   {
     var json = cssString.Insert(cssString.Length - 1, "}");
-    return json.Replace(":", "\":\"").Replace("{", "\":{\"").Replace("}", "\"},\"").Replace(";", "\",\"").Replace(",\"\"", "").Replace(" \":\"", ":").Replace("}},\"", "}}").Insert(0, "{\"");
+    return json
+      .Replace(":", "\":\"")
+      .Replace("{", "\":{\"")
+      .Replace("}", "\"},\"")
+      .Replace(";", "\",\"")
+      .Replace(",\"\"", "")
+      .Replace(" \":\"", ":")
+      .Replace("}},\"", "}}")
+      .Insert(0, "{\"");
   }
 
   public static string ToCss(this string json, string baseElement) => 
-    json.Replace("},", $";}}{baseElement}").Replace("\"", "").Replace(",", ";").Replace(":{", "{").Replace("}}", ";}")[1..];
+    json
+      .Replace("},", $";}}{baseElement}")
+      .Replace("\"", "")
+      .Replace(",", ";")
+      .Replace(":{", "{")
+      .Replace("}}", ";}")[1..];
+  
+  public static string SetScope(string componentId, string baseElement = "") => $"{baseElement}[{componentId}]";
+
+  public static string SetId(string name) =>
+    $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
+  
 }

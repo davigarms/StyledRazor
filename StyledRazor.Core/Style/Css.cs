@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using StyledRazor.Core.Utils;
+using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core.Style;
 
@@ -29,7 +27,7 @@ public class Css : Dictionary<string, CssDefinition>
     return definition;
   }
   
-  public void SetCss(string selector, CssDefinition definition)
+  public void Set(string selector, CssDefinition definition)
   {
     if (ContainsKey(selector))
     {
@@ -40,7 +38,20 @@ public class Css : Dictionary<string, CssDefinition>
       Add(selector, definition);
     }
   }
+  public void Set(string selector, string cssString)
+  {
+    var deserializeDefinition = DeserializeDefinition($"{selector}{cssString}");
 
+    if (ContainsKey(selector))
+    {
+      this[selector] = deserializeDefinition;
+    }
+    else
+    {
+      Add(selector, deserializeDefinition);
+    }
+  }
+  
   public new string ToString() => Serialize(false);
 
   public string Serialize() => Serialize(true);
@@ -58,5 +69,14 @@ public class Css : Dictionary<string, CssDefinition>
 
     var json = cssString.Minify().ToJson();
     return JsonSerializer.Deserialize<Css>(json);
+  }
+  
+  public static CssDefinition DeserializeDefinition(string cssString)
+  {
+    if (string.IsNullOrEmpty(cssString)) return null;
+
+    var json = cssString.Minify().ToJson();
+    var css = JsonSerializer.Deserialize<Css>(json);
+    return css?.Values.FirstOrDefault() ?? new CssDefinition();
   }
 }

@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;using Microsoft.VisualBasic.CompilerServices;
 using StyledRazor.Core.Style;
-using System;
+using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core;
 
@@ -34,16 +34,9 @@ public class Styled
   public CssDefinition Get(string selector)
   {
     var definition = Css.Get(selector);
-    definition.OnChange += DefinitionHasChanged;
+    definition.OnChange += UpdateCss;
     return definition;
   }
-
-  private void DefinitionHasChanged() => UpdateCss();
   
   private void UpdateCss() => CssString = Css?.ToString();
-
-  private static string SetScope(string componentId, string baseElement = "") => $"{baseElement}[{componentId}]";
-
-  private static string SetId(string name) =>
-    $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
 }

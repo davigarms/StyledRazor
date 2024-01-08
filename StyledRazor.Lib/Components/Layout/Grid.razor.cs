@@ -139,7 +139,7 @@ public class Grid : StyledBase, IDisposable
   {
     await SetNumberOfColumns();
     await SetCalculatedHeight();
-    Base.Get("> *").SetProperty("width", $"calc({CalculatedWidth} - 1 * {Gutter}) !important");
+    Base.Get("> *").Set("width", $"calc({CalculatedWidth} - 1 * {Gutter}) !important");
     StateHasChanged();
   }
 

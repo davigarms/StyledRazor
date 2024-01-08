@@ -8,7 +8,7 @@ public class CssDefinition : Dictionary<string, string>
 {
   public event Action OnChange;
   
-  public void SetProperty(string property, string value)
+  public void Set(string property, string value)
   {
     if (ContainsKey(property))
     {

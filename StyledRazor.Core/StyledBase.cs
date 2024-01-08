@@ -25,7 +25,7 @@ public abstract class StyledBase : ComponentBase
   protected virtual string Style => "";
 
   public virtual Styled Base => null;
-  
+
   protected StyledBase()
   {
     Create = new StyledFactory(this);

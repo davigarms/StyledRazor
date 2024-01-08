@@ -74,22 +74,6 @@
 
 @code
 {
-  public Index()
-  {
-    Css css = new ();
-    
-    css.Get("> *").SetProperty("margin", "10px");
-    
-    css.SetCss("div", new CssDefinition
-    {
-      {"margin", "10px"},
-    });
-    
-    
-    Console.WriteLine(css.ToString());
-    Console.WriteLine(css.Serialize());
-  }
-
   private Button DynamicButton { get; set; } = new GreyButton();
 
   private void Click() => DynamicButton =
