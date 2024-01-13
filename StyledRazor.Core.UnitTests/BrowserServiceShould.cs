@@ -1,4 +1,5 @@
 using FakeItEasy;
+using Microsoft.AspNetCore.Components;
 using NUnit.Framework;
 using StyledRazor.Core.Browser;
 
@@ -25,6 +26,29 @@ public class BrowserServiceShould
 
     var result = await browserService.WindowDimension();
     
+    Assert.Multiple(() =>
+    {
+      Assert.That(result.Width, Is.EqualTo(_expectedWidth));
+      Assert.That(result.Height, Is.EqualTo(_expectedHeight));
+    });
+  }
+
+  [Test]
+  public async Task ReturnDimensionFromAnElement()
+  {
+    var fakeBrowserConnector = A.Fake<IBrowserConnector>();
+    var browserService = new BrowserService(fakeBrowserConnector);
+    var element = new ElementReference();
+    var elementDimension = new Dimension
+    {
+      Width = _expectedWidth,
+      Height = _expectedHeight,
+    };
+    A.CallTo(() => fakeBrowserConnector.InvokeAsync<Dimension>("DimensionFrom", element))
+      .Returns(elementDimension);
+
+    var result = await browserService.DimensionFrom(element);
+
     Assert.Multiple(() =>
     {
       Assert.That(result.Width, Is.EqualTo(_expectedWidth));
