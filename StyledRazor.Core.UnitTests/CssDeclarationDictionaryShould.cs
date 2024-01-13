@@ -1,4 +1,4 @@
-using StyledRazor.Core.Style;
+using StyledRazor.Core.Css;
 
 namespace StyledRazor.Core.UnitTests;
 

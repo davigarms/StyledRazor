@@ -1,6 +1,6 @@
 using static StyledRazor.Core.Utils.Css;
 
-namespace StyledRazor.Core.Style;
+namespace StyledRazor.Core.Css;
 
 public static class CssFactory
 {

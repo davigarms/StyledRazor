@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace StyledRazor.Core.Style;
+namespace StyledRazor.Core.Css;
 
 public class CssDeclarationDictionary : Dictionary<string, string>
 {

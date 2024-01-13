@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;using Microsoft.VisualBasic.CompilerServices;
-using StyledRazor.Core.Style;
+using StyledRazor.Core.Css;
 using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core;
