@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyledRazor.Lib", "StyledRa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyledRazor.Core", "StyledRazor.Core\StyledRazor.Core.csproj", "{607D81AB-C4D4-4AAB-80CB-1160723D03ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyledRazor.Core.UnitTests", "StyledRazor.Core.UnitTests\StyledRazor.Core.UnitTests.csproj", "{1D9BCB9F-C78E-41A0-922D-AF960785FCB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{607D81AB-C4D4-4AAB-80CB-1160723D03ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{607D81AB-C4D4-4AAB-80CB-1160723D03ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{607D81AB-C4D4-4AAB-80CB-1160723D03ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D9BCB9F-C78E-41A0-922D-AF960785FCB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D9BCB9F-C78E-41A0-922D-AF960785FCB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D9BCB9F-C78E-41A0-922D-AF960785FCB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D9BCB9F-C78E-41A0-922D-AF960785FCB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
