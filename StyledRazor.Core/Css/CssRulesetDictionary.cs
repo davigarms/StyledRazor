@@ -16,27 +16,23 @@ public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
 
   public CssDeclarationDictionary Get(string selector)
   {
-    var property = TryGetValue(selector, out var declaration);
-
-    if (!property)
-    {
-      declaration = new CssDeclarationDictionary();
-      Add(selector, declaration);
-    }
-
+    var propertyExists = TryGetValue(selector, out var declaration);
+    return propertyExists ? declaration : CreateEmptyDeclarationFor(selector);
+  }
+  
+  private CssDeclarationDictionary CreateEmptyDeclarationFor(string selector)
+  {
+    var declaration = new CssDeclarationDictionary();
+    Add(selector, declaration);
     return declaration;
   }
 
   public void Set(string selector, CssDeclarationDictionary declaration)
   {
     if (ContainsKey(selector))
-    {
       this[selector] = declaration;
-    }
     else
-    {
       Add(selector, declaration);
-    }
   }
 
   public void Set(string selector, string cssString)
@@ -44,13 +40,9 @@ public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
     var declaration = DeserializeDeclaration($"{selector}{cssString}");
 
     if (ContainsKey(selector))
-    {
       this[selector] = declaration;
-    }
     else
-    {
       Add(selector, declaration);
-    }
   }
 
   public new string ToString() => Serialize(false);
