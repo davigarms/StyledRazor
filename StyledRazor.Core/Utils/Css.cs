@@ -34,8 +34,8 @@ public static class Css
       .Replace($"{scope}", scope);
 
     return cssString
-      .Insert(cssString.Length, "\n")
-      .Replace($"{scope}\n", "");
+      .Insert(cssString.Length, "\0")
+      .Replace($"{scope}\0", "");
   }
   
   public static string Minify(this string cssString)
@@ -46,8 +46,10 @@ public static class Css
       .Replace(" \n", "\n")
       .Replace("\t", "")
       .Replace(": ", ":")
+      .Replace(" :", ":")
+      .Replace(" ;", ";")
+      .Replace("; ", ";")
       .Replace(" {", "{")
-      .Replace(" }", "}")
       .Replace(" > ", ">")
       .Replace("\n", "");
 
