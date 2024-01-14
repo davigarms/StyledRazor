@@ -20,7 +20,7 @@ public class StyledFactoryShould
     yield return (@"{
                     margin: 10px ;
                   }", "@element[@scope]{margin:10px;}");
-    
+
     yield return (@"{
                     margin: 10px;
                     padding: 10px;
@@ -104,6 +104,16 @@ public class StyledFactoryShould
     var styled = _create.Li(css.original);
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("li", styled.Id, css.minified)));
+  }
+
+  [TestCaseSource(nameof(CssCases))]
+  public void ReturnAnExistingStyled_WhenAStyledAlreadyExists((string original, string minified) css)
+  {
+    var styled = _create.Div(css.original);
+    var styledId = styled.Id;
+    styled = _create.Div(css.original);
+
+    Assert.That(styled.Id, Is.EqualTo(styledId));
   }
 
   private static string MinifiedCssWithScopeFor(string element, string scope, string cssMinified) =>

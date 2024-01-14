@@ -14,12 +14,12 @@ public class StyledFactory
     _component = component;
   }
 
-  private Styled Create(string baseElement, string baseCss)
-  {
-    if (_styled != null) return _styled;
-    
-    _styled = new Styled(_component, baseElement, baseCss);
+  private Styled Create(string baseElement, string baseCss) =>
+    _styled ?? CreateAndSetStyled(baseElement, baseCss);
 
+  private Styled CreateAndSetStyled(string baseElement, string baseCss)
+  {
+    _styled = new Styled(_component, baseElement, baseCss);
     return _styled;
   }
 
