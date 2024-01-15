@@ -29,15 +29,19 @@ public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
 
   public void Set(string selector, CssDeclarationDictionary declaration)
   {
+    if (declaration.Count == 0) return;
+    
     if (ContainsKey(selector))
       this[selector] = declaration;
     else
       Add(selector, declaration);
   }
 
-  public void Set(string selector, string cssString)
+  public void Set(string selector, string declarationString)
   {
-    var declaration = DeserializeDeclaration($"{selector}{cssString}");
+    if (string.IsNullOrEmpty(declarationString)) return;
+    
+    var declaration = DeserializeCssDeclaration($"{selector}{declarationString}");
 
     if (ContainsKey(selector))
       this[selector] = declaration;
@@ -49,27 +53,27 @@ public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
 
   public string Serialize() => Serialize(true);
 
-  public string Serialize(bool restrictScope)
+  public string Serialize(bool scoped)
   {
-    var baseElement = restrictScope ? Keys.ToArray()[0] + " " : "";
+    var baseElement = scoped ? Keys.ToArray()[0] + " " : "";
     var json = JsonSerializer.Serialize(this, JsonOptions);
     return json.ToCss(baseElement);
   }
 
   public static CssRulesetDictionary Deserialize(string cssString)
   {
-    if (string.IsNullOrEmpty(cssString)) return null;
+    if (string.IsNullOrEmpty(cssString)) return new CssRulesetDictionary();
 
     var json = cssString.Minify().ToJson();
     return JsonSerializer.Deserialize<CssRulesetDictionary>(json);
   }
 
-  public static CssDeclarationDictionary DeserializeDeclaration(string cssString)
+  public static CssDeclarationDictionary DeserializeCssDeclaration(string cssRule)
   {
-    if (string.IsNullOrEmpty(cssString)) return null;
+    if (string.IsNullOrEmpty(cssRule)) return new CssDeclarationDictionary();
 
-    var json = cssString.Minify().ToJson();
-    var css = JsonSerializer.Deserialize<CssRulesetDictionary>(json);
-    return css?.Values.FirstOrDefault() ?? new CssDeclarationDictionary();
+    var json = cssRule.Minify().ToJson();
+    var cssRuleset = JsonSerializer.Deserialize<CssRulesetDictionary>(json);
+    return cssRuleset?.Values.FirstOrDefault() ?? new CssDeclarationDictionary();
   }
 }
