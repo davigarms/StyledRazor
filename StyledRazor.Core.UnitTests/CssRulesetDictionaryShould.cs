@@ -5,22 +5,33 @@ namespace StyledRazor.Core.UnitTests;
 [TestFixture]
 public class CssRulesetDictionaryShould
 {
-  private static readonly string Selector = TestContext.CurrentContext.Random.GetString(4);
+  private const string Property = "Property";
+  private const string InitialValue = "InitialValue";
+  private const string NewValue = "NewValue";
+  private const string Selector = "Selector";
+  private const string Element = "Element";
 
-  private static readonly CssDeclarationDictionary Declaration = new()
+  private static readonly CssDeclarationDictionary InitialDeclaration = new()
   {
-    { "padding", "10px" },
+    [Property] = InitialValue,
+  };
+  
+  private static readonly CssDeclarationDictionary NewDeclaration = new()
+  {
+    [Property] = NewValue,
   };
 
   [Test]
   public void GetCssDeclarationDictionary_WhenSelectorExists()
   {
-    var css = new CssRulesetDictionary();
-    css.Set(Selector, Declaration);
-
+    var css = new CssRulesetDictionary
+    {
+      [Selector] = InitialDeclaration,
+    };
+    
     var declaration = css.Get(Selector);
 
-    Assert.That(declaration, Is.EquivalentTo(Declaration));
+    Assert.That(declaration, Is.EqualTo(InitialDeclaration));
   }
 
   [Test]
@@ -30,7 +41,7 @@ public class CssRulesetDictionaryShould
 
     var declaration = css.Get(Selector);
 
-    Assert.That(declaration, Is.EquivalentTo(new CssDeclarationDictionary()));
+    Assert.That(declaration, Is.EqualTo(new CssDeclarationDictionary()));
   }
 
   [Test]
@@ -40,13 +51,13 @@ public class CssRulesetDictionaryShould
 
     css.Set(Selector,
     @"{
-      padding: 10px;
+      Property: NewValue;
     }");
 
     Assert.Multiple(() =>
     {
       Assert.That(css.ContainsKey(Selector));
-      Assert.That(css.SingleOrDefault(x => x.Key == Selector).Value, Is.EquivalentTo(Declaration));
+      Assert.That(css.SingleOrDefault(x => x.Key == Selector).Value, Is.EqualTo(NewDeclaration));
     });
   }
 
@@ -55,21 +66,18 @@ public class CssRulesetDictionaryShould
   {
     var css = new CssRulesetDictionary
     {
-      [Selector] = new()
-      {
-        { "padding", "0" },
-      },
+      [Selector] = InitialDeclaration,
     };
 
     css.Set(Selector,
     @"{
-      padding: 10px;
+      Property: NewValue;
     }");
 
     Assert.Multiple(() =>
     {
       Assert.That(css.ContainsKey(Selector));
-      Assert.That(css.SingleOrDefault(x => x.Key == Selector).Value, Is.EquivalentTo(Declaration));
+      Assert.That(css.SingleOrDefault(x => x.Key == Selector).Value, Is.EqualTo(NewDeclaration));
     });
   }
 
@@ -88,12 +96,12 @@ public class CssRulesetDictionaryShould
   {
     var css = new CssRulesetDictionary();
 
-    css.Set(Selector, Declaration);
+    css.Set(Selector, NewDeclaration);
 
     Assert.Multiple(() =>
     {
       Assert.That(css.ContainsKey(Selector));
-      Assert.That(css.SingleOrDefault(x => x.Key == Selector).Value, Is.EquivalentTo(Declaration));
+      Assert.That(css.SingleOrDefault(x => x.Key == Selector).Value, Is.EqualTo(NewDeclaration));
     });
   }
 
@@ -102,18 +110,15 @@ public class CssRulesetDictionaryShould
   {
     var css = new CssRulesetDictionary
     {
-      [Selector] = new()
-      {
-        { "padding", "0" },
-      },
+      [Selector] = InitialDeclaration,
     };
 
-    css.Set(Selector, Declaration);
+    css.Set(Selector, NewDeclaration);
 
     Assert.Multiple(() =>
     {
       Assert.That(css.ContainsKey(Selector));
-      Assert.That(css.SingleOrDefault(x => x.Key == Selector).Value, Is.EquivalentTo(Declaration));
+      Assert.That(css.SingleOrDefault(x => x.Key == Selector).Value, Is.EqualTo(NewDeclaration));
     });
   }
 
@@ -152,16 +157,10 @@ public class CssRulesetDictionaryShould
   {
     var css = new CssRulesetDictionary
     {
-      ["div"] = new()
-      {
-        { "padding", "10px" },
-      },
-      ["> *"] = new()
-      {
-        { "padding", "10px" },
-      },
+      [Element] = InitialDeclaration,
+      [Selector] = InitialDeclaration,
     };
-    const string expectedCss = "div{padding:10px;}div > *{padding:10px;}"; 
+    const string expectedCss = "Element{Property:InitialValue;}Element Selector{Property:InitialValue;}"; 
     
     var serializedCss = css.Serialize();
     
