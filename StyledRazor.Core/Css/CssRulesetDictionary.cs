@@ -57,7 +57,7 @@ public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
   {
     var baseElement = scoped ? Keys.ToArray()[0] + " " : "";
     var json = JsonSerializer.Serialize(this, JsonOptions);
-    return json.ToCss(baseElement);
+    return Count == 0 ? string.Empty : json.ToCss(baseElement);
   }
 
   public static CssRulesetDictionary Deserialize(string cssString)
@@ -65,9 +65,17 @@ public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
     if (string.IsNullOrEmpty(cssString)) return new CssRulesetDictionary();
 
     var json = cssString.Minify().ToJson();
-    return JsonSerializer.Deserialize<CssRulesetDictionary>(json);
-  }
 
+    try
+    {
+      return JsonSerializer.Deserialize<CssRulesetDictionary>(json);
+    }
+    catch (JsonException e)
+    {
+      throw new JsonException($"{json} \n\n Exception: {e}");
+    }
+  }
+  
   public static CssDeclarationDictionary DeserializeCssDeclaration(string cssRule)
   {
     if (string.IsNullOrEmpty(cssRule)) return new CssDeclarationDictionary();

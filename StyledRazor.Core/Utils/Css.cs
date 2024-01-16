@@ -45,8 +45,7 @@ public static class Css
       .Replace("\r", "\n")
       .Replace(" \n", "\n")
       .Replace("\t", "")
-      .Replace(": ", ":")
-      .Replace(" :", ":")
+      .Replace(" : ", ": ")
       .Replace(" ;", ";")
       .Replace("; ", ";")
       .Replace(" {", "{")
@@ -60,12 +59,11 @@ public static class Css
   {
     var json = cssString.Insert(cssString.Length - 1, "}");
     return json
-      .Replace(":", "\":\"")
+      .Replace(": ", "\": \"")
       .Replace("{", "\":{\"")
       .Replace("}", "\"},\"")
       .Replace(";", "\",\"")
       .Replace(",\"\"", "")
-      .Replace(" \":\"", ":")
       .Replace("}},\"", "}}")
       .Insert(0, "{\"");
   }
