@@ -3,64 +3,64 @@ namespace StyledRazor.Core.UnitTests;
 [TestFixture]
 public class StyledFactoryShould
 {
-  private StyledFactory _create;
+  private StyledFactory _create = new(new TestComponent());
 
   private class TestComponent : StyledBase {}
 
   private static IEnumerable<(string, string)> CssCases()
   {
     yield return (@"{
-                    margin: 10px;
-                  }", "@element[@scope]{margin:10px;}");
+                    Property1: Value;
+                  }", "Element[ScopeId]{Property1:Value;}");
 
     yield return (@"{
-                    margin : 10px;
-                  }", "@element[@scope]{margin:10px;}");
+                    Property1 : Value;
+                  }", "Element[ScopeId]{Property1:Value;}");
 
     yield return (@"{
-                    margin: 10px ;
-                  }", "@element[@scope]{margin:10px;}");
+                    Property1: Value ;
+                  }", "Element[ScopeId]{Property1:Value;}");
 
     yield return (@"{
-                    margin: 10px;
-                    padding: 10px;
-                  }", "@element[@scope]{margin:10px;padding:10px;}");
+                    Property1: Value;
+                    Property2: Value;
+                  }", "Element[ScopeId]{Property1:Value;Property2:Value;}");
 
     yield return (@"{
-                    margin: 10px;     padding: 10px;
-                  }", "@element[@scope]{margin:10px;padding:10px;}");
+                    Property1: Value;     Property2: Value;
+                  }", "Element[ScopeId]{Property1:Value;Property2:Value;}");
 
-    yield return (@"{margin: 10px; padding: 10px;}", "@element[@scope]{margin:10px;padding:10px;}");
+    yield return (@"{Property1: Value; Property2: Value;}", "Element[ScopeId]{Property1:Value;Property2:Value;}");
 
     yield return (@"{
-                      margin: 10px;
-                      padding: 10px;
+                      Property1: Value;
+                      Property2: Value;
                     }
-                    > * {
-                      margin: 10px;
+                    Selector {
+                      Property1: Value;
                     }
-                  ", "@element[@scope]{margin:10px;padding:10px;}@element[@scope]> *{margin:10px;}");
+                  ", "Element[ScopeId]{Property1:Value;Property2:Value;}Element[ScopeId]Selector{Property1:Value;}");
 
     yield return (@"{
-                      margin: 10px;
-                      padding: 10px;
-                    }
-
-                    > * {
-                      margin: 10px;
-                    }", "@element[@scope]{margin:10px;padding:10px;}@element[@scope]> *{margin:10px;}");
-
-    yield return (@"{
-                      margin: 10px;
-                      padding: 10px;
+                      Property1: Value;
+                      Property2: Value;
                     }
 
+                    Selector {
+                      Property1: Value;
+                    }", "Element[ScopeId]{Property1:Value;Property2:Value;}Element[ScopeId]Selector{Property1:Value;}");
 
-                    > * {
-                      margin: 10px;
+    yield return (@"{
+                      Property1: Value;
+                      Property2: Value;
                     }
 
-                    ", "@element[@scope]{margin:10px;padding:10px;}@element[@scope]> *{margin:10px;}");
+
+                    Selector {
+                      Property1: Value;
+                    }
+
+                    ", "Element[ScopeId]{Property1:Value;Property2:Value;}Element[ScopeId]Selector{Property1:Value;}");
   }
 
   [SetUp]
@@ -91,7 +91,7 @@ public class StyledFactoryShould
   }
 
   [TestCaseSource(nameof(CssCases))]
-  public void CreateAStyledUL_WithMinifiedAndScopedCss((string original, string minified) css)
+  public void CreateAStyledUl_WithMinifiedAndScopedCss((string original, string minified) css)
   {
     var styled = _create.Ul(css.original);
 
@@ -107,7 +107,7 @@ public class StyledFactoryShould
   }
 
   [TestCaseSource(nameof(CssCases))]
-  public void ReturnAnExistingStyled_WhenAStyledAlreadyExists((string original, string minified) css)
+  public void NotCreateANewStyled_WhenAStyledAlreadyExists((string original, string minified) css)
   {
     var styled = _create.Div(css.original);
     var styledId = styled.Id;
@@ -116,6 +116,6 @@ public class StyledFactoryShould
     Assert.That(styled.Id, Is.EqualTo(styledId));
   }
 
-  private static string MinifiedCssWithScopeFor(string element, string scope, string cssMinified) =>
-    cssMinified.Replace("@scope", scope).Replace("@element", element);
+  private static string MinifiedCssWithScopeFor(string element, string scopeId, string cssMinified) =>
+    cssMinified.Replace("ScopeId", scopeId).Replace("Element", element);
 }
