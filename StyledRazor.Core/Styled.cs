@@ -33,7 +33,8 @@ public class Styled
 
   public CssDeclarationDictionary Get(string selector)
   {
-    var declaration = Css.Get(selector);
+    var scopedSelector = $"{SetScope(Id, "div")}{selector}";
+    var declaration = Css.Get(scopedSelector);
     declaration.OnChange += UpdateCss;
     return declaration;
   }

@@ -4,39 +4,50 @@ namespace StyledRazor.Core.UnitTests;
 
 public class StyledShould
 {
-  private StyledFactory _create;
+  private StyledFactory _create = new(new TestComponent());
 
   private class TestComponent : StyledBase {}
 
   [SetUp]
   public void SetUp() => _create = new StyledFactory(new TestComponent());
 
-
   [Test]
   public void UpdateStyled()
   {
     var createBase = new StyledFactory(new TestComponent());
-    var styledDiv = _create.Div("{margin: 10px}");
     var styledBase = createBase.Div(string.Empty);
-    var minifiedCss = "div[component]{margin:10px;}";
-
+    var styledDiv = _create.Div("{Property: Value}");
+    var expectedCss = "div[ScopeId]{Property:Value;}".Replace("ScopeId", styledDiv.Id);
+      
     styledBase.Update(styledDiv);
+    
     Assert.Multiple(() =>
     {
       Assert.That(styledBase.Id, Is.EqualTo(styledDiv.Id));
-      Assert.That(styledBase.CssString, Is.EqualTo(minifiedCss.Replace("component", styledDiv.Id)));
+      Assert.That(styledBase.CssString, Is.EqualTo(expectedCss));
     });
   }
 
   [Test]
   public void GetCssDeclarationDictionaryFromASelector()
   {
-    var styled = _create.Div("{margin: 10px}");
+    var styled = _create.Div(@"
+    {
+      Property: Value
+    }
+
+    Child {
+      Property1: Value;
+      Property2: Value;
+    }");
+    
     var expectedDictionary = new CssDeclarationDictionary
     {
-      { "margin", "10px" },
+      ["Property1"] = "Value",
+      ["Property2"] = "Value",
     };
-    
-    Assert.That(styled.Get($"div[{styled.Id}]"), Is.EquivalentTo(expectedDictionary));
+
+    var dictionary = styled.Get("Child");
+    Assert.That(dictionary, Is.EquivalentTo(expectedDictionary));
   }
 }
