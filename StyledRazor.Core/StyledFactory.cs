@@ -15,14 +15,8 @@ public class StyledFactory
   }
 
   private Styled Create(string baseElement, string baseCss) =>
-    _styled ?? CreateAndSetStyled(baseElement, baseCss);
-
-  private Styled CreateAndSetStyled(string baseElement, string baseCss)
-  {
-    _styled = new Styled(_component, baseElement, baseCss);
-    return _styled;
-  }
-
+    _styled ??= new Styled(_component, baseElement, baseCss);
+  
   public Styled Div(string css = "") => Create("div", css);
 
   public Styled H1(string css = "") => Create("h1", css);
