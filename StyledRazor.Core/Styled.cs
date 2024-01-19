@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Components;using Microsoft.VisualBasic.CompilerServices;
+using static StyledRazor.Core.Css.CssHelper;
+using Microsoft.AspNetCore.Components;
 using StyledRazor.Core.Css;
-using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core;
 

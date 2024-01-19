@@ -1,5 +1,3 @@
-using static StyledRazor.Core.Utils.Css;
-
 namespace StyledRazor.Core.Css;
 
 public static class CssFactory

@@ -1,28 +1,30 @@
+using static System.String;
 using System;
+using System.Linq;
 
-namespace StyledRazor.Core.Utils;
+namespace StyledRazor.Core.Css;
 
-public static class Css
+public static class CssHelper
 {
   /// <summary>
   /// Convert CSS units to float (support for more units to be added).  
   /// </summary>
   /// <param name="value"></param>
-  /// <returns>float</returns>
+  /// <returns>int</returns>
   /// <exception cref="InvalidOperationException"></exception>
-  public static float ToInt(this string value)
+  public static int ToInt(this string value)
   {
-    if (value.Contains("px"))
-      return float.Parse(value.Replace("px", "").Trim());
+    var unit = CssUnit.ValidUnits.FirstOrDefault(x => value.Contains(x.Name));
+    var validNames = $"\n- {Join("\n- ", CssUnit.ValidNames)}";
 
-    if (value.Contains("rem"))
-      return float.Parse(value.Replace("rem", "").Trim()) * 16;
+    if (unit is null)
+      throw new InvalidOperationException($"Css value must be in one of the following units:{validNames}");
 
-    if (value.Contains("em"))
-      return float.Parse(value.Replace("em", "").Trim()) * 16;
-
-    throw new InvalidOperationException("value must be in 'px', 'rem' or 'em'."); 
+    return value.ConvertFrom(unit);
   }
+
+  private static int ConvertFrom(this string value, CssUnit unit) =>
+    (int)Math.Round(double.Parse(value.Replace(unit.Name, Empty).Trim()) * unit.Modifier);
 
   public static string AddScope(this string cssString, string scope)
   {
@@ -37,10 +39,10 @@ public static class Css
       .Insert(cssString.Length, "\0")
       .Replace($"{scope}\0", "");
   }
-  
-  public static string Minify(this string cssString)
+
+  public static string Minify(this string unminifiedCss)
   {
-    cssString = cssString
+    return unminifiedCss
       .Replace("  ", "")
       .Replace("\r", "\n")
       .Replace(" \n", "\n")
@@ -51,13 +53,11 @@ public static class Css
       .Replace(" {", "{")
       .Replace(" > ", ">")
       .Replace("\n", "");
-
-    return cssString;
   }
-  
-  public static string ToJson(this string cssString)
+
+  public static string ToJson(this string minifiedCss)
   {
-    var json = cssString.Insert(cssString.Length - 1, "}");
+    var json = minifiedCss.Insert(minifiedCss.Length - 1, "}");
     return json
       .Replace(": ", "\": \"")
       .Replace("{", "\":{\"")
@@ -68,17 +68,16 @@ public static class Css
       .Insert(0, "{\"");
   }
 
-  public static string ToCss(this string json, string baseElement) => 
+  public static string ToCss(this string json, string baseElement) =>
     json
       .Replace("},", $";}}{baseElement}")
       .Replace("\"", "")
       .Replace(",", ";")
       .Replace(":{", "{")
       .Replace("}}", ";}")[1..];
-  
+
   public static string SetScope(string componentId, string baseElement = "") => $"{baseElement}[{componentId}]";
 
   public static string SetId(string name) =>
     $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
-  
 }
