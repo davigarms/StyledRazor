@@ -1,51 +1,40 @@
+using static StyledRazor.Core.Utils.Css;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using static StyledRazor.Core.Utils.Css;
 
 namespace StyledRazor.Core.StyleSheet;
 
-public sealed class StyleSheetService
+public static class StyleSheetService
 {
-  private static StyleSheetService _instance;
-  
-  private static readonly object Lock = new();
-  
-  private readonly List<Styled> _styledList;
+  private static readonly List<Styled> StyledList = new();
 
-  private string Css => string.Join("", _styledList.Select(styled => styled.Css));
+  private static string Css => string.Join(string.Empty, StyledList.Select(styled => styled.Css));
 
-  public Func<Task> OnUpdate { get; set; }
-  
+  public static Func<Task> OnUpdate { get; set; }
 
-  public StyleSheetService()
-  {
-    _styledList = new List<Styled>();
-  }
-
-  public void Add(Styled styled)
+  public static void Add(Styled styled)
   {
     if (styled == null) return;
-    
-    _styledList.Add(styled);
+
+    StyledList.Add(styled);
     OnUpdate?.Invoke();
   }
 
-  public void Update(string id, Styled styled)
+  public static void Update(string id, Styled styled)
   {
-    var toUpdate = _styledList.FirstOrDefault(s => s.Id == id);
+    var toUpdate = StyledList.FirstOrDefault(s => s.Id == id);
 
-    if (toUpdate == null || toUpdate.Id == styled.Id) return;
-    
+    if (toUpdate == null ||
+        toUpdate.Id == styled.Id) return;
+
     toUpdate.UpdateStyle(styled);
     OnUpdate?.Invoke();
   }
 
-  public RenderFragment CreateStyleSheet() => CreateStyleSheet("");
-
-  public RenderFragment CreateStyleSheet(string baseCss) => builder =>
+  public static RenderFragment CreateStyleSheet(string baseCss = "") => builder =>
   {
     builder.OpenElement(0, "style");
     builder.AddContent(1, Minify(baseCss));
@@ -53,20 +42,5 @@ public sealed class StyleSheetService
     builder.CloseElement();
   };
 
-  public void Clear() => _styledList.Clear();
-
-  public static StyleSheetService GetInstance()
-  {
-    if (_instance == null)
-    {
-      lock (Lock)
-      {
-        if (_instance == null)
-        {
-          _instance = new StyleSheetService();
-        }
-      }
-    }
-    return _instance;
-  }
+  public static void Clear() => StyledList.Clear();
 }

@@ -17,8 +17,6 @@ public abstract class StyledBase : ComponentBase
   [Parameter] 
   public RenderFragment ChildContent { get; set; }
 
-  private static StyleSheetService StyleSheetService => StyleSheetService.GetInstance();
-
   protected readonly StyledFactory Create;
   
   protected ElementReference ElementRef { get; private set; }
@@ -28,7 +26,6 @@ public abstract class StyledBase : ComponentBase
   protected virtual string Style => "";
 
   public virtual Styled Base => null;
-  
 
   protected StyledBase()
   {

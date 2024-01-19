@@ -9,17 +9,15 @@ public class StyleSheet : ComponentBase, IDisposable
 {
   private RenderFragment StyleElement { get; set; }
 
-  private static StyleSheetService StyleSheetService => StyleSheetService.GetInstance();
-
   protected override void OnInitialized() => StyleSheetService.OnUpdate += UpdateStyleSheet;
 
+  protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.AddContent(0, StyleElement);
+  
   private async Task UpdateStyleSheet()
   {
     StyleElement = StyleSheetService.CreateStyleSheet(ResetCss);
     await InvokeAsync(StateHasChanged);
   }
-
-  protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.AddContent(0, StyleElement);
 
   public void Dispose()
   {
