@@ -6,7 +6,7 @@ namespace StyledRazor.Core;
 
 public class Styled
 {
-  private CssRulesetDictionary Css { get; set; }
+  private CssRuleset Css { get; set; }
 
   public string Id { get; private set; }
 
@@ -31,7 +31,7 @@ public class Styled
     UpdateCss();
   }
 
-  public CssDeclarationDictionary Get(string selector)
+  public CssStyleDeclaration Get(string selector)
   {
     var scopedSelector = $"{SetScope(Id, "div")}{selector}";
     var declaration = Css.Get(scopedSelector);

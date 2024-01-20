@@ -41,7 +41,7 @@ public class StyledShould
       Property2: Value;
     }");
     
-    var expectedDictionary = new CssDeclarationDictionary
+    var expectedDictionary = new CssStyleDeclaration
     {
       ["Property1"] = "Value",
       ["Property2"] = "Value",

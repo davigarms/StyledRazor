@@ -3,27 +3,27 @@ using StyledRazor.Core.Css;
 namespace StyledRazor.Core.UnitTests;
 
 [TestFixture]
-public class CssDeclarationDictionaryShould
+public class CssStyleDeclarationShould
 {
   private const string Property = "Property";
   private const string InitialValue = "InitialValue";
   private const string NewValue = "NewValue";
   private static readonly string Selector = TestContext.CurrentContext.Random.GetString(4);
 
-  private static readonly CssDeclarationDictionary InitialDeclaration = new()
+  private static readonly CssStyleDeclaration InitialDeclaration = new()
   {
     [Property] = InitialValue,
   };
   
-  private static readonly CssDeclarationDictionary NewDeclaration = new()
+  private static readonly CssStyleDeclaration NewDeclaration = new()
   {
     [Property] = NewValue,
   };
   
-  private static CssRulesetDictionary _css = new();
+  private static CssRuleset _css = new();
 
   [SetUp]
-  public void SetUp() => _css = new CssRulesetDictionary();
+  public void SetUp() => _css = new CssRuleset();
   
   [Test]
   public void SetNewProperty_WhenPropertyIsNotDefined()

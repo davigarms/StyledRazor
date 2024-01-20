@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace StyledRazor.Core.Css;
 
-public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
+public class CssRuleset : Dictionary<string, CssStyleDeclaration>
 {
   private static readonly JsonSerializerOptions JsonOptions = new()
   {
@@ -13,20 +14,20 @@ public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
     Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
   };
 
-  public CssDeclarationDictionary Get(string selector)
+  public CssStyleDeclaration Get(string selector)
   {
     var propertyExists = TryGetValue(selector, out var declaration);
     return propertyExists ? declaration : CreateEmptyDeclarationFor(selector);
   }
   
-  private CssDeclarationDictionary CreateEmptyDeclarationFor(string selector)
+  private CssStyleDeclaration CreateEmptyDeclarationFor(string selector)
   {
-    var declaration = new CssDeclarationDictionary();
+    var declaration = new CssStyleDeclaration();
     Add(selector, declaration);
     return declaration;
   }
 
-  public void Set(string selector, CssDeclarationDictionary declaration)
+  public void Set(string selector, CssStyleDeclaration declaration)
   {
     if (declaration.Count == 0) return;
     
@@ -59,15 +60,15 @@ public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
     return Count == 0 ? string.Empty : json.ToCss(baseElement);
   }
 
-  public static CssRulesetDictionary Deserialize(string cssString)
+  public static CssRuleset Deserialize(string cssString)
   {
-    if (string.IsNullOrEmpty(cssString)) return new CssRulesetDictionary();
+    if (string.IsNullOrEmpty(cssString)) return new CssRuleset();
 
     var json = cssString.Minify().ToJson();
 
     try
     {
-      return JsonSerializer.Deserialize<CssRulesetDictionary>(json);
+      return JsonSerializer.Deserialize<CssRuleset>(json);
     }
     catch (JsonException e)
     {
@@ -75,12 +76,12 @@ public class CssRulesetDictionary : Dictionary<string, CssDeclarationDictionary>
     }
   }
   
-  public static CssDeclarationDictionary DeserializeCssDeclaration(string cssRule)
+  public static CssStyleDeclaration DeserializeCssDeclaration(string cssRule)
   {
-    if (string.IsNullOrEmpty(cssRule)) return new CssDeclarationDictionary();
+    if (string.IsNullOrEmpty(cssRule)) return new CssStyleDeclaration();
 
     var json = cssRule.Minify().ToJson();
-    var cssRuleset = JsonSerializer.Deserialize<CssRulesetDictionary>(json);
-    return cssRuleset?.Values.FirstOrDefault() ?? new CssDeclarationDictionary();
+    var cssRuleset = JsonSerializer.Deserialize<CssRuleset>(json);
+    return cssRuleset?.Values.FirstOrDefault() ?? new CssStyleDeclaration();
   }
 }

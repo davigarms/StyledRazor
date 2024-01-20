@@ -2,6 +2,6 @@ namespace StyledRazor.Core.Css;
 
 public static class CssFactory
 {
-  public static CssRulesetDictionary Create(string baseCss, string scope = "") =>
-    CssRulesetDictionary.Deserialize(baseCss.AddScope(scope));
+  public static CssRuleset Create(string baseCss, string scope = "") =>
+    CssRuleset.Deserialize(baseCss.AddScope(scope));
 }

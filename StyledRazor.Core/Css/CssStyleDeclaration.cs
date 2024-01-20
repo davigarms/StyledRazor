@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StyledRazor.Core.Css;
 
-public class CssDeclarationDictionary : Dictionary<string, string>
+public class CssStyleDeclaration : Dictionary<string, string>
 {
   public event Action OnChange;
 
