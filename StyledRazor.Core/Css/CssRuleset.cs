@@ -51,8 +51,6 @@ public class CssRuleset : Dictionary<string, CssStyleDeclaration>
 
   public new string ToString() => Serialize(false);
 
-  public string Serialize() => Serialize(true);
-
   public string Serialize(bool scoped)
   {
     var baseElement = scoped ? Keys.ToArray()[0] + " " : "";

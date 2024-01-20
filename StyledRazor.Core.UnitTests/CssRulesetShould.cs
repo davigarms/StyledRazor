@@ -153,7 +153,7 @@ public class CssRulesetShould
   }
 
   [Test]
-  public void SerializeCssWithScope_WhenScopedIsTrue()
+  public void SerializeCssWithParentScope_WhenScopedIsTrue()
   {
     var css = new CssRuleset
     {
@@ -162,7 +162,7 @@ public class CssRulesetShould
     };
     const string expectedCss = "Element{Property:InitialValue;}Element Selector{Property:InitialValue;}"; 
     
-    var serializedCss = css.Serialize();
+    var serializedCss = css.Serialize(true);
     
     Assert.That(serializedCss, Is.EqualTo(expectedCss));
   }
