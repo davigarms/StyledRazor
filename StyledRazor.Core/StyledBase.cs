@@ -1,49 +1,40 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using System;
 using System.Collections.Generic;
 
 namespace StyledRazor.Core;
 
 public abstract class StyledBase : ComponentBase
 {
-  [Parameter] 
+  [Parameter]
   public Styled Styled { get; set; }
-  
-  [Parameter(CaptureUnmatchedValues = true)] 
+
+  [Parameter(CaptureUnmatchedValues = true)]
   public IDictionary<string, object> Params { get; set; }
-  
-  [Parameter] 
+
+  [Parameter]
   public RenderFragment ChildContent { get; set; }
 
   protected readonly StyledFactory Create;
-  
+
   protected ElementReference ElementRef { get; private set; }
-  
+
   protected virtual bool UseElementRef => false;
-  
+
   protected virtual string Style => "";
 
   public virtual Styled Base => null;
-  
 
   protected StyledBase()
   {
     Create = new StyledFactory(this);
   }
-  
-  protected override void OnInitialized()
-  {
-    if (Base == null) 
-      throw new NullReferenceException
-        ($"Base field must be overriden on <{GetType().Name}> to set the component CSS");
-  }
 
   protected override void OnParametersSet()
   {
-    if (Styled == null) return;
+    if (Styled == null || Base == null) return;
 
-    Base.UpdateStyle(Styled);
+    Base.Update(Styled);
   }
 
   protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -65,8 +56,8 @@ public abstract class StyledBase : ComponentBase
 
   private void BuildComponentStyle(RenderTreeBuilder builder)
   {
-    if (string.IsNullOrEmpty(Style)) return; 
-    
+    if (string.IsNullOrEmpty(Style)) return;
+
     builder.AddAttribute(0, "style", Style);
   }
 
@@ -81,7 +72,7 @@ public abstract class StyledBase : ComponentBase
   private void BuildElementReference(RenderTreeBuilder builder)
   {
     if (!UseElementRef) return;
-    
+
     builder.AddElementReferenceCapture(0, value => ElementRef = value);
   }
 
@@ -94,10 +85,10 @@ public abstract class StyledBase : ComponentBase
 
   private void BuildComponentCss(RenderTreeBuilder builder)
   {
-    if (Base.Css == null) return;
+    if (Base.CssString == null) return;
 
     builder.OpenElement(0, "style");
-    builder.AddContent(0, Base.Css);
+    builder.AddContent(0, Base.CssString);
     builder.CloseElement();
   }
 }
