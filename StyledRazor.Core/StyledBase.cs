@@ -1,40 +1,49 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using StyledRazor.Core.StyleSheet;
+using System;
 using System.Collections.Generic;
 
 namespace StyledRazor.Core;
 
 public abstract class StyledBase : ComponentBase
 {
-  [Parameter]
+  [Parameter] 
   public Styled Styled { get; set; }
-
-  [Parameter(CaptureUnmatchedValues = true)]
+  
+  [Parameter(CaptureUnmatchedValues = true)] 
   public IDictionary<string, object> Params { get; set; }
-
-  [Parameter]
+  
+  [Parameter] 
   public RenderFragment ChildContent { get; set; }
 
   protected readonly StyledFactory Create;
-
+  
   protected ElementReference ElementRef { get; private set; }
-
+  
   protected virtual bool UseElementRef => false;
+  
+  protected virtual string Style => string.Empty;
 
-  protected virtual string Style => "";
-
-  public virtual Styled Base => null;
+  public virtual Styled Base => Create.Div();
 
   protected StyledBase()
   {
     Create = new StyledFactory(this);
   }
+  
+  protected override void OnInitialized() => StyleSheetService.Add(Base);
 
   protected override void OnParametersSet()
   {
-    if (Styled == null || Base == null) return;
-
-    Base.Update(Styled);
+    if (Styled == null) return;
+    UpdateStyle(Styled);
+  }
+  
+  private void UpdateStyle(Styled styled)
+  {
+    StyleSheetService.Update(Base.Id, styled);
+    Base.Update(styled);
   }
 
   protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -45,26 +54,20 @@ public abstract class StyledBase : ComponentBase
     BuildComponentParams(builder);
     BuildElementReference(builder);
     BuildComponentContent(builder);
-    BuildComponentCss(builder);
     builder.CloseElement();
   }
 
-  private void BuildComponentId(RenderTreeBuilder builder)
-  {
-    builder.AddAttribute(0, Base.Id);
-  }
+  private void BuildComponentId(RenderTreeBuilder builder) => builder.AddAttribute(0, Base.Id);
 
   private void BuildComponentStyle(RenderTreeBuilder builder)
   {
-    if (string.IsNullOrEmpty(Style)) return;
-
+    if (string.IsNullOrEmpty(Style)) return; 
     builder.AddAttribute(0, "style", Style);
   }
 
   private void BuildComponentParams(RenderTreeBuilder builder)
   {
     if (Params == null) return;
-
     foreach (var (key, value) in Params)
       builder.AddAttribute(0, key, value);
   }
@@ -72,23 +75,12 @@ public abstract class StyledBase : ComponentBase
   private void BuildElementReference(RenderTreeBuilder builder)
   {
     if (!UseElementRef) return;
-
     builder.AddElementReferenceCapture(0, value => ElementRef = value);
   }
 
   private void BuildComponentContent(RenderTreeBuilder builder)
   {
     if (ChildContent == null) return;
-
     builder.AddContent(0, ChildContent);
-  }
-
-  private void BuildComponentCss(RenderTreeBuilder builder)
-  {
-    if (Base.CssString == null) return;
-
-    builder.OpenElement(0, "style");
-    builder.AddContent(0, Base.CssString);
-    builder.CloseElement();
   }
 }
