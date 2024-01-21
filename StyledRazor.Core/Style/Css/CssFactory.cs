@@ -1,4 +1,4 @@
-namespace StyledRazor.Core.Css;
+namespace StyledRazor.Core.Style.Css;
 
 public static class CssFactory
 {

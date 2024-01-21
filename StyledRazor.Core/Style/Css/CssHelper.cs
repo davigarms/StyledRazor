@@ -1,8 +1,8 @@
-using static System.String;
 using System;
 using System.Linq;
+using static System.String;
 
-namespace StyledRazor.Core.Css;
+namespace StyledRazor.Core.Style.Css;
 
 public static class CssHelper
 {
@@ -14,7 +14,7 @@ public static class CssHelper
   /// <exception cref="InvalidOperationException"></exception>
   public static int ToInt(this string value)
   {
-    var unit = CssUnit.ValidUnits.FirstOrDefault(x => value.Contains(x.Name));
+    var unit = CssUnit.ValidUnits.FirstOrDefault(x => value.Contains((string)x.Name));
     var validNames = $"\n- {Join("\n- ", CssUnit.ValidNames)}";
 
     if (unit is null)

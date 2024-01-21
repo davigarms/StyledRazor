@@ -1,4 +1,4 @@
-using static StyledRazor.Core.Css.CssHelper;
+using static StyledRazor.Core.Style.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core;
 using StyledRazor.Core.Browser;

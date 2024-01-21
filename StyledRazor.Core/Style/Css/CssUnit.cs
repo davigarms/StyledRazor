@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace StyledRazor.Core.Css;
+namespace StyledRazor.Core.Style.Css;
 
 public class CssUnit
 {
