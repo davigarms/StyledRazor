@@ -5,10 +5,10 @@
 
   <Container Fluid>
     <Grid BaseWidth="200px">
-        <Button>Default</Button>
-        <Button Styled="@DynamicButton.Base" @onclick="@Click">
-          Click me
-        </Button>
+      <Button>Default</Button>
+      <Button Styled="@DynamicButton.Base" @onclick="@Click">
+        Click me
+      </Button>
     </Grid>
   </Container>
 
@@ -22,7 +22,7 @@
 
   <Container Fluid>
     <Stack Gutter="@Tokens.Zero">
-      
+
       <Container Fluid>
         <Grid Gutter="@Tokens.SpacingS" ColsLg="4" ColsMd="2" ColsSm="1" Ratio="1">
           @for (var i = 1; i < 5; i++)
@@ -68,7 +68,7 @@
 
     </Stack>
   </Container>
-  
+
 </Stack>
 
 @code

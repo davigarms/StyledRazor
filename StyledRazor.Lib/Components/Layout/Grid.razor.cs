@@ -1,9 +1,8 @@
+using static StyledRazor.Core.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core;
 using StyledRazor.Core.Browser;
 using StyledRazor.Core.MediaQuery;
-using StyledRazor.Core.Utils;
-using static StyledRazor.Core.Utils.Browser;
 using StyledRazor.Lib.Styles;
 using System.Threading.Tasks;
 using System;
@@ -85,7 +84,7 @@ public class Grid : StyledBase, IDisposable
     overflow: hidden;
     flex-grow: var(--flex-grow);
   }
-    
+
   > [double] {
     flex-basis: calc(2 * (var(--width)) - 1 * var(--gutter)) !important
   }
@@ -135,12 +134,6 @@ public class Grid : StyledBase, IDisposable
     }
   }
 
-  public void Dispose()
-  {
-    BrowserService.OnResize -= WindowSizeHasChanged;
-    GC.SuppressFinalize(this);
-  }
-
   private async Task WindowSizeHasChanged()
   {
     await SetNumberOfColumns();
@@ -163,7 +156,7 @@ public class Grid : StyledBase, IDisposable
           "initial";
   }
 
-  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - RemToInt(Gutter)) / Ratio}px";
+  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - Gutter.ToInt()) / Ratio}px";
 
   private ResponsiveCols GetResponsiveColumns()
   {
@@ -179,5 +172,11 @@ public class Grid : StyledBase, IDisposable
     if (ColsXxl > 0) columns.Add(BreakPoint.Xxl, ColsXxl);
 
     return columns.Count > 0 ? columns : null;
+  }
+
+  public void Dispose()
+  {
+    BrowserService.OnResize -= WindowSizeHasChanged;
+    GC.SuppressFinalize(this);
   }
 }

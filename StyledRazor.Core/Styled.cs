@@ -1,36 +1,43 @@
+using static StyledRazor.Core.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
-using System;
-using static StyledRazor.Core.Utils.Css;
+using StyledRazor.Core.Css;
 
 namespace StyledRazor.Core;
 
 public class Styled
 {
+  private CssRuleset Css { get; set; }
+
   public string Id { get; private set; }
 
   public string Element { get; private set; }
 
-  public string Css { get; private set; }
+  public string CssString { get; private set; }
 
 
   internal Styled(IComponent component, string element, string baseCss)
   {
-    Id = IdFrom(component.GetType().Name);
+    Id = SetId(component.GetType().Name);
     Element = element;
-
-    var baseElementId = ElementIdFrom(Element, Id);
-    Css = Minify(baseCss, baseElementId);
+    Css = CssFactory.Create(baseCss, SetScope(Id, Element));
+    UpdateCss();
   }
 
-  public void UpdateStyle(Styled styled)
+  public void Update(Styled styled)
   {
     Id = styled.Id;
-    Css = styled.Css;
     Element = styled.Element;
+    Css = styled.Css;
+    UpdateCss();
   }
 
-  private static string ElementIdFrom(string baseElement, string componentId) => $"{baseElement}[{componentId}]";
-
-  private static string IdFrom(string name) =>
-    $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
+  public CssStyleDeclaration Get(string selector)
+  {
+    var scopedSelector = $"{SetScope(Id, "div")}{selector}";
+    var declaration = Css.Get(scopedSelector);
+    declaration.OnChange += UpdateCss;
+    return declaration;
+  }
+  
+  private void UpdateCss() => CssString = Css?.ToString();
 }

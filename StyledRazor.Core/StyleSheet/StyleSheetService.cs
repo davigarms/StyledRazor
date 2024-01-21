@@ -1,4 +1,4 @@
-using static StyledRazor.Core.Utils.Css;
+using static StyledRazor.Core.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ public static class StyleSheetService
 {
   private static readonly List<Styled> StyledList = new();
 
-  private static string Css => string.Join(string.Empty, StyledList.Select(styled => styled.Css));
+  private static string Css => string.Join(string.Empty, StyledList.Select(styled => styled.CssString));
 
   public static Func<Task> OnUpdate { get; set; }
 
@@ -30,14 +30,14 @@ public static class StyleSheetService
     if (toUpdate == null ||
         toUpdate.Id == styled.Id) return;
 
-    toUpdate.UpdateStyle(styled);
+    toUpdate.Update(styled);
     OnUpdate?.Invoke();
   }
 
   public static RenderFragment CreateStyleSheet(string baseCss = "") => builder =>
   {
     builder.OpenElement(0, "style");
-    builder.AddContent(1, Minify(baseCss));
+    builder.AddContent(1, baseCss.Minify());
     builder.AddContent(1, Css);
     builder.CloseElement();
   };

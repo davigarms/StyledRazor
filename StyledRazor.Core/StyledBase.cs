@@ -51,7 +51,7 @@ public abstract class StyledBase : ComponentBase
   private void UpdateStyle(Styled styled)
   {
     StyleSheetService.Update(Base.Id, styled);
-    Base.UpdateStyle(styled);
+    Base.Update(styled);
   }
 
   protected override void BuildRenderTree(RenderTreeBuilder builder)
