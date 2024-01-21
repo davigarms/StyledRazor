@@ -27,8 +27,7 @@ public static class StyleSheetService
   {
     var toUpdate = StyledList.FirstOrDefault(s => s.Id == id);
 
-    if (toUpdate == null ||
-        toUpdate.Id == styled.Id) return;
+    if (toUpdate == null || toUpdate.Id == styled.Id) return;
 
     toUpdate.Update(styled);
     OnUpdate?.Invoke();

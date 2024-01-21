@@ -23,28 +23,20 @@ public abstract class StyledBase : ComponentBase
   
   protected virtual bool UseElementRef => false;
   
-  protected virtual string Style => "";
+  protected virtual string Style => string.Empty;
 
-  public virtual Styled Base => null;
+  public virtual Styled Base => Create.Div();
 
   protected StyledBase()
   {
     Create = new StyledFactory(this);
   }
   
-  protected override void OnInitialized()
-  {
-    if (Base == null) 
-      throw new NullReferenceException
-        ($"Base field must be overriden on <{GetType().Name}> to set the component CSS");
-
-    StyleSheetService.Add(Base);
-  }
+  protected override void OnInitialized() => StyleSheetService.Add(Base);
 
   protected override void OnParametersSet()
   {
     if (Styled == null) return;
-
     UpdateStyle(Styled);
   }
   
@@ -65,22 +57,17 @@ public abstract class StyledBase : ComponentBase
     builder.CloseElement();
   }
 
-  private void BuildComponentId(RenderTreeBuilder builder)
-  {
-    builder.AddAttribute(0, Base.Id);
-  }
+  private void BuildComponentId(RenderTreeBuilder builder) => builder.AddAttribute(0, Base.Id);
 
   private void BuildComponentStyle(RenderTreeBuilder builder)
   {
     if (string.IsNullOrEmpty(Style)) return; 
-    
     builder.AddAttribute(0, "style", Style);
   }
 
   private void BuildComponentParams(RenderTreeBuilder builder)
   {
     if (Params == null) return;
-
     foreach (var (key, value) in Params)
       builder.AddAttribute(0, key, value);
   }
@@ -88,14 +75,12 @@ public abstract class StyledBase : ComponentBase
   private void BuildElementReference(RenderTreeBuilder builder)
   {
     if (!UseElementRef) return;
-    
     builder.AddElementReferenceCapture(0, value => ElementRef = value);
   }
 
   private void BuildComponentContent(RenderTreeBuilder builder)
   {
     if (ChildContent == null) return;
-
     builder.AddContent(0, ChildContent);
   }
 }
