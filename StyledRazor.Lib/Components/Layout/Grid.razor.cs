@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using StyledRazor.Core;
 using StyledRazor.Core.Browser;
 using StyledRazor.Core.MediaQuery;
-using StyledRazor.Lib.Styles;
+using StyledRazor.Core.Style;
 using System.Threading.Tasks;
 using System;
 

@@ -20,4 +20,8 @@
     <ProjectReference Include="..\StyledRazor.Core\StyledRazor.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Styles" />
+  </ItemGroup>
+
 </Project>
