@@ -4,19 +4,19 @@
 
 <Layout Styled="@Base"
         style=@($@"
-		      --min-height: {@MinimumHeight};
+		      --min-height: {@MinimumHeight ?? Tokens.SizeTotal};
 		      --padding: {@Padding};
-		      --space: {@Space};")>
+		      --space: {@Space ?? Tokens.SpacingM};")>
   @ChildContent
 </Layout>
 
 @code {
 
   [Parameter]
-  public string MinimumHeight { get; set; } = Tokens.SizeTotal;
+  public string MinimumHeight { get; set; }
 
   [Parameter]
-  public string Space { get; set; } = Tokens.SpacingM;
+  public string Space { get; set; }
 
   [Parameter]
   public bool NoPadding { get; set; }

@@ -7,23 +7,30 @@ namespace StyledRazor.Lib.Components.UI.Button;
 public class Button : StyledBase
 {
 	[Parameter] public string Margin { get; set; } = "0";
-	[Parameter] public string Padding { get; set; }
+  [Parameter] public string Padding { get; set; }
+  
+  public Button() {}
 
-	public override Styled Base => Create.A($@"
+  public Button(ITokens tokens)
+  {
+	  Tokens ??= tokens;
+  }
+
+  public override Styled Base => Create.A($@"
 	{{
     {ButtonDefinition}                       
   }}");
-	
-	protected override string Style => $@"
+
+  protected override string Style => $@"
 	  --margin: {(string.IsNullOrEmpty(Margin) ? ButtonMargin : Margin)};
 	  --padding: {(string.IsNullOrEmpty(Padding) ? ButtonPadding : Padding)}
 	";
-	
-	private const string ButtonMargin = $"{Tokens.SpacingS} {Tokens.SpacingM}";
-	
-	private const string ButtonPadding = $"{Tokens.SpacingS}";
 
-	protected const string ButtonDefinition = $@"
+  private string ButtonMargin => $"{Tokens.SpacingS} {Tokens.SpacingM}";
+
+  private string ButtonPadding => $"{Tokens.SpacingS}";
+
+  protected string ButtonDefinition => $@"
 		display: inline-block;
 		border-radius: {Tokens.SpacingXs};
 		background: transparent;
@@ -38,7 +45,11 @@ public class Button : StyledBase
 
 public class GreyButton : Button
 {
-	public override Styled Base => Create.A($@"
+	public GreyButton() {}
+  
+	public GreyButton(ITokens tokens) : base(tokens) {}
+
+  public override Styled Base => Create.A($@"
 	{{
 		{ButtonDefinition}
 		background: grey;
@@ -48,7 +59,11 @@ public class GreyButton : Button
 
 public class AlertButton : Button
 {
-	public override Styled Base => Create.A($@"
+	public AlertButton() {}
+	
+  public AlertButton(ITokens tokens) : base(tokens) {}
+
+  public override Styled Base => Create.A($@"
 	{{
 		{ButtonDefinition}
 		background: red;

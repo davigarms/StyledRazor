@@ -1,13 +1,16 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
+using StyledRazor.Core.Style;
 using StyledRazor.Core.StyleSheet;
-using System;
 using System.Collections.Generic;
 
 namespace StyledRazor.Core;
 
 public abstract class StyledBase : ComponentBase
 {
+  [Inject] 
+  protected ITokens Tokens { get; set; }
+  
   [Parameter] 
   public Styled Styled { get; set; }
   

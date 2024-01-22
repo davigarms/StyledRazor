@@ -9,7 +9,7 @@ public class Box : StyledBase
 {
 	[Parameter] public string Height { get; set; } = "initial";
 	[Parameter] public string Width { get; set; } = "initial";
-	[Parameter] public string Padding { get; set; } = Tokens.Zero;
+	[Parameter] public string Padding { get; set; }
 	[Parameter] public string Left { get; set; }
 	[Parameter] public string Top { get; set; }
 	[Parameter] public string Right { get; set; }
@@ -23,7 +23,7 @@ public class Box : StyledBase
 	private bool HasMirroredPadding => !string.IsNullOrEmpty(Horizontal) || !string.IsNullOrEmpty(Vertical);
 
 	private string ShorthandPadding => HasIndividualPadding ? string.Empty :
-		HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero};" : $"--padding: {Padding};";
+		HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero};" : $"--padding: {Padding ?? Tokens.Zero};";
 
 	public override Styled Base => Create.Div(@"
 	{

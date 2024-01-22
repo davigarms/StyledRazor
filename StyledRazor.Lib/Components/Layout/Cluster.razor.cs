@@ -7,12 +7,12 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Cluster : StyledBase
 {
-	[Parameter] public string Space { get; set; } = Tokens.Zero;
+	[Parameter] public string Space { get; set; }
 	[Parameter] public bool Wrap { get; set; }
 	[Parameter] public bool WrapReverse { get; set; }
-	[Parameter] public string Align { get; set; } = Tokens.AlignCenter;
+	[Parameter] public string Align { get; set; }
 	[Parameter] public string AlignContent { get; set; }
-	[Parameter] public string Justify { get; set; } = Tokens.AlignFlexEnd;
+	[Parameter] public string Justify { get; set; }
 	[Parameter] public bool NoPadding { get; set; }
 
 	private string Padding => NoPadding ? Tokens.Zero : Space;
@@ -62,11 +62,11 @@ public class Cluster : StyledBase
 	}");
 
 	protected override string Style => $@"
-	  --gap: {Space};
+	  --gap: {Space ?? Tokens.Zero};
 	  --flex-wrap: {FlexWrap};
-	  --align-items: {Align};
+	  --align-items: {Align ?? Tokens.AlignCenter};
 	  --align-content: {AlignContent};
-	  --justify: {Justify};
+	  --justify: {Justify ?? Tokens.AlignFlexEnd};
 	  --padding: {Padding};
   ";
 }

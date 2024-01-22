@@ -4,12 +4,12 @@
 
 <Layout Styled="@Base"
         style=@($@"
-					--gutter: {@Gutter};")>
+					--gutter: {@Gutter ?? Tokens.SpacingL};")>
   @ChildContent
 </Layout>
 
 @code {
-  [Parameter] public string Gutter { get; set; } = Tokens.SpacingL;
+  [Parameter] public string Gutter { get; set; }
 
 	public override Styled Base => Create.Div(@"
 	{

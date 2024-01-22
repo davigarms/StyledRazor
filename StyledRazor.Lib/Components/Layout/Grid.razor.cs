@@ -12,7 +12,7 @@ namespace StyledRazor.Lib.Components.Layout;
 public class Grid : StyledBase, IDisposable
 {
   [Parameter]
-  public string Gutter { get; set; } = Tokens.SpacingS;
+  public string Gutter { get; set; }
 
   [Parameter]
   public bool Grow { get; set; } = true;
@@ -62,7 +62,7 @@ public class Grid : StyledBase, IDisposable
     --height: {CalculatedHeight};
     --width: {CalculatedWidth};
     --flex-grow: {FlexGrow};
-    --gutter: {Gutter};
+    --gutter: {Gutter ?? Tokens.SpacingS};
   ";
 
   public override Styled Base => Create.Div(@"
@@ -156,7 +156,7 @@ public class Grid : StyledBase, IDisposable
           "initial";
   }
 
-  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - Gutter.ToInt()) / Ratio}px";
+  private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - (Gutter ?? Tokens.SpacingS).ToInt()) / Ratio}px";
 
   private ResponsiveCols GetResponsiveColumns()
   {

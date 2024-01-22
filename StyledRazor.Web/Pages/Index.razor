@@ -69,15 +69,18 @@
 
     </Stack>
   </Container>
-
 </Stack>
 
 @code
 {
-  private Button DynamicButton { get; set; } = new GreyButton();
+  [Inject] protected ITokens Tokens { get; set; }
+  
+  private Button DynamicButton { get; set; } 
+
+  protected override void OnInitialized() => DynamicButton = new GreyButton(Tokens);
 
   private void Click() => DynamicButton =
     DynamicButton is GreyButton
-      ? new AlertButton()
-      : new GreyButton();
+      ? new AlertButton(Tokens)
+      : new GreyButton(Tokens);
 }
