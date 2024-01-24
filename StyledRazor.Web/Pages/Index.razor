@@ -1,5 +1,7 @@
 @page "/"
 @using StyledRazor.Core.Style
+@using StyledRazor.Core
+
 
 <Stack Gutter="@Tokens.SpacingXs">
   <Box>First</Box>
@@ -7,7 +9,7 @@
   <Container Fluid>
     <Grid BaseWidth="200px">
       <Button>Default</Button>
-      <Button Styled="@DynamicButton.Base" @onclick="@Click">
+      <Button Styled="@ActiveButton" @onclick="@Click">
         Click me
       </Button>
     </Grid>
@@ -74,13 +76,14 @@
 @code
 {
   [Inject] protected ITokens Tokens { get; set; }
-  
-  private Button DynamicButton { get; set; } 
 
-  protected override void OnInitialized() => DynamicButton = new GreyButton(Tokens);
+  private Styled ActiveButton { get; set; }
 
-  private void Click() => DynamicButton =
-    DynamicButton is GreyButton
-      ? new AlertButton(Tokens)
-      : new GreyButton(Tokens);
+  protected override void OnInitialized() => ActiveButton = Styled(typeof(GreyButton));
+
+  private Styled Styled(Type type) => (Activator.CreateInstance(type, Tokens) as StyledBase)?.Base;
+
+  private void Click() => ActiveButton = ActiveButton.Type == typeof(GreyButton)
+                                           ? Styled(typeof(AlertButton))
+                                           : Styled(typeof(GreyButton));
 }

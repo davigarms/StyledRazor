@@ -11,10 +11,7 @@ public class Button : StyledBase
   
   public Button() {}
 
-  public Button(ITokens tokens)
-  {
-	  Tokens ??= tokens;
-  }
+  public Button(ITokens tokens) : base(tokens) {}
 
   public override Styled Base => Create.A($@"
 	{{
@@ -49,7 +46,7 @@ public class GreyButton : Button
   
 	public GreyButton(ITokens tokens) : base(tokens) {}
 
-  public override Styled Base => Create.A($@"
+	public override Styled Base => Create.A($@"
 	{{
 		{ButtonDefinition}
 		background: grey;
