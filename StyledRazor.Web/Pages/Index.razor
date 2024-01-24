@@ -76,14 +76,14 @@
 @code
 {
   [Inject] protected ITokens Tokens { get; set; }
+  
+  [Inject] protected StyledProvider StyledProvider { get; set; }
 
   private Styled ActiveButton { get; set; }
 
-  protected override void OnInitialized() => ActiveButton = Styled(typeof(GreyButton));
-
-  private Styled Styled(Type type) => (Activator.CreateInstance(type, Tokens) as StyledBase)?.Base;
+  protected override void OnInitialized() => ActiveButton = StyledProvider.Get(typeof(GreyButton));
 
   private void Click() => ActiveButton = ActiveButton.Type == typeof(GreyButton)
-                                           ? Styled(typeof(AlertButton))
-                                           : Styled(typeof(GreyButton));
+                                           ? StyledProvider.Get(typeof(AlertButton))
+                                           : StyledProvider.Get(typeof(GreyButton));
 }

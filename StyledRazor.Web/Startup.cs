@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using StyledRazor.Core;
 using StyledRazor.Core.Browser;
 using StyledRazor.Core.MediaQuery;
 using StyledRazor.Core.Style;
@@ -25,6 +26,7 @@ namespace StyledRazor.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<IBrowserConnector, BrowserConnector>();
+            services.AddScoped<StyledProvider>();
             services.AddScoped<ITokens, Tokens>();
             services.AddScoped<BrowserService>();
             services.AddScoped<MediaQueryService>();
