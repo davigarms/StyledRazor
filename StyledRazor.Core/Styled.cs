@@ -1,6 +1,5 @@
 using static StyledRazor.Core.Style.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Style;
 using StyledRazor.Core.Style.Css;
 using System;
 
