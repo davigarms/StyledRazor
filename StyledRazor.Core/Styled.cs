@@ -16,7 +16,7 @@ public class Styled
 
   public string CssString { get; private set; }
   
-  public Type Type { get; private set; }
+  public Type Type { get; }
   
   internal Styled(IComponent component, string element, string baseCss)
   {
