@@ -1,4 +1,5 @@
 using StyledRazor.Core;
+using StyledRazor.Core.Component;
 using System.Text.Json.Serialization;
 
 namespace StyledRazor.Lib.Components.Layout;

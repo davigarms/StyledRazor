@@ -1,3 +1,4 @@
+using StyledRazor.Core.Component;
 using StyledRazor.Core.Style;
 using System;
 
