@@ -1,6 +1,6 @@
 using StyledRazor.Core.MediaQuery;
 
-namespace StyledRazor.Core.Style;
+namespace StyledRazor.Core.Style.DesignTokens;
 
 public class Tokens : ITokens
 {

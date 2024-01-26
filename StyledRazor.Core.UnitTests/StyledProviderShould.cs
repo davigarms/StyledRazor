@@ -1,5 +1,5 @@
 using StyledRazor.Core.Component;
-using StyledRazor.Core.Style;
+using StyledRazor.Core.Style.DesignTokens;
 
 namespace StyledRazor.Core.UnitTests;
 

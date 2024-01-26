@@ -1,4 +1,4 @@
-namespace StyledRazor.Core.Style;
+namespace StyledRazor.Core.Style.DesignTokens;
 
 public interface ITokens
 {
