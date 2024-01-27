@@ -61,7 +61,7 @@ public class StyledShould
 
     var dictionary = styled.Get("Child");
     
-    Assert.That(dictionary, Is.EquivalentTo(ExpectedDictionary));
+    Assert.That(dictionary, Is.EqualTo(ExpectedDictionary));
   }
 
   [Test]
@@ -71,17 +71,18 @@ public class StyledShould
 
     var dictionary = styled.Get("Child");
 
-    Assert.That(dictionary, Is.EquivalentTo(ExpectedDictionary));
+    Assert.That(dictionary, Is.EqualTo(ExpectedDictionary));
   }
 
   [Test]
   public void GetCssDeclarationDictionaryFromAnyValidSelector([Values] ValidElements elementName)
   {
-    var styled = _create.GetType().GetMethod(elementName.ToString())?
+    var styled = _create.GetType()
+                   .GetMethod(elementName.ToString())?
                    .Invoke(_create, new object?[]{ Css }) as Styled;
     
     var dictionary = styled?.Get("Child");
 
-    Assert.That(dictionary, Is.EquivalentTo(ExpectedDictionary));
+    Assert.That(dictionary, Is.EqualTo(ExpectedDictionary));
   }
 }
