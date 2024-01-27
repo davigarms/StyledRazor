@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace StyledRazor.Core;
+namespace StyledRazor.Core.Component;
 
 public class StyledFactory
 {

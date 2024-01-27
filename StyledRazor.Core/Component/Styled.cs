@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 using StyledRazor.Core.Style.Css;
 using System;
 
-namespace StyledRazor.Core;
+namespace StyledRazor.Core.Component;
 
 public class Styled
 {
