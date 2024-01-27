@@ -1,5 +1,4 @@
 using StyledRazor.Core.Component;
-using StyledRazor.Core.Style;
 using StyledRazor.Core.Style.Css;
 
 namespace StyledRazor.Core.UnitTests;
@@ -9,6 +8,15 @@ public class StyledShould
   private StyledFactory _create = new(new TestComponent());
 
   private class TestComponent : StyledBase {}
+
+  public enum ValidElements
+  {
+    Div,
+    A,
+    H1,
+    Li,
+    Ul,
+  }
   
   private const string Css = @"{
       Property: Value
@@ -62,6 +70,17 @@ public class StyledShould
     var styled = _create.A(Css);
 
     var dictionary = styled.Get("Child");
+
+    Assert.That(dictionary, Is.EquivalentTo(ExpectedDictionary));
+  }
+
+  [Test]
+  public void GetCssDeclarationDictionaryFromAnyValidSelector([Values] ValidElements elementName)
+  {
+    var styled = _create.GetType().GetMethod(elementName.ToString())?
+                   .Invoke(_create, new object?[]{ Css }) as Styled;
+    
+    var dictionary = styled?.Get("Child");
 
     Assert.That(dictionary, Is.EquivalentTo(ExpectedDictionary));
   }
