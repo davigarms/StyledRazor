@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace StyledRazor.Core.Component;
 
-public class StyledBase : ComponentBase
+public abstract class StyledBase : ComponentBase
 {
   [Inject] 
   protected ITokens Tokens { get; set; }
