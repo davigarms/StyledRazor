@@ -76,8 +76,8 @@ public static class CssHelper
       .Replace(":{", "{")
       .Replace("}}", ";}")[1..];
 
-  public static string SetScope(string componentId, string baseElement = "") => $"{baseElement}[{componentId}]";
+  public static string ScopeFrom(string componentId, string baseElement = "") => $"{baseElement}[{componentId}]";
 
-  public static string SetId(string name) =>
+  public static string IdFrom(string name) =>
     $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
 }

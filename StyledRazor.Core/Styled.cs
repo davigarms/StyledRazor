@@ -20,9 +20,9 @@ public class Styled
   internal Styled(IComponent component, string element, string baseCss)
   {
     Type = component.GetType();
-    Id = SetId(Type.Name);
+    Id = IdFrom(Type.Name);
     Element = element;
-    Css = CssFactory.Create(baseCss, SetScope(Id, Element));
+    Css = CssFactory.Create(baseCss, ScopeFrom(Id, Element));
     UpdateCss();
   }
 
@@ -36,7 +36,7 @@ public class Styled
 
   public CssStyleDeclaration Get(string selector)
   {
-    var scopedSelector = $"{SetScope(Id, Element)}{selector}";
+    var scopedSelector = $"{ScopeFrom(Id, Element)}{selector}";
     var declaration = Css.Get(scopedSelector);
     declaration.OnChange += UpdateCss;
     return declaration;
