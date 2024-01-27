@@ -1,7 +1,7 @@
 using StyledRazor.Core.Component;
 using StyledRazor.Core.Style.Css;
 
-namespace StyledRazor.Core.UnitTests;
+namespace StyledRazor.Core.UnitTests.Component;
 
 public class StyledShould
 {
