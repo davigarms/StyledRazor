@@ -12,50 +12,35 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Grid : StyledBase, IDisposable
 {
-  [Parameter]
-  public string Gutter { get; set; }
+  [Parameter] public string Gutter { get; set; }
 
-  [Parameter]
-  public bool Grow { get; set; } = true;
+  [Parameter] public bool Grow { get; set; } = true;
 
-  [Parameter]
-  public string Height { get; set; }
+  [Parameter] public string Height { get; set; }
 
-  [Parameter]
-  public string BaseWidth { get; set; }
+  [Parameter] public string BaseWidth { get; set; }
 
-  [Parameter]
-  public double Ratio { get; set; }
+  [Parameter] public double Ratio { get; set; }
 
-  [Parameter]
-  public int ColsXs { get; set; }
+  [Parameter] public int ColsXs { get; set; }
 
-  [Parameter]
-  public int ColsSm { get; set; }
+  [Parameter] public int ColsSm { get; set; }
 
-  [Parameter]
-  public int ColsMd { get; set; }
+  [Parameter] public int ColsMd { get; set; }
 
-  [Parameter]
-  public int ColsLg { get; set; }
+  [Parameter] public int ColsLg { get; set; }
 
-  [Parameter]
-  public int ColsXl { get; set; }
+  [Parameter] public int ColsXl { get; set; }
 
-  [Parameter]
-  public int ColsXxl { get; set; }
+  [Parameter] public int ColsXxl { get; set; }
 
-  [Parameter]
-  public int Cols { get; set; } = 1;
+  [Parameter] public int Cols { get; set; } = 1;
 
-  [Parameter]
-  public ResponsiveCols ResponsiveCols { get; set; }
+  [Parameter] public ResponsiveCols ResponsiveCols { get; set; }
 
-  [Inject]
-  private BrowserService Browser { get; set; }
+  [Inject] private BrowserService Browser { get; set; }
   
-  [Inject]
-  private MediaQueryService MediaQuery { get; set; }
+  [Inject] private MediaQueryService MediaQuery { get; set; }
 
   protected override string Style => $@"
     --height: {CalculatedHeight};
@@ -64,8 +49,7 @@ public class Grid : StyledBase, IDisposable
     --gutter: {Gutter ?? Tokens.SpacingS};
   ";
 
-  public override Styled Base => Create.Div(@"
-  {
+  public override Styled Base => Create.Div(@"{
     list-style: none;
 	  display: flex;
     flex-wrap: wrap;

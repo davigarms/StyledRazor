@@ -8,17 +8,14 @@ namespace StyledRazor.Core.Component;
 
 public abstract class StyledBase : ComponentBase
 {
-  [Inject] 
-  protected ITokens Tokens { get; set; }
+  [Inject] protected ITokens Tokens { get; set; }
   
-  [Parameter] 
-  public Styled Styled { get; set; }
+  [Parameter] public Styled Styled { get; set; }
   
   [Parameter(CaptureUnmatchedValues = true)] 
   public IDictionary<string, object> Params { get; set; }
   
-  [Parameter] 
-  public RenderFragment ChildContent { get; set; }
+  [Parameter] public RenderFragment ChildContent { get; set; }
 
   protected readonly StyledFactory Create;
   

@@ -11,20 +11,15 @@
 </Layout>
 
 @code {
+  [Parameter] public string MinimumHeight { get; set; }
 
-  [Parameter]
-  public string MinimumHeight { get; set; }
+  [Parameter] public string Space { get; set; }
 
-  [Parameter]
-  public string Space { get; set; }
-
-  [Parameter]
-  public bool NoPadding { get; set; }
+  [Parameter] public bool NoPadding { get; set; }
 
   private string Padding => NoPadding ? Tokens.Zero : Space;
 
-  public override Styled Base => Create.Div(@"
-  {
+  public override Styled Base => Create.Div(@"{
     display: flex;
     flex-direction: column;
     min-height: var(--min-height);
@@ -58,5 +53,4 @@
     margin-top: auto !important;
     margin-bottom: 0 !important;
   }");
-
 }

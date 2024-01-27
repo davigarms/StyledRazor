@@ -9,14 +9,14 @@ namespace StyledRazor.Lib.Components.UI.Button;
 public class Button : StyledBase
 {
 	[Parameter] public string Margin { get; set; } = "0";
+	
   [Parameter] public string Padding { get; set; }
   
   public Button() {}
 
   public Button(ITokens tokens) : base(tokens) {}
 
-  public override Styled Base => Create.A($@"
-	{{
+  public override Styled Base => Create.A($@"{{
     {ButtonDefinition}                       
   }}");
 
@@ -48,8 +48,7 @@ public class GreyButton : Button
   
 	public GreyButton(ITokens tokens) : base(tokens) {}
 
-	public override Styled Base => Create.A($@"
-	{{
+	public override Styled Base => Create.A($@"{{
 		{ButtonDefinition}
 		background: grey;
 		color: white;
@@ -62,8 +61,7 @@ public class AlertButton : Button
 	
   public AlertButton(ITokens tokens) : base(tokens) {}
 
-  public override Styled Base => Create.A($@"
-	{{
+  public override Styled Base => Create.A($@"{{
 		{ButtonDefinition}
 		background: red;
 		color: white;

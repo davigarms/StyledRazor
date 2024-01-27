@@ -9,13 +9,21 @@ namespace StyledRazor.Lib.Components.Layout;
 public class Box : StyledBase
 {
 	[Parameter] public string Height { get; set; } = "initial";
+	
 	[Parameter] public string Width { get; set; } = "initial";
+	
 	[Parameter] public string Padding { get; set; }
+	
 	[Parameter] public string Left { get; set; }
+	
 	[Parameter] public string Top { get; set; }
+	
 	[Parameter] public string Right { get; set; }
+	
 	[Parameter] public string Bottom { get; set; }
+	
 	[Parameter] public string Horizontal { get; set; }
+	
 	[Parameter] public string Vertical { get; set; }
 	
 	private bool HasIndividualPadding => !string.IsNullOrEmpty(Left) || !string.IsNullOrEmpty(Top) ||
@@ -26,8 +34,7 @@ public class Box : StyledBase
 	private string ShorthandPadding => HasIndividualPadding ? string.Empty :
 		HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero};" : $"--padding: {Padding ?? Tokens.Zero};";
 
-	public override Styled Base => Create.Div(@"
-	{
+	public override Styled Base => Create.Div(@"{
 		height: var(--height);
 		width: var(--width);
 		padding-left: var(--left);

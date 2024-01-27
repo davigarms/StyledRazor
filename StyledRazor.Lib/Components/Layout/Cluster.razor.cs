@@ -9,11 +9,17 @@ namespace StyledRazor.Lib.Components.Layout;
 public class Cluster : StyledBase
 {
 	[Parameter] public string Space { get; set; }
+	
 	[Parameter] public bool Wrap { get; set; }
+	
 	[Parameter] public bool WrapReverse { get; set; }
+	
 	[Parameter] public string Align { get; set; }
+	
 	[Parameter] public string AlignContent { get; set; }
+	
 	[Parameter] public string Justify { get; set; }
+	
 	[Parameter] public bool NoPadding { get; set; }
 
 	private string Padding => NoPadding ? Tokens.Zero : Space;
@@ -22,8 +28,7 @@ public class Cluster : StyledBase
 		WrapReverse ? Tokens.FlexWrapReverse :
 		Tokens.FlexNoWrap;
 
-	public override Styled Base => Create.Div(@"
-	{
+	public override Styled Base => Create.Div(@"{
     display: flex;
     gap: var(--gap);
     flex-wrap: var(--flex-wrap);
