@@ -33,10 +33,9 @@ public abstract class StyledBase : ComponentBase
     Create = new StyledFactory(this);
   }
 
-  protected StyledBase(ITokens tokens)
+  protected StyledBase(ITokens tokens) : this()
   {
     Tokens ??= tokens;
-    Create = new StyledFactory(this);
   } 
   
   protected override void OnInitialized() => StyleSheetService.Add(Base);
