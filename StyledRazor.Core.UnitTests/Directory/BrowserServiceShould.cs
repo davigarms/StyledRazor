@@ -1,9 +1,8 @@
 using FakeItEasy;
 using Microsoft.AspNetCore.Components;
-using NUnit.Framework;
 using StyledRazor.Core.Browser;
 
-namespace StyledRazor.Core.UnitTests;
+namespace StyledRazor.Core.UnitTests.Directory;
 
 [TestFixture]
 public class BrowserServiceShould
