@@ -57,8 +57,6 @@ public class Grid : StyledBase, IDisposable
   [Inject]
   private MediaQueryService MediaQuery { get; set; }
 
-  protected override bool UseElementRef => true;
-
   protected override string Style => $@"
     --height: {CalculatedHeight};
     --width: {CalculatedWidth};

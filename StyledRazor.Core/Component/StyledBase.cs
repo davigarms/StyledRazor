@@ -22,9 +22,7 @@ public abstract class StyledBase : ComponentBase
 
   protected readonly StyledFactory Create;
   
-  protected ElementReference ElementRef { get; private set; }
-  
-  protected virtual bool UseElementRef => false;
+  protected ElementReference ElementRef { get; set; }
   
   protected virtual string Style => string.Empty;
 
@@ -58,38 +56,11 @@ public abstract class StyledBase : ComponentBase
   protected override void BuildRenderTree(RenderTreeBuilder builder)
   {
     builder.OpenElement(0, Base.Element);
-    BuildComponentId(builder);
-    BuildComponentStyle(builder);
-    BuildComponentParams(builder);
-    BuildElementReference(builder);
-    BuildComponentContent(builder);
-    builder.CloseElement();
-  }
-
-  private void BuildComponentId(RenderTreeBuilder builder) => builder.AddAttribute(0, Base.Id);
-
-  private void BuildComponentStyle(RenderTreeBuilder builder)
-  {
-    if (string.IsNullOrEmpty(Style)) return; 
-    builder.AddAttribute(0, "style", Style);
-  }
-
-  private void BuildComponentParams(RenderTreeBuilder builder)
-  {
-    if (Params == null) return;
-    foreach (var (key, value) in Params)
-      builder.AddAttribute(0, key, value);
-  }
-
-  private void BuildElementReference(RenderTreeBuilder builder)
-  {
-    if (!UseElementRef) return;
+    builder.AddAttribute(0, Base.Id);
+    if (!string.IsNullOrEmpty(Style)) builder.AddAttribute(0, "style", Style);
+    builder.AddMultipleAttributes(0, Params);
     builder.AddElementReferenceCapture(0, value => ElementRef = value);
-  }
-
-  private void BuildComponentContent(RenderTreeBuilder builder)
-  {
-    if (ChildContent == null) return;
     builder.AddContent(0, ChildContent);
+    builder.CloseElement();
   }
 }
