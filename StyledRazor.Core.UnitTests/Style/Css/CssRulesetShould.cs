@@ -1,7 +1,6 @@
-using StyledRazor.Core.Style;
 using StyledRazor.Core.Style.Css;
 
-namespace StyledRazor.Core.UnitTests;
+namespace StyledRazor.Core.UnitTests.Style.Css;
 
 [TestFixture]
 public class CssRulesetShould

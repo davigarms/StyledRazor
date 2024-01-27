@@ -1,6 +1,6 @@
 using static StyledRazor.Core.Style.Css.CssHelper;
 
-namespace StyledRazor.Core.UnitTests;
+namespace StyledRazor.Core.UnitTests.Style.Css;
 
 public class CssHelperShould
 {
