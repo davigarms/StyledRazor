@@ -36,7 +36,7 @@ public class Styled
 
   public CssStyleDeclaration Get(string selector)
   {
-    var scopedSelector = $"{SetScope(Id, "div")}{selector}";
+    var scopedSelector = $"{SetScope(Id, Element)}{selector}";
     var declaration = Css.Get(scopedSelector);
     declaration.OnChange += UpdateCss;
     return declaration;
