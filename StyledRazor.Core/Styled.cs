@@ -15,8 +15,8 @@ public class Styled
 
   public string CssString { get; private set; }
   
-  public Type Type { get; }
-  
+  public Type Type { get; private set; }
+
   internal Styled(IComponent component, string element, string baseCss)
   {
     Type = component.GetType();
@@ -28,6 +28,7 @@ public class Styled
 
   public void Update(Styled styled)
   {
+    Type = styled.Type;
     Id = styled.Id;
     Element = styled.Element;
     Css = styled.Css;
@@ -41,6 +42,6 @@ public class Styled
     declaration.OnChange += UpdateCss;
     return declaration;
   }
-  
+
   private void UpdateCss() => CssString = Css?.ToString();
 }
