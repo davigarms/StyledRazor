@@ -14,5 +14,5 @@ public class StyledProvider
   }
 
   public Styled Get(Type styleType) => 
-    (Activator.CreateInstance(styleType, _tokens) as StyledBase)?.Base;
+    (Activator.CreateInstance(styleType, _tokens) as StyledBase)?.ComponentStyle;
 }

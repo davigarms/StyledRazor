@@ -24,7 +24,7 @@ public abstract class StyledBase : ComponentBase
   
   protected virtual string Style => string.Empty;
 
-  public virtual Styled Base => Create.Div();
+  public virtual Styled ComponentStyle => Create.Div();
 
   protected StyledBase()
   {
@@ -36,7 +36,7 @@ public abstract class StyledBase : ComponentBase
     Tokens ??= tokens;
   } 
   
-  protected override void OnInitialized() => StyleSheetService.Add(Base);
+  protected override void OnInitialized() => StyleSheetService.Add(ComponentStyle);
 
   protected override void OnParametersSet()
   {
@@ -46,14 +46,14 @@ public abstract class StyledBase : ComponentBase
   
   private void UpdateStyle(Styled styled)
   {
-    StyleSheetService.Update(Base.Id, styled);
-    Base.Update(styled);
+    StyleSheetService.Update(ComponentStyle.Id, styled);
+    ComponentStyle.Update(styled);
   }
 
   protected override void BuildRenderTree(RenderTreeBuilder builder)
   {
-    builder.OpenElement(0, Base.Element);
-    builder.AddAttribute(0, Base.Id);
+    builder.OpenElement(0, ComponentStyle.Element);
+    builder.AddAttribute(0, ComponentStyle.Id);
     if (!string.IsNullOrEmpty(Style)) builder.AddAttribute(0, "style", Style);
     builder.AddMultipleAttributes(0, Params);
     builder.AddElementReferenceCapture(0, value => ElementRef = value);
