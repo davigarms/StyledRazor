@@ -121,7 +121,7 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledDiv_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.Div(css.original);
+    var styled = _create.Div(css.original).ComponentStyle;
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("div", styled.Id, css.minified)));
   }
@@ -129,7 +129,7 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledHyperLink_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.A(css.original);
+    var styled = _create.A(css.original).ComponentStyle;
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("a", styled.Id, css.minified)));
   }
@@ -137,7 +137,7 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledH1_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.H1(css.original);
+    var styled = _create.H1(css.original).ComponentStyle;
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("h1", styled.Id, css.minified)));
   }
@@ -145,7 +145,7 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledUl_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.Ul(css.original);
+    var styled = _create.Ul(css.original).ComponentStyle;
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("ul", styled.Id, css.minified)));
   }
@@ -153,7 +153,7 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledLi_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.Li(css.original);
+    var styled = _create.Li(css.original).ComponentStyle;
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("li", styled.Id, css.minified)));
   }
@@ -161,9 +161,9 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void ReturnExistingStyled_WhenStyledAlreadyExists((string original, string minified) css)
   {
-    var styled = _create.Div(css.original);
+    var styled = _create.Div(css.original).ComponentStyle;
     var styledId = styled.Id;
-    styled = _create.Div(css.original);
+    styled = _create.Div(css.original).ComponentStyle;
 
     Assert.That(styled.Id, Is.EqualTo(styledId));
   }

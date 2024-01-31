@@ -1,7 +1,7 @@
 ﻿@using StyledRazor.Core.Model
 @inherits StyledRazor.Core.Component.StyledBase
 
-<Layout Styled="@ComponentStyle" 
+<Layout Styled="@Component" 
         stretch-all="@StretchAll">
 	@ChildContent
 </Layout>
@@ -11,7 +11,7 @@
 
   [Parameter] public int StretchIndex { get; set; }
 
-  public override Styled ComponentStyle => Create.Div($@"{{
+  protected override StyledBase Component => Create.Div($@"{{
     display: flex;
     flex-wrap: nowrap;
     height: inherit;

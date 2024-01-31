@@ -5,5 +5,5 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Layout : StyledBase
 {
-  public override Styled ComponentStyle => Create.Div();
+  protected override StyledBase Component => Create.Div();
 }

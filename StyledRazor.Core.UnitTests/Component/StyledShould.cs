@@ -42,8 +42,8 @@ public class StyledShould
   public void UpdateStyled()
   {
     var createBase = new StyledFactory(new TestComponent());
-    var styledBase = createBase.Div(string.Empty);
-    var styledDiv = _create.Div("{Property: Value}");
+    var styledBase = createBase.Div(string.Empty).ComponentStyle;
+    var styledDiv = _create.Div("{Property: Value}").ComponentStyle;
     var expectedCss = "div[ScopeId]{Property:Value;}".Replace("ScopeId", styledDiv.Id);
       
     styledBase.Update(styledDiv);
@@ -58,7 +58,7 @@ public class StyledShould
   [Test]
   public void GetCssDeclarationDictionaryFromADivSelector()
   {
-    var styled = _create.Div(Css);
+    var styled = _create.Div(Css).ComponentStyle;
 
     var dictionary = styled.Get("Child");
     
@@ -68,7 +68,7 @@ public class StyledShould
   [Test]
   public void GetCssDeclarationDictionaryFromAHyperlinkSelector()
   {
-    var styled = _create.A(Css);
+    var styled = _create.A(Css).ComponentStyle;
 
     var dictionary = styled.Get("Child");
 
@@ -78,9 +78,10 @@ public class StyledShould
   [Test]
   public void GetCssDeclarationDictionaryFromAnyValidSelector([Values] ValidElements elementName)
   {
-    var styled = _create.GetType()
-                   .GetMethod(elementName.ToString())?
-                   .Invoke(_create, new object?[]{ Css }) as Styled;
+    var styled = (_create.GetType()
+                    .GetMethod(elementName.ToString())
+                    ?
+                    .Invoke(_create, new object?[] { Css }) as StyledBase)?.ComponentStyle;
     
     var dictionary = styled?.Get("Child");
 

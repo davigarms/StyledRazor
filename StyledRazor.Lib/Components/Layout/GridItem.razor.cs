@@ -6,5 +6,5 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class GridItem : StyledBase
 {
-  public override Styled ComponentStyle => Create.Div();
+  protected override StyledBase Component => Create.Div();
 }

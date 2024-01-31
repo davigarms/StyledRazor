@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using StyledRazor.Core.Component;
 using StyledRazor.Core.Style.Css;
 using System;
 using static StyledRazor.Core.Style.Css.CssHelper;
@@ -17,11 +18,14 @@ public class Styled
   
   public Type Type { get; private set; }
 
+  public StyledBase Component { get; }
+  
   internal Styled(IComponent component, string element, string baseCss)
   {
     Type = component.GetType();
     Id = IdFrom(Type.Name);
     Element = element;
+    Component = new StyledBase(this);
     Css = CssFactory.Create(baseCss, ScopeFrom(Id, Element));
     UpdateCss();
   }

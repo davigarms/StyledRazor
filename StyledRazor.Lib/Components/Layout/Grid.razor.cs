@@ -48,7 +48,7 @@ public class Grid : StyledBase, IDisposable
     --gutter: {Gutter ?? Tokens.SpacingS};
   ";
 
-  public override Styled ComponentStyle => Create.Div(@"{
+  protected override StyledBase Component => Create.Div(@"{
     list-style: none;
 	  display: flex;
     flex-wrap: wrap;

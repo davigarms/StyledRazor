@@ -10,7 +10,7 @@ public class Container : StyledBase
   
   [Parameter] public string Width { get; set; } = "initial";
 
-  public override Styled ComponentStyle => Create.Div(@"{
+  protected override StyledBase Component => Create.Div(@"{
 		margin-left: auto;
 		margin-right: auto;
 		max-width: var(--max-width);
