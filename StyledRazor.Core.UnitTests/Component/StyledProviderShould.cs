@@ -31,6 +31,6 @@ public class StyledProviderShould
     });
   }
   
-  private static string ExpectedCssStringWithScopeFrom(Styled styled, string expected) => 
-    expected.Replace("TestComponent", styled.Id);
+  private static string ExpectedCssStringWithScopeFrom(ComponentStyle componentStyle, string expected) => 
+    expected.Replace("TestComponent", componentStyle.Id);
 }

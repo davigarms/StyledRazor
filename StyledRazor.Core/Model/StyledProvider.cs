@@ -13,6 +13,6 @@ public class StyledProvider
     _tokens = tokens;
   }
 
-  public Styled Get(Type styleType) => 
+  public ComponentStyle Get(Type styleType) => 
     (Activator.CreateInstance(styleType, _tokens) as StyledBase)?.ComponentStyle;
 }

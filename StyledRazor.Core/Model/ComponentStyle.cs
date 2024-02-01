@@ -6,7 +6,7 @@ using static StyledRazor.Core.Style.Css.CssHelper;
 
 namespace StyledRazor.Core.Model;
 
-public class Styled
+public class ComponentStyle
 {
   private CssRuleset Css { get; set; }
 
@@ -20,7 +20,7 @@ public class Styled
 
   public StyledBase Component { get; }
   
-  internal Styled(IComponent component, string element, string baseCss)
+  internal ComponentStyle(IComponent component, string element, string baseCss)
   {
     Type = component.GetType();
     Id = IdFrom(Type.Name);
@@ -30,12 +30,12 @@ public class Styled
     UpdateCss();
   }
 
-  public void Update(Styled styled)
+  public void Update(ComponentStyle componentStyle)
   {
-    Type = styled.Type;
-    Id = styled.Id;
-    Element = styled.Element;
-    Css = styled.Css;
+    Type = componentStyle.Type;
+    Id = componentStyle.Id;
+    Element = componentStyle.Element;
+    Css = componentStyle.Css;
     UpdateCss();
   }
 

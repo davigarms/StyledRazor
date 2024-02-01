@@ -77,7 +77,7 @@
   
   [Inject] protected StyledProvider StyledProvider { get; set; }
 
-  private Styled ActiveButton { get; set; }
+  private ComponentStyle ActiveButton { get; set; }
 
   protected override void OnInitialized() => ActiveButton = StyledProvider.Get(typeof(GreyButton));
 

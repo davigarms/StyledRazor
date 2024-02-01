@@ -16,7 +16,7 @@ public class StyledFactory
   }
 
   private StyledBase Create(string baseElement, string baseCss) =>
-    _styled ??= new StyledBase(new Styled(_component, baseElement, baseCss));
+    _styled ??= new StyledBase(new ComponentStyle(_component, baseElement, baseCss));
   
   public StyledBase Div(string css = "") => Create("div", css);
 

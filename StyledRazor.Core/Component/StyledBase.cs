@@ -24,9 +24,9 @@ public class StyledBase : ComponentBase
   
   protected virtual string Style => string.Empty;
 
-  private readonly Styled _componentStyle;
+  private readonly ComponentStyle _componentStyle;
 
-  public Styled ComponentStyle
+  public ComponentStyle ComponentStyle
   {
     get => _componentStyle ?? Component.ComponentStyle;
     private init => _componentStyle = value;
@@ -44,9 +44,9 @@ public class StyledBase : ComponentBase
     Tokens ??= tokens;
   }
 
-  public StyledBase(Styled styled) : this()
+  public StyledBase(ComponentStyle componentStyle) : this()
   {
-    ComponentStyle = styled;
+    ComponentStyle = componentStyle;
   }
   
   protected override void OnInitialized() => StyleSheetService.Add(ComponentStyle);
@@ -57,10 +57,10 @@ public class StyledBase : ComponentBase
     UpdateStyle(Styled.ComponentStyle);
   }
   
-  private void UpdateStyle(Styled styled)
+  private void UpdateStyle(ComponentStyle componentStyle)
   {
-    StyleSheetService.Update(ComponentStyle.Id, styled);
-    ComponentStyle.Update(styled);
+    StyleSheetService.Update(ComponentStyle.Id, componentStyle);
+    ComponentStyle.Update(componentStyle);
   }
 
   protected override void BuildRenderTree(RenderTreeBuilder builder)
