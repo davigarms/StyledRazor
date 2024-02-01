@@ -12,6 +12,5 @@ public class StyledProvider
     _tokens = tokens;
   }
 
-  public Styled Get(Type styleType) => 
-    Activator.CreateInstance(styleType, _tokens) as Styled;
+  public Styled Get(Type styleType) => Activator.CreateInstance(styleType, _tokens) as Styled;
 }
