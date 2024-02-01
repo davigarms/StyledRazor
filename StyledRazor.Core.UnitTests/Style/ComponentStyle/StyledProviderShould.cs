@@ -20,7 +20,7 @@ public class ComponentStyleProviderShould
   {
     const string expectedCssString = "div[TestComponent]{Property:Value;}";
     
-    var componentStyle = new ComponentStyleProvider(new Tokens()).Get(typeof(TestComponent));
+    var componentStyle = new StyledProvider(new Tokens()).Get(typeof(TestComponent)).ComponentStyle;
 
     Assert.Multiple(() =>
     {

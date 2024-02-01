@@ -4,15 +4,15 @@ using System;
 
 namespace StyledRazor.Core.Style.ComponentStyle;
 
-public class ComponentStyleProvider
+public class StyledProvider
 {
   private readonly ITokens _tokens;
   
-  public ComponentStyleProvider(ITokens tokens)
+  public StyledProvider(ITokens tokens)
   {
     _tokens = tokens;
   }
 
-  public ComponentStyle Get(Type styleType) => 
-    (Activator.CreateInstance(styleType, _tokens) as Styled)?.ComponentStyle;
+  public Styled Get(Type styleType) => 
+    Activator.CreateInstance(styleType, _tokens) as Styled;
 }
