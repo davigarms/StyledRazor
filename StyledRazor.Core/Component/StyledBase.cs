@@ -11,7 +11,7 @@ public class StyledBase : ComponentBase
 {
   [Inject] protected ITokens Tokens { get; set; }
   
-  [Parameter] public StyledBase Styled { get; set; }
+  [Parameter] public StyledBase Base { get; set; }
   
   [Parameter(CaptureUnmatchedValues = true)] 
   public IDictionary<string, object> Params { get; set; }
@@ -53,8 +53,8 @@ public class StyledBase : ComponentBase
 
   protected override void OnParametersSet()
   {
-    if (Styled == null) return;
-    UpdateStyle(Styled.ComponentStyle);
+    if (Base == null) return;
+    UpdateStyle(Base.ComponentStyle);
   }
   
   private void UpdateStyle(ComponentStyle componentStyle)
