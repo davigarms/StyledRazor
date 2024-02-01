@@ -4,7 +4,7 @@ using StyledRazor.Core.Model;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class Cluster : StyledBase
+public class Cluster : Styled
 {
 	[Parameter] public string Space { get; set; }
 	
@@ -26,7 +26,7 @@ public class Cluster : StyledBase
 		WrapReverse ? Tokens.FlexWrapReverse :
 		Tokens.FlexNoWrap;
 
-	protected override StyledBase Component => CreateStyled.Div(@"{
+	protected override Styled Component => CreateStyled.Div(@"{
     display: flex;
     gap: var(--gap);
     flex-wrap: var(--flex-wrap);

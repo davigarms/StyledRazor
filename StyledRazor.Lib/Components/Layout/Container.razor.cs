@@ -4,13 +4,13 @@ using StyledRazor.Core.Model;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class Container : StyledBase
+public class Container : Styled
 {
   [Parameter] public bool Fluid { get; set; }
   
   [Parameter] public string Width { get; set; } = "initial";
 
-  protected override StyledBase Component => CreateStyled.Div(@"{
+  protected override Styled Component => CreateStyled.Div(@"{
 		margin-left: auto;
 		margin-right: auto;
 		max-width: var(--max-width);

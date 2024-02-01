@@ -5,7 +5,7 @@ using StyledRazor.Core.Style.DesignTokens;
 
 namespace StyledRazor.Lib.Components.UI.Button;
 
-public class Button : StyledBase
+public class Button : Styled
 {
 	[Parameter] public string Margin { get; set; } = "0";
 	
@@ -15,7 +15,7 @@ public class Button : StyledBase
 
   public Button(ITokens tokens) : base(tokens) {}
 
-  protected override StyledBase Component => CreateStyled.A($@"{{
+  protected override Styled Component => CreateStyled.A($@"{{
     {ButtonDefinition}                       
   }}");
 
@@ -47,7 +47,7 @@ public class GreyButton : Button
   
 	public GreyButton(ITokens tokens) : base(tokens) {}
 
-	protected override StyledBase Component => CreateStyled.A($@"{{
+	protected override Styled Component => CreateStyled.A($@"{{
 		{ButtonDefinition}
 		background: grey;
 		color: white;
@@ -60,7 +60,7 @@ public class AlertButton : Button
 	
   public AlertButton(ITokens tokens) : base(tokens) {}
 
-  protected override StyledBase Component => CreateStyled.A($@"{{
+  protected override Styled Component => CreateStyled.A($@"{{
 		{ButtonDefinition}
 		background: red;
 		color: white;

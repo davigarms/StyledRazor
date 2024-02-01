@@ -7,11 +7,11 @@ using System.Collections.Generic;
 
 namespace StyledRazor.Core.Component;
 
-public class StyledBase : ComponentBase
+public class Styled : ComponentBase
 {
   [Inject] protected ITokens Tokens { get; set; }
   
-  [Parameter] public StyledBase Base { get; set; }
+  [Parameter] public Styled Base { get; set; }
   
   [Parameter(CaptureUnmatchedValues = true)] 
   public IDictionary<string, object> Params { get; set; }
@@ -32,19 +32,19 @@ public class StyledBase : ComponentBase
     private init => _componentStyle = value;
   }
 
-  protected virtual StyledBase Component => CreateStyled.Div();
+  protected virtual Styled Component => CreateStyled.Div();
   
-  public StyledBase()
+  public Styled()
   {
     CreateStyled = new StyledFactory(this);
   }
 
-  public StyledBase(ITokens tokens) : this()
+  public Styled(ITokens tokens) : this()
   {
     Tokens ??= tokens;
   }
 
-  public StyledBase(ComponentStyle componentStyle) : this()
+  public Styled(ComponentStyle componentStyle) : this()
   {
     ComponentStyle = componentStyle;
   }

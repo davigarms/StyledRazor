@@ -9,7 +9,7 @@ using System;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class Grid : StyledBase, IDisposable
+public class Grid : Styled, IDisposable
 {
   [Parameter] public string Gutter { get; set; }
 
@@ -48,7 +48,7 @@ public class Grid : StyledBase, IDisposable
     --gutter: {Gutter ?? Tokens.SpacingS};
   ";
 
-  protected override StyledBase Component => CreateStyled.Div(@"{
+  protected override Styled Component => CreateStyled.Div(@"{
     list-style: none;
 	  display: flex;
     flex-wrap: wrap;

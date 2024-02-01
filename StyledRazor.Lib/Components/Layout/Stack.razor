@@ -1,5 +1,5 @@
 ﻿@using StyledRazor.Core.Model
-@inherits StyledRazor.Core.Component.StyledBase
+@inherits StyledRazor.Core.Component.Styled
 
 <Layout Base="@Component"
         style=@($@"--gutter: {Gutter ?? Tokens.SpacingL};")>
@@ -9,7 +9,7 @@
 @code {
   [Parameter] public string Gutter { get; set; }
 
-	protected override StyledBase Component => CreateStyled.Div(@"{
+	protected override Styled Component => CreateStyled.Div(@"{
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;

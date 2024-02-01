@@ -1,5 +1,5 @@
 ﻿@using StyledRazor.Core.Model
-@inherits StyledRazor.Core.Component.StyledBase
+@inherits StyledRazor.Core.Component.Styled
 
 <Layout Base="@Component"
         style=@($@"
@@ -18,7 +18,7 @@
 
   private string Padding => NoPadding ? Tokens.Zero : Space;
 
-  protected override StyledBase Component => CreateStyled.Div(@"{
+  protected override Styled Component => CreateStyled.Div(@"{
     display: flex;
     flex-direction: column;
     min-height: var(--min-height);

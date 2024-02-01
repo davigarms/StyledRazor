@@ -4,11 +4,11 @@ using StyledRazor.Core.Model;
 
 namespace StyledRazor.Lib.Components.Styling;
 
-public class Background : StyledBase
+public class Background : Styled
 {
   [Parameter] public string Color { get; set; }
 
-  protected override StyledBase Component => CreateStyled.Div(@"{
+  protected override Styled Component => CreateStyled.Div(@"{
     background: var(--background-color);
     height: inherit; 
   }");

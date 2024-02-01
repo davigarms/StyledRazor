@@ -6,11 +6,11 @@ namespace StyledRazor.Core.UnitTests.Component;
 
 public class StyledProviderShould
 {
-  private class TestComponent : StyledBase
+  private class TestComponent : Styled
   {
     public TestComponent(ITokens tokens) : base(tokens) {}
 
-    protected override StyledBase Component => CreateStyled.Div(@"{
+    protected override Styled Component => CreateStyled.Div(@"{
       Property: Value;
     }");
   }

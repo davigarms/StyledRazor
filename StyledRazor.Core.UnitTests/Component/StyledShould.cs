@@ -8,7 +8,7 @@ public class StyledShould
 {
   private StyledFactory _create = new(new TestComponent());
 
-  private class TestComponent : StyledBase {}
+  private class TestComponent : Styled {}
 
   public enum ValidElements
   {
@@ -81,7 +81,7 @@ public class StyledShould
     var styled = (_create.GetType()
                     .GetMethod(elementName.ToString())
                     ?
-                    .Invoke(_create, new object?[] { Css }) as StyledBase)?.ComponentStyle;
+                    .Invoke(_create, new object?[] { Css }) as Styled)?.ComponentStyle;
     
     var dictionary = styled?.Get("Child");
 

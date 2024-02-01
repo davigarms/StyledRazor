@@ -4,7 +4,7 @@ using StyledRazor.Core.Model;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class Box : StyledBase
+public class Box : Styled
 {
 	[Parameter] public string Height { get; set; } = "initial";
 	
@@ -32,7 +32,7 @@ public class Box : StyledBase
 	private string ShorthandPadding => HasIndividualPadding ? string.Empty :
 		HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero};" : $"--padding: {Padding ?? Tokens.Zero};";
 
-	protected override StyledBase Component => CreateStyled.Div(@"{
+	protected override Styled Component => CreateStyled.Div(@"{
 		height: var(--height);
 		width: var(--width);
 		padding-left: var(--left);

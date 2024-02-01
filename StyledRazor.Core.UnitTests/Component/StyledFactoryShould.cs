@@ -12,7 +12,7 @@ public class StyledFactoryShould
   
   private StyledFactory _createStyled = new(new TestComponent());
 
-  private class TestComponent : StyledBase {}
+  private class TestComponent : Styled {}
 
   private static IEnumerable<(string, string)> CssCases()
   {
