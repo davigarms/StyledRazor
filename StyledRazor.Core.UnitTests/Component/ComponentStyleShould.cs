@@ -3,7 +3,7 @@ using StyledRazor.Core.Style.Css;
 
 namespace StyledRazor.Core.UnitTests.Component;
 
-public class StyledShould
+public class ComponentStyleShould
 {
   private StyledFactory _create = new(new TestComponent());
 
