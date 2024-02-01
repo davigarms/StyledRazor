@@ -120,51 +120,57 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledDiv_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _createStyled.Div(css.original).ComponentStyle;
+    var styled = _createStyled.Div(css.original);
+    var componentStyle = styled.ComponentStyle;
 
-    Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("div", styled.Id, css.minified)));
+    Assert.That(componentStyle.CssString, Is.EqualTo(MinifiedCssWithScopeFor("div", componentStyle.Id, css.minified)));
   }
 
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledHyperLink_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _createStyled.A(css.original).ComponentStyle;
+    var styled = _createStyled.A(css.original);
+    var componentStyle = styled.ComponentStyle;
 
-    Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("a", styled.Id, css.minified)));
+    Assert.That(componentStyle.CssString, Is.EqualTo(MinifiedCssWithScopeFor("a", componentStyle.Id, css.minified)));
   }
 
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledH1_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _createStyled.H1(css.original).ComponentStyle;
+    var styled = _createStyled.H1(css.original);
+    var componentStyle = styled.ComponentStyle;
 
-    Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("h1", styled.Id, css.minified)));
+    Assert.That(componentStyle.CssString, Is.EqualTo(MinifiedCssWithScopeFor("h1", componentStyle.Id, css.minified)));
   }
 
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledUl_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _createStyled.Ul(css.original).ComponentStyle;
+    var styled = _createStyled.Ul(css.original);
+    var componentStyle = styled.ComponentStyle;
 
-    Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("ul", styled.Id, css.minified)));
+    Assert.That(componentStyle.CssString, Is.EqualTo(MinifiedCssWithScopeFor("ul", componentStyle.Id, css.minified)));
   }
 
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledLi_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _createStyled.Li(css.original).ComponentStyle;
+    var styled = _createStyled.Li(css.original);
+    var componentStyle = styled.ComponentStyle;
 
-    Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("li", styled.Id, css.minified)));
+    Assert.That(componentStyle.CssString, Is.EqualTo(MinifiedCssWithScopeFor("li", componentStyle.Id, css.minified)));
   }
 
   [TestCaseSource(nameof(CssCases))]
-  public void ReturnExistingStyled_WhenStyledAlreadyExists((string original, string minified) css)
+  public void ReturnTheExistingStyledComponent_WhenStyledAlreadyExistsInFactory((string original, string minified) css)
   {
-    var styled = _createStyled.Div(css.original).ComponentStyle;
-    var styledId = styled.Id;
-    styled = _createStyled.Div(css.original).ComponentStyle;
+    var styled1 = _createStyled.Div(css.original);
+    var componentStyle1 = styled1.ComponentStyle;
+    var styled2 = _createStyled.Div(css.original);
+    var componentStyle2 = styled2.ComponentStyle;
 
-    Assert.That(styled.Id, Is.EqualTo(styledId));
+    Assert.That(componentStyle2.Id, Is.EqualTo(componentStyle1.Id));
   }
 
   [Test]
