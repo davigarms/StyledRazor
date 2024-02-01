@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
 using StyledRazor.Core.Style.StyleSheet;
-using System.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 
-namespace StyledRazor.Core.StyleSheet;
+namespace StyledRazor.Core.Component;
 
 public class StyleSheet : ComponentBase, IDisposable
 {
