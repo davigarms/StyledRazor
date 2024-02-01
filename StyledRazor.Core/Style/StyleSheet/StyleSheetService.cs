@@ -1,22 +1,21 @@
-using static StyledRazor.Core.Style.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Style.ComponentStyle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static StyledRazor.Core.Style.Css.CssHelper;
 
-namespace StyledRazor.Core.StyleSheet;
+namespace StyledRazor.Core.Style.StyleSheet;
 
 public static class StyleSheetService
 {
-  private static readonly List<ComponentStyle> StyledList = new();
+  private static readonly List<ComponentStyle.ComponentStyle> StyledList = new();
 
   private static string Css => string.Join(string.Empty, StyledList.Select(styled => styled.CssString));
 
   public static Func<Task> OnUpdate { get; set; }
 
-  public static void Add(ComponentStyle componentStyle)
+  public static void Add(ComponentStyle.ComponentStyle componentStyle)
   {
     if (componentStyle == null) return;
 
@@ -24,7 +23,7 @@ public static class StyleSheetService
     OnUpdate?.Invoke();
   }
 
-  public static void Update(string id, ComponentStyle componentStyle)
+  public static void Update(string id, ComponentStyle.ComponentStyle componentStyle)
   {
     var toUpdate = StyledList.FirstOrDefault(s => s.Id == id);
 
