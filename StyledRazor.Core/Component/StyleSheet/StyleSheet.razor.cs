@@ -4,7 +4,7 @@ using StyledRazor.Core.Style.StyleSheet;
 using System;
 using System.Threading.Tasks;
 
-namespace StyledRazor.Core.Component;
+namespace StyledRazor.Core.Component.StyleSheet;
 
 public class StyleSheet : ComponentBase, IDisposable
 {
