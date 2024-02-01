@@ -18,14 +18,11 @@ public class ComponentStyle
   
   public Type Type { get; private set; }
 
-  public Styled Component { get; }
-  
   internal ComponentStyle(IComponent component, string element, string baseCss)
   {
     Type = component.GetType();
     Id = IdFrom(Type.Name);
     Element = element;
-    Component = new Styled(this);
     Css = CssFactory.Create(baseCss, ScopeFrom(Id, Element));
     UpdateCss();
   }
