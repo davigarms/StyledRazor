@@ -1,8 +1,7 @@
 using StyledRazor.Core.Component;
-using StyledRazor.Core.Style.ComponentStyle;
 using StyledRazor.Core.Style.DesignTokens;
 
-namespace StyledRazor.Core.UnitTests.Style.ComponentStyle;
+namespace StyledRazor.Core.UnitTests.Component;
 
 public class ComponentStyleProviderShould
 {
