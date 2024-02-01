@@ -4,7 +4,7 @@ using StyledRazor.Core.Style.Css;
 using System;
 using static StyledRazor.Core.Style.Css.CssHelper;
 
-namespace StyledRazor.Core.Model;
+namespace StyledRazor.Core.Style.ComponentStyle;
 
 public class ComponentStyle
 {

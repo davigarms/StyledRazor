@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core.Component;
+using StyledRazor.Core.Style.ComponentStyle;
 
 namespace StyledRazor.Core.Model;
 
