@@ -1,10 +1,17 @@
 using StyledRazor.Core.Component;
+using StyledRazor.Core.Style.ComponentStyle;
 using StyledRazor.Core.Style.DesignTokens;
 
 namespace StyledRazor.Core.UnitTests.Component;
 
 public class ComponentStyleProviderShould
 {
+  private readonly Type _styleType = typeof(TestComponent);
+  
+  private readonly Tokens _tokens = new();
+  
+  private StyledProvider StyledProvider => new(_tokens);
+
   private class TestComponent : Styled
   {
     public TestComponent(ITokens tokens) : base(tokens) {}
@@ -15,19 +22,27 @@ public class ComponentStyleProviderShould
   }
 
   [Test]
+  public void GetComponent_FromAStyledComponent()
+  {
+    var styled = StyledProvider.Get(_styleType);
+    
+    Assert.That(styled.GetType(), Is.EqualTo(_styleType));
+  }
+
+  [Test]
   public void GetComponentStyle_FromAStyledComponent()
   {
     const string expectedCssString = "div[TestComponent]{Property:Value;}";
     
-    var componentStyle = new StyledProvider(new Tokens()).Get(typeof(TestComponent)).ComponentStyle;
+    var componentStyle = StyledProvider.Get(_styleType).ComponentStyle;
 
     Assert.Multiple(() =>
     {
-      Assert.That(componentStyle.Type, Is.EqualTo(typeof(TestComponent)));
+      Assert.That(componentStyle.Type, Is.EqualTo(_styleType));
       Assert.That(componentStyle.CssString, Is.EqualTo(ExpectedCssStringWithScopeFrom(componentStyle, expectedCssString)));
     });
   }
   
-  private static string ExpectedCssStringWithScopeFrom(Core.Style.ComponentStyle.ComponentStyle componentStyle, string expected) => 
+  private static string ExpectedCssStringWithScopeFrom(ComponentStyle componentStyle, string expected) => 
     expected.Replace("TestComponent", componentStyle.Id);
 }
