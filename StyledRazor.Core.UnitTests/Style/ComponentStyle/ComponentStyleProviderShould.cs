@@ -2,7 +2,7 @@ using StyledRazor.Core.Component;
 using StyledRazor.Core.Style.ComponentStyle;
 using StyledRazor.Core.Style.DesignTokens;
 
-namespace StyledRazor.Core.UnitTests.Component;
+namespace StyledRazor.Core.UnitTests.Style.ComponentStyle;
 
 public class ComponentStyleProviderShould
 {
@@ -31,6 +31,6 @@ public class ComponentStyleProviderShould
     });
   }
   
-  private static string ExpectedCssStringWithScopeFrom(ComponentStyle componentStyle, string expected) => 
+  private static string ExpectedCssStringWithScopeFrom(Core.Style.ComponentStyle.ComponentStyle componentStyle, string expected) => 
     expected.Replace("TestComponent", componentStyle.Id);
 }
