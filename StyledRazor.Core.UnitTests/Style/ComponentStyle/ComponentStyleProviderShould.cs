@@ -16,18 +16,16 @@ public class ComponentStyleProviderShould
   }
 
   [Test]
-  public void GetStyled_FromAStyledComponent()
+  public void GetComponentStyle_FromAStyledComponent()
   {
-    var tokens = new Tokens();
-    var styledProvider = new ComponentStyleProvider(tokens);
     const string expectedCssString = "div[TestComponent]{Property:Value;}";
     
-    var styled = styledProvider.Get(typeof(TestComponent));
+    var componentStyle = new ComponentStyleProvider(new Tokens()).Get(typeof(TestComponent));
 
     Assert.Multiple(() =>
     {
-      Assert.That(styled.Type, Is.EqualTo(typeof(TestComponent)));
-      Assert.That(styled.CssString, Is.EqualTo(ExpectedCssStringWithScopeFrom(styled, expectedCssString)));
+      Assert.That(componentStyle.Type, Is.EqualTo(typeof(TestComponent)));
+      Assert.That(componentStyle.CssString, Is.EqualTo(ExpectedCssStringWithScopeFrom(componentStyle, expectedCssString)));
     });
   }
   
