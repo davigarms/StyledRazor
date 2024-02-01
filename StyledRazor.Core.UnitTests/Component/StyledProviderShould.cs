@@ -1,4 +1,4 @@
-using StyledRazor.Core.Component;
+using StyledRazor.Core.Component.Styled;
 using StyledRazor.Core.Style.ComponentStyle;
 using StyledRazor.Core.Style.DesignTokens;
 

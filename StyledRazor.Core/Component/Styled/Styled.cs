@@ -5,7 +5,7 @@ using StyledRazor.Core.Style.DesignTokens;
 using StyledRazor.Core.Style.StyleSheet;
 using System.Collections.Generic;
 
-namespace StyledRazor.Core.Component;
+namespace StyledRazor.Core.Component.Styled;
 
 public class Styled : ComponentBase
 {

@@ -1,7 +1,7 @@
 using StyledRazor.Core.Style.DesignTokens;
 using System;
 
-namespace StyledRazor.Core.Component;
+namespace StyledRazor.Core.Component.Styled;
 
 public class StyledProvider
 {

@@ -4,9 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StyledRazor.Core.Browser;
-using StyledRazor.Core.Component;
+using StyledRazor.Core.Component.Styled;
 using StyledRazor.Core.MediaQuery;
-using StyledRazor.Core.Style.ComponentStyle;
 using StyledRazor.Core.Style.DesignTokens;
 
 namespace StyledRazor.Web

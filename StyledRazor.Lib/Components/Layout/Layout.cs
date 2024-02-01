@@ -1,4 +1,4 @@
-using StyledRazor.Core.Component;
+using StyledRazor.Core.Component.Styled;
 
 namespace StyledRazor.Lib.Components.Layout;
 
