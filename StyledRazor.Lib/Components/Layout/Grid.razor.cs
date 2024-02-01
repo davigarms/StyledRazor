@@ -41,7 +41,7 @@ public class Grid : StyledBase, IDisposable
   
   [Inject] private MediaQueryService MediaQuery { get; set; }
 
-  protected override string Style => $@"
+  protected override string InlineStyle => $@"
     --height: {CalculatedHeight};
     --width: {CalculatedWidth};
     --flex-grow: {FlexGrow};

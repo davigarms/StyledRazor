@@ -19,7 +19,7 @@ public class Button : StyledBase
     {ButtonDefinition}                       
   }}");
 
-  protected override string Style => $@"
+  protected override string InlineStyle => $@"
 	  --margin: {(string.IsNullOrEmpty(Margin) ? ButtonMargin : Margin)};
 	  --padding: {(string.IsNullOrEmpty(Padding) ? ButtonPadding : Padding)}
 	";

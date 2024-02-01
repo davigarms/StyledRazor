@@ -13,7 +13,7 @@ public class Background : StyledBase
     height: inherit; 
   }");
 
-  protected override string Style => $@"
+  protected override string InlineStyle => $@"
     --background-color: {Color};
   ";
 }

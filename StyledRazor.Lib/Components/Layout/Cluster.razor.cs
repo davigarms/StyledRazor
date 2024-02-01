@@ -65,7 +65,7 @@ public class Cluster : StyledBase
 		align-self: stretch;
 	}");
 
-	protected override string Style => $@"
+	protected override string InlineStyle => $@"
 	  --gap: {Space ?? Tokens.Zero};
 	  --flex-wrap: {FlexWrap};
 	  --align-items: {Align ?? Tokens.AlignCenter};

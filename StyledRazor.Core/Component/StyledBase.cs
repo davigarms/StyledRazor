@@ -22,7 +22,7 @@ public class StyledBase : ComponentBase
   
   protected ElementReference ElementRef { get; set; }
   
-  protected virtual string Style => string.Empty;
+  protected virtual string InlineStyle => string.Empty;
 
   private readonly ComponentStyle _componentStyle;
 
@@ -67,7 +67,7 @@ public class StyledBase : ComponentBase
   {
     builder.OpenElement(0, ComponentStyle.Element);
     builder.AddAttribute(0, ComponentStyle.Id);
-    if (!string.IsNullOrEmpty(Style)) builder.AddAttribute(0, "style", Style);
+    if (!string.IsNullOrEmpty(InlineStyle)) builder.AddAttribute(0, "style", InlineStyle);
     builder.AddMultipleAttributes(0, Params);
     builder.AddElementReferenceCapture(0, value => ElementRef = value);
     builder.AddContent(0, ChildContent);
