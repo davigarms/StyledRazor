@@ -7,6 +7,7 @@ using StyledRazor.Core.Browser;
 using StyledRazor.Core.Component;
 using StyledRazor.Core.MediaQuery;
 using StyledRazor.Core.Model;
+using StyledRazor.Core.Style.ComponentStyle;
 using StyledRazor.Core.Style.DesignTokens;
 
 namespace StyledRazor.Web
