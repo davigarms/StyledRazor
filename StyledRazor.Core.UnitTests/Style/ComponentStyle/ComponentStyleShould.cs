@@ -1,11 +1,11 @@
 using StyledRazor.Core.Component;
 using StyledRazor.Core.Style.Css;
 
-namespace StyledRazor.Core.UnitTests.Component;
+namespace StyledRazor.Core.UnitTests.Style.ComponentStyle;
 
 public class ComponentStyleShould
 {
-  private StyledFactory _create = new(new TestComponent());
+  private StyledFactory _createFactory = new(new TestComponent());
 
   private class TestComponent : Styled {}
 
@@ -35,55 +35,54 @@ public class ComponentStyleShould
 
   
   [SetUp]
-  public void SetUp() => _create = new StyledFactory(new TestComponent());
+  public void SetUp() => _createFactory = new StyledFactory(new TestComponent());
 
   [Test]
   public void UpdateStyled()
   {
-    var createBase = new StyledFactory(new TestComponent());
-    var styledBase = createBase.Div(string.Empty).ComponentStyle;
-    var styledDiv = _create.Div("{Property: Value}").ComponentStyle;
-    var expectedCss = "div[ScopeId]{Property:Value;}".Replace("ScopeId", styledDiv.Id);
+    var createFactory = new StyledFactory(new TestComponent());
+    var componentStyle1 = _createFactory.Div(string.Empty).ComponentStyle;
+    var componentStyle2 = createFactory.Div("{Property: Value}").ComponentStyle;
+    var expectedCss = "div[ScopeId]{Property:Value;}".Replace("ScopeId", componentStyle2.Id);
       
-    styledBase.Update(styledDiv);
+    componentStyle1.Update(componentStyle2);
     
     Assert.Multiple(() =>
     {
-      Assert.That(styledBase.Id, Is.EqualTo(styledDiv.Id));
-      Assert.That(styledBase.CssString, Is.EqualTo(expectedCss));
+      Assert.That(componentStyle1.Id, Is.EqualTo(componentStyle2.Id));
+      Assert.That(componentStyle1.CssString, Is.EqualTo(expectedCss));
     });
   }
 
   [Test]
-  public void GetCssDeclarationDictionaryFromADivSelector()
+  public void GetCssDeclarationDictionary_FromADivSelector()
   {
-    var styled = _create.Div(Css).ComponentStyle;
+    var componentStyle = _createFactory.Div(Css).ComponentStyle;
 
-    var dictionary = styled.Get("Child");
+    var styleDeclaration = componentStyle.Get("Child");
     
-    Assert.That(dictionary, Is.EqualTo(ExpectedDictionary));
+    Assert.That(styleDeclaration, Is.EqualTo(ExpectedDictionary));
   }
 
   [Test]
-  public void GetCssDeclarationDictionaryFromAHyperlinkSelector()
+  public void GetCssDeclarationDictionary_FromAHyperlinkSelector()
   {
-    var styled = _create.A(Css).ComponentStyle;
+    var componentStyle = _createFactory.A(Css).ComponentStyle;
 
-    var dictionary = styled.Get("Child");
+    var styleDeclaration = componentStyle.Get("Child");
 
-    Assert.That(dictionary, Is.EqualTo(ExpectedDictionary));
+    Assert.That(styleDeclaration, Is.EqualTo(ExpectedDictionary));
   }
 
   [Test]
-  public void GetCssDeclarationDictionaryFromAnyValidSelector([Values] ValidElements elementName)
+  public void GetCssDeclarationDictionary_FromAnyValidSelector([Values] ValidElements elementName)
   {
-    var styled = (_create.GetType()
-                    .GetMethod(elementName.ToString())
-                    ?
-                    .Invoke(_create, new object?[] { Css }) as Styled)?.ComponentStyle;
+    var componentStyle = (_createFactory.GetType()
+                    .GetMethod(elementName.ToString())?
+                    .Invoke(_createFactory, new object?[] { Css }) as Styled)?.ComponentStyle;
     
-    var dictionary = styled?.Get("Child");
+    var styleDeclaration = componentStyle?.Get("Child");
 
-    Assert.That(dictionary, Is.EqualTo(ExpectedDictionary));
+    Assert.That(styleDeclaration, Is.EqualTo(ExpectedDictionary));
   }
 }
