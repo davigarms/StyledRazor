@@ -32,7 +32,7 @@ public class Box : StyledBase
 	private string ShorthandPadding => HasIndividualPadding ? string.Empty :
 		HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero};" : $"--padding: {Padding ?? Tokens.Zero};";
 
-	protected override StyledBase Component => Create.Div(@"{
+	protected override StyledBase Component => CreateStyled.Div(@"{
 		height: var(--height);
 		width: var(--width);
 		padding-left: var(--left);

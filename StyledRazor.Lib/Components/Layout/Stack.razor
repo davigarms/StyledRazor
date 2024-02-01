@@ -9,7 +9,7 @@
 @code {
   [Parameter] public string Gutter { get; set; }
 
-	protected override StyledBase Component => Create.Div(@"{
+	protected override StyledBase Component => CreateStyled.Div(@"{
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;

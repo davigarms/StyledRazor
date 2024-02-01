@@ -18,7 +18,7 @@
 
   private string Padding => NoPadding ? Tokens.Zero : Space;
 
-  protected override StyledBase Component => Create.Div(@"{
+  protected override StyledBase Component => CreateStyled.Div(@"{
     display: flex;
     flex-direction: column;
     min-height: var(--min-height);

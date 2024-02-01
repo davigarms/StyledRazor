@@ -18,7 +18,7 @@ public class StyledBase : ComponentBase
   
   [Parameter] public RenderFragment ChildContent { get; set; }
 
-  protected readonly StyledFactory Create;
+  protected readonly StyledFactory CreateStyled;
   
   protected ElementReference ElementRef { get; set; }
   
@@ -32,11 +32,11 @@ public class StyledBase : ComponentBase
     private init => _componentStyle = value;
   }
 
-  protected virtual StyledBase Component => Create.Div();
+  protected virtual StyledBase Component => CreateStyled.Div();
   
   public StyledBase()
   {
-    Create = new StyledFactory(this);
+    CreateStyled = new StyledFactory(this);
   }
 
   public StyledBase(ITokens tokens) : this()

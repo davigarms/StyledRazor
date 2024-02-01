@@ -11,7 +11,7 @@
 
   [Parameter] public int StretchIndex { get; set; }
 
-  protected override StyledBase Component => Create.Div($@"{{
+  protected override StyledBase Component => CreateStyled.Div($@"{{
     display: flex;
     flex-wrap: nowrap;
     height: inherit;
