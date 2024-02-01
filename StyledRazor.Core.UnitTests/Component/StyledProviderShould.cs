@@ -19,7 +19,7 @@ public class StyledProviderShould
   public void GetStyled_FromAStyledComponent()
   {
     var tokens = new Tokens();
-    var styledProvider = new StyledProvider(tokens);
+    var styledProvider = new ComponentStyleProvider(tokens);
     const string expectedCssString = "div[TestComponent]{Property:Value;}";
     
     var styled = styledProvider.Get(typeof(TestComponent));

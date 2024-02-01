@@ -4,11 +4,11 @@ using System;
 
 namespace StyledRazor.Core.Model;
 
-public class StyledProvider
+public class ComponentStyleProvider
 {
   private readonly ITokens _tokens;
   
-  public StyledProvider(ITokens tokens)
+  public ComponentStyleProvider(ITokens tokens)
   {
     _tokens = tokens;
   }

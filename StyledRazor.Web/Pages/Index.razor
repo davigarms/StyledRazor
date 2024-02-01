@@ -75,13 +75,13 @@
 {
   [Inject] protected ITokens Tokens { get; set; }
   
-  [Inject] protected StyledProvider StyledProvider { get; set; }
+  [Inject] protected ComponentStyleProvider ComponentStyleProvider { get; set; }
 
   private ComponentStyle ActiveButton { get; set; }
 
-  protected override void OnInitialized() => ActiveButton = StyledProvider.Get(typeof(GreyButton));
+  protected override void OnInitialized() => ActiveButton = ComponentStyleProvider.Get(typeof(GreyButton));
 
   private void Click() => ActiveButton = ActiveButton.Type == typeof(GreyButton)
-                                           ? StyledProvider.Get(typeof(AlertButton))
-                                           : StyledProvider.Get(typeof(GreyButton));
+                                           ? ComponentStyleProvider.Get(typeof(AlertButton))
+                                           : ComponentStyleProvider.Get(typeof(GreyButton));
 }

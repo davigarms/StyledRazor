@@ -27,7 +27,7 @@ namespace StyledRazor.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<IBrowserConnector, BrowserConnector>();
-            services.AddScoped<StyledProvider>();
+            services.AddScoped<ComponentStyleProvider>();
             services.AddScoped<ITokens, Tokens>();
             services.AddScoped<BrowserService>();
             services.AddScoped<MediaQueryService>();
