@@ -6,8 +6,6 @@
 </Styled>
 
 @code {
-  [Parameter] public string Gutter { get; set; }
-
 	protected override Styled ComponentBase => CreateStyled.Div(@"{
 		display: flex;
 		flex-direction: column;
@@ -20,4 +18,6 @@
 		margin-top: var(--gutter);
 		overflow: auto !important;
 	}");
+
+	[Parameter] public string Gutter { get; set; }
 }

@@ -5,10 +5,6 @@
 </Styled>
 
 @code {
-  [Parameter] public bool StretchAll { get; set; }
-
-  [Parameter] public int StretchIndex { get; set; }
-
   protected override Styled ComponentBase => CreateStyled.Div($@"{{
     display: flex;
     flex-wrap: nowrap;
@@ -23,4 +19,8 @@
   > :nth-child({StretchIndex}) {{
     flex: 1
   }}");
+
+  [Parameter] public bool StretchAll { get; set; }
+
+  [Parameter] public int StretchIndex { get; set; }
 }

@@ -9,14 +9,6 @@
 </Styled>
 
 @code {
-  [Parameter] public string MinimumHeight { get; set; }
-
-  [Parameter] public string Space { get; set; }
-
-  [Parameter] public bool NoPadding { get; set; }
-
-  private string Padding => NoPadding ? Tokens.Zero : Space;
-
   protected override Styled ComponentBase => CreateStyled.Div(@"{
     display: flex;
     flex-direction: column;
@@ -51,4 +43,13 @@
     margin-top: auto !important;
     margin-bottom: 0 !important;
   }");
+
+  [Parameter] public string MinimumHeight { get; set; }
+
+  [Parameter] public string Space { get; set; }
+
+  [Parameter] public bool NoPadding { get; set; }
+
+  private string Padding => NoPadding ? Tokens.Zero : Space;
+
 }
