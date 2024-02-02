@@ -1,9 +1,9 @@
 ﻿@inherits StyledRazor.Core.Component.Styled.Styled
 
-<Layout Base="@Component"
+<Styled Base="@Component"
         style=@($@"--gutter: {Gutter ?? Tokens.SpacingL};")>
   @ChildContent
-</Layout>
+</Styled>
 
 @code {
   [Parameter] public string Gutter { get; set; }

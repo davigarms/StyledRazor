@@ -1,12 +1,12 @@
 ﻿@inherits StyledRazor.Core.Component.Styled.Styled
 
-<Layout Base="@Component"
+<Styled Base="@Component"
         style=@($@"
 		      --min-height: {@MinimumHeight ?? Tokens.SizeTotal};
 		      --padding: {@Padding};
 		      --space: {@Space ?? Tokens.SpacingM};")>
   @ChildContent
-</Layout>
+</Styled>
 
 @code {
   [Parameter] public string MinimumHeight { get; set; }
