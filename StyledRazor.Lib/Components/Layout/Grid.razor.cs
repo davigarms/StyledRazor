@@ -47,11 +47,12 @@ public class Grid : Styled, IDisposable
     --gutter: {Gutter ?? Tokens.SpacingS};
   ";
 
-  protected override Styled Component => CreateStyled.Div(@"{
+  protected override Styled Component => CreateStyled.Ul(@"{
     list-style: none;
 	  display: flex;
     flex-wrap: wrap;
     padding: 0;
+    margin: 0;
     margin-left: calc(-1 * var(--gutter));
     width: calc(100% + var(--gutter));
     position: relative;
