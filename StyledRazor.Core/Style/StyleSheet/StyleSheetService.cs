@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Components;
+using StyledRazor.Core.Style.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using  StyledRazor.Core.Style.Component;
 using static StyledRazor.Core.Style.Css.CssHelper;
 
 namespace StyledRazor.Core.Style.StyleSheet;

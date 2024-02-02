@@ -1,7 +1,7 @@
-using StyledRazor.Core.Component.Styled;
+using StyledRazor.Core.Components.StyledComponent;
 using System.Text.Json;
 
-namespace StyledRazor.Core.UnitTests.Component;
+namespace StyledRazor.Core.UnitTests.Components.StyledComponent;
 
 [TestFixture]
 public class StyledFactoryShould

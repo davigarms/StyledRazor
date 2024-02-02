@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using StyledRazor.Core.Style.Component;
+using StyledRazor.Core.Style.Components;
 using StyledRazor.Core.Style.DesignTokens;
 using StyledRazor.Core.Style.StyleSheet;
 using System.Collections.Generic;
 
-namespace StyledRazor.Core.Component.Styled;
+namespace StyledRazor.Core.Components.StyledComponent;
 
 public class Styled : ComponentBase
 {

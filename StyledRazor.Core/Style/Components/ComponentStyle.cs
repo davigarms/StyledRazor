@@ -1,9 +1,9 @@
-using static StyledRazor.Core.Style.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core.Style.Css;
 using System;
+using static StyledRazor.Core.Style.Css.CssHelper;
 
-namespace StyledRazor.Core.Style.Component;
+namespace StyledRazor.Core.Style.Components;
 
 public class ComponentStyle
 {
