@@ -4,7 +4,7 @@ using StyledRazor.Core.Style.DesignTokens;
 
 namespace StyledRazor.Core.UnitTests.Component;
 
-public class ComponentStyleProviderShould
+public class StyledProviderShould
 {
   private readonly Type _styleType = typeof(TestComponent);
   
