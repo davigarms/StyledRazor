@@ -1,14 +1,14 @@
-﻿@inherits StyledRazor.Core.Component.Styled.Styled
+﻿@inherits Styled
 
-<Styled Base="@Component"
-        style=@($@"--gutter: {Gutter ?? Tokens.SpacingL};")>
+<Styled Base="@ComponentBase"
+        Style=@($@"--gutter: {Gutter ?? Tokens.SpacingL}")>
   @ChildContent
 </Styled>
 
 @code {
   [Parameter] public string Gutter { get; set; }
 
-	protected override Styled Component => CreateStyled.Div(@"{
+	protected override Styled ComponentBase => CreateStyled.Div(@"{
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;

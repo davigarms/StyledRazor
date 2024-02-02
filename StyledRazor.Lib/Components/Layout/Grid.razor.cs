@@ -10,44 +10,7 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Grid : Styled, IDisposable
 {
-  [Parameter] public string Gutter { get; set; }
-
-  [Parameter] public bool Grow { get; set; } = true;
-
-  [Parameter] public string Height { get; set; }
-
-  [Parameter] public string BaseWidth { get; set; }
-
-  [Parameter] public double Ratio { get; set; }
-
-  [Parameter] public int ColsXs { get; set; }
-
-  [Parameter] public int ColsSm { get; set; }
-
-  [Parameter] public int ColsMd { get; set; }
-
-  [Parameter] public int ColsLg { get; set; }
-
-  [Parameter] public int ColsXl { get; set; }
-
-  [Parameter] public int ColsXxl { get; set; }
-
-  [Parameter] public int Cols { get; set; } = 1;
-
-  [Parameter] public ResponsiveCols ResponsiveCols { get; set; }
-
-  [Inject] private BrowserService Browser { get; set; }
-  
-  [Inject] private MediaQueryService MediaQuery { get; set; }
-
-  protected override string InlineStyle => $@"
-    --height: {CalculatedHeight};
-    --width: {CalculatedWidth};
-    --flex-grow: {FlexGrow};
-    --gutter: {Gutter ?? Tokens.SpacingS};
-  ";
-
-  protected override Styled Component => CreateStyled.Ul(@"{
+  protected override Styled ComponentBase => CreateStyled.Ul(@"{
     list-style: none;
 	  display: flex;
     flex-wrap: wrap;
@@ -87,21 +50,56 @@ public class Grid : Styled, IDisposable
     flex-basis: 100% !important
   }");
 
+  protected override string InlineStyle => $@"
+    --height: {CalculatedHeight};
+    --width: {CalculatedWidth};
+    --flex-grow: {FlexGrow};
+    --gutter: {Gutter ?? Tokens.SpacingS};
+  ";
+
+  [Parameter] public string Gutter { get; set; }
+
+  [Parameter] public bool Grow { get; set; } = true;
+
+  [Parameter] public string Height { get; set; }
+
+  [Parameter] public string BaseWidth { get; set; }
+
+  [Parameter] public double Ratio { get; set; }
+
+  [Parameter] public int ColsXs { get; set; }
+
+  [Parameter] public int ColsSm { get; set; }
+
+  [Parameter] public int ColsMd { get; set; }
+
+  [Parameter] public int ColsLg { get; set; }
+
+  [Parameter] public int ColsXl { get; set; }
+
+  [Parameter] public int ColsXxl { get; set; }
+
+  [Parameter] public int Cols { get; set; } = 1;
+
+  [Parameter] public ResponsiveCols ResponsiveCols { get; set; }
+
+  [Inject] private BrowserService Browser { get; set; }
+
+  [Inject] private MediaQueryService MediaQuery { get; set; }
 
   private string CalculatedHeight { get; set; }
 
   private string CalculatedWidth => string.IsNullOrEmpty(BaseWidth) ? $"{100 / Cols}%" : $"{BaseWidth}";
 
   private string FlexGrow => HasBaseWidth ?
-                              Grow ? "1" : "0"
-                              : "0";
+                               Grow ? "1" : "0"
+                               : "0";
 
   private bool HasBaseWidth => !string.IsNullOrEmpty(BaseWidth);
 
   private bool HasHeight => !string.IsNullOrEmpty(Height);
 
   private bool HasRatio => Ratio != 0;
-  
 
   protected override async Task OnAfterRenderAsync(bool firstRender)
   {
@@ -111,7 +109,6 @@ public class Grid : Styled, IDisposable
       BrowserService.OnResize += WindowSizeHasChanged;
       await Task.Delay(1);
       await WindowSizeHasChanged();
-      
       StateHasChanged();
     }
   }
@@ -132,10 +129,10 @@ public class Grid : Styled, IDisposable
   private async Task SetCalculatedHeight()
   {
     var elementDimension = await Browser.DimensionFrom(ElementRef);
-    CalculatedHeight = Cols == 1 && string.IsNullOrEmpty(BaseWidth) ? "initial" : 
-      HasHeight ? Height :
-        HasRatio ? HeightFrom(elementDimension.Width) :
-          "initial";
+    CalculatedHeight = Cols == 1 && string.IsNullOrEmpty(BaseWidth) ? "initial" :
+                       HasHeight ? Height :
+                       HasRatio ? HeightFrom(elementDimension.Width) :
+                       "initial";
   }
 
   private string HeightFrom(int elementWidth) => $"{((double)elementWidth / Cols - (Gutter ?? Tokens.SpacingS).ToInt()) / Ratio}px";

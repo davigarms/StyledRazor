@@ -5,9 +5,7 @@ namespace StyledRazor.Lib.Components.Styling;
 
 public class Background : Styled
 {
-  [Parameter] public string Color { get; set; }
-
-  protected override Styled Component => CreateStyled.Div(@"{
+  protected override Styled ComponentBase => CreateStyled.Div(@"{
     background: var(--background-color);
     height: inherit; 
   }");
@@ -15,4 +13,6 @@ public class Background : Styled
   protected override string InlineStyle => $@"
     --background-color: {Color};
   ";
+
+  [Parameter] public string Color { get; set; }
 }

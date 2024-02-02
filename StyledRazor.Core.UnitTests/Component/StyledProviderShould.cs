@@ -16,7 +16,7 @@ public class ComponentStyleProviderShould
   {
     public TestComponent(ITokens tokens) : base(tokens) {}
 
-    protected override Styled Component => CreateStyled.Div(@"{
+    protected override Styled ComponentBase => CreateStyled.Div(@"{
       Property: Value;
     }");
   }

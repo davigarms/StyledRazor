@@ -10,30 +10,30 @@ namespace StyledRazor.Core.Component.Styled;
 public class Styled : ComponentBase
 {
   [Inject] protected ITokens Tokens { get; set; }
-  
+
   [Parameter] public Styled Base { get; set; }
-  
-  [Parameter(CaptureUnmatchedValues = true)] 
+
+  [Parameter(CaptureUnmatchedValues = true)]
   public IDictionary<string, object> Params { get; set; }
-  
+
   [Parameter] public RenderFragment ChildContent { get; set; }
 
   protected readonly StyledFactory CreateStyled;
-  
-  protected ElementReference ElementRef { get; set; }
-  
+
+  protected ElementReference ElementRef { get; private set; }
+
   protected virtual string InlineStyle => string.Empty;
 
   private readonly ComponentStyle _componentStyle;
 
   public ComponentStyle ComponentStyle
   {
-    get => _componentStyle ?? Component.ComponentStyle;
+    get => _componentStyle ?? ComponentBase.ComponentStyle;
     private init => _componentStyle = value;
   }
 
-  protected virtual Styled Component => CreateStyled.Div();
-  
+  protected virtual Styled ComponentBase => CreateStyled.Div();
+
   public Styled()
   {
     CreateStyled = new StyledFactory(this);
@@ -48,7 +48,7 @@ public class Styled : ComponentBase
   {
     ComponentStyle = componentStyle;
   }
-  
+
   protected override void OnInitialized() => StyleSheetService.Add(ComponentStyle);
 
   protected override void OnParametersSet()
@@ -56,7 +56,7 @@ public class Styled : ComponentBase
     if (Base == null) return;
     UpdateStyle(Base.ComponentStyle);
   }
-  
+
   private void UpdateStyle(ComponentStyle componentStyle)
   {
     StyleSheetService.Update(ComponentStyle.Id, componentStyle);

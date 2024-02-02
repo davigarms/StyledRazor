@@ -5,11 +5,7 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Container : Styled
 {
-  [Parameter] public bool Fluid { get; set; }
-  
-  [Parameter] public string Width { get; set; } = "initial";
-
-  protected override Styled Component => CreateStyled.Div(@"{
+  protected override Styled ComponentBase => CreateStyled.Div(@"{
 		margin-left: auto;
 		margin-right: auto;
 		max-width: var(--max-width);
@@ -21,4 +17,8 @@ public class Container : Styled
 		--max-width: {(Fluid ? Width : Tokens.Initial)};
 		--width: {(Fluid ? Tokens.SizeTotal : Width)};
 	";
+
+  [Parameter] public bool Fluid { get; set; }
+
+  [Parameter] public string Width { get; set; } = "initial";
 }

@@ -6,26 +6,18 @@ namespace StyledRazor.Lib.Components.UI.Button;
 
 public class Button : Styled
 {
-	[Parameter] public string Margin { get; set; } = "0";
-	
-  [Parameter] public string Padding { get; set; }
-  
   public Button() {}
 
   public Button(ITokens tokens) : base(tokens) {}
 
-  protected override Styled Component => CreateStyled.A($@"{{
+  protected override Styled ComponentBase => CreateStyled.A($@"{{
     {ButtonDefinition}                       
   }}");
 
   protected override string InlineStyle => $@"
-	  --margin: {(string.IsNullOrEmpty(Margin) ? ButtonMargin : Margin)};
-	  --padding: {(string.IsNullOrEmpty(Padding) ? ButtonPadding : Padding)}
+	  --margin: {(string.IsNullOrEmpty(Margin) ? DefaultMargin : Margin)};
+	  --padding: {(string.IsNullOrEmpty(Padding) ? DefaultPadding : Padding)}
 	";
-
-  private string ButtonMargin => $"{Tokens.SpacingS} {Tokens.SpacingM}";
-
-  private string ButtonPadding => $"{Tokens.SpacingS}";
 
   protected string ButtonDefinition => $@"
 		display: inline-block;
@@ -38,15 +30,23 @@ public class Button : Styled
 		margin: var(--margin);
     padding: var(--padding);    
 	";
+
+  [Parameter] public string Margin { get; set; } = "0";
+
+  [Parameter] public string Padding { get; set; }
+
+  private string DefaultMargin => $"{Tokens.SpacingS} {Tokens.SpacingM}";
+
+  private string DefaultPadding => $"{Tokens.SpacingS}";
 }
 
 public class GreyButton : Button
 {
-	public GreyButton() {}
-  
-	public GreyButton(ITokens tokens) : base(tokens) {}
+  public GreyButton() {}
 
-	protected override Styled Component => CreateStyled.A($@"{{
+  public GreyButton(ITokens tokens) : base(tokens) {}
+
+  protected override Styled ComponentBase => CreateStyled.A($@"{{
 		{ButtonDefinition}
 		background: grey;
 		color: white;
@@ -55,11 +55,11 @@ public class GreyButton : Button
 
 public class AlertButton : Button
 {
-	public AlertButton() {}
-	
+  public AlertButton() {}
+
   public AlertButton(ITokens tokens) : base(tokens) {}
 
-  protected override Styled Component => CreateStyled.A($@"{{
+  protected override Styled ComponentBase => CreateStyled.A($@"{{
 		{ButtonDefinition}
 		background: red;
 		color: white;
