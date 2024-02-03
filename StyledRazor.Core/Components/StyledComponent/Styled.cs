@@ -26,11 +26,7 @@ public class Styled : ComponentBase
 
   private readonly ComponentStyle _componentStyle;
 
-  public ComponentStyle ComponentStyle
-  {
-    get => _componentStyle ?? ComponentBase.ComponentStyle;
-    private init => _componentStyle = value;
-  }
+  public ComponentStyle ComponentStyle => _componentStyle ?? ComponentBase.ComponentStyle;
 
   protected virtual Styled ComponentBase => CreateStyled.Div();
 
@@ -46,7 +42,7 @@ public class Styled : ComponentBase
 
   public Styled(ComponentStyle componentStyle) : this()
   {
-    ComponentStyle = componentStyle;
+    _componentStyle = componentStyle;
   }
 
   protected override void OnInitialized() => StyleSheetService.Add(ComponentStyle);
