@@ -1,4 +1,5 @@
 @page "/"
+@using StyledRazor.Core.MediaQuery
 
 <Stack Gutter="@Tokens.SpacingXs">
   <Box>First</Box>
@@ -24,7 +25,7 @@
     <Stack Gutter="@Tokens.Zero">
 
       <Container Fluid>
-        <Grid Gutter="@Tokens.SpacingS" ColsLg="4" ColsMd="2" ColsSm="1" Ratio="1">
+        <Grid Gutter="@Tokens.SpacingS" Columns="ResponsiveCols.Set(sm: 1, md: 2, lg: 4)" Ratio="1">
           @for (var i = 1; i < 5; i++)
           {
             var content = "Item " + i;
