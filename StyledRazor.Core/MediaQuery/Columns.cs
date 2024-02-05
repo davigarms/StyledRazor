@@ -2,11 +2,11 @@ using System.Linq;
 
 namespace StyledRazor.Core.MediaQuery;
 
-public class ResponsiveCols
+public class Columns
 {
   private readonly MediaQuery _mediaQuery = new();
 
-  public ResponsiveCols(int xs = 0, int sm = 0, int md = 0, int lg = 0, int xl = 0, int xxl = 0)
+  public Columns(int xs = 0, int sm = 0, int md = 0, int lg = 0, int xl = 0, int xxl = 0)
   {
     if (xs > 0) _mediaQuery.Add(BreakPoint.Xs, xs);
     if (sm > 0) _mediaQuery.Add(BreakPoint.Sm, sm);
@@ -16,7 +16,7 @@ public class ResponsiveCols
     if (xxl > 0) _mediaQuery.Add(BreakPoint.Xxl, xxl);
   }
 
-  public static ResponsiveCols Set(int xs = 0, int sm = 0, int md = 0, int lg = 0, int xl = 0, int xxl = 0)
+  public static Columns Set(int xs = 0, int sm = 0, int md = 0, int lg = 0, int xl = 0, int xxl = 0)
     => new(xs, sm, md, lg, xl, xxl);
 
   public int? NumberOfColumnsFor(int windowWidth)
