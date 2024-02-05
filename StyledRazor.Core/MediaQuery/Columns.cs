@@ -44,7 +44,7 @@ public class Columns
       var maxQuery = _mediaQuery.ElementAt(i + 1);
 
       if (windowWidth < (int)minQuery.Key ||
-          (windowWidth >= (int)minQuery.Key && windowWidth < (int)maxQuery.Key))
+          windowWidth >= (int)minQuery.Key && windowWidth < (int)maxQuery.Key)
       {
         return minQuery.Value;
       }
