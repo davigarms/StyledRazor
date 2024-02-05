@@ -69,7 +69,7 @@ public class Grid : StyledBase, IDisposable
 
   [Parameter] public double Ratio { get; set; }
 
-  [Parameter] public ResponsiveCols Columns { get; set; } = new();
+  [Parameter] public Columns Columns { get; set; } = new();
 
   [Inject] private BrowserService Browser { get; set; }
 
