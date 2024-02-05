@@ -100,9 +100,7 @@ public class Grid : Styled, IDisposable
     if (firstRender)
     {
       BrowserService.OnResize += WindowSizeHasChanged;
-      await Task.Delay(1);
       await WindowSizeHasChanged();
-      StateHasChanged();
     }
   }
 
