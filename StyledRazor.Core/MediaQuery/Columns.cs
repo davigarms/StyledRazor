@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 
 namespace StyledRazor.Core.MediaQuery;
@@ -6,18 +7,32 @@ public class Columns
 {
   private readonly MediaQuery _mediaQuery = new();
 
-  public Columns(int xs = 0, int sm = 0, int md = 0, int lg = 0, int xl = 0, int xxl = 0)
+  public Columns(int xs = 0,
+                 int sm = 0,
+                 int md = 0,
+                 int lg = 0,
+                 int xl = 0,
+                 int xxl = 0
+  )
   {
-    if (xs > 0) _mediaQuery.Add(BreakPoint.Xs, xs);
-    if (sm > 0) _mediaQuery.Add(BreakPoint.Sm, sm);
-    if (md > 0) _mediaQuery.Add(BreakPoint.Md, md);
-    if (lg > 0) _mediaQuery.Add(BreakPoint.Lg, lg);
-    if (xl > 0) _mediaQuery.Add(BreakPoint.Xl, xl);
-    if (xxl > 0) _mediaQuery.Add(BreakPoint.Xxl, xxl);
+    int[] breakpoints = { xs, sm, md, lg, xl, xxl };
+    var index = 0;
+
+    foreach (BreakPoint breakPoint in Enum.GetValues(typeof(BreakPoint)))
+    {
+      var value = breakpoints[index];
+      if (value > 0) _mediaQuery.Add(breakPoint, value);
+      index++;
+    }
   }
 
-  public static Columns Set(int xs = 0, int sm = 0, int md = 0, int lg = 0, int xl = 0, int xxl = 0)
-    => new(xs, sm, md, lg, xl, xxl);
+  public static Columns Set(int xs = 0,
+                            int sm = 0,
+                            int md = 0,
+                            int lg = 0,
+                            int xl = 0,
+                            int xxl = 0
+  ) => new(xs, sm, md, lg, xl, xxl);
 
   public int? NumberOfColumnsFor(int windowWidth)
   {
