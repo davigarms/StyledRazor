@@ -51,17 +51,17 @@ public class Columns
 
     for (var i = 0; i < _mediaQuery.Count - 1; i++)
     {
-      var minQuery = _mediaQuery.ElementAt(i);
-      var maxQuery = _mediaQuery.ElementAt(i + 1);
+      var minWidth = _mediaQuery.ElementAt(i);
+      var maxWidth = _mediaQuery.ElementAt(i + 1);
 
-      if (windowWidth < (int)minQuery.Key ||
-          windowWidth >= (int)minQuery.Key && windowWidth < (int)maxQuery.Key)
+      if (windowWidth < (int)minWidth.Key ||
+          windowWidth >= (int)minWidth.Key && windowWidth < (int)maxWidth.Key)
       {
-        return minQuery.Value;
+        return minWidth.Value;
       }
     }
 
-    var lastQuery = _mediaQuery.Last();
-    return windowWidth > (int)lastQuery.Key ? lastQuery.Value : null;
+    var lastWidth = _mediaQuery.Last();
+    return windowWidth > (int)lastWidth.Key ? lastWidth.Value : null;
   }
 }
