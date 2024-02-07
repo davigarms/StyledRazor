@@ -1,11 +1,22 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace StyledRazor.Core.MediaQuery;
 
+public enum BreakPoint
+{
+  Xs = 0,
+  Sm = 480,
+  Md = 768,
+  Lg = 960,
+  Xl = 1280,
+  Xxl = 1536,
+}
+
 public class Columns
 {
-  private readonly MediaQuery _mediaQuery = new();
+  private readonly Dictionary<BreakPoint, int> _mediaQuery = new();
 
   public Columns(int xs = 0,
                  int sm = 0,
