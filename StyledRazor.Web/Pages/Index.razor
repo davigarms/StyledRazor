@@ -74,6 +74,8 @@
 
 @code
 {
+  [Inject] protected Columns Columns { get; set; }
+  
   [Inject] protected ITokens Tokens { get; set; }
   
   [Inject] protected StyledProvider StyledProvider { get; set; }

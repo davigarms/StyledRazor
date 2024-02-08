@@ -1,49 +1,46 @@
-using System;
+using StyledRazor.Core.Style.DesignTokens;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace StyledRazor.Core.MediaQuery;
 
-public enum BreakPoint
-{
-  Xs = 0,
-  Sm = 480,
-  Md = 768,
-  Lg = 960,
-  Xl = 1280,
-  Xxl = 1536,
-}
-
 public class Columns
 {
-  private readonly Dictionary<BreakPoint, int> _mediaQuery = new();
+  private readonly ITokens _tokens;
 
-  public Columns(int xs = 0,
-                 int sm = 0,
-                 int md = 0,
-                 int lg = 0,
-                 int xl = 0,
-                 int xxl = 0
-  )
+  private Dictionary<int, int> _mediaQuery = new();
+
+  public Columns(ITokens tokens)
   {
-    int[] breakpoints = { xs, sm, md, lg, xl, xxl };
-    var index = 0;
-
-    foreach (BreakPoint breakPoint in Enum.GetValues(typeof(BreakPoint)))
-    {
-      var value = breakpoints[index];
-      if (value > 0) _mediaQuery.Add(breakPoint, value);
-      index++;
-    }
+    _tokens = tokens;
   }
 
-  public static Columns Set(int xs = 0,
-                            int sm = 0,
-                            int md = 0,
-                            int lg = 0,
-                            int xl = 0,
-                            int xxl = 0
-  ) => new(xs, sm, md, lg, xl, xxl);
+  public Columns Set(int xs = 0,
+                     int sm = 0,
+                     int md = 0,
+                     int lg = 0,
+                     int xl = 0,
+                     int xxl = 0
+  )
+  {
+    int[] columns = { xs, sm, md, lg, xl, xxl };
+    _mediaQuery = new Dictionary<int, int>();
+    var breakPoints = new[]
+                      {
+                        _tokens.BreakPointXs,
+                        _tokens.BreakPointSm,
+                        _tokens.BreakPointMd,
+                        _tokens.BreakPointLg,
+                        _tokens.BreakPointXl,
+                        _tokens.BreakPointXxl,
+                      };
+
+    for (var i = 0; i < breakPoints.Length; i++)
+      if (columns[i] > 0)
+        _mediaQuery[breakPoints[i]] = columns[i];
+
+    return this;
+  }
 
   public int? NumberOfColumnsFor(int windowWidth)
   {
@@ -54,14 +51,14 @@ public class Columns
       var minWidth = _mediaQuery.ElementAt(i);
       var maxWidth = _mediaQuery.ElementAt(i + 1);
 
-      if (windowWidth < (int)minWidth.Key ||
-          windowWidth >= (int)minWidth.Key && windowWidth < (int)maxWidth.Key)
+      if (windowWidth < minWidth.Key ||
+          windowWidth >= minWidth.Key && windowWidth < maxWidth.Key)
       {
         return minWidth.Value;
       }
     }
 
     var lastWidth = _mediaQuery.Last();
-    return windowWidth > (int)lastWidth.Key ? lastWidth.Value : null;
+    return windowWidth > lastWidth.Key ? lastWidth.Value : null;
   }
 }
