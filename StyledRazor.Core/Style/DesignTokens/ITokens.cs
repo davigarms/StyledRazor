@@ -2,6 +2,12 @@ namespace StyledRazor.Core.Style.DesignTokens;
 
 public interface ITokens
 {
+  int BreakPointXs { get; }
+  int BreakPointSm { get; }
+  int BreakPointMd { get; }
+  int BreakPointLg { get; }
+  int BreakPointXl { get; }
+  int BreakPointXxl { get; }
   public string Zero { get; }
   public string Auto { get; }
   public string SpacingXs { get; }
