@@ -68,7 +68,7 @@ public class Grid : Styled, IDisposable
 
   [Parameter] public double Ratio { get; set; }
 
-  [Parameter] public Columns Columns { get; set; } = new();
+  [Parameter] public Columns Columns { get; set; }
 
   [Inject] private BrowserService Browser { get; set; }
 
@@ -76,7 +76,7 @@ public class Grid : Styled, IDisposable
 
   private Dimension WindowDimension { get; set; } = new();
   
-  private int ActualCols  => Columns.NumberOfColumnsFor(WindowDimension.Width) ?? 1;
+  private int ActualCols  => Columns?.NumberOfColumnsFor(WindowDimension.Width) ?? 1;
 
   private string CalculatedHeight => ActualCols == 1 && string.IsNullOrEmpty(BaseWidth) ? "initial" :
                                      HasHeight ? Height :

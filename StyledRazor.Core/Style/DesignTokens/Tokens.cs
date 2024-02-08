@@ -4,6 +4,12 @@ namespace StyledRazor.Core.Style.DesignTokens;
 
 public class Tokens : ITokens
 {
+    public int BreakPointXs => 0;
+    public int BreakPointSm => 480;
+    public int BreakPointMd => 768;
+    public int BreakPointLg => 960;
+    public int BreakPointXl => 1280;
+    public int BreakPointXxl => 1536;
     public string Zero => "0";
     public string Auto => "auto";
     public string SpacingXs => ".25rem";
@@ -33,10 +39,10 @@ public class Tokens : ITokens
     public string FlexWrap => "wrap";
     public string FlexWrapReverse => "wrap-reverse";
     public string FlexNoWrap => "nowrap";
-    public string ScreenXs => $"{(int)BreakPoint.Xs}px";
-    public string ScreenS => $"{(int)BreakPoint.Sm}px";
-    public string ScreenM => $"{(int)BreakPoint.Md}px";
-    public string ScreenLg => $"{(int)BreakPoint.Lg}px";
-    public string ScreenXlg => $"{(int)BreakPoint.Xl}px";
-    public string ScreenXxg => $"{(int)BreakPoint.Xxl}px";
+    public string ScreenXs => $"{(int)BreakPointXs}px";
+    public string ScreenS => $"{(int)BreakPointSm}px";
+    public string ScreenM => $"{(int)BreakPointMd}px";
+    public string ScreenLg => $"{(int)BreakPointLg}px";
+    public string ScreenXlg => $"{(int)BreakPointXl}px";
+    public string ScreenXxg => $"{(int)BreakPointXxl}px";
 }
