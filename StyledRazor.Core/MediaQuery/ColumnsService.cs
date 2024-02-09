@@ -4,18 +4,18 @@ using System.Linq;
 
 namespace StyledRazor.Core.MediaQuery;
 
-public class Columns
+public class ColumnsService
 {
   private readonly ITokens _tokens;
 
   private Dictionary<int, int> _mediaQuery = new();
 
-  public Columns(ITokens tokens)
+  public ColumnsService(ITokens tokens)
   {
     _tokens = tokens;
   }
 
-  public Columns Set(int xs = 0,
+  public ColumnsService Set(int xs = 0,
                      int sm = 0,
                      int md = 0,
                      int lg = 0,
