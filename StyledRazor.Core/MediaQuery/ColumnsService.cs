@@ -48,17 +48,19 @@ public class ColumnsService
 
     for (var i = 0; i < _columnsByBreakpoint.Count - 1; i++)
     {
-      var minWidth = _columnsByBreakpoint.ElementAt(i);
-      var maxWidth = _columnsByBreakpoint.ElementAt(i + 1);
+      var minWidth = _columnsByBreakpoint.ElementAt(i).Key;
+      var maxWidth = _columnsByBreakpoint.ElementAt(i + 1).Key;
+      var minWidthColumns = _columnsByBreakpoint.ElementAt(i).Value;
 
-      if (windowWidth < minWidth.Key ||
-          windowWidth >= minWidth.Key && windowWidth < maxWidth.Key)
+      if (windowWidth < minWidth ||
+          windowWidth >= minWidth && windowWidth < maxWidth)
       {
-        return minWidth.Value;
+        return minWidthColumns;
       }
     }
 
-    var lastWidth = _columnsByBreakpoint.Last();
-    return windowWidth > lastWidth.Key ? lastWidth.Value : null;
+    var lastWidth = _columnsByBreakpoint.Last().Key;
+    var lastWidthColumns = _columnsByBreakpoint.Last().Value;
+    return windowWidth > lastWidth ? lastWidthColumns : null;
   }
 }
