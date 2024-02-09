@@ -6,8 +6,6 @@ namespace StyledRazor.Core.UnitTests.Components.StyledComponent;
 
 public class StyledProviderShould
 {
-  private readonly Type _styleType = typeof(TestComponent);
-  
   private readonly Tokens _tokens = new();
   
   private StyledProvider StyledProvider => new(_tokens);
@@ -22,11 +20,11 @@ public class StyledProviderShould
   }
 
   [Test]
-  public void GetComponent_FromAStyledComponent()
+  public void CreateAStyledComponentInstance()
   {
-    var styled = StyledProvider.Get(_styleType);
+    var styled = StyledProvider.CreateInstance<TestComponent>();
     
-    Assert.That(styled.GetType(), Is.EqualTo(_styleType));
+    Assert.That(styled.GetType(), Is.EqualTo(typeof(TestComponent)));
   }
 
   [Test]
@@ -34,11 +32,11 @@ public class StyledProviderShould
   {
     const string expectedCssString = "div[TestComponent]{Property:Value;}";
     
-    var componentStyle = StyledProvider.Get(_styleType).ComponentStyle;
+    var componentStyle = StyledProvider.CreateInstance<TestComponent>().ComponentStyle;
 
     Assert.Multiple(() =>
     {
-      Assert.That(componentStyle.Type, Is.EqualTo(_styleType));
+      Assert.That(componentStyle.Type, Is.EqualTo(typeof(TestComponent)));
       Assert.That(componentStyle.CssString, Is.EqualTo(ExpectedCssStringWithScopeFrom(componentStyle, expectedCssString)));
     });
   }
