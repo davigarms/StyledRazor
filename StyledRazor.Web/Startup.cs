@@ -30,6 +30,7 @@ namespace StyledRazor.Web
             services.AddScoped<ITokens, Tokens>();
             services.AddScoped<BrowserService>();
             services.AddScoped<ColumnsService>();
+            services.AddScoped<BreakPoints>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
