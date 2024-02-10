@@ -1,16 +1,11 @@
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Component;
-using StyledRazor.Core.Model;
+using StyledRazor.Core.Components.StyledComponent;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class Container : StyledBase
+public class Container : Styled
 {
-  [Parameter] public bool Fluid { get; set; }
-  
-  [Parameter] public string Width { get; set; } = "initial";
-
-  public override Styled Base => Create.Div(@"{
+  protected override Styled ComponentBase => CreateStyled.Div(@"{
 		margin-left: auto;
 		margin-right: auto;
 		max-width: var(--max-width);
@@ -18,8 +13,12 @@ public class Container : StyledBase
 		position: relative;
 	}");
 
-  protected override string Style => $@"
+  protected override string InlineStyle => $@"
 		--max-width: {(Fluid ? Width : Tokens.Initial)};
 		--width: {(Fluid ? Tokens.SizeTotal : Width)};
 	";
+
+  [Parameter] public bool Fluid { get; set; }
+
+  [Parameter] public string Width { get; set; } = "initial";
 }

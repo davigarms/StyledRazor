@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
+using StyledRazor.Core.Style.Components;
 
-namespace StyledRazor.Core.Model;
+namespace StyledRazor.Core.Components.StyledComponent;
 
 public class StyledFactory
 {
@@ -8,14 +9,13 @@ public class StyledFactory
 
   private Styled _styled;
 
-
   public StyledFactory(IComponent component)
   {
     _component = component;
   }
 
   private Styled Create(string baseElement, string baseCss) =>
-    _styled ??= new Styled(_component, baseElement, baseCss);
+    _styled ??= new Styled(new ComponentStyle(_component, baseElement, baseCss));
   
   public Styled Div(string css = "") => Create("div", css);
 

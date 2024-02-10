@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Component;
-using StyledRazor.Core.Model;
+using StyledRazor.Core.Components.StyledComponent;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class GridItem : StyledBase
+public class GridItem : Styled
 {
-  public override Styled Base => Create.Div();
+  protected override Styled ComponentBase => CreateStyled.Li();
 }

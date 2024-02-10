@@ -1,37 +1,36 @@
-using static StyledRazor.Core.Style.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Component;
-using StyledRazor.Core.Model;
+using StyledRazor.Core.Style.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static StyledRazor.Core.Style.Css.CssHelper;
 
-namespace StyledRazor.Core.StyleSheet;
+namespace StyledRazor.Core.Style.StyleSheet;
 
 public static class StyleSheetService
 {
-  private static readonly List<Styled> StyledList = new();
+  private static readonly List<ComponentStyle> StyledList = new();
 
   private static string Css => string.Join(string.Empty, StyledList.Select(styled => styled.CssString));
 
   public static Func<Task> OnUpdate { get; set; }
 
-  public static void Add(Styled styled)
+  public static void Add(ComponentStyle componentStyle)
   {
-    if (styled == null) return;
+    if (componentStyle == null) return;
 
-    StyledList.Add(styled);
+    StyledList.Add(componentStyle);
     OnUpdate?.Invoke();
   }
 
-  public static void Update(string id, Styled styled)
+  public static void Update(string id, ComponentStyle componentStyle)
   {
     var toUpdate = StyledList.FirstOrDefault(s => s.Id == id);
 
-    if (toUpdate == null || toUpdate.Id == styled.Id) return;
+    if (toUpdate == null || toUpdate.Id == componentStyle.Id) return;
 
-    toUpdate.Update(styled);
+    toUpdate.Update(componentStyle);
     OnUpdate?.Invoke();
   }
 

@@ -1,24 +1,15 @@
-﻿@using StyledRazor.Core.Model
-@inherits StyledRazor.Core.Component.StyledBase
+﻿@inherits Styled
 
-<Layout Styled="@Base"
-        style=@($@"
+<Styled Base="@ComponentBase"
+        Style=@($@"
 		      --min-height: {@MinimumHeight ?? Tokens.SizeTotal};
 		      --padding: {@Padding};
-		      --space: {@Space ?? Tokens.SpacingM};")>
+		      --space: {@Space ?? Tokens.SpacingM}")>
   @ChildContent
-</Layout>
+</Styled>
 
 @code {
-  [Parameter] public string MinimumHeight { get; set; }
-
-  [Parameter] public string Space { get; set; }
-
-  [Parameter] public bool NoPadding { get; set; }
-
-  private string Padding => NoPadding ? Tokens.Zero : Space;
-
-  public override Styled Base => Create.Div(@"{
+  protected override Styled ComponentBase => CreateStyled.Div(@"{
     display: flex;
     flex-direction: column;
     min-height: var(--min-height);
@@ -52,4 +43,13 @@
     margin-top: auto !important;
     margin-bottom: 0 !important;
   }");
+
+  [Parameter] public string MinimumHeight { get; set; }
+
+  [Parameter] public string Space { get; set; }
+
+  [Parameter] public bool NoPadding { get; set; }
+
+  private string Padding => NoPadding ? Tokens.Zero : Space;
+
 }

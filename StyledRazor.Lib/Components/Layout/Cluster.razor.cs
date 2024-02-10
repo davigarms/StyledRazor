@@ -1,32 +1,11 @@
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Component;
-using StyledRazor.Core.Model;
+using StyledRazor.Core.Components.StyledComponent;
 
 namespace StyledRazor.Lib.Components.Layout;
 
-public class Cluster : StyledBase
+public class Cluster : Styled
 {
-	[Parameter] public string Space { get; set; }
-	
-	[Parameter] public bool Wrap { get; set; }
-	
-	[Parameter] public bool WrapReverse { get; set; }
-	
-	[Parameter] public string Align { get; set; }
-	
-	[Parameter] public string AlignContent { get; set; }
-	
-	[Parameter] public string Justify { get; set; }
-	
-	[Parameter] public bool NoPadding { get; set; }
-
-	private string Padding => NoPadding ? Tokens.Zero : Space;
-
-	private string FlexWrap => Wrap ? Tokens.FlexWrap :
-		WrapReverse ? Tokens.FlexWrapReverse :
-		Tokens.FlexNoWrap;
-
-	public override Styled Base => Create.Div(@"{
+	protected override Styled ComponentBase => CreateStyled.Div(@"{
     display: flex;
     gap: var(--gap);
     flex-wrap: var(--flex-wrap);
@@ -64,8 +43,8 @@ public class Cluster : StyledBase
 	> [stretch] {
 		align-self: stretch;
 	}");
-
-	protected override string Style => $@"
+	
+	protected override string InlineStyle => $@"
 	  --gap: {Space ?? Tokens.Zero};
 	  --flex-wrap: {FlexWrap};
 	  --align-items: {Align ?? Tokens.AlignCenter};
@@ -73,4 +52,24 @@ public class Cluster : StyledBase
 	  --justify: {Justify ?? Tokens.AlignFlexEnd};
 	  --padding: {Padding};
   ";
+	
+	[Parameter] public string Space { get; set; }
+	
+	[Parameter] public bool Wrap { get; set; }
+	
+	[Parameter] public bool WrapReverse { get; set; }
+	
+	[Parameter] public string Align { get; set; }
+	
+	[Parameter] public string AlignContent { get; set; }
+	
+	[Parameter] public string Justify { get; set; }
+	
+	[Parameter] public bool NoPadding { get; set; }
+
+	private string Padding => NoPadding ? Tokens.Zero : Space;
+
+	private string FlexWrap => Wrap ? Tokens.FlexWrap :
+	                           WrapReverse ? Tokens.FlexWrapReverse :
+	                           Tokens.FlexNoWrap;
 }

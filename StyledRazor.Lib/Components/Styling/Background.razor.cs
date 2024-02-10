@@ -1,19 +1,18 @@
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Component;
-using StyledRazor.Core.Model;
+using StyledRazor.Core.Components.StyledComponent;
 
 namespace StyledRazor.Lib.Components.Styling;
 
-public class Background : StyledBase
+public class Background : Styled
 {
-  [Parameter] public string Color { get; set; }
-
-  public override Styled Base => Create.Div(@"{
+  protected override Styled ComponentBase => CreateStyled.Div(@"{
     background: var(--background-color);
     height: inherit; 
   }");
 
-  protected override string Style => $@"
+  protected override string InlineStyle => $@"
     --background-color: {Color};
   ";
+
+  [Parameter] public string Color { get; set; }
 }

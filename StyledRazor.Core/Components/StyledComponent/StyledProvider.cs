@@ -1,8 +1,7 @@
-using StyledRazor.Core.Component;
 using StyledRazor.Core.Style.DesignTokens;
 using System;
 
-namespace StyledRazor.Core.Model;
+namespace StyledRazor.Core.Components.StyledComponent;
 
 public class StyledProvider
 {
@@ -13,6 +12,6 @@ public class StyledProvider
     _tokens = tokens;
   }
 
-  public Styled Get(Type styleType) => 
-    (Activator.CreateInstance(styleType, _tokens) as StyledBase)?.Base;
+  public Styled CreateInstance<T>() where T: Styled => 
+    Activator.CreateInstance(typeof(T), _tokens) as Styled;
 }
