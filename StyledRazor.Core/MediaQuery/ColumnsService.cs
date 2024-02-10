@@ -8,7 +8,7 @@ public class ColumnsService
 {
   private readonly ITokens _tokens;
 
-  private Dictionary<int, int> _columnsByBreakpoint = new();
+  public Dictionary<int, int> ColumnsByBreakpoint { get; private set; } = new();
 
   public ColumnsService(ITokens tokens)
   {
@@ -24,7 +24,7 @@ public class ColumnsService
   )
   {
     int[] columns = { xs, sm, md, lg, xl, xxl };
-    _columnsByBreakpoint = new Dictionary<int, int>();
+    ColumnsByBreakpoint = new Dictionary<int, int>();
     var breakPoints = new[]
                       {
                         _tokens.BreakPointXs,
@@ -37,30 +37,28 @@ public class ColumnsService
 
     for (var i = 0; i < breakPoints.Length; i++)
       if (columns[i] > 0)
-        _columnsByBreakpoint[breakPoints[i]] = columns[i];
+        ColumnsByBreakpoint[breakPoints[i]] = columns[i];
 
     return this;
   }
 
   public int? NumberOfColumnsFor(int windowWidth)
   {
-    if (_columnsByBreakpoint.Count == 0) return null;
+    if (ColumnsByBreakpoint.Count == 0) return null;
 
-    for (var i = 0; i < _columnsByBreakpoint.Count - 1; i++)
+    for (var i = 0; i < ColumnsByBreakpoint.Count - 1; i++)
     {
-      var minWidth = _columnsByBreakpoint.ElementAt(i).Key;
-      var maxWidth = _columnsByBreakpoint.ElementAt(i + 1).Key;
-      var minWidthColumns = _columnsByBreakpoint.ElementAt(i).Value;
+      var minWidth = ColumnsByBreakpoint.ElementAt(i);
+      var maxWidth = ColumnsByBreakpoint.ElementAt(i + 1);
 
-      if (windowWidth < minWidth ||
-          windowWidth >= minWidth && windowWidth < maxWidth)
+      if (windowWidth < minWidth.Key ||
+          windowWidth >= minWidth.Key && windowWidth < maxWidth.Key)
       {
-        return minWidthColumns;
+        return minWidth.Value;
       }
     }
 
-    var lastWidth = _columnsByBreakpoint.Last().Key;
-    var lastWidthColumns = _columnsByBreakpoint.Last().Value;
-    return windowWidth > lastWidth ? lastWidthColumns : null;
+    var lastWidth = ColumnsByBreakpoint.Last();
+    return windowWidth > lastWidth.Key ? lastWidth.Value : null;
   }
 }
