@@ -8,7 +8,7 @@ public class ColumnsService
 {
   private readonly ITokens _tokens;
 
-  public Dictionary<int, int> ColumnsByBreakpoint { get; private set; } = new();
+  private Dictionary<int, int> ColumnsByBreakpoint { get; set; } = new();
 
   public ColumnsService(ITokens tokens)
   {
