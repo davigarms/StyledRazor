@@ -1,6 +1,6 @@
 ﻿@inherits Styled
 
-<Styled Base="@ComponentBase"
+<Styled Base="@BaseComponent"
         Style=@($@"
 		      --min-height: {@MinimumHeight ?? Tokens.SizeTotal};
 		      --padding: {@Padding};
@@ -9,7 +9,7 @@
 </Styled>
 
 @code {
-  protected override Styled ComponentBase => CreateStyled.Div(@"{
+  protected override Styled BaseComponent => CreateStyled.Div(@"{
     display: flex;
     flex-direction: column;
     min-height: var(--min-height);

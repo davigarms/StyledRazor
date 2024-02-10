@@ -1,12 +1,12 @@
 ﻿@inherits Styled
 
-<Styled Base="@ComponentBase"
+<Styled Base="@BaseComponent"
         Style=@($@"--gutter: {Gutter ?? Tokens.SpacingL}")>
   @ChildContent
 </Styled>
 
 @code {
-	protected override Styled ComponentBase => CreateStyled.Div(@"{
+	protected override Styled BaseComponent => CreateStyled.Div(@"{
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;

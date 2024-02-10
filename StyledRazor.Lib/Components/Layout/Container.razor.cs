@@ -5,7 +5,7 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Container : Styled
 {
-  protected override Styled ComponentBase => CreateStyled.Div(@"{
+  protected override Styled BaseComponent => CreateStyled.Div(@"{
 		margin-left: auto;
 		margin-right: auto;
 		max-width: var(--max-width);

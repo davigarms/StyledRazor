@@ -1,11 +1,11 @@
 ﻿@inherits Styled
 
-<Styled Base="@ComponentBase" stretch-all="@StretchAll">
+<Styled Base="@BaseComponent" stretch-all="@StretchAll">
 	@ChildContent
 </Styled>
 
 @code {
-  protected override Styled ComponentBase => CreateStyled.Div($@"{{
+  protected override Styled BaseComponent => CreateStyled.Div($@"{{
     display: flex;
     flex-wrap: nowrap;
     height: inherit;

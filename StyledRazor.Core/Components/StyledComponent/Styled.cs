@@ -26,9 +26,9 @@ public class Styled : ComponentBase
 
   private readonly ComponentStyle _componentStyle;
 
-  public ComponentStyle ComponentStyle => _componentStyle ?? ComponentBase.ComponentStyle;
+  public ComponentStyle ComponentStyle => _componentStyle ?? BaseComponent.ComponentStyle;
 
-  protected virtual Styled ComponentBase => CreateStyled.Div();
+  protected virtual Styled BaseComponent => CreateStyled.Div();
 
   public Styled()
   {

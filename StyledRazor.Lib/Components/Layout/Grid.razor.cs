@@ -10,7 +10,7 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Grid : Styled, IDisposable
 {
-  protected override Styled ComponentBase => CreateStyled.Ul(@"{
+  protected override Styled BaseComponent => CreateStyled.Ul(@"{
     list-style: none;
 	  display: flex;
     flex-wrap: wrap;
