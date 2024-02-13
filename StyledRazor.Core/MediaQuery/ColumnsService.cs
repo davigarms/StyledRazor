@@ -6,13 +6,21 @@ namespace StyledRazor.Core.MediaQuery;
 
 public class ColumnsService
 {
-  private readonly ITokens _tokens;
+  private int[] BreakPoints { get; }
 
   private Dictionary<int, int> ColumnsByBreakpoint { get; set; }
 
   public ColumnsService(ITokens tokens)
   {
-    _tokens = tokens;
+    BreakPoints = new[]
+                  {
+                    tokens.BreakPointXs,
+                    tokens.BreakPointSm,
+                    tokens.BreakPointMd,
+                    tokens.BreakPointLg,
+                    tokens.BreakPointXl,
+                    tokens.BreakPointXxl,
+                  };
   }
 
   public ColumnsService Set(int xs = 0,
@@ -25,19 +33,10 @@ public class ColumnsService
   {
     int[] columns = { xs, sm, md, lg, xl, xxl };
     ColumnsByBreakpoint = new Dictionary<int, int>();
-    var breakPoints = new[]
-                      {
-                        _tokens.BreakPointXs,
-                        _tokens.BreakPointSm,
-                        _tokens.BreakPointMd,
-                        _tokens.BreakPointLg,
-                        _tokens.BreakPointXl,
-                        _tokens.BreakPointXxl,
-                      };
 
-    for (var i = 0; i < breakPoints.Length; i++)
+    for (var i = 0; i < BreakPoints.Length; i++)
       if (columns[i] > 0)
-        ColumnsByBreakpoint[breakPoints[i]] = columns[i];
+        ColumnsByBreakpoint[BreakPoints[i]] = columns[i];
 
     return this;
   }
