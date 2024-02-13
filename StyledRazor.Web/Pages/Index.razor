@@ -81,9 +81,10 @@
 
   private StyledBase ActiveButton { get; set; }
 
-  protected override void OnInitialized() => ActiveButton = StyledProvider.Get(typeof(GreyButton));
+  protected override void OnInitialized() => ActiveButton = StyledProvider.CreateInstance<GreyButton>();
 
   private void Click() => ActiveButton = ActiveButton is GreyButton
-                                           ? StyledProvider.Get(typeof(AlertButton))
-                                           : StyledProvider.Get(typeof(GreyButton));
+                                           ? StyledProvider.CreateInstance<AlertButton>()
+                                           : StyledProvider.CreateInstance<GreyButton>();
+
 }
