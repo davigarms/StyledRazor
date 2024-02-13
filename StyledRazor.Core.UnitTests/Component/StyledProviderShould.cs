@@ -10,9 +10,11 @@ public class StyledProviderShould
   {
     public TestComponent(ITokens tokens) : base(tokens) {}
 
-    public override Styled Base => Create.Div(@"{
+    protected override Styled BaseComponent => Create.Div(@"{
       Property: Value;
     }");
+
+    public Styled GetBaseComponent() => BaseComponent;
   }
 
   [Test]
@@ -23,11 +25,12 @@ public class StyledProviderShould
     const string expectedCssString = "div[TestComponent]{Property:Value;}";
     
     var styled = styledProvider.Get(typeof(TestComponent));
+    var baseComponent = ((TestComponent)styled).GetBaseComponent();
 
     Assert.Multiple(() =>
     {
-      Assert.That(styled.Type, Is.EqualTo(typeof(TestComponent)));
-      Assert.That(styled.CssString, Is.EqualTo(ExpectedCssStringWithScopeFrom(styled, expectedCssString)));
+      Assert.That(styled.GetType(), Is.EqualTo(typeof(TestComponent)));
+      Assert.That(baseComponent.CssString, Is.EqualTo(ExpectedCssStringWithScopeFrom(baseComponent, expectedCssString)));
     });
   }
   

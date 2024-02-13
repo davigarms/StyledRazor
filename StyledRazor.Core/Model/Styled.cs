@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Components;
+using StyledRazor.Core.Component;
 using StyledRazor.Core.Style.Css;
+using StyledRazor.Core.StyleSheet;
 using System;
 using static StyledRazor.Core.Style.Css.CssHelper;
 
 namespace StyledRazor.Core.Model;
 
-public class Styled
+public class Styled : StyledBase
 {
   private CssRuleset Css { get; set; }
 
@@ -15,12 +17,14 @@ public class Styled
 
   public string CssString { get; private set; }
   
-  public Type Type { get; private set; }
+  protected override Styled BaseComponent => this;
+  
+  public Styled() {}
 
   internal Styled(IComponent component, string element, string baseCss)
   {
-    Type = component.GetType();
-    Id = IdFrom(Type.Name);
+    StyleSheetService.Add(this);
+    Id = IdFrom(component.GetType().Name);
     Element = element;
     Css = CssFactory.Create(baseCss, ScopeFrom(Id, Element));
     UpdateCss();
@@ -28,7 +32,6 @@ public class Styled
 
   public void Update(Styled styled)
   {
-    Type = styled.Type;
     Id = styled.Id;
     Element = styled.Element;
     Css = styled.Css;
@@ -43,5 +46,9 @@ public class Styled
     return declaration;
   }
 
-  private void UpdateCss() => CssString = Css?.ToString();
+  private void UpdateCss()
+  {
+    CssString = Css?.ToString();
+    StyleSheetService.OnUpdate?.Invoke();
+  }
 }

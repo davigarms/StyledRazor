@@ -1,6 +1,4 @@
 @page "/"
-@using StyledRazor.Core.Model
-@using StyledRazor.Core.MediaQuery
 
 <Stack Gutter="@Tokens.SpacingXs">
   <Box>First</Box>
@@ -8,7 +6,7 @@
   <Container Fluid>
     <Grid BaseWidth="200px">
       <Button>Default</Button>
-      <Button Styled="@ActiveButton" @onclick="@Click">
+      <Button Base="@ActiveButton" @onclick="@Click">
         Click me
       </Button>
     </Grid>
@@ -80,11 +78,11 @@
   
   [Inject] protected StyledProvider StyledProvider { get; set; }
 
-  private Styled ActiveButton { get; set; }
+  private StyledBase ActiveButton { get; set; }
 
   protected override void OnInitialized() => ActiveButton = StyledProvider.Get(typeof(GreyButton));
 
-  private void Click() => ActiveButton = ActiveButton.Type == typeof(GreyButton)
+  private void Click() => ActiveButton = ActiveButton is GreyButton
                                            ? StyledProvider.Get(typeof(AlertButton))
                                            : StyledProvider.Get(typeof(GreyButton));
 }

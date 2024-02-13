@@ -15,7 +15,7 @@ public class Button : StyledBase
 
   public Button(ITokens tokens) : base(tokens) {}
 
-  public override Styled Base => Create.A($@"{{
+  protected override Styled BaseComponent => Create.A($@"{{
     {ButtonDefinition}                       
   }}");
 
@@ -47,7 +47,7 @@ public class GreyButton : Button
   
 	public GreyButton(ITokens tokens) : base(tokens) {}
 
-	public override Styled Base => Create.A($@"{{
+	protected override Styled BaseComponent => Create.A($@"{{
 		{ButtonDefinition}
 		background: grey;
 		color: white;
@@ -60,7 +60,7 @@ public class AlertButton : Button
 	
   public AlertButton(ITokens tokens) : base(tokens) {}
 
-  public override Styled Base => Create.A($@"{{
+  protected override Styled BaseComponent => Create.A($@"{{
 		{ButtonDefinition}
 		background: red;
 		color: white;
