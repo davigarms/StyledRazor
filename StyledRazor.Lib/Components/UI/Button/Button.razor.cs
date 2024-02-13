@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Component;
-using StyledRazor.Core.Model;
+using StyledRazor.Core.Components;
 using StyledRazor.Core.Style.DesignTokens;
 
 namespace StyledRazor.Lib.Components.UI.Button;

@@ -1,5 +1,4 @@
-using StyledRazor.Core.Component;
-using StyledRazor.Core.Model;
+using StyledRazor.Core.Components;
 using StyledRazor.Core.Style.Css;
 
 namespace StyledRazor.Core.UnitTests.Component;

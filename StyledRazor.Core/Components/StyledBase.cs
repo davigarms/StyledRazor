@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Rendering;
-using StyledRazor.Core.Model;
 using StyledRazor.Core.Style.DesignTokens;
 using System.Collections.Generic;
 
-namespace StyledRazor.Core.Component;
+namespace StyledRazor.Core.Components;
 
 public abstract class StyledBase : ComponentBase
 {

@@ -1,13 +1,12 @@
-using static StyledRazor.Core.Style.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Component;
-using StyledRazor.Core.Model;
+using StyledRazor.Core.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static StyledRazor.Core.Style.Css.CssHelper;
 
-namespace StyledRazor.Core.StyleSheet;
+namespace StyledRazor.Core.Style.StyleSheet;
 
 public static class StyleSheetService
 {

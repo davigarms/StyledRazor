@@ -1,5 +1,4 @@
-using StyledRazor.Core.Component;
-using StyledRazor.Core.Model;
+using StyledRazor.Core.Components;
 using System.Text.Json;
 
 namespace StyledRazor.Core.UnitTests.Component;

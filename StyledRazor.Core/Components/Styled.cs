@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Components;
-using StyledRazor.Core.Component;
 using StyledRazor.Core.Style.Css;
-using StyledRazor.Core.StyleSheet;
-using System;
+using StyledRazor.Core.Style.StyleSheet;
 using static StyledRazor.Core.Style.Css.CssHelper;
 
-namespace StyledRazor.Core.Model;
+namespace StyledRazor.Core.Components;
 
 public class Styled : StyledBase
 {

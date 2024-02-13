@@ -1,9 +1,8 @@
 using static StyledRazor.Core.Style.Css.CssHelper;
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core.Browser;
-using StyledRazor.Core.Component;
+using StyledRazor.Core.Components;
 using StyledRazor.Core.MediaQuery;
-using StyledRazor.Core.Model;
 using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
