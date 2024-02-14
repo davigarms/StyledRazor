@@ -8,7 +8,7 @@ public class StyledFactoryShould
 {
   private const string UnexpectedSpace = " ";
   private const string MalformedSelectorWithColon = $":{UnexpectedSpace}Name";
-  
+
   private StyledFactory _create = new(new TestComponent());
 
   private class TestComponent : StyledBase {}
@@ -158,13 +158,12 @@ public class StyledFactoryShould
   }
 
   [TestCaseSource(nameof(CssCases))]
-  public void ReturnExistingStyled_WhenStyledAlreadyExists((string original, string minified) css)
+  public void ReturnTheExistingStyledComponentForAGivenFactory((string original, string minified) css)
   {
-    var styled = _create.Div(css.original);
-    var styledId = styled.Id;
-    styled = _create.Div(css.original);
+    var styled1 = _create.Div(css.original);
+    var styled2 = _create.Div(css.original);
 
-    Assert.That(styled.Id, Is.EqualTo(styledId));
+    Assert.That(styled2.Id, Is.EqualTo(styled1.Id));
   }
 
   [Test]
