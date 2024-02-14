@@ -17,7 +17,7 @@ public class Container : StyledBase
 		position: relative;
 	}");
 
-  protected override string Style => $@"
+  protected override string InlineStyle => $@"
 		--max-width: {(Fluid ? Width : Tokens.Initial)};
 		--width: {(Fluid ? Tokens.SizeTotal : Width)};
 	";

@@ -20,7 +20,7 @@ public abstract class StyledBase : ComponentBase
   
   protected ElementReference ElementRef { get; private set; }
   
-  protected virtual string Style => string.Empty;
+  protected virtual string InlineStyle => string.Empty;
 
   protected virtual Styled BaseComponent => Create.Div();
 
@@ -44,7 +44,7 @@ public abstract class StyledBase : ComponentBase
   {
     builder.OpenElement(0, BaseComponent.Element);
     builder.AddAttribute(0, BaseComponent.Id);
-    if (!string.IsNullOrEmpty(Style)) builder.AddAttribute(0, "style", Style);
+    if (!string.IsNullOrEmpty(InlineStyle)) builder.AddAttribute(0, "style", InlineStyle);
     builder.AddMultipleAttributes(0, Params);
     builder.AddElementReferenceCapture(0, value => ElementRef = value);
     builder.AddContent(0, ChildContent);

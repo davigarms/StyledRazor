@@ -51,7 +51,7 @@ public class Grid : StyledBase, IDisposable
     flex-basis: 100% !important
   }");
 
-  protected override string Style => $@"
+  protected override string InlineStyle => $@"
     --height: {CalculatedHeight};
     --width: {CalculatedWidth};
     --flex-grow: {FlexGrow};

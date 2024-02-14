@@ -41,7 +41,7 @@ public class Box : StyledBase
 		padding: var(--padding);
 	}");
 
-  protected override string Style => $@"
+  protected override string InlineStyle => $@"
 		{ShorthandPadding}
 		--height: {Height};
 		--width: {Width};
