@@ -6,10 +6,6 @@ namespace StyledRazor.Lib.Components.UI.Button;
 
 public class Button : StyledBase
 {
-	[Parameter] public string Margin { get; set; } = "0";
-	
-  [Parameter] public string Padding { get; set; }
-  
   public Button() {}
 
   public Button(ITokens tokens) : base(tokens) {}
@@ -23,10 +19,6 @@ public class Button : StyledBase
 	  --padding: {(string.IsNullOrEmpty(Padding) ? ButtonPadding : Padding)}
 	";
 
-  private string ButtonMargin => $"{Tokens.SpacingS} {Tokens.SpacingM}";
-
-  private string ButtonPadding => $"{Tokens.SpacingS}";
-
   protected string ButtonDefinition => $@"
 		display: inline-block;
 		border-radius: {Tokens.SpacingXs};
@@ -38,6 +30,14 @@ public class Button : StyledBase
 		margin: var(--margin);
     padding: var(--padding);    
 	";
+
+  [Parameter] public string Margin { get; set; } = "0";
+
+  [Parameter] public string Padding { get; set; }
+
+  private string ButtonMargin => $"{Tokens.SpacingS} {Tokens.SpacingM}";
+
+  private string ButtonPadding => $"{Tokens.SpacingS}";
 }
 
 public class GreyButton : Button

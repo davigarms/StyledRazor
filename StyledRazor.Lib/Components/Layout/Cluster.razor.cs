@@ -5,27 +5,7 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Cluster : StyledBase
 {
-	[Parameter] public string Space { get; set; }
-	
-	[Parameter] public bool Wrap { get; set; }
-	
-	[Parameter] public bool WrapReverse { get; set; }
-	
-	[Parameter] public string Align { get; set; }
-	
-	[Parameter] public string AlignContent { get; set; }
-	
-	[Parameter] public string Justify { get; set; }
-	
-	[Parameter] public bool NoPadding { get; set; }
-
-	private string Padding => NoPadding ? Tokens.Zero : Space;
-
-	private string FlexWrap => Wrap ? Tokens.FlexWrap :
-		WrapReverse ? Tokens.FlexWrapReverse :
-		Tokens.FlexNoWrap;
-
-	protected override Styled BaseComponent => Create.Div(@"{
+  protected override Styled BaseComponent => Create.Div(@"{
     display: flex;
     gap: var(--gap);
     flex-wrap: var(--flex-wrap);
@@ -64,7 +44,7 @@ public class Cluster : StyledBase
 		align-self: stretch;
 	}");
 
-	protected override string InlineStyle => $@"
+  protected override string InlineStyle => $@"
 	  --gap: {Space ?? Tokens.Zero};
 	  --flex-wrap: {FlexWrap};
 	  --align-items: {Align ?? Tokens.AlignCenter};
@@ -72,4 +52,24 @@ public class Cluster : StyledBase
 	  --justify: {Justify ?? Tokens.AlignFlexEnd};
 	  --padding: {Padding};
   ";
+
+  [Parameter] public string Space { get; set; }
+
+  [Parameter] public bool Wrap { get; set; }
+
+  [Parameter] public bool WrapReverse { get; set; }
+
+  [Parameter] public string Align { get; set; }
+
+  [Parameter] public string AlignContent { get; set; }
+
+  [Parameter] public string Justify { get; set; }
+
+  [Parameter] public bool NoPadding { get; set; }
+
+  private string Padding => NoPadding ? Tokens.Zero : Space;
+
+  private string FlexWrap => Wrap ? Tokens.FlexWrap :
+                             WrapReverse ? Tokens.FlexWrapReverse :
+                             Tokens.FlexNoWrap;
 }
