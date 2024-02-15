@@ -42,17 +42,24 @@ public static class CssHelper
 
   public static string Minify(this string unminifiedCss)
   {
+    while (unminifiedCss.Contains("/*") && unminifiedCss.Contains("*/"))
+    {
+      var start = unminifiedCss.IndexOf("/*");
+      var end = unminifiedCss.IndexOf("*/") + 2;
+      unminifiedCss = unminifiedCss.Remove(start, end);
+    }
+    
     return unminifiedCss
-      .Replace("  ", "")
-      .Replace("\r", "\n")
-      .Replace(" \n", "\n")
-      .Replace("\t", "")
-      .Replace(" : ", ": ")
-      .Replace(" ;", ";")
-      .Replace("; ", ";")
-      .Replace(" {", "{")
-      .Replace(" > ", ">")
-      .Replace("\n", "");
+           .Replace("  ", "")
+           .Replace("\r", "\n")
+           .Replace(" \n", "\n")
+           .Replace("\t", "")
+           .Replace(" : ", ": ")
+           .Replace(" ;", ";")
+           .Replace("; ", ";")
+           .Replace(" {", "{")
+           .Replace(" > ", ">")
+           .Replace("\n", "");
   }
 
   public static string ToJson(this string minifiedCss)
