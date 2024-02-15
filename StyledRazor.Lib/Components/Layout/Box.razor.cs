@@ -5,7 +5,7 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Box : StyledBase
 {
-  protected override Styled BaseComponent => Create.Div(@"{
+  protected override Styled BaseComponent => CreateStyled.Div(@"{
 		height: var(--height);
 		width: var(--width);
 		padding-left: var(--left);

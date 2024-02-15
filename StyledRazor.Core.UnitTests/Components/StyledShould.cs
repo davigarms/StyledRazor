@@ -5,7 +5,7 @@ namespace StyledRazor.Core.UnitTests.Components;
 
 public class StyledShould
 {
-  private StyledFactory Create { get; set; } = new(new TestComponent());
+  private StyledFactory CreateStyled { get; set; } = new(new TestComponent());
 
   private class TestComponent : Styled {}
 
@@ -26,13 +26,13 @@ public class StyledShould
 
 
   [SetUp]
-  public void SetUp() => Create = new StyledFactory(new TestComponent());
+  public void SetUp() => CreateStyled = new StyledFactory(new TestComponent());
 
   [Test]
   public void UpdateStyled()
   {
     var createAnother = new StyledFactory(new TestComponent());
-    var styled1 = Create.Div(string.Empty);
+    var styled1 = CreateStyled.Div(string.Empty);
     var styled2 = createAnother.Div("{Property: Value}");
     const string expectedCss = "div[TestComponent]{Property:Value;}";
 
@@ -48,7 +48,7 @@ public class StyledShould
   [Test]
   public void GetCssDeclarationDictionary()
   {
-    var styled = Create.A(Css);
+    var styled = CreateStyled.A(Css);
 
     var styleDeclaration = styled.Get("Child");
 

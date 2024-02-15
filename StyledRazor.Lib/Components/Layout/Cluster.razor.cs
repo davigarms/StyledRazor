@@ -5,7 +5,7 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Cluster : StyledBase
 {
-  protected override Styled BaseComponent => Create.Div(@"{
+  protected override Styled BaseComponent => CreateStyled.Div(@"{
     display: flex;
     gap: var(--gap);
     flex-wrap: var(--flex-wrap);

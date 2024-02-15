@@ -5,7 +5,7 @@ namespace StyledRazor.Lib.Components.Styling;
 
 public class Background : StyledBase
 {
-  protected override Styled BaseComponent => Create.Div(@"{
+  protected override Styled BaseComponent => CreateStyled.Div(@"{
     background: var(--background-color);
     height: inherit; 
   }");

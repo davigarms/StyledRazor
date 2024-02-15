@@ -16,17 +16,17 @@ public abstract class StyledBase : ComponentBase
   
   [Parameter] public RenderFragment ChildContent { get; set; }
 
-  protected readonly StyledFactory Create;
+  protected readonly StyledFactory CreateStyled;
   
   protected ElementReference ElementRef { get; private set; }
   
   protected virtual string InlineStyle => string.Empty;
 
-  protected virtual Styled BaseComponent => Create.Div();
+  protected virtual Styled BaseComponent => CreateStyled.Div();
 
   protected StyledBase()
   {
-    Create = new StyledFactory(this);
+    CreateStyled = new StyledFactory(this);
   }
 
   protected StyledBase(ITokens tokens) : this()

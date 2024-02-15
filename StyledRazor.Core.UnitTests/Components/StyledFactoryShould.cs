@@ -9,7 +9,7 @@ public class StyledFactoryShould
   private const string UnexpectedSpace = " ";
   private const string MalformedSelectorWithColon = $":{UnexpectedSpace}Name";
 
-  private StyledFactory _create = new(new TestComponent());
+  private StyledFactory CreateStyled { get; set; } = new(new TestComponent());
 
   private class TestComponent : StyledBase {}
 
@@ -115,12 +115,12 @@ public class StyledFactoryShould
   }
 
   [SetUp]
-  public void SetUp() => _create = new StyledFactory(new TestComponent());
+  public void SetUp() => CreateStyled = new StyledFactory(new TestComponent());
 
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledDiv_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.Div(css.original);
+    var styled = CreateStyled.Div(css.original);
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("div", styled.Id, css.minified)));
   }
@@ -128,7 +128,7 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledHyperLink_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.A(css.original);
+    var styled = CreateStyled.A(css.original);
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("a", styled.Id, css.minified)));
   }
@@ -136,7 +136,7 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledH1_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.H1(css.original);
+    var styled = CreateStyled.H1(css.original);
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("h1", styled.Id, css.minified)));
   }
@@ -144,7 +144,7 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledUl_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.Ul(css.original);
+    var styled = CreateStyled.Ul(css.original);
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("ul", styled.Id, css.minified)));
   }
@@ -152,7 +152,7 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void CreateAStyledLi_WithMinifiedAndScopedCss((string original, string minified) css)
   {
-    var styled = _create.Li(css.original);
+    var styled = CreateStyled.Li(css.original);
 
     Assert.That(styled.CssString, Is.EqualTo(MinifiedCssWithScopeFor("li", styled.Id, css.minified)));
   }
@@ -160,8 +160,8 @@ public class StyledFactoryShould
   [TestCaseSource(nameof(CssCases))]
   public void ReturnTheExistingStyledComponentForAGivenFactory((string original, string minified) css)
   {
-    var styled1 = _create.Div(css.original);
-    var styled2 = _create.Div(css.original);
+    var styled1 = CreateStyled.Div(css.original);
+    var styled2 = CreateStyled.Div(css.original);
 
     Assert.That(styled2.Id, Is.EqualTo(styled1.Id));
   }
@@ -174,7 +174,7 @@ public class StyledFactoryShould
         Property: Value
       }}";
 
-    Assert.Throws<JsonException>(() => _create.Div(css));
+    Assert.Throws<JsonException>(() => CreateStyled.Div(css));
   }
 
   private static string MinifiedCssWithScopeFor(string element, string scopeId, string cssMinified) =>
