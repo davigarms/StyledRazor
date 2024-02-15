@@ -13,10 +13,10 @@ public class StyleSheet : ComponentBase, IDisposable
   protected override void OnInitialized() => StyleSheetService.OnUpdate += UpdateStyleSheet;
 
   protected override void BuildRenderTree(RenderTreeBuilder builder) => builder.AddContent(0, StyleElement);
-  
+
   private async Task UpdateStyleSheet()
   {
-    StyleElement = StyleSheetService.CreateStyleSheet(ResetCss);
+    StyleElement = StyleSheetService.CreateStyleSheet(BaseCss);
     await InvokeAsync(StateHasChanged);
   }
 
@@ -27,7 +27,7 @@ public class StyleSheet : ComponentBase, IDisposable
     GC.SuppressFinalize(this);
   }
 
-  private static string ResetCss => @"
+  [Parameter] public string BaseCss { get; set; } = @"
     /* Box sizing rules */
     *,
     *::before,
