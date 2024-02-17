@@ -9,9 +9,16 @@ using System.Collections.Generic;
 
 namespace StyledRazor.Lib.Components.Layout;
 
+public class GridList : Grid
+{
+  protected override Styled BaseComponent => CreateStyled.Ul(Css);
+}
+
 public class Grid : StyledBase, IDisposable
 {
-  protected override Styled BaseComponent => CreateStyled.Ul(@"{
+  protected override Styled BaseComponent => CreateStyled.Div(Css);
+
+  protected const string Css = @"{
     list-style: none;
 	  display: flex;
     flex-wrap: wrap;
@@ -49,7 +56,7 @@ public class Grid : StyledBase, IDisposable
 
   > [full] {
     flex-basis: 100% !important
-  }");
+  }";
 
   protected override string InlineStyle => $@"
     --height: {CalculatedHeight};

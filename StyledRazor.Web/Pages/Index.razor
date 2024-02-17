@@ -24,7 +24,7 @@
     <Stack Gutter="@Tokens.Zero">
 
       <Container Fluid>
-        <Grid Gutter="@Tokens.SpacingS" Columns="Columns.Set(sm: 1, md: 2, lg: 4)" Ratio="1">
+        <GridList Gutter="@Tokens.SpacingS" Columns="Columns.Set(sm: 1, md: 2, lg: 4)" Ratio="1">
           @for (var i = 1; i < 5; i++)
           {
             var content = "Item " + i;
@@ -41,7 +41,7 @@
               </Background>
             </GridItem>
           }
-        </Grid>
+        </GridList>
       </Container>
 
       <Container Fluid>
