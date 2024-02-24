@@ -62,7 +62,7 @@ public class Grid : StyledBase, IDisposable
     --height: {CalculatedHeight};
     --width: {CalculatedWidth};
     --flex-grow: {FlexGrow};
-    --gutter: {Gutter ?? Tokens.SpacingS};
+    --gutter: {CurrentGutter};
   ";
 
   [Parameter] public string Gutter { get; set; }
@@ -78,6 +78,8 @@ public class Grid : StyledBase, IDisposable
   [Parameter] public ColumnsService Columns { get; set; }
 
   [Inject] private BrowserService Browser { get; set; }
+
+  private string CurrentGutter => Gutter ?? Tokens.SpacingS;
 
   private Dimension ElementDimension { get; set; } = new();
 
@@ -119,7 +121,7 @@ public class Grid : StyledBase, IDisposable
   }
 
   private string HeightFrom(int elementWidth) =>
-    $"{((double)elementWidth / CurrentColumns - (Gutter ?? Tokens.SpacingS).ToInt()) / Ratio}px";
+    $"{((double)elementWidth / CurrentColumns - CurrentGutter.ToInt()) / Ratio}px";
 
   public void Dispose()
   {

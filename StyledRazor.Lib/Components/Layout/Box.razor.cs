@@ -5,7 +5,7 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Box : StyledBase
 {
-  protected override Styled BaseComponent => CreateStyled.Div(@"{
+	protected override Styled BaseComponent => CreateStyled.Div(@"{
 		height: var(--height);
 		width: var(--width);
 		padding-left: var(--left);
@@ -49,5 +49,12 @@ public class Box : StyledBase
   private bool HasMirroredPadding => !string.IsNullOrEmpty(Horizontal) || !string.IsNullOrEmpty(Vertical);
 
   private string ShorthandPadding => HasIndividualPadding ? string.Empty :
-                                     HasMirroredPadding ? $"--padding: {Vertical ?? Tokens.Zero} {Horizontal ?? Tokens.Zero};" : $"--padding: {Padding ?? Tokens.Zero};";
+                                     HasMirroredPadding ? $"--padding: {CurrentVertical} {CurrentHorizontal};" :
+                                     $"--padding: {CurrentPadding};";
+
+  private string CurrentVertical => Vertical ?? Tokens.Zero;
+
+  private string CurrentHorizontal => Horizontal ?? Tokens.Zero;
+
+  private string CurrentPadding => Padding ?? Tokens.Zero;
 }

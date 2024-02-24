@@ -5,7 +5,7 @@ namespace StyledRazor.Lib.Components.Layout;
 
 public class Cluster : StyledBase
 {
-  protected override Styled BaseComponent => CreateStyled.Div(@"{
+	protected override Styled BaseComponent => CreateStyled.Div(@"{
     display: flex;
     gap: var(--gap);
     flex-wrap: var(--flex-wrap);
@@ -45,11 +45,11 @@ public class Cluster : StyledBase
 	}");
 
   protected override string InlineStyle => $@"
-	  --gap: {Space ?? Tokens.Zero};
+	  --gap: {CurrentSpace};
 	  --flex-wrap: {FlexWrap};
-	  --align-items: {Align ?? Tokens.AlignCenter};
+	  --align-items: {CurrentAlignItems};
 	  --align-content: {AlignContent};
-	  --justify: {Justify ?? Tokens.AlignFlexEnd};
+	  --justify: {CurrentJustify};
 	  --padding: {Padding};
   ";
 
@@ -72,4 +72,10 @@ public class Cluster : StyledBase
   private string FlexWrap => Wrap ? Tokens.FlexWrap :
                              WrapReverse ? Tokens.FlexWrapReverse :
                              Tokens.FlexNoWrap;
+
+  private string CurrentSpace => Space ?? Tokens.Zero;
+
+  private string CurrentAlignItems => Align ?? Tokens.AlignCenter;
+  
+  private string CurrentJustify => Justify ?? Tokens.AlignFlexEnd;
 }
