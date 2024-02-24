@@ -83,14 +83,14 @@ public class Grid : StyledBase, IDisposable
 
   private Dimension WindowDimension { get; set; } = new();
 
-  private int ActualCols => Columns?.NumberOfColumnsFor(WindowDimension.Width) ?? 1;
+  private int CurrentColumns => Columns?.NumberOfColumnsFor(WindowDimension.Width) ?? 1;
 
-  private string CalculatedHeight => ActualCols == 1 && string.IsNullOrEmpty(BaseWidth) ? "initial" :
+  private string CalculatedHeight => CurrentColumns == 1 && string.IsNullOrEmpty(BaseWidth) ? "initial" :
                                      HasHeight ? Height :
                                      HasRatio ? HeightFrom(ElementDimension.Width) :
                                      "initial";
 
-  private string CalculatedWidth => string.IsNullOrEmpty(BaseWidth) ? $"{100 / ActualCols}%" : $"{BaseWidth}";
+  private string CalculatedWidth => string.IsNullOrEmpty(BaseWidth) ? $"{100 / CurrentColumns}%" : $"{BaseWidth}";
 
   private string FlexGrow => HasBaseWidth ?
                                Grow ? "1" : "0"
@@ -119,7 +119,7 @@ public class Grid : StyledBase, IDisposable
   }
 
   private string HeightFrom(int elementWidth) =>
-    $"{((double)elementWidth / ActualCols - (Gutter ?? Tokens.SpacingS).ToInt()) / Ratio}px";
+    $"{((double)elementWidth / CurrentColumns - (Gutter ?? Tokens.SpacingS).ToInt()) / Ratio}px";
 
   public void Dispose()
   {
