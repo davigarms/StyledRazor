@@ -40,27 +40,18 @@ public static class CssHelper
       .Replace($"{scope}\0", "");
   }
 
-  public static string Minify(this string unminifiedCss)
-  {
-    while (unminifiedCss.Contains("/*") && unminifiedCss.Contains("*/"))
-    {
-      var start = unminifiedCss.IndexOf("/*");
-      var end = unminifiedCss.IndexOf("*/") + 2;
-      unminifiedCss = unminifiedCss.Remove(start, end);
-    }
-    
-    return unminifiedCss
-           .Replace("  ", "")
-           .Replace("\r", "\n")
-           .Replace(" \n", "\n")
-           .Replace("\t", "")
-           .Replace(" : ", ": ")
-           .Replace(" ;", ";")
-           .Replace("; ", ";")
-           .Replace(" {", "{")
-           .Replace(" > ", ">")
-           .Replace("\n", "");
-  }
+  public static string Minify(this string unminifiedCss) => unminifiedCss
+                                                            .RemoveComments()
+                                                            .Replace("  ", "")
+                                                            .Replace("\r", "\n")
+                                                            .Replace(" \n", "\n")
+                                                            .Replace("\t", "")
+                                                            .Replace(" : ", ": ")
+                                                            .Replace(" ;", ";")
+                                                            .Replace("; ", ";")
+                                                            .Replace(" {", "{")
+                                                            .Replace(" > ", ">")
+                                                            .Replace("\n", "");
 
   public static string ToJson(this string minifiedCss)
   {
@@ -87,4 +78,15 @@ public static class CssHelper
 
   public static string IdFrom(string name) =>
     $"{(name == null ? "w" : name.ToLower() + "_")}{Guid.NewGuid().ToString().Replace("-", "")[..10]}";
+
+  private static string RemoveComments(this string unminifiedCss)
+  {
+    while (unminifiedCss.Contains("/*") && unminifiedCss.Contains("*/"))
+    {
+      var start = unminifiedCss.IndexOf("/*", StringComparison.Ordinal);
+      var end = unminifiedCss.IndexOf("*/", StringComparison.Ordinal) + 2;
+      unminifiedCss = unminifiedCss.Remove(start, end);
+    }
+    return unminifiedCss;
+  }
 }
