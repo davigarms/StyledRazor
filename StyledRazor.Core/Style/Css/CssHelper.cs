@@ -29,15 +29,15 @@ public static class CssHelper
   public static string AddScope(this string cssString, string scope)
   {
     cssString = cssString.Trim()
-      .Insert(0, $"{scope}")
-      .Replace("}", $"}}\n{scope}")
-      .Replace("\r", "")
-      .Replace("\n\n", "")
-      .Replace($"{scope}", scope);
+                         .Insert(0, $"{scope}")
+                         .Replace("}", $"}}\n{scope}")
+                         .Replace("\r", "")
+                         .Replace("\n\n", "")
+                         .Replace($"{scope}", scope);
 
     return cssString
-      .Insert(cssString.Length, "\0")
-      .Replace($"{scope}\0", "");
+           .Insert(cssString.Length, "\0")
+           .Replace($"{scope}\0", "");
   }
 
   public static string Minify(this string unminifiedCss) => unminifiedCss
@@ -57,13 +57,13 @@ public static class CssHelper
   {
     var json = minifiedCss.Insert(minifiedCss.Length - 1, "}");
     return json
-      .Replace(": ", "\": \"")
-      .Replace("{", "\":{\"")
-      .Replace("}", "\"},\"")
-      .Replace(";", "\",\"")
-      .Replace(",\"\"", "")
-      .Replace("}},\"", "}}")
-      .Insert(0, "{\"");
+           .Replace(": ", "\": \"")
+           .Replace("{", "\":{\"")
+           .Replace("}", "\"},\"")
+           .Replace(";", "\",\"")
+           .Replace(",\"\"", "")
+           .Replace("}},\"", "}}")
+           .Insert(0, "{\"");
   }
 
   public static string ToCss(this string json, string baseElement) =>
