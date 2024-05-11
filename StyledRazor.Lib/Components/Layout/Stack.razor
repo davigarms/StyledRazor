@@ -1,7 +1,7 @@
 ﻿@inherits StyledBase
 
 <Styled Base="@BaseComponent"
-        style=@($"--gutter: {CurrentGutter}")>
+        style=@($"--gutter: {Gutter}")>
   @ChildContent
 </Styled>
 
@@ -19,7 +19,11 @@
 		overflow: auto !important;
 	}");
 
-  [Parameter] public string Gutter { get; set; }
-	
-	private string CurrentGutter => Gutter ?? Tokens.SpacingL;
+	[Parameter] public string Gutter
+	{
+		get => _gutter ?? Tokens.SpacingL;
+		set => _gutter = value;
+	}
+
+	private string _gutter;
 }

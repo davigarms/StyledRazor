@@ -45,25 +45,37 @@ public class Cluster : StyledBase
 	}");
 
   protected override string InlineStyle => $@"
-	  --gap: {CurrentSpace};
+	  --gap: {Space};
 	  --flex-wrap: {FlexWrap};
-	  --align-items: {CurrentAlignItems};
+	  --align-items: {Align};
 	  --align-content: {AlignContent};
-	  --justify: {CurrentJustify};
+	  --justify: {Justify};
 	  --padding: {Padding};
   ";
 
-  [Parameter] public string Space { get; set; }
+  [Parameter] public string Space
+  {
+	  get => _space ?? Tokens.Zero;
+	  set => _space = value;
+  }
 
   [Parameter] public bool Wrap { get; set; }
 
   [Parameter] public bool WrapReverse { get; set; }
 
-  [Parameter] public string Align { get; set; }
+  [Parameter] public string Align
+  {
+	  get => _align ?? Tokens.AlignCenter;
+	  set => _align = value;
+  }
 
   [Parameter] public string AlignContent { get; set; }
 
-  [Parameter] public string Justify { get; set; }
+  [Parameter] public string Justify
+  {
+	  get => _justify ?? Tokens.AlignFlexEnd;
+	  set => _justify = value;
+  }
 
   [Parameter] public bool NoPadding { get; set; }
 
@@ -73,9 +85,9 @@ public class Cluster : StyledBase
                              WrapReverse ? Tokens.FlexWrapReverse :
                              Tokens.FlexNoWrap;
 
-  private string CurrentSpace => Space ?? Tokens.Zero;
-
-  private string CurrentAlignItems => Align ?? Tokens.AlignCenter;
+  private string _space;
   
-  private string CurrentJustify => Justify ?? Tokens.AlignFlexEnd;
+  private string _align;
+  
+  private string _justify;
 }

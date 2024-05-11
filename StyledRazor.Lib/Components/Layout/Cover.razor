@@ -2,9 +2,9 @@
 
 <Styled Base="@BaseComponent"
         style=@($@"
-		      --min-height: {CurrentMinHeight};
+		      --min-height: {MinimumHeight};
 		      --padding: {Padding};
-		      --space: {CurrentSpace};")>
+		      --space: {Space};")>
   @ChildContent
 </Styled>
 
@@ -44,15 +44,23 @@
     margin-bottom: 0 !important;
   }");
 
-  [Parameter] public string MinimumHeight { get; set; }
+  [Parameter] public string MinimumHeight
+  {
+    get => _minimumHeight ?? Tokens.SizeTotal;
+    set => _minimumHeight = value;
+  }
 
-  [Parameter] public string Space { get; set; }
+  [Parameter] public string Space
+  {
+    get => _space ?? Tokens.SpacingM;
+    set => _space = value;
+  }
 
   [Parameter] public bool NoPadding { get; set; }
 
-  private string Padding => NoPadding ? Tokens.Zero : CurrentSpace;
+  private string Padding => NoPadding ? Tokens.Zero : Space;
   
-  private string CurrentMinHeight => MinimumHeight ?? Tokens.SizeTotal;
+  private string _space;
   
-  private string CurrentSpace => Space ?? Tokens.SpacingM;
+  private string _minimumHeight;
 }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using StyledRazor.Core.Components;
+using StyledRazor.Core.Style.DesignTokens;
 
 namespace StyledRazor.Lib.Components.Layout;
 
@@ -29,7 +30,11 @@ public class Box : StyledBase
 
   [Parameter] public string Width { get; set; } = "initial";
 
-  [Parameter] public string Padding { get; set; }
+  [Parameter] public string Padding
+  {
+	  get => _padding ?? Tokens.SpacingS;
+	  set => _padding = value;
+  }
 
   [Parameter] public string Left { get; set; }
 
@@ -48,13 +53,15 @@ public class Box : StyledBase
 
   private bool HasMirroredPadding => !string.IsNullOrEmpty(Horizontal) || !string.IsNullOrEmpty(Vertical);
 
-  private string ShorthandPadding => HasIndividualPadding ? string.Empty :
-                                     HasMirroredPadding ? $"--padding: {CurrentVertical} {CurrentHorizontal};" :
-                                     $"--padding: {CurrentPadding};";
+  private string ShorthandPadding => HasIndividualPadding ? $"--padding: {IndividualPadding};" :
+                                     HasMirroredPadding ? $"--padding: {MirroredPadding};" :
+                                     $"--padding: {Padding};";
 
-  private string CurrentVertical => Vertical ?? Tokens.Zero;
+  private string IndividualPadding => $"{Top ?? Zero} {Right ?? Zero} {Bottom ?? Zero} {Left ?? Zero}";
+  
+  private string MirroredPadding => $"{Vertical ?? Zero} {Horizontal ?? Zero}";
 
-  private string CurrentHorizontal => Horizontal ?? Tokens.Zero;
+  private string Zero => Tokens.Zero;
 
-  private string CurrentPadding => Padding ?? Tokens.Zero;
+  private string _padding;
 }
